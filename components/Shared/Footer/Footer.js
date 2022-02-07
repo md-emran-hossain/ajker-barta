@@ -11,7 +11,8 @@ const Footer = () => {
 
       <div className="footer-info lg:w-1/3 md:px-4">
 
-      <Image  className="block h-20 sm:h-20 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt=""/>
+      <Image  className="block rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt="" height="70"
+      width="190"/>
         <h4 className="text-white text-2xl mb-4">About us</h4>
         <p className="text-gray-400">Each template in our ever growing studio library can be added and moved around within any page effortlessly with one click.</p>
         <div className="mt-4">
@@ -56,9 +57,10 @@ const Footer = () => {
 
       <div className="grid gap-3 md:grid-cols-2 sm:grid-cols-1">
     
-      <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-  <div className="flex items-center px-2 py-2">
-    <Image  className="block h-10 sm:h-10 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt=""/>
+      <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden" style={{maxHeight: '5rem'}}>
+  <div className="flex items-center px-2 py-4">
+    <Image className="block rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt=""height="50"
+      width="90"/>
     <div className="text-center sm:text-left sm:flex-grow">
       <div className="mb-4">
         <p className="text-md leading-tight">Adam Wathan</p>
@@ -70,9 +72,10 @@ const Footer = () => {
     </div>
   </div>
 </div>
-      <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-  <div className="flex items-center px-2 py-2">
-    <Image  className="block h-10 sm:h-10 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt=""/>
+<div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden" style={{maxHeight: '5rem'}}>
+  <div className="flex items-center px-2 py-4">
+    <Image className="block rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt=""height="50"
+      width="90"/>
     <div className="text-center sm:text-left sm:flex-grow">
       <div className="mb-4">
         <p className="text-md leading-tight">Adam Wathan</p>
@@ -84,9 +87,10 @@ const Footer = () => {
     </div>
   </div>
 </div>
-      <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-  <div className="flex items-center px-2 py-2">
-    <Image  className="block h-10 sm:h-10 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt=""/>
+<div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden" style={{maxHeight: '5rem'}}>
+  <div className="flex items-center px-2 py-4">
+    <Image className="block rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt=""height="50"
+      width="90"/>
     <div className="text-center sm:text-left sm:flex-grow">
       <div className="mb-4">
         <p className="text-md leading-tight">Adam Wathan</p>
@@ -98,9 +102,10 @@ const Footer = () => {
     </div>
   </div>
 </div>
-      <div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
-  <div className="flex items-center px-2 py-2">
-    <Image  className="block h-10 sm:h-10 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4" alt=""/>
+<div className="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden" style={{maxHeight: '5rem'}}>
+  <div className="flex items-center px-2 py-4">
+    <Image className="block rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0" src={logo} alt=""height="50"
+      width="90"/>
     <div className="text-center sm:text-left sm:flex-grow">
       <div className="mb-4">
         <p className="text-md leading-tight">Adam Wathan</p>
@@ -121,18 +126,6 @@ const Footer = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       </div>
 
     </div>
@@ -144,7 +137,8 @@ const Footer = () => {
 
       <div className="md:flex md:-mx-4 md:items-center">
         <div className="md:flex-1 md:px-4 text-center md:text-left">
-          <p className="text-white">&copy; <strong>{new Date().getFullYear()}</strong></p>
+          <p className="text-white"><strong>Copyright &copy; {new Date().getFullYear()} Ajker-Barta. All Rights Reserved.
+</strong></p>
         </div>
         <div className="md:flex-1 md:px-4 text-center md:text-right">
           <a href="#" className="py-2 px-4 text-white inline-block hover:underline">Terms of Service</a>
