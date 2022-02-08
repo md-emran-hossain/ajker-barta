@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FaRegImages } from "react-icons/fa";
 const ImageGallary = ({ data }) => {
   return (
-    <div className="md:mx-32">
+    <div className="md:mx-32 mb-24">
       <h2 className="text-lg py-y">Photo Gallary</h2>
       {console.log(data)}
 
@@ -23,7 +23,7 @@ const ImageGallary = ({ data }) => {
         </div>
 
         <div className="relative w-full md:col-span-2 sm:col-span-1 h-60">
-        <div className="md:absolute sm:static z-30 bg-slate-200 rounded-full m-2 p-2">
+          <div className="md:absolute sm:static z-30 bg-slate-200 rounded-full m-2 p-2">
 
             <FaRegImages className="text-2xl" />
           </div>
@@ -33,10 +33,10 @@ const ImageGallary = ({ data }) => {
             layout="fill"
             objectFit="cover"
           />
-           <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-2xl">{data[1].name}</h1>
+          <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-2xl">{data[1].name}</h1>
         </div>
         <div className="relative w-full h-60">
-        <div className="absolute z-30 bg-slate-200 rounded-full m-2 p-2">
+          <div className="absolute z-30 bg-slate-200 rounded-full m-2 p-2">
             <FaRegImages className="text-lg" />
           </div>
           <Image
@@ -45,10 +45,10 @@ const ImageGallary = ({ data }) => {
             layout="fill"
             objectFit="cover"
           />
-           <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-xl">{data[2].name}</h1>
+          <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-xl">{data[2].name}</h1>
         </div>
         <div className="relative w-full h-60">
-        <div className="absolute z-30 bg-slate-200 rounded-full m-2 p-2">
+          <div className="absolute z-30 bg-slate-200 rounded-full m-2 p-2">
             <FaRegImages className="text-lg" />
           </div>
           <Image
@@ -57,7 +57,7 @@ const ImageGallary = ({ data }) => {
             layout="fill"
             objectFit="cover"
           />
-           <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-xl">{data[3].name}</h1>
+          <h1 className="md:absolute sm:static bottom-3 left-3 text-white text-xl">{data[3].name}</h1>
         </div>
       </div>
     </div>
