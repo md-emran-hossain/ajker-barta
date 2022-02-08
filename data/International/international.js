@@ -1,7 +1,7 @@
 const international = [
     {
         id:1,
-        country:'Asia',
+        continent:'Asia',
         news:[
             {
                 id:1, 
@@ -52,46 +52,156 @@ const international = [
             },
             {
                 id: 7,
-                title:'',
-                img:'',
-                description:'',
-                date:''
+                title:'Taliban killed 100 ex-Afghan govt officials, others: UN report',
+                img:'https://images.prothomalo.com/prothomalo-english%2F2021-09%2F957a8a3a-5b28-4e80-a92f-6329020700cd%2F2021_09_03T221222Z_1733138246_RC2MIP93K18X_RTRMADP_3_AFGHANISTAN_CONFLICT_EMAILS.JPG?auto=format%2Ccompress&format=webp&w=940&dpr=1.0',
+                description:'The Taliban and their allies have killed more than 100 security and civilian personnel linked to the former US-backed Afghan government since seizing power in August, according to a new United Nations report.The report, an advance copy of which was seen by AFP on Sunday, describes severe curtailing of human rights by Afghanistans fundamentalist new rulers.Taliban officials on Monday rejected the claims, insisting that the reported deaths were linked to "personal enmity" cases and were under investigation.Advertisement"The Islamic Emirate has not killed anyone since the amnesty was announced," the interior ministry said on Twitter. The UN report said that, in addition to the political killings, womens freedoms and the right to protest had also been curbed.Despite the Talibans promise of general amnesties, the United Nations Assistance Mission for Afghanistan "continued to receive credible allegations of killings, enforced disappearances, and other violations", the report said.',
+                on_date:'2 September 2021',
+                publish_date: '31 Jan 2022'
             },
             {
                 id: 8,
-                title:'',
-                img:'',
-                description:'',
-                date:''
+                title:'North Korea says Sunday test was Hwasong-12 missile',
+                img:'https://images.prothomalo.com/prothomalo-english%2F2022-01%2F449b8751-c5f9-44be-bff4-a683b5fe816e%2F626999_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.0',
+                description:'North Korea confirmed it had fired a Hwasong-12 "mid-range ballistic missile", state media reported Monday, the first time it has tested a weapon that powerful since 2017.Seouls military said it had detected the launch Sunday of an intermediate-range ballistic missile -- Pyongyangs seventh weapons test in January.North Korea has never test-fired this many missiles in a calendar month before and last week threatened to abandon a nearly five-year-long self-imposed moratorium on testing long-range and nuclear weapons, blaming US "hostile" policy for forcing its hand."The evaluation test-fire of Hwasong 12-type ground-to-ground intermediate- and long-range ballistic missile was conducted Sunday," the official Korean Central News Agen said.',
+                date:'30 January, 2022',
+                publish_date:'31 Jan 2022'
             },
             {
                 id: 9,
-                title:'',
+                title:'Beijing reports highest covid cases since June 2020 as Olympics loom',
                 img:'',
-                description:'',
-                date:''
+                description:'Beijing recorded its highest number of new Covid-19 cases for a year and a half on Sunday, as the Chinese capital gears up to host the Winter Olympics in five days.China will hold the Games in a strict "closed-loop" bubble as part of its zero-Covid strategy of targeted lockdowns, border restrictions and lengthy quarantines.The approach has helped the worlds second-largest economy keep new infections far lower than many other countries, but it is battling local outbreaks in several cities as well as in the Olympic bubble Advertisement The upcoming Lunar New Year -- Chinas biggest national holiday -- presents a further challenge as millions of people return to their hometowns and mingle with family and friends.',
+                on_date:'30 January 2022 ',
+                publish_date:'30 January 2022 '
             },
             {
                 id: 10,
-                title:'',
-                img:'',
-                description:'',
-                date:''
+                title:'Bottom of gender rankings, Iraqi women defy critics to work',
+                img:'https://images.prothomalo.com/prothomalo-english%2F2022-01%2F1ef63ad5-7392-4f71-8625-f80b9409d153%2F624623_01_02.jpg?rect=0%2C159%2C5392%2C3033&auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.0',
+                description:'Each working morning, oil engineer Safa al-Saeedi dons a safety helmet and heads into a gas complex for another day challenging conservative prejudices by being a professional woman in Iraq.“Society does not accept that a girl can live outside the family home,” said 29-year-old Saeedi, who works in Iraq’s southern oil and gas fields around Basra.Saeedi, one of just 180 women among the 5,000 employees of the Basrah Gas Company, sees herself as a change maker and encourages other women to join the industry.Advertisement For many, a single woman working away from home in a male-dominated sector is frowned upon, and it is a hard task for women to break out of the role of wife and mother traditionally assigned to them.',
+                on_date:'20 January, 2022',
+                publish_date:'30 Jan 2022'
             },
             {
                 id: 11,
-                title:'',
-                img:'',
-                description:'',
-                date:''
+                title:'Urgent, renewed effort needed to restore civilian rule in Myanmar: UN rights chief',
+                img:'https://images.prothomalo.com/prothomalo-english%2F2021-08%2F96290da1-f5cb-4a80-a0c8-9191085c482f%2F677089_01_02.jpg?auto=format%2Ccompress&format=webp&w=640&dpr=1.0',
+                description:'UN human rights chief Michelle Bachelet on Friday appealed international community to intensify pressure on Myanmars military to stop its campaign of violence against citizens, and to insist on the prompt return to civilian rule, almost one year after seizing power in a coup. Bachelet reported that this week she spoke in person with "determined, courageous" human rights defenders who are pleading for the international community not to abandon them, but to take robust effective measures to ensure their rights are protected and that the military is held accountable, the UN said in a statement.Advertisement "I urge governments - in the region and beyond - as well as businesses, to listen to this plea. It is time for an urgent, renewed effort to restore human rights and democracy in Myanmar and ensure that perpetrators of systemic human rights violations and abuses are held to account," she said.',
+                on_date:'29 Jan 2022',
+                publish_date:'29 Jan 2022'
             },
             {
                 id: 12,
-                title:'',
-                img:'',
-                description:'',
-                date:''
+                title:'Torture trail raises questions on Kazakh terror claims',
+                img:'https://images.prothomalo.com/prothomalo-english%2F2022-01%2Fcbeebeec-df77-4692-b415-0bfbd82e50fa%2F606702_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.0',
+                description:'As Kazakhstan witnessed its worst unrest in 30 years of independence this month, Aset Abishev was grabbed off a bus and locked away by police who he said tortured him for a week.Abishev -- a longtime opposition activist in the Central Asian country -- was arrested on 4 January, just hours before thousands took to the streets of the former capital Almaty, sending a political crisis that authorities said left 225 people dead and thousands injured towards a bloody crescendo.The 44-year-old was held without charge or access to communications and finally released a week later, his body covered in bruises.AdvertisementHis account to AFP of the violations inflicted on him and other detainees is one of several that call into question a state investigation into the unrest that has seen hundreds charged with terrorism and other serious crimes.',
+                on_date:'21 January, 2022',
+                publish_date:'27 Jan 2022'
             }
         ]
+    },
+    {
+        id: 2,
+        continent: 'Europe',
+        news: [
+            {
+                id: 1, 
+                title: "Tigray victims file case against Ethiopia at Africa rights body: lawyers",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 2, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 3, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 4, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 5, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1, 
+                title: "",
+                img: '',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+        ]
     }
-]
+];
+
+export default international;
