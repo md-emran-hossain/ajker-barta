@@ -51,30 +51,32 @@ const Header = () => {
 
 
     return (
-        <div className="grid md:grid-cols-3 py-8 place-content-center border-b border-gray-300">
-            {
-                !isMobile &&
-                <div className='text-center'>
-                    <Toolbar>
-                        <Search className='bg-gray-200'>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
-                            <StyledInputBase
-                                placeholder="Search…"
-                                inputProps={{ 'aria-label': 'search' }}
-                            />
-                        </Search>
-                    </Toolbar>
+        <div className="container  md:mx-auto">
+            <div className="grid md:grid-cols-3 py-8 place-content-center border-b border-gray-300 ">
+                {
+                    !isMobile &&
+                    <div className='text-center'>
+                        <Toolbar className='grid  place-content-center'>
+                            <Search className='bg-gray-200'>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </Search>
+                        </Toolbar>
+                    </div>
+                }
+
+                <div>
+                    <h1 className='text-stone-900 text-4xl text-center  font-bold'>Ajker Barta</h1>
                 </div>
-            }
 
-            <div>
-                <h1 className='text-stone-900 text-4xl text-center sm:inline font-bold'>Ajker Barta</h1>
-            </div>
-
-            <div className='mt-2'>
-                <button className={`${styles.loginButton} ${styles.log}`}>Login</button>
+                <div className='mt-2 grid place-content-center'>
+                    <button className={`${styles.loginButton} ${styles.log}`}>Login</button>
+                </div>
             </div>
         </div>
     );
