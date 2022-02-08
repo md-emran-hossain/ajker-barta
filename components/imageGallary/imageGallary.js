@@ -19,7 +19,7 @@ const ImageGallary = ({ data }) => {
             width={600}
             alt="img"
           ></Image>
-          <h1 className="absolute bottom-3 left-3  text-white text-2xl">{data[0].name}</h1>
+          <h1 className="absolute md:-bottom-60  left-3  text-white text-2xl">{data[0].name}</h1>
         </div>
 
         <div className="relative w-full md:col-span-2 sm:col-span-1 h-60">
