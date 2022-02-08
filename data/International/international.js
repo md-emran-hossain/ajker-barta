@@ -201,6 +201,92 @@ const international = [
                 publish_date:'25 Jan 2022'
             },
         ]
+    },
+    {
+        id: 3,
+        continent:'United States',
+        news: [
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+            {
+                id: 1,
+                title:'',
+                img:'',
+                description:'',
+                on_date:'',
+                publish_date:''
+            },
+        ]
     }
 ];
 
