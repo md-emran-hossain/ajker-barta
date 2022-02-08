@@ -17,9 +17,9 @@ const Exclusive = () => {
             <button className='py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2'>Trending</button>
             <div className='grid sm:grid-cols-2 gap-3'>
               {
-                newses?.slice(0, 8).map(news => <div className='text-center relative p-6 shadow-md border-r-4 border-red-600' key={news.id}>
-                  <h1 className='z-10 text-lg font-medium text-gray-800 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news.title}</h1>
-                  <p style={{ transform: "translate(-50%, -50%)", }} className='absolute top-1/2 left-1/2 text-8xl -z-10 font-bold text-blue-100'>{count++}</p>
+                newses?.slice(0, 8).map(news => <div className=' relative p-6 shadow-md rounded-r-lg border-r-4 border-red-600' key={news.id}>
+                  <h1 className='z-10 leading-7 text-lg font-medium text-gray-800 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news.title}</h1>
+                  <p style={{ transform: "translate(-50%, -50%)", }} className='absolute top-1/2 left-3/4 text-8xl -z-10 font-bold text-blue-100'>{count++}</p>
                 </div>)
               }
             </div>
