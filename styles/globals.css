@@ -44,7 +44,9 @@ body {
 #hero .swiper-button-next::after{
   font-size: 20px !important;
 }
-
+.slim-border{
+  border-width: 1px;
+}
 
 
  /* Login page Style  */
