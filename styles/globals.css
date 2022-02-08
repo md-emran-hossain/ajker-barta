@@ -27,11 +27,11 @@ body {
   box-sizing: border-box;
 }
 
+/* Main Nav  */
 
 
  /* Login page Style  */
 
- 
 .first-form{
   
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -197,12 +197,6 @@ body {
   font-size: 26px;
   text-align: center;
 }
-/* .first-form label span {
-  font-size: 12px;
-  color: #cfcfcf;
-  text-transform: uppercase;
-} */
-
 .first-form input {
   display: block;
   width: 100%;
@@ -212,21 +206,6 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
-
-/* .forgot-pass {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-  color: #cfcfcf;
-} */
-/* 
-.submit {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  background: #d4af7a;
-  text-transform: uppercase;
-} */
-
 .fb-btn {
   border: 2px solid #d3dae9;
   color: #8fa1c7;
