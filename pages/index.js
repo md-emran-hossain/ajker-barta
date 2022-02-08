@@ -7,10 +7,10 @@ import Footer from "../components/Shared/Footer/Footer";
 export default function Home() {
   return (
     <div>
-      <NavigationBar />
+      
       <Hero />
       <ImageGallary data={data} />
-      <Footer></Footer>
+      
     </div>
   )
 }

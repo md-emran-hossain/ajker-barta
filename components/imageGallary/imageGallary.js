@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FaRegImages } from "react-icons/fa";
 const ImageGallary = ({ data }) => {
   return (
-    <div className="md:mx-32 mb-24">
+    <div className=" mb-24">
       <h2 className="text-lg py-y">Photo Gallary</h2>
       {console.log(data)}
 
