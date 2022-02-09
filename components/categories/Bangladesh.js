@@ -15,26 +15,23 @@ const Bangladesh = () => {
     <div className="h-auto mb-4">
       <h2>Bangladesh</h2>
       <div
-        className={`grid first:row-span-3  gap-2 md:grid-cols-3 sm:grid-cols-1 ${styles.bangladesh}`}
+        className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >
         <div className="flex justify-between auto-cols-fr" key={col2.id}>
-              <div className="mr-1 w-7/12">
-                <h1 className="font-bold">{col2.title}</h1>
-                <p>{col2.date}</p>
-              </div>
+          <div className="mr-1 w-7/12">
+            <h1 className="font-bold">{col2.title}</h1>
+            <p>{col2.date}</p>
+          </div>
 
-              <img
-                className="w-5/12 object-fill"
-                src={col2.img}
-                alt={col2.title}
-              />
-            </div>
+          <img className="w-5/12 object-fill" src={col2.img} alt={col2.title} />
+        </div>
         <div className="row-span-3">
           <img className=" object-fill" src={col1?.img} alt={col1?.title} />
 
           <div className="mr-1 ">
             <h1 className="font-bold">{col1?.title}</h1>
             <p>{col1?.date}</p>
+            <p>{col1?.description}</p>
           </div>
         </div>
         {col3.map((item) => {
