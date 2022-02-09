@@ -6,6 +6,8 @@ import ImageGallary from "../components/imageGallary/imageGallary";
 import data from "../components/imageGallary/data";
 import Footer from "../components/Shared/Footer/Footer";
 import Exclusive from "../components/Exclusive";
+import Business from "../components/Business";
+import ScienceTechnology from "../components/ScienceTechnology";
 
 export default function Home() {
   return (
@@ -15,6 +17,8 @@ export default function Home() {
       <Hero />
       <ImageGallary data={data} />
       <Exclusive />
+      <Business />
+      <ScienceTechnology />
       {/* <div style={{ height: '1000px' }}> */}
       <International></International>
       {/* </div> */}
