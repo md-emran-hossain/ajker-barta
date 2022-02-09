@@ -1,7 +1,7 @@
 
+import International from "../components/Home/International/International";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
-import Login from '../components/Login/Login/Login';
 
 export default function Home() {
 
@@ -9,7 +9,9 @@ export default function Home() {
     <div>
       <Header></Header>
       <NavigationBar></NavigationBar>
-      <Login></Login>
+      <div style={{ height: '1000px' }}>
+        <International></International>
+      </div>
     </div>
   )
 }

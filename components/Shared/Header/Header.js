@@ -5,6 +5,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
+import LoginIcon from '@mui/icons-material/Login';
 
 const Header = () => {
 
@@ -50,32 +51,77 @@ const Header = () => {
     }));
 
 
+
     return (
-        <div className="container  md:mx-auto">
-            <div className="grid md:grid-cols-3 py-8 place-content-center border-b border-gray-300 ">
-                {
-                    !isMobile &&
-                    <div className='text-center'>
-                        <Toolbar className='grid  place-content-center'>
-                            <Search className='bg-gray-200'>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </Search>
-                        </Toolbar>
-                    </div>
-                }
-
+        <div className={isMobile ? " fixed bg-gray-100 drop-shadow w-full" : "md:container mx-auto"}>
+            <div className='' >
                 <div>
-                    <h1 className='text-stone-900 text-4xl text-center  font-bold'>Ajker Barta</h1>
-                </div>
+                    {/* Side menu bar */}
+                    {
+                        isMobile &&
+                        <nav className={styles.nav} role="navigation">
+                            <div className={styles.clickNav}>
+                                <input type="checkbox" />
 
-                <div className='mt-2 grid place-content-center'>
-                    <button className={`${styles.loginButton} ${styles.log}`}>Login</button>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+
+                                <ul className={styles.navData} role="list" style={{ height: '100vh', paddingTop: '110px', }}>
+                                    <li><h2 className='text-center text-2xl font-bold text-red-600'>AJKER BARTA</h2></li>
+                                    <li><a className={styles.link} href="" data-title="Home" aria-label="Home">Bangladesh</a></li>
+                                    <li><a className={styles.link} href="" data-title="About" aria-label="About">International</a></li>
+                                    <li><a className={styles.link} href="" data-title="My Expertise" aria-label="My Expertise">Sports</a></li>
+                                    <li><a className={styles.link} href="" data-title="My Technical articles" aria-label="My Technical articles">Opinion</a></li>
+                                    <li><a className={styles.link} href="" data-title="My twitter moments" aria-label="My twitter moments">Business</a></li>
+                                    <li className="separator"></li>
+                                    <li><a className={styles.link} href="" data-title="Force Framework" aria-label="Force Framework">Youth</a></li>
+                                    <li><a className={styles.link} href="" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</a></li>
+                                    <li><a className={styles.link} href="" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</a></li>
+                                    <li><a className={styles.link} href="" data-title="Force Framework" aria-label="Force Framework">Custom Search Engine</a></li>
+                                    <li><a className={styles.link} href="" data-title="DograsWeblog Free Themes" aria-label="DograsWeblog Free Themes">DEV HEROS</a></li>
+                                    <li className="separator"></li>
+                                    <li>
+                                        <p className='ml-5'><strong> © AJKER BARTA</strong></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    }
+                </div>
+                <div className=''>
+                    <div className="grid grid-cols-12 gap-2 py-5 place-content-around  ">
+
+                        {
+                            !isMobile &&
+
+                            <Toolbar className='place-self-center'>
+                                <Search className='bg-gray-200'>
+                                    <SearchIconWrapper>
+                                        <SearchIcon />
+                                    </SearchIconWrapper>
+                                    <StyledInputBase
+                                        placeholder="Search…"
+                                        inputProps={{ 'aria-label': 'search' }}
+                                    />
+                                </Search>
+                            </Toolbar>
+
+                        }
+
+                        <div className='place-self-center col-span-10'>
+                            <h1 className='text-stone-900 text-4xl md:text-5xl text-center font-bold'>Ajker Barta</h1>
+                        </div>
+
+                        <div className='place-self-center '>
+                            {
+                                !isMobile ? <button className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
+                                    :
+                                    <h2><LoginIcon></LoginIcon></h2>
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
