@@ -5,7 +5,6 @@ const ImageGallary = ({ data }) => {
   return (
     <div className=" overflow-hidden mb-24">
       <h2 className="text-lg py-y">Photo Gallary</h2>
-      {console.log(data)}
 
       <div className="grid md:grid-cols-4 sm:grid-cols-1 md:gap-3 sm:gap-2">
         <div className="md:relative  sm:static w-full sm:h-60 md:col-span-2 sm:col-span-1 md:row-span-2 sm:row-span-1 h-full">
@@ -22,7 +21,6 @@ const ImageGallary = ({ data }) => {
           <h1 className="absolute  md:-bottom-60  left-3  text-white text-2xl">
             {data[0].name}
           </h1>
-         
         </div>
 
         <div className="relative w-full md:col-span-2 sm:col-span-1 h-60">
@@ -35,7 +33,7 @@ const ImageGallary = ({ data }) => {
             layout="fill"
             objectFit="cover"
           />
-          
+
           <h1 className="md:absolute z-10 sm:static bottom-3 left-3 text-white text-2xl">
             {data[1].name}
           </h1>

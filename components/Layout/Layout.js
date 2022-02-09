@@ -4,7 +4,7 @@ import NavigationBar from '../Shared/NavigationBar/NavigationBar';
 
 const Layout = ({children}) => {
     return (
-        <div className='md:mx-20 sm:mx-5'>
+        <div className={styles.container}>
             <NavigationBar />
             {children}
             <Footer />
