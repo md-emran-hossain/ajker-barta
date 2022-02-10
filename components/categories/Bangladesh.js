@@ -40,7 +40,7 @@ const Bangladesh = () => {
           </Link>
         </div>
         <div className="row-span-3 cursor-pointer">
-          <Link href={`/news/:${col1?.id}`}>
+          <Link href={`/news/${col1?.id}`}>
             <div>
               <img className=" object-fill" src={col1?.img} alt={col1?.title} />
 

@@ -20,7 +20,7 @@ const NavigationBar = () => {
 
     return (
 
-        <div className={isSticky ? "navbar navbar-bg-color hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-4 bg-gray-100 sm:px-4 drop-shadow border-y border-gray-300 mb-16" : "navbar hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-8 sm:px-4 border-y border-gray-300 mb-16"}>
+        <div className={isSticky ? "navbar navbar-bg-color hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-4 bg-gray-100 sm:px-4 drop-shadow border-y border-gray-300" : "navbar hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-8 sm:px-4 border-y border-gray-300"}>
             {!isMobile &&
 
                 <div className=" flex items-center space-x-1" >
