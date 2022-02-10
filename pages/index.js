@@ -3,7 +3,8 @@ import Bangladesh from "../components/categories/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";
 import ImageGallary from "../components/imageGallary/imageGallary";
-import Footer from "../components/Shared/Footer/Footer";
+import Coronavirus from "../components/Coronavirus/Coronavirus";
+import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
@@ -13,10 +14,12 @@ export default function Home() {
             <div>
                   <Hero />
                   <Bangladesh />
+                  <Coronavirus />
                   <ImageGallary data={data} />
                   <ScienceTechnology />
                   <Exclusive />
                   <Business />
+                  <Opinion />
                   {/* <div style={{ height: '1000px' }}> */}
                   <International></International>
                   {/* </div> */}
