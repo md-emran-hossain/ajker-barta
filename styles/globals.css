@@ -26,11 +26,6 @@ body {
 * {
   box-sizing: border-box;
 }
-.container{
-  width: 95%;
-  max-width: 1280px;
-  margin: 0 auto;
-}
 #hero .swiper-button-prev{
   left: 0 !important;
   background-color: #fff;
