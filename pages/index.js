@@ -1,4 +1,3 @@
-import data from "../components/imageGallary/data";
 import Bangladesh from "../components/categories/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";
@@ -19,10 +18,10 @@ export default function Home() {
                   <ScienceTechnology />
                   <Exclusive />
                   <Business />
-                  <ImageGallary data={data} />
                   <Opinion />
                   {/* <div style={{ height: '1000px' }}> */}
                   <International></International>
+                  <ImageGallary />
                   {/* </div> */}
                   <Sports />
 
