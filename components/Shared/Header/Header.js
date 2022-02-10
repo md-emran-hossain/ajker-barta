@@ -50,17 +50,16 @@ const Header = () => {
         },
     }));
 
-
-
     return (
-        <div className={isMobile ? " fixed bg-gray-100 drop-shadow w-full" : "md:container mx-auto"}>
-            <div className='' >
-                <div>
+        <div className={isMobile ? " fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
+            <div className=' container mx-auto' >
+                <div className="grid grid-cols-12 gap-2 py-5 place-content-between  ">
+
                     {/* Side menu bar */}
                     {
                         isMobile &&
-                        <nav className={styles.nav} role="navigation">
-                            <div className={styles.clickNav}>
+                        <nav className={`${styles.nav} ""`} role="navigation">
+                            <div className={`${styles.clickNav} "col-span-3 place-self-center"`}>
                                 <input type="checkbox" />
 
                                 <span></span>
@@ -89,38 +88,34 @@ const Header = () => {
                             </div>
                         </nav>
                     }
-                </div>
-                <div className=''>
-                    <div className="grid grid-cols-12 gap-2 py-5 place-content-around  ">
 
+                    {
+                        !isMobile &&
+
+                        <Toolbar className='col-span-3 place-self-center'>
+                            <Search className='bg-gray-200'>
+                                <SearchIconWrapper>
+                                    <SearchIcon />
+                                </SearchIconWrapper>
+                                <StyledInputBase
+                                    placeholder="Search…"
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </Search>
+                        </Toolbar>
+
+                    }
+
+                    <div className=' col-span-6'>
+                        <h1 className='text-stone-900 text-4xl md:text-5xl text-center font-bold lg:ml-0 ml-5'>Ajker Barta</h1>
+                    </div>
+
+                    <div className=' col-span-3   place-self-center'>
                         {
-                            !isMobile &&
-
-                            <Toolbar className='place-self-center'>
-                                <Search className='bg-gray-200'>
-                                    <SearchIconWrapper>
-                                        <SearchIcon />
-                                    </SearchIconWrapper>
-                                    <StyledInputBase
-                                        placeholder="Search…"
-                                        inputProps={{ 'aria-label': 'search' }}
-                                    />
-                                </Search>
-                            </Toolbar>
-
+                            !isMobile ? <button className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
+                                :
+                                <h2><LoginIcon></LoginIcon></h2>
                         }
-
-                        <div className='place-self-center col-span-10'>
-                            <h1 className='text-stone-900 text-4xl md:text-5xl text-center font-bold'>Ajker Barta</h1>
-                        </div>
-
-                        <div className='place-self-center '>
-                            {
-                                !isMobile ? <button className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
-                                    :
-                                    <h2><LoginIcon></LoginIcon></h2>
-                            }
-                        </div>
                     </div>
                 </div>
             </div>
