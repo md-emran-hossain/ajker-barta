@@ -17,13 +17,13 @@ const Bangladesh = () => {
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >
-        <div className="flex justify-between auto-cols-fr" key={col2.id}>
+        <div className="flex justify-between auto-cols-fr" key={col2?.id}>
           <div className="mr-1 w-7/12">
-            <h1 className="font-bold">{col2.title}</h1>
-            <p>{col2.date}</p>
+            <h1 className="font-bold">{col2?.title}</h1>
+            <p>{col2?.date}</p>
           </div>
 
-          <img className="w-5/12 object-fill" src={col2.img} alt={col2.title} />
+          <img className="w-5/12 object-fill" src={col2?.img} alt={col2?.title} />
         </div>
         <div className="row-span-3">
           <img className=" object-fill" src={col1?.img} alt={col1?.title} />
