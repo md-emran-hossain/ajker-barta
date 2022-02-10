@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BsArrowRight } from 'react-icons/bs'
+import { IoIosArrowForward } from 'react-icons/io'
 
 const ScienceTechnology = () => {
   const [newses, setNewses] = useState([])
@@ -11,7 +11,9 @@ const ScienceTechnology = () => {
   return (
     <div className='mb-12'>
       <div className="container">
-        <h1 className='flex items-center justify-start gap-2 ml-2 text-xl mb-1 cursor-pointer font-medium text-blue-900'>Science & Technology <BsArrowRight className='text-red-600' /></h1>
+        <div className='flex items-center'>
+          <h1 className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Science & Technology </h1><IoIosArrowForward className='text-red-600 mt-2' />
+        </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {
             newses?.slice(0, 4).map(news => <div key={news.id} className=' p-2 shadow-sm hover:shadow-md'>
