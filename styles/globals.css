@@ -9,6 +9,18 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  /* box-shadow: inset 0 0 5px 0 rgba(0, 0, 0, 0.5); */
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(209, 209, 209);
+  border-radius: 20px;
+  /* box-shadow: inset 0 0 5px 0 rgba(100, 67, 67, 0.2); */
+}
 
 
 * {
@@ -39,12 +51,23 @@ body {
 #hero .swiper-button-next::after{
   font-size: 20px !important;
 }
+.slim-border{
+  border-width: 1px;
+}
+/* Main Nav  */
+.nav-bg-color{
+  background-color: rgba(255, 255, 255, 0.885);
+}
 
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  transition: all 0.5s;
+}
 
 
  /* Login page Style  */
 
- 
 .first-form{
   
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -210,12 +233,6 @@ body {
   font-size: 26px;
   text-align: center;
 }
-/* .first-form label span {
-  font-size: 12px;
-  color: #cfcfcf;
-  text-transform: uppercase;
-} */
-
 .first-form input {
   display: block;
   width: 100%;
@@ -225,21 +242,6 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
-
-/* .forgot-pass {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 12px;
-  color: #cfcfcf;
-} */
-/* 
-.submit {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  background: #d4af7a;
-  text-transform: uppercase;
-} */
-
 .fb-btn {
   border: 2px solid #d3dae9;
   color: #8fa1c7;
@@ -379,6 +381,143 @@ body {
     height: 100%;
   }
 }
+
+ /* International section card  */
+
+ .news-card {
+  border: 0px solid aqua;
+  margin: 0.5rem;
+  position: relative;
+  /* height: 12rem; */
+  overflow: hidden;
+  border-radius: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+@media (min-width: 900px) {
+
+.news-card {
+    height: 20rem
+}
+  }
+
+.news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);;
+      z-index: 0;
+    }
+
+.news-card__card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+/*     background: rgba(255,0,0,.5); */
+  }
+
+.news-card__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 3s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    z-index: -1;
+  }
+
+.news-card__text-wrapper {
+    position: absolute;
+    bottom: 0rem;
+    padding: 1rem;
+    color: white;
+/*     background-color: rgba(0, 0, 0, 0.4); */
+    transition: background-color 1.5s ease;
+  }
+
+.news-card__title {
+    transition: color 1s ease;
+    margin-bottom: .5rem;
+  }
+
+.news-card__post-date {
+    font-size: .7rem;
+    margin-bottom: .5rem;
+    color: #CCC;
+  }
+
+.news-card__details-wrapper {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1.5s ease, opacity 1s ease;
+  }
+
+@media (min-width: 900px) {
+    .news-card:hover .news-card__details-wrapper {
+      max-height: 20rem;
+      opacity: 1;
+    }
+    .news-card:hover .news-card__text-wrapper {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .news-card:hover .news-card__title {
+      color: yellow;
+    }
+    .news-card:hover .news-card__image {
+      transform: scale(1.2);
+      z-index: -1;
+    }
+  }
+
+.news-card__excerpt {
+    font-weight: 300;
+  }
+
+.news-card__read-more {
+    background: black;
+    color: #bbb;
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.3rem;
+    margin-top: 1rem;
+    border: 1px solid #444;
+    font-size: 0.8rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 7rem;
+    margin-left: auto;
+    position: relative;
+    z-index: 5;
+  }
+
+.news-card__read-more i {
+      position: relative;
+      left: 0.2rem;
+      color: #888;
+      transition: left 0.5s ease, color 0.6s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+.news-card__read-more:hover i {
+      left: 0.5rem;
+      color: yellow;
+    }
 
 
 

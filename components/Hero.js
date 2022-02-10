@@ -58,7 +58,7 @@ const Hero = () => {
               clickable: true
             }}
             speed={1000}
-            modules={[Pagination, Autoplay]}
+            modules={[Autoplay]}
             className={styles.secondSlide}
           >
             {

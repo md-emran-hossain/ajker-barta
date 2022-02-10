@@ -47,21 +47,23 @@ const Login = () => {
                         <p className="tip pt-12">Please click on button in image container</p>
                         <div className="cont bg-white-500 shadow " style={{ borderRadius: '20px' }}>
                             <div className="form sign-in">
-                                <h2>Welcome back,</h2>
-                                <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
-                                    <TextField style={{ width: '100%' }} className="mb-2 text-center"
-                                        defaultValue="admin@gmail.com"
-                                        type="email" {...register("email")} label="Your Email" variant="standard" required /> <br />
+                                <div style={{ width: '60%', margin: '0 auto' }}>
+                                    <h2>Welcome back,</h2>
+                                    <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
+                                        <TextField style={{ width: '100%' }} className="mb-2 text-center"
+                                            defaultValue="admin@gmail.com"
+                                            type="email" {...register("email")} label="Your Email" variant="standard" required /> <br />
 
-                                    <TextField style={{ width: '100%' }} className="mb-4 text-center"
-                                        defaultValue="123456"
-                                        name="password" {...register("password")} label="Your Password"
-                                        type="password"
-                                        variant="standard" required />
+                                        <TextField style={{ width: '100%' }} className="mb-4 text-center"
+                                            defaultValue="123456"
+                                            name="password" {...register("password")} label="Your Password"
+                                            type="password"
+                                            variant="standard" required />
 
-                                    <Button className="fb-btn" type="submit" style={{ width: '100%', }} variant="outlined"><span>Login</span></Button>
-                                </form>
-                                <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn" variant="outlined"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
+                                        <Button className="fb-btn" type="submit" style={{ width: '100%', }} variant="outlined"><span>Login</span></Button>
+                                    </form>
+                                    <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn" variant="outlined"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
+                                </div>
                             </div>
                             <div className="sub-cont">
                                 <div className="img">
@@ -79,20 +81,22 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="form sign-up">
-                                    <h2>Time to feel like home,</h2>
-                                    <form className='mb-4'>
-                                        <TextField sx={{ width: '100%' }} className="mb-2"
-                                            name="name" type="text" onChange={(e) => setNewName(e.target.value)} label="Your Name" variant="standard" required />
+                                    <div style={{ width: '60%', margin: '0 auto' }}>
+                                        <h2>Time to feel like home,</h2>
+                                        <form className='mb-4'>
+                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                                name="name" type="text" onChange={(e) => setNewName(e.target.value)} label="Your Name" variant="standard" required />
 
-                                        <TextField sx={{ width: '100%' }} className="mb-2"
-                                            name="email" type="email" onChange={(e) => setNewEmail(e.target.value)} label="Your Email" variant="standard" required />
+                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                                name="email" type="email" onChange={(e) => setNewEmail(e.target.value)} label="Your Email" variant="standard" required />
 
-                                        <TextField sx={{ width: '100%' }}
-                                            name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
+                                            <TextField sx={{ width: '100%' }}
+                                                name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
 
-                                        <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%' }} variant="outlined"><span>Sign up</span></Button>
-                                    </form>
-                                    <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn " variant="outlined"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
+                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%' }} variant="outlined"><span>Sign up</span></Button>
+                                        </form>
+                                        <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn " variant="outlined"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
