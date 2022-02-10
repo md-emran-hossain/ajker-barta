@@ -8,6 +8,7 @@ import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
+import Sports from "../components/Home/Sports/Sports";
 
 export default function Home() {
       return (
@@ -23,6 +24,7 @@ export default function Home() {
                   {/* <div style={{ height: '1000px' }}> */}
                   <International></International>
                   {/* </div> */}
+                  <Sports />
 
             </div>
       )
