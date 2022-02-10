@@ -5,6 +5,8 @@
 }
 .firstSlider{
   width: 65%;
+  
+  position: relative;
 }
 .secondSlide{
   width: 32%;
