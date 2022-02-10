@@ -17,7 +17,7 @@ const Hero = () => {
       .then(data => setNewses(data))
   }, [])
   return (
-    <div className='py-12' id='hero'>
+    <div className='md:py-6sm:z-0' id='hero'>
       <div className='container'>
         <div className={styles.slidRow}>
           <Swiper

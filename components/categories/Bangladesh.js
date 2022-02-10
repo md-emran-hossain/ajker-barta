@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 import styles from "../../styles/Bangladesh.module.css";
 const Bangladesh = () => {
   const [news, setNews] = useState([]);
@@ -13,7 +14,9 @@ const Bangladesh = () => {
 
   return (
     <div className="h-auto mb-4">
-      <h2>Bangladesh</h2>
+      <div className="flex items-center justify-start ">
+      <h1 className='py-2 text-xl cursor-pointer font-medium text-blue-900'>Bangladesh </h1><IoIosArrowForward className='text-red-600 mt-1' />
+      </div>
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >

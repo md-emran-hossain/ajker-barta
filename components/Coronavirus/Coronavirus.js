@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
 import Corona from './Corona';
 
 const Coronavirus = () => {
@@ -17,8 +18,10 @@ const Coronavirus = () => {
 console.log(data);
     return (
         <div className="container xl mx-auto">
-           <div className="p-0 ml-5 mt-5 uppercase font-bold text-xl mb-2">Coronavirus <span className='text-red-500'>Worldwide</span> </div>
-  <div className="p-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+          <div className="flex items-center justify-start ">
+      <h1 className=' text-xl cursor-pointer font-medium text-blue-900'>Coronavirus Worldwide</h1><IoIosArrowForward className='text-red-600 mt-1' />
+      </div>
+  <div className="py-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
   
   {
 

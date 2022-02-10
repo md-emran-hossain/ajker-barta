@@ -16,10 +16,10 @@ export default function Home() {
                   <Hero />
                   <Bangladesh />
                   <Coronavirus />
-                  <ImageGallary data={data} />
                   <ScienceTechnology />
                   <Exclusive />
                   <Business />
+                  <ImageGallary data={data} />
                   <Opinion />
                   {/* <div style={{ height: '1000px' }}> */}
                   <International></International>
