@@ -27,7 +27,8 @@ const NavigationBar = () => {
         <div className={isSticky ? "navbar navbar-bg-color hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-4 bg-gray-100 sm:px-4 drop-shadow border-y border-gray-300 mb-16" : "navbar hidden sticky top-0 z-30 w-full md:grid place-content-center px-2 py-8 sm:px-4 border-y border-gray-300 mb-16"}>
             {!isMobile &&
 
-                <div className=" flex items-center space-x-1" >
+                <div className=" flex items-center space-x-1 " >
+                    {(isSticky && !isMobile) && <h2 className='text-2xl font-bold text-gray-500 text-start '>AJKER BARTA</h2>}
                     <ul className=" space-x-2 md:inline-flex">
                         <li><a href="#" className={`${styles.link} "pr-1 font-semibold text-gray-600 rounded"`}>Bangladesh</a></li>
                         <li><a href="#" className={`${styles.link} "pr-1 font-semibold text-gray-600 rounded"`}>International</a></li>

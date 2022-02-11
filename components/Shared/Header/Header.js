@@ -4,14 +4,30 @@ import useMediaQuery from '../useMediaQuery/useMediaQuery';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import Toolbar from '@mui/material/Toolbar';
+import { Toolbar, Box, Tooltip, Menu, MenuItem, Avatar, IconButton, Button, Typography } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
 import useAuth from '../../../hooks/useAuth';
 import Router from 'next/router';
+// import Link from 'next/link';
+
+
 
 const Header = () => {
     const { user, logOut } = useAuth();
     const isMobile = useMediaQuery('(max-width: 765px)');
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+
+
+
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -112,19 +128,49 @@ const Header = () => {
                     }
 
                     <div className=' col-span-6'>
-                        <h1 className='text-stone-900 text-4xl md:text-5xl text-center font-bold lg:ml-0 ml-5'>Ajker Barta</h1>
+                        <h1 className='text-gray-600 text-3xl md:text-5xl text-center font-bold lg:ml-0 ml-5'>AJKER BARTA</h1>
                     </div>
 
                     <div className=' col-span-3   place-self-center'>
                         {
                             user.email ? <>
-                                <button onClick={logOut} className={`${styles.loginButton} ${styles.log} "hidden "`}>Logout</button>
-                                {/* <small>{user.email}</small> */}
+
+                                <Box sx={{ flexGrow: 0 }}>
+                                    <Tooltip title="Open settings">
+                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                            <Avatar alt="Remy Sharp" src={user.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{ mt: '45px' }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        <div onClick={handleCloseUserMenu} className="flex flex-col px-3 w-36">
+                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600' >Profile</h5>
+
+                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600'>Account</h5>
+
+                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600' onClick={logOut}>Logout</h5>
+                                        </div>
+                                    </Menu>
+                                </Box>
                             </>
                                 :
                                 !isMobile ? <button onClick={goLoginPage} className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
                                     :
-                                    <h2 onClick={goLoginPage}><LoginIcon></LoginIcon></h2>
+                                    <h2 onClick={goLoginPage} style={{ cursor: 'pointer' }}><LoginIcon></LoginIcon></h2>
 
                         }
                     </div>
