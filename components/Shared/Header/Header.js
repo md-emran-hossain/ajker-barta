@@ -2,15 +2,16 @@ import React from 'react';
 import styles from '../../../styles/NavigationBar.module.css';
 import useMediaQuery from '../useMediaQuery/useMediaQuery';
 import SearchIcon from '@mui/icons-material/Search';
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import LoginIcon from '@mui/icons-material/Login';
+import useAuth from '../../../hooks/useAuth';
+import Router from 'next/router';
 
 const Header = () => {
-
+    const { user, logOut } = useAuth();
     const isMobile = useMediaQuery('(max-width: 765px)');
-
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -49,6 +50,10 @@ const Header = () => {
             },
         },
     }));
+
+    const goLoginPage = () => {
+        Router.push("/login")
+    }
 
     return (
         <div className={isMobile ? " fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
@@ -112,9 +117,15 @@ const Header = () => {
 
                     <div className=' col-span-3   place-self-center'>
                         {
-                            !isMobile ? <button className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
+                            user.email ? <>
+                                <button onClick={logOut} className={`${styles.loginButton} ${styles.log} "hidden "`}>Logout</button>
+                                {/* <small>{user.email}</small> */}
+                            </>
                                 :
-                                <h2><LoginIcon></LoginIcon></h2>
+                                !isMobile ? <button onClick={goLoginPage} className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
+                                    :
+                                    <h2 onClick={goLoginPage}><LoginIcon></LoginIcon></h2>
+
                         }
                     </div>
                 </div>

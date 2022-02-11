@@ -4,7 +4,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 const Sports = (intDatas) => {
-    console.log(intDatas);
     const [sportsData, setSportsData] = useState([]);
 
     useEffect(() => {

@@ -4,9 +4,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 
 const International = (intDatas) => {
-    console.log(intDatas);
     const [newsData, setNewsData] = useState([]);
-    // const [firstData, setFirstData] = useState({})
 
     useEffect(() => {
         fetch("./newsData.JSON")
@@ -16,7 +14,6 @@ const International = (intDatas) => {
             })
     }, [])
 
-    console.log(newsData);
 
     const singleData = newsData.slice(0, 1);
     const multiData = newsData.slice(1, 4);
