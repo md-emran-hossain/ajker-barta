@@ -3,7 +3,7 @@ import NavigationBar from '../Shared/NavigationBar/NavigationBar';
 import Header from '../Shared/Header/Header'
 const Layout = ({ children }) => {
     return (
-        <div className="container mx-auto">
+        <div>
             <Header />
             <NavigationBar />
             {children}
