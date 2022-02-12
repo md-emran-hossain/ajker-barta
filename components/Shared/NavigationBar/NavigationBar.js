@@ -3,10 +3,6 @@ import styles from '../../../styles/NavigationBar.module.css';
 import useMediaQuery from '../useMediaQuery/useMediaQuery';
 
 
-
-
-
-
 const NavigationBar = () => {
     const isMobile = useMediaQuery('(max-width: 765px)');
     const [isSticky, setSticky] = React.useState(false);
