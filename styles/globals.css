@@ -9,6 +9,11 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
 }
+.container{
+  width: 95%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 
 ::-webkit-scrollbar {
   width: 10px;

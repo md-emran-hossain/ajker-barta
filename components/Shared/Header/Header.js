@@ -72,7 +72,7 @@ const Header = () => {
     }
 
     return (
-        <div className={isMobile ? " fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
+        <div className={isMobile ? " z-50 fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
             <div className=' container mx-auto' >
                 <div className="grid grid-cols-12 gap-2 py-5 place-content-between  ">
 

@@ -1,10 +1,9 @@
-import styles from '../../styles/Layout.module.css'
 import Footer from '../Shared/Footer/Footer';
 import NavigationBar from '../Shared/NavigationBar/NavigationBar';
 import Header from '../Shared/Header/Header'
-const Layout = ({children}) => {
+const Layout = ({ children }) => {
     return (
-        <div className={styles.container}>
+        <div className="container mx-auto">
             <Header />
             <NavigationBar />
             {children}
