@@ -6,6 +6,7 @@ import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import Toolbar from '@mui/material/Toolbar';
 import LoginIcon from '@mui/icons-material/Login';
+import Link from 'next/link'
 
 const Header = () => {
 
@@ -70,7 +71,7 @@ const Header = () => {
 
                                 <ul className={styles.navData} role="list" style={{ height: '100vh', paddingTop: '110px', }}>
                                     <li><h2 className='text-center text-2xl font-bold text-red-600'>AJKER BARTA</h2></li>
-                                    <li><a className={styles.link} href="" data-title="Home" aria-label="Home">Bangladesh</a></li>
+                                    <li><Link className={styles.link} href="/bangladesh">Bangladesh</Link></li>
                                     <li><a className={styles.link} href="" data-title="About" aria-label="About">International</a></li>
                                     <li><a className={styles.link} href="" data-title="My Expertise" aria-label="My Expertise">Sports</a></li>
                                     <li><a className={styles.link} href="" data-title="My Technical articles" aria-label="My Technical articles">Opinion</a></li>
