@@ -19,14 +19,14 @@ export default function Home() {
                   <Header />
                   <NavigationBar />
                   <Hero />
-                  <Bangladesh />
                   <Coronavirus />
+                  <Bangladesh />
+                  <International />
                   <ImageGallary data={data} />
                   <ScienceTechnology />
                   <Exclusive />
                   <Business />
                   <Opinion />
-                  <International />
                   <Sports />
                   <Footer />
             </div>

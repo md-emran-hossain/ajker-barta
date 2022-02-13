@@ -71,7 +71,7 @@ const Header = () => {
     }
 
     return (
-        <div className={isMobile ? " z-50 fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
+        <div className={isMobile ? "z-50 fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
             <div className=' container mx-auto' >
                 <div className="grid grid-cols-12 gap-2 py-5 place-content-between  ">
 
@@ -127,17 +127,17 @@ const Header = () => {
                     }
 
                     <div className=' col-span-6'>
-                        <h1 className='text-gray-600 text-3xl md:text-5xl text-center font-bold lg:ml-0 ml-5'>AJKER BARTA</h1>
+                        <Link href="/"><h1 className='text-gray-600 text-3xl md:text-5xl text-center font-bold lg:ml-0 ml-5 cursor-pointer'>AJKER BARTA</h1 ></Link>
                     </div>
 
-                    <div className=' col-span-3   place-self-center'>
+                    <div className='col-span-3 place-self-center'>
                         {
                             user.email ? <>
 
                                 <Box sx={{ flexGrow: 0 }}>
                                     <Tooltip title="Open settings">
                                         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar alt="Remy Sharp" src={user.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                            <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
                                         </IconButton>
                                     </Tooltip>
                                     <Menu
@@ -157,17 +157,17 @@ const Header = () => {
                                         onClose={handleCloseUserMenu}
                                     >
                                         <div onClick={handleCloseUserMenu} className="flex flex-col px-3 w-36">
-                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600' >Profile</h5>
+                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600' >Profile</h5>
 
-                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600'>Account</h5>
+                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600'>Account</h5>
 
-                                            <h5 style={{ cursor: 'pointer' }} className='mb-3 lg:text-2xl text-1xl font-bold text-gray-600' onClick={logOut}>Logout</h5>
+                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600' onClick={logOut}>Logout</h5>
                                         </div>
                                     </Menu>
                                 </Box>
                             </>
                                 :
-                                !isMobile ? <button onClick={goLoginPage} className={`${styles.loginButton} ${styles.log} "hidden "`}>Login</button>
+                                !isMobile ? <button onClick={goLoginPage} className='cursor-pointer font-bold text-blue-600 hover:bg-gray-200 border-2 px-6 py-1'>Login</button>
                                     :
                                     <h2 onClick={goLoginPage} style={{ cursor: 'pointer' }}><LoginIcon></LoginIcon></h2>
 
@@ -175,7 +175,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
