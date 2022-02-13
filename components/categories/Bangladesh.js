@@ -12,7 +12,7 @@ const Bangladesh = () => {
   const col3 = news.slice(2, 7);
 
   return (
-    <div className="h-auto mb-4">
+    <div className="container h-auto mb-4">
       <h2>Bangladesh</h2>
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
