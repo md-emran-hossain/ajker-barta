@@ -1,4 +1,4 @@
-import data from "../components/imageGallary/data";
+ import data from "../components/imageGallary/data"; 
 import Bangladesh from "../components/categories/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";

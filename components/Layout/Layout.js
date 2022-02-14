@@ -1,14 +1,14 @@
 import styles from '../../styles/Layout.module.css'
-import Footer from '../Shared/Footer/Footer';
+ import Footer from '../Shared/Footer/Footer';
 import NavigationBar from '../Shared/NavigationBar/NavigationBar';
-import Header from '../Shared/Header/Header'
+ import Header from '../Shared/Header/Header'
 const Layout = ({children}) => {
     return (
         <div className={styles.container}>
-            <Header />
+               <Header />   
             <NavigationBar />
             {children}
-            <Footer />
+            <Footer />  
         </div>
     );
 };

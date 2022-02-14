@@ -395,10 +395,7 @@ body {
   min-width: 150px;
   margin-bottom: 10px;
   box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
+
 }
 
 /* @media (min-width: 900px) {
