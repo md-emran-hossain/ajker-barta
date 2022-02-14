@@ -9,9 +9,9 @@ const ScienceTechnology = () => {
       .then(data => setNewses(data))
   }, [])
   return (
-    <div className='mb-12'>
+    <div className='my-8'>
       <div className="container">
-        <div className='flex items-center'>
+        <div className='flex mb-4 items-center'>
           <h1 className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Science & Technology </h1><IoIosArrowForward className='text-red-600 mt-2' />
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
