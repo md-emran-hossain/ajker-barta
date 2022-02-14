@@ -24,7 +24,7 @@ const Bangladesh = () => {
       <div className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}>
         <div className="flex justify-between auto-cols-fr" key={col2?.id}>
           <div className="mr-1 w-7/12 cursor-pointer">
-            <Link href={`/news/:${col2?.id}`}>
+            <Link href={`/news/${col2?.id}`}>
               <div>
                 <h1 className="font-bold">{col2?.title}</h1>
                 <p>{col2?.date}</p>
