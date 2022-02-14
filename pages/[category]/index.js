@@ -1,24 +1,28 @@
-import Link from "next/link";
+import axios from 'axios'
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import Footer from '../../components/Shared/Footer/Footer';
+import Header from '../../components/Shared/Header/Header';
+import NavigationBar from '../../components/Shared/NavigationBar/NavigationBar';
 import styles from "../../styles/CategoryDetails.module.css";
 
 const CategoryDetails = ({ newses }) => {
-  const [category, setCategory] = useState("");
-  const subCategories = newses.map((news) => news.subCategory);
+  
+  const router = useRouter()
+  const category = router.query.category;
+  const displayNews = newses.filter(news => news.category === category)
+  const subCategories = displayNews.map((news) => news.subCategory);
   const unique = [...new Set(subCategories)];
-  useEffect(() => {
-    setCategory(newses[0]?.category);
-  }, []);
-  const router = useRouter();
+ 
   return (
     <div>
+      <Header />
+      <NavigationBar />
       <div className={styles.smallContainer}>
         <h1 className="text-3xl font-bold">{category}</h1>
         <div className="flex flex-wrap gap-3 my-2">
           {unique.map((sub, i) => (
             <span
-              onClick={() => router.push(`${category}/${sub}`)}
+              onClick={() => router.push(`/${category}/${sub}`)}
               className="cursor-pointer"
               key={i}
             >
@@ -27,7 +31,7 @@ const CategoryDetails = ({ newses }) => {
           ))}
         </div>
         <div className={styles.categoryGrid}>
-          {newses?.slice(0, 5).map((news) => (
+          {displayNews?.slice(0, 5).map((news) => (
             <div className={styles.itemBox} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
@@ -37,7 +41,7 @@ const CategoryDetails = ({ newses }) => {
           ))}
         </div>
         <div>
-          {newses?.slice(5).map((news) => (
+          {displayNews?.slice(5).map((news) => (
             <div className={styles.singleNews} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <div>
@@ -54,8 +58,17 @@ const CategoryDetails = ({ newses }) => {
           Load More
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
 
 export default CategoryDetails;
+export const getServerSideProps = async () => {
+    const res = await axios.get(`http://localhost:3000/api/news/`);
+    return {
+      props: {
+        newses: res.data,
+      },
+    };
+  };
