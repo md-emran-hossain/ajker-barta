@@ -14,14 +14,11 @@ const Bangladesh = () => {
   const col3 = news.slice(2, 7);
   const router = useRouter()
   return (
-    <div className="h-auto mb-4">
-      <div className="flex items-center justify-start ">
-        <h1 className="py-2 text-xl cursor-pointer font-medium text-blue-900">
-          Bangladesh{" "}
-        </h1>
-        <IoIosArrowForward className="text-red-600 mt-1" />
-      </div>
-      <div className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}>
+    <div className="container h-auto mb-4">
+      <h2>Bangladesh</h2>
+      <div
+        className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
+      >
         <div className="flex justify-between auto-cols-fr" key={col2?.id}>
           <div className="mr-1 w-7/12 cursor-pointer">
             <Link href={`/news/${col2?.id}`}>

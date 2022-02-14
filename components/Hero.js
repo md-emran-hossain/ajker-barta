@@ -17,7 +17,7 @@ const Hero = () => {
       .then(data => setNewses(data))
   }, [])
   return (
-    <div className='md:py-6 sm:z-0' id='hero'>
+    <div className='pb-6' id='hero'>
       <div className='container'>
         <div className={styles.slidRow}>
           <Swiper
@@ -35,9 +35,9 @@ const Hero = () => {
             {
               newses.slice(0, 3).map(news => <SwiperSlide className='h-full' key={news.id}>
                 <div className='relative w-full h-full'>
-                  <img className='w-full h-full' src={news.img} alt='' />
+                  <img className='w-full h-full' src={news?.img} alt='' />
                   <div className='absolute bottom-4 left-4 z-10'>
-                    <p className='text-white text-sm italic'>{news.category} / {news.date}</p>
+                    <p className='text-white text-sm italic'>{news?.category} / {news?.date}</p>
                     <h1 className='text-white text-xl md:text-3xl cursor-pointer hover:text-red-600 leading-5 md:leading-8 sm:my-1 md:my-2 font-semibold transition-colors duration-300'>{news.title}</h1>
                     <p className='text-white text-sm md:text-md'>{news?.description.slice(0, 150)}...</p>
                   </div>

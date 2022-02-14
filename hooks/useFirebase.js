@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, } from "firebase/auth";
 import Swal from 'sweetalert2'
+import Router from "next/router";
 
 import initializeFirebase from '../components/Login/Firebase/Firebase.init';
 // initialize firebase app
 initializeFirebase();
 
-const useFirebase = () => {
+export default function useFirebase() {
     const [user, setUser] = useState({});
     const [authError, setAuthError] = useState('');
     const [loading, setLoading] = useState(true);
@@ -28,6 +29,11 @@ const useFirebase = () => {
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: `Login success ${user.email} `,
+                })
             })
             .catch((error) => {
                 Swal.fire({
@@ -49,6 +55,11 @@ const useFirebase = () => {
 
                 const newUser = { email, displayName: name };
                 setUser(newUser);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: `New user create success ${newUser.email} `,
+                })
 
                 // database save user
                 saveUser(email, name, 'POST');
@@ -61,7 +72,6 @@ const useFirebase = () => {
                         icon: 'error',
                         title: 'Oops...',
                         text: `${error.message} `,
-
                     })
                 });
 
@@ -84,9 +94,14 @@ const useFirebase = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 setUser(user)
-                console.log(user.user)
+                // console.log(user.user)
                 setAuthError('');
                 handleResponse(user.user, location, Router)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: `Login success ${user.user.email} `,
+                })
             })
             .catch((error) => {
                 Swal.fire({
@@ -150,12 +165,35 @@ const useFirebase = () => {
 
     // Log out user 
     const logOut = () => {
-        signOut(auth).then(() => {
-            setAuthError('');
-        }).catch((error) => {
-            setAuthError(error.message);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't to Logout!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00cec9',
+            cancelButtonColor: '#d63031',
+            confirmButtonText: 'Logout'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                signOut(auth).then(() => {
+                    setAuthError('');
+                }).catch((error) => {
+                    setAuthError(error.message);
+                })
+                    .finally(() => setLoading(false));
+                Router.push('/')
+                Swal.fire(
+                    'Login out',
+                    'Logout successfully.',
+                    'success'
+                )
+            }
         })
-            .finally(() => setLoading(false));
+
+
+
+
+
     };
 
     // firebase observer user state
@@ -171,45 +209,46 @@ const useFirebase = () => {
         return () => unsubscribe;
     }, [auth]);
 
-    useEffect(() => {
-        fetch(`/users/${user.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setAdmin(data.admin)
-                console.log(data.admin)
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: `${error} `,
 
-                })
-            })
-    }, [user.email]);
+    // admin set to database 
+    // useEffect(() => {
+    //     fetch(`/users/${user.email}`)
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             setAdmin(data.admin)
+    //             console.log(data.admin)
+    //         })
+    //         .catch(error => {
+    //             Swal.fire({
+    //                 icon: 'error',
+    //                 title: 'Oops...',
+    //                 text: `${error} `,
+
+    //             })
+    //         })
+    // }, [user.email]);
 
     /// user info save to the database 
-    const saveUser = (email, displayName, method) => {
-        const user = { email, displayName };
-        console.log(user);
-        fetch('', {
-            method: method,
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => {
-                setLoading(false)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    };
+    // const saveUser = (email, displayName, method) => {
+    //     const user = { email, displayName };
+    //     console.log(user);
+    //     fetch('', {
+    //         method: method,
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //         .then(res => {
+    //             setLoading(false)
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // };
 
     return {
         user, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
     }
 };
 
-export default useFirebase;

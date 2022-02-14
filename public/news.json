@@ -48,7 +48,7 @@
     "date": " 06 Feb 2022"
   },
   {
-    "id": "5",
+    "id": "7",
     "title": "Messi, Mbappe on target as PSG thrash sorry Lille",
     "category": "Sport",
     "img": "https://i.postimg.cc/Sx32hcvJ/sport.jpg",
@@ -56,7 +56,23 @@
     "date": " 06 Feb 2022"
   },
   {
-    "id": "6",
+    "id": "8",
+    "title": "Construction companies, raw material producers to meet every three months",
+    "category": "Business",
+    "img": "https://i.postimg.cc/QdJ861Z2/business.jpg",
+    "description": "In this context, Bangladesh Steel Manufacturers Association (BSMA) and Bangladesh Association of Construction Industry (BACI) held a meeting at the FBCCI office recently, said a press release on Saturday",
+    "date": " 06 Feb 2022"
+  },
+  {
+    "id": "7",
+    "title": "Messi, Mbappe on target as PSG thrash sorry Lille",
+    "category": "Sport",
+    "img": "https://i.postimg.cc/Sx32hcvJ/sport.jpg",
+    "description": "Lionel Messi and Kylian Mbappe both scored as Paris Saint-Germain stretched their mammoth lead at the top of Ligue 1 to 13 points with a 5-1 thrashing of defending champions Lille on Sunday",
+    "date": " 06 Feb 2022"
+  },
+  {
+    "id": "8",
     "title": "Construction companies, raw material producers to meet every three months",
     "category": "Business",
     "img": "https://i.postimg.cc/QdJ861Z2/business.jpg",
