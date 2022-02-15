@@ -138,7 +138,7 @@ const NewsPublish = () => {
                     </select>
                 }
 
-                <input className="bg-red-600 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white rounded-sm p-2" type="submit" value="Add News" />
+                <input className="bg-red-600 mb-12 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white rounded-sm p-2" type="submit" value="Add News" />
             </form>
         </div>
     );

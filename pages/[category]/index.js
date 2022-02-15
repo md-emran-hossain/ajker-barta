@@ -6,13 +6,13 @@ import NavigationBar from '../../components/Shared/NavigationBar/NavigationBar';
 import styles from "../../styles/CategoryDetails.module.css";
 
 const CategoryDetails = ({ newses }) => {
-  
+
   const router = useRouter()
   const category = router.query.category;
   const displayNews = newses.filter(news => news.category === category)
   const subCategories = displayNews.map((news) => news.subCategory);
   const unique = [...new Set(subCategories)];
- 
+
   return (
     <div>
       <Header />
@@ -48,7 +48,7 @@ const CategoryDetails = ({ newses }) => {
                 <h1 className="text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer">
                   {news?.heading}
                 </h1>
-                <p className="text-sm my-2">{news.description?.[0]}</p>
+                <p className="text-sm my-2">{news?.description?.[0]}</p>
                 <p className="text-blue-600 text-md">{news?.publishedDate}</p>
               </div>
             </div>
@@ -65,10 +65,10 @@ const CategoryDetails = ({ newses }) => {
 
 export default CategoryDetails;
 export const getServerSideProps = async () => {
-    const res = await axios.get(`http://localhost:3000/api/news/`);
-    return {
-      props: {
-        newses: res.data,
-      },
-    };
+  const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  return {
+    props: {
+      newses: res.data,
+    },
   };
+};
