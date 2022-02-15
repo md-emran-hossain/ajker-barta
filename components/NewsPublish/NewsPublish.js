@@ -79,7 +79,7 @@ const NewsPublish = () => {
                     <option value="coronavirus">CORONAVIRUS</option>
                     <option value="bangladesh">Bangladesh</option>
                     <option value="international">International</option>
-                    <option value="science & technology">Science & Technology</option>
+                    <option value="sciencetechnology">Science & Technology</option>
                     <option value="business">Business</option>
                     <option value="sports">Sports</option>
                 </select>
@@ -121,7 +121,7 @@ const NewsPublish = () => {
                                 <option value="round table">Round Table</option>
                             </>
                         }
-                        {category === 'science & technology' &&
+                        {category === 'sciencetechnology' &&
                             <>
                                 <option value="gadgets">Gadgets</option>
                                 <option value="social media">Social Media</option>

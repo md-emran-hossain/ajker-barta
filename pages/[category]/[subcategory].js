@@ -55,7 +55,7 @@ const SubCategoryDetails = ({ newses }) => {
             </div>)
           }
         </div>
-        <button className='w-32 block py-2 mx-auto mb-5 px-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition-bg duration-300'>Load More</button>
+        <button className='w-32 block py-2 mx-auto my-5 px-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition-bg duration-300'>Load More</button>
       </div>
       <Footer />
     </div>
@@ -64,7 +64,7 @@ const SubCategoryDetails = ({ newses }) => {
 
 export default SubCategoryDetails;
 export const getServerSideProps = async () => {
-    const res = await axios.get(`http://localhost:3000/api/news/`);
+    const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
     return {
       props: {
         newses: res.data,
