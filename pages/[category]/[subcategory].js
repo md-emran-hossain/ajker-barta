@@ -8,7 +8,7 @@ import styles from '../../styles/CategoryDetails.module.css'
 
 const SubCategoryDetails = ({ newses }) => {
 
-  const subCategories = newses.map(news => news.subCategory)
+  const subCategories = newses.map(news => news.subCategory && news.category)
   const router = useRouter()
   const subCategory = router.query.subcategory;
   const category = router.query.category;
