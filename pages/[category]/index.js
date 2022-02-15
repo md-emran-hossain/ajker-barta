@@ -1,3 +1,4 @@
+import { async } from '@firebase/util';
 import axios from 'axios'
 import { useRouter } from "next/router";
 import Footer from '../../components/Shared/Footer/Footer';
@@ -64,6 +65,9 @@ const CategoryDetails = ({ newses }) => {
 };
 
 export default CategoryDetails;
+
+
+
 export const getServerSideProps = async () => {
     const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
     return {

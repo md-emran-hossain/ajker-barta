@@ -6,7 +6,9 @@ import data from './data'
 const ImageGallary = () => {
   return (
     <div className="container overflow-hidden mb-24">
-      <h2 className="text-lg py-y">Photo Gallary</h2>
+     <div className='flex mb-4 items-center'>
+          <h1 className='ml-0 text-xl cursor-pointer font-medium text-blue-900'>Image Gallery </h1><IoIosArrowForward className='text-red-600 mt-2' />
+        </div>
 
       <div className="grid md:grid-cols-4 sm:grid-cols-1 md:gap-3 sm:gap-2">
         <div className="md:relative  sm:static w-full sm:h-60 md:col-span-2 sm:col-span-1 md:row-span-2 sm:row-span-1 h-full">

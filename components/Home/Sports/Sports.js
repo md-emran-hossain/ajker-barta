@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styles from './Sports.module.css';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { IoIosArrowForward } from 'react-icons/io';
+import { useRouter } from 'next/router';
 
 
 const Sports = (intDatas) => {
     const [sportsData, setSportsData] = useState([]);
-
+    const router = useRouter()
     useEffect(() => {
         fetch("./newsData.JSON")
             .then(res => res.json())
@@ -20,7 +21,7 @@ const Sports = (intDatas) => {
     const singleData = sportsData.slice(0, 1);
     const multiData = sportsData.slice(1, 4);
     return (
-        <div className='container mx-auto lg:pb-5 lg:border-b  border-gray-200'>
+        <div onClick={() => router.push('/sports')} className='container mx-auto lg:pb-5 lg:border-b cursor-pointer  border-gray-200'>
             <h2 className='text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold'><span className='text-black'>Sports </span> <ChevronRightIcon /></h2>
             <div className="grid grid-cols-12">
                 <div className='col-span-12 lg:col-span-6 mb-3 lg:mb-0' >

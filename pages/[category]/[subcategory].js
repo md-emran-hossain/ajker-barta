@@ -62,6 +62,8 @@ const SubCategoryDetails = ({ newses }) => {
   );
 };
 
+ 
+
 export default SubCategoryDetails;
 export const getServerSideProps = async () => {
     const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);

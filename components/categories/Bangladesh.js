@@ -15,7 +15,9 @@ const Bangladesh = () => {
   const router = useRouter()
   return (
     <div className="container h-auto mb-4">
-      <h2>Bangladesh</h2>
+      <div className='flex mb-4 items-center'>
+          <h1 onClick={() => router.push('/bangladesh')} className=' text-xl cursor-pointer font-medium text-blue-900'>Bangladesh </h1><IoIosArrowForward className='text-red-600 mt-2' />
+        </div>
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >

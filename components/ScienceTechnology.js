@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io'
 
 const ScienceTechnology = () => {
   const [newses, setNewses] = useState([])
+  const router = useRouter()
   useEffect(() => {
     fetch('./news.json')
       .then(res => res.json())
@@ -11,7 +13,7 @@ const ScienceTechnology = () => {
   return (
     <div className='my-8'>
       <div className="container">
-        <div className='flex mb-4 items-center'>
+        <div onClick={() => router.push('/sciencetechnology')} className='flex mb-4 items-center'>
           <h1 className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Science & Technology </h1><IoIosArrowForward className='text-red-600 mt-2' />
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

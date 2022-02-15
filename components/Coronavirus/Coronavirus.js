@@ -1,10 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import Corona from './Corona';
 
 const Coronavirus = () => {
 
   const [data, setData] = useState([])
-
+  const router = useRouter()
   useEffect(() => {
 
     fetch('/ass/fakeapi.JSON')
@@ -17,7 +18,7 @@ const Coronavirus = () => {
   console.log(data);
   return (
     <div className="container xl mx-auto">
-      <div className="mt-5 uppercase font-bold text-xl mb-2">Coronavirus <span className='text-red-500'>Worldwide</span> </div>
+      <div onClick={() => router.push('/coronavirus')} className="mt-5 uppercase font-bold text-xl mb-2 cursor-pointer">Coronavirus <span className='text-red-500'>Worldwide</span> </div>
       <div className="py-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
 
         {

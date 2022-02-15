@@ -7,6 +7,9 @@ import {
   FaRegBookmark,
   FaPrint,
 } from "react-icons/fa";
+import Footer from "../../components/Shared/Footer/Footer";
+import Header from "../../components/Shared/Header/Header";
+import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 const Newsdetails = () => {
   const [news, setNews] = useState({});
   const [remaining, setRemaining] = useState([]);
@@ -43,65 +46,71 @@ const Newsdetails = () => {
     );
   };
   return (
-    <div className="grid md:grid-cols-3 sm:grid-cols-1">
-      <div className="col-span-2 mt-20">
-        <h3 className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
-          {news?.category}
-        </h3>
-        <h1 className="text-4xl mb-3 font-semibold">{news?.title}</h1>
-        <div className="flex items-end justify-between mb-2">
-          <div>
-            <p className="font-bold">Ajker barta desk</p>
-            <p>Publish Date: {news?.date}</p>
-          </div>
-          <Actions />
-        </div>
-        <hr />
-        <img src={news?.img} className=" py-3 w-full" alt={news?.title} />
-
-        <p className="py-3 text-lg">{news?.description}</p>
-
-        <div className="border-y border-gray-300 flex items-center justify-between">
-          <h2 className="text-xl font-semibold py-3">Comments</h2>
-          <Actions />
-        </div>
-        <div className="flex justify-between items-center border-y border-gray-300">
-          <h2 className="text-xl py-3">No Comments yet</h2>
-
-          <div>
-          <span>Sort by: </span>
-          <select name="Sort by" id="Sort by">
-            <option value="">Newest</option>
-            <option value="">Oldest</option>
-          </select>
-          </div>
-        </div>
-        <div>
-          <span>
-            
-          </span>
-        </div>
-      </div>
-      <div className="col-span-1">
-        <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
-          You may also read
-        </p>
-
-        {remaining.map((item) => {
-          return (
-            <div key={item.id}>
-              <div className="mx-10 my-5 pb-4 border-b border-gray-300">
-                <h2 className="text-xl font-semibold">{item?.title}</h2>
-                <div className="flex">
-                  <p>{item?.description.slice(0, 70)}</p>
-                  <img className="w-5/12" src={item.img} alt={item.title} />
-                </div>
-                <p>{item.date}</p>
-              </div>
+    <div>
+      <Header />
+      <NavigationBar />
+      <div className="grid mx-14 md:grid-cols-3 sm:grid-cols-1">
+        <div className="col-span-2 mt-20">
+          <h3 className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
+            {news?.category}
+          </h3>
+          <h1 className="text-4xl mb-3 font-semibold">{news?.title}</h1>
+          <div className="flex items-end justify-between mb-2">
+            <div>
+              <p className="font-bold">Ajker barta desk</p>
+              <p>Publish Date: {news?.date}</p>
             </div>
-          );
-        })}
+            <Actions />
+          </div>
+          <hr />
+          <img src={news?.img} className=" py-3 w-full" alt={news?.title} />
+
+          <p className="py-3 text-lg">{news?.description}</p>
+
+          <div className="border-y border-gray-300 flex items-center justify-between">
+            <h2 className="text-xl font-semibold py-3">Comments</h2>
+            <Actions />
+          </div>
+          <div className="flex justify-between items-center border-y border-gray-300">
+            <h2 className="text-xl py-3">No Comments yet</h2>
+
+            <div>
+              <span>Sort by: </span>
+              <select name="Sort by" id="Sort by">
+                <option value="">Newest</option>
+                <option value="">Oldest</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <form action="">
+              <input placeholder="Write your comment here" type="text" className="border-2 rounded block w-full my-2 p-2" />
+              <input className="bg-orange-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Post" />
+            </form>
+          </div>
+        </div>
+        <div className="col-span-1">
+          <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
+            You may also read
+          </p>
+
+          {remaining.map((item) => {
+            return (
+              <div key={item.id}>
+                <div className="mx-10 my-5 pb-4 border-b border-gray-300">
+                  <h2 className="text-xl font-semibold">{item?.title}</h2>
+                  <div className="flex">
+                    <p>{item?.description.slice(0, 70)}</p>
+                    <img className="w-5/12" src={item.img} alt={item.title} />
+                  </div>
+                  <p>{item.date}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
