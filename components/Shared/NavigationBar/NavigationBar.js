@@ -24,14 +24,14 @@ const NavigationBar = () => {
             {!isMobile &&
                 <div className=" flex items-center" >
                     <ul className=" space-x-4 md:inline-flex">
-                        <li><Link href="bangladesh" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Bangladesh</Link></li>
-                        <li><Link href="international" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>International</Link></li>
-                        <li><Link href="sports" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Sports</Link></li>
-                        <li><Link href="" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Science & Technology</Link></li>
-                        <li><Link href="business" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Business</Link></li>
-                        <li><Link href="coronavirus" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Coronavirus</Link></li>
-                        <li><Link href="entertainment" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Entertainment</Link></li>
-                        <li><Link href="lifestyle" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Lifestyle</Link></li>
+                        <li><Link href="/bangladesh" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Bangladesh</Link></li>
+                        <li><Link href="/international" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>International</Link></li>
+                        <li><Link href="/sports" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Sports</Link></li>
+                        <li><Link href="/sciencetechnology" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Science & Technology</Link></li>
+                        <li><Link href="/business" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Business</Link></li>
+                        <li><Link href="/coronavirus" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Coronavirus</Link></li>
+                        <li><Link href="/entertainment" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Entertainment</Link></li>
+                        <li><Link href="/lifestyle" className={`${styles.link} "pr-1 font-semibold text-gray-600"`}>Lifestyle</Link></li>
                     </ul>
                 </div>
             }
