@@ -11,6 +11,8 @@ import Sports from "../components/Home/Sports/Sports";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
+import Global from "../components/CovidUpdate/Global";
+import CovidBtn from "../components/CovidUpdate/CovidBtn";
 
 export default function Home() {
       return (
@@ -19,6 +21,8 @@ export default function Home() {
                   <NavigationBar />
                   <Hero />
                   <Coronavirus />
+                  <Global />
+                  <CovidBtn />
                   <Bangladesh />
                   <International />
                   <ImageGallary />
