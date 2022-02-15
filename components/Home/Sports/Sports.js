@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Sports.module.css';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { IoIosArrowForward } from 'react-icons/io';
 
 
 const Sports = (intDatas) => {

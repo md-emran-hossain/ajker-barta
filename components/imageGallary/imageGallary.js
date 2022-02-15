@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { FaRegImages } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 import styles from "../../styles/Hero.module.css";
-const ImageGallary = ({ data }) => {
+import data from './data'
+const ImageGallary = () => {
   return (
     <div className="container overflow-hidden mb-24">
       <h2 className="text-lg py-y">Photo Gallary</h2>
