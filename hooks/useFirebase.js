@@ -22,9 +22,7 @@ export default function useFirebase() {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-
-                const destination = location?.state?.from || '/';
-                Router.push(destination);
+                Router.push(location || '/');
                 const user = result.user;
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
@@ -118,9 +116,7 @@ export default function useFirebase() {
 
     // handle logged in user
     const handleResponse = (user, location, Router) => {
-
-        const destination = location?.state?.from || '/';
-        Router.push(destination);
+        Router.push(location);
         setAuthError('');
         if (user.email === 'admin@gmail.com') {
 
