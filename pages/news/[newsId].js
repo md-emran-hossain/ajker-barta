@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 import {
   FaFacebookF,
   FaTwitter,
@@ -18,20 +18,28 @@ const Newsdetails = ({newses}) => {
   const news = newses.find(news => news._id === newsId)
   const category = news.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
-  const iconClass = "p-2 flex-initial bg-gray-200 rounded-full cursor-pointer";
+  const url = window.location.href
+  const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
-        <span className={iconClass}>
-          <FaFacebookF />
+        <span>
+          <FacebookShareButton url={url}>
+
+          <FacebookIcon size={40} round={true} />
+          </FacebookShareButton>
         </span>
-        <span className={iconClass}>
-          <FaTwitter />
+        <span >
+          <TwitterShareButton url={url}>
+            <TwitterIcon size={40} round={true} />
+          </TwitterShareButton>
         </span>
-        <span className={iconClass}>
-          <FaShare />
+        <span >
+         <LinkedinShareButton url={url}>
+          <LinkedinIcon round={true} size={40} />
+         </LinkedinShareButton>
         </span>
-        <span className={iconClass}>
+        <span className={`${iconClass} bg-orange-500 text-white`}>
           <FaRegBookmark />
         </span>
         <span onClick={() => window.print()} className={iconClass}>
@@ -40,13 +48,14 @@ const Newsdetails = ({newses}) => {
       </div>
     );
   };
+  console.log(url)
   return (
     <div>
       <Header />
       <NavigationBar />
-      <div className="grid mx-14 md:grid-cols-3 sm:grid-cols-1">
+      <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-20">
-          <h3 className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
+          <h3 onClick={() => router.push(`/${category}`)} className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
@@ -60,7 +69,17 @@ const Newsdetails = ({newses}) => {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p className="py-3 text-lg">{news?.description.join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(0,5).join()}</p>
+          {
+            news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
+          }
+          <p className="py-3 text-lg">{news?.description.slice(5,10).join()}</p>
+          {
+            news?.images?.img3 && <img src={news?.images?.img3} alt='img2' />
+          }
+          <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
 
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
@@ -91,7 +110,7 @@ const Newsdetails = ({newses}) => {
 
           {remaining.slice(0,10).map((item) => {
             return (
-              <div key={item._id}>
+              <div onClick={() => router.push(`/news/${item._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
                   <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">
