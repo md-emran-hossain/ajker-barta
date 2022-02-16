@@ -10,7 +10,7 @@ const CategoryDetails = ({ newses }) => {
   
   const router = useRouter()
   const category = router.query.category;
-  const displayNews = newses.filter(news => news.category === category)
+  const displayNews = newses.filter(news => news.category === category).reverse()
   const subCategories = displayNews.map((news) => news.category && news.subCategory);
   const unique = [...new Set(subCategories)];
   console.log(displayNews, category)

@@ -13,20 +13,27 @@ import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
 import axios from 'axios'
 export default function Home({newses}) {
+      const coronanews = newses.filter(news => news.category === 'coronavirus')
+      const bdnews = newses.filter(news => news.category === 'bangladesh')
+      const international = newses.filter(news => news.category === 'international')
+      const science = newses.filter(news => news.category === 'sciencetechnology')
+      const business = newses.filter(news => news.category === 'business')
+      const sports = newses.filter(news => news.category === 'sports')
+      
       return (
             <div>
                   <Header />
                   <NavigationBar />
-                  <Hero />
-                  <Coronavirus />
-                  <Bangladesh />
-                  <International />
-                  <ImageGallary />
-                  <ScienceTechnology />
+                  <Hero newses={newses} />
+                  <Coronavirus coronanews={coronanews} />
+                  <Bangladesh bdnews={bdnews} />
+                  <International international={international} />
+                  <ScienceTechnology science={science}  />
                   <Exclusive />
-                  <Business />
+                  <Business business={business} />
+                  <ImageGallary />
                   <Opinion />
-                  <Sports />
+                  <Sports sports={sports} />
                   <Footer />
             </div>
       )

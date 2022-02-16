@@ -2,14 +2,10 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { IoIosArrowForward } from 'react-icons/io'
 
-const Business = () => {
-  const [newses, setNewses] = useState([])
+const Business = ({business}) => {
+ 
   const router = useRouter()
-  useEffect(() => {
-    fetch('./news.json')
-      .then(res => res.json())
-      .then(data => setNewses(data))
-  }, [])
+  const newses = business.reverse()
   return (
     <div className='mb-6'>
       <div className="container">
@@ -18,11 +14,11 @@ const Business = () => {
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
           {
-            newses?.slice(0, 4).map(news => <div key={news.id} className=' p-2 shadow-sm hover:shadow-md'>
-              <img className='w-full h-52 object-cover' src={news.img} alt="" />
-              <h1 className='text-lg leading-6 my-1 font-semibold hover:text-red-600 transition-colors duration-300 cursor-pointer' >{news.title}</h1>
-              <p className='text-sm'>{news.description?.slice(0, 120)}...</p>
-              <p className='text-md italic text-blue-600'>{news.date}</p>
+            newses?.slice(0, 4).map(news => <div key={news._id} className=' p-2 shadow-sm hover:shadow-md'>
+              <img className='w-full h-52 object-cover' src={news?.images?.img1} alt="" />
+              <h1 className='text-lg leading-6 my-1 font-semibold hover:text-red-600 transition-colors duration-300 cursor-pointer' >{news?.heading}</h1>
+              <p className='text-sm'>{news?.description[0].slice(0, 100)}...</p>
+              <p className='text-md italic text-blue-600'>{news.publishedDate}</p>
             </div>)
           }
         </div>

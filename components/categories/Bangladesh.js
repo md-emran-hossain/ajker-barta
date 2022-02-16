@@ -2,16 +2,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-const Bangladesh = () => {
-  const [news, setNews] = useState([]);
-  useEffect(() => {
-    fetch("/Bangladesh.json")
-      .then((res) => res.json())
-      .then((data) => setNews(data));
-  }, []);
-  const col1 = news[0];
-  const col2 = news[1];
-  const col3 = news.slice(2, 7);
+const Bangladesh = ({bdnews}) => {
+
+  const col1 = bdnews[0];
+  const col2 = bdnews[1];
+  const col3 = bdnews.slice(2, 7);
   const router = useRouter()
   return (
     <div className="container h-auto mb-4">
@@ -21,50 +16,50 @@ const Bangladesh = () => {
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >
-        <div className="flex justify-between auto-cols-fr" key={col2?.id}>
+        <div className="flex justify-between auto-cols-fr" key={col2?._id}>
           <div className="mr-1 w-7/12 cursor-pointer">
-            <Link href={`/news/${col2?.id}`}>
+            <Link href={`/news/${col2?._id}`}>
               <div>
-                <h1 className="font-bold">{col2?.title}</h1>
-                <p>{col2?.date}</p>
+                <h1 className="font-bold">{col2?.heading}</h1>
+                <p>{col2?.publishedDate}</p>
               </div>
             </Link>
           </div>
-          <Link href={`/news/:${col2?.id}`}>
+          <Link href={`/news/:${col2?._id}`}>
             <img
               className="w-5/12 object-fill cursor-pointer"
-              src={col2?.img}
-              alt={col2?.title}
+              src={col2?.images.img1}
+              alt={col2?.heading}
             />
           </Link>
         </div>
         <div className="row-span-3 cursor-pointer">
-          <Link href={`/news/${col1?.id}`}>
+          <Link href={`/news/${col1?._id}`}>
             <div>
-              <img className=" object-fill" src={col1?.img} alt={col1?.title} />
+              <img className=" object-fill" src={col1?.images?.img1} alt={col1?.heading} />
 
               <div className="mr-1 ">
-                <h1 className="font-bold">{col1?.title}</h1>
-                <p>{col1?.date}</p>
-                <p>{col1?.description}</p>
+                <h1 className="font-bold">{col1?.heading}</h1>
+                <p>{col1?.publishedDate}</p>
+                <p>{col1?.description[0].slice(0,100)}</p>
               </div>
             </div>
           </Link>
         </div>
         {col3.map((item) => {
           return (
-            <div className="flex justify-between auto-cols-fr" key={item.id}>
+            <div className="flex justify-between auto-cols-fr" key={item._id}>
 
-              <div onClick={() => router.push(`/news/${item.id}`)} className="mr-1 w-7/12 cursor-pointer">
-                <h1 className="font-bold">{item.title}</h1>
-                <p>{item.date}</p>
+              <div onClick={() => router.push(`/news/${item._id}`)} className="mr-1 w-7/12 cursor-pointer">
+                <h1 className="font-bold">{item?.heading}</h1>
+                <p>{item?.publishedDate}</p>
               </div>
 
               <img
                 className="w-5/12 object-fill cursor-pointer"
-                src={item.img}
+                src={item?.images?.img1}
                 alt={item.title}
-                onClick={() => router.push(`/news/${item.id}`)}
+                onClick={() => router.push(`/news/${item._id}`)}
               />
             </div>
           );

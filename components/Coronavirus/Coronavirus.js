@@ -2,20 +2,20 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import Corona from './Corona';
 
-const Coronavirus = () => {
+const Coronavirus = ({coronanews}) => {
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const router = useRouter()
-  useEffect(() => {
+  // useEffect(() => {
 
-    fetch('/ass/fakeapi.JSON')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
+  //   fetch('/ass/fakeapi.JSON')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data)
 
-      })
-  }, [])
-  console.log(data);
+  //     })
+  // }, [])
+  const latestNews = coronanews.reverse().slice(0,4)
   return (
     <div className="container xl mx-auto">
       <div onClick={() => router.push('/coronavirus')} className="mt-5 uppercase font-bold text-xl mb-2 cursor-pointer">Coronavirus <span className='text-red-500'>Worldwide</span> </div>
@@ -24,9 +24,9 @@ const Coronavirus = () => {
         {
 
 
-          data.map(item => <Corona
-            key={item.id}
-            item={item}
+latestNews.map(news => <Corona
+            key={news._id}
+            news={news}
           ></Corona>)
 
 
