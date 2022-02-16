@@ -11,6 +11,7 @@ import Sports from "../components/Home/Sports/Sports";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
+
 import axios from 'axios'
 export default function Home({newses}) {
       const coronanews = newses.filter(news => news.category === 'coronavirus')
@@ -20,10 +21,17 @@ export default function Home({newses}) {
       const business = newses.filter(news => news.category === 'business')
       const sports = newses.filter(news => news.category === 'sports')
       
+
+import Global from "../components/CovidUpdate/Global";
+import CovidBtn from "../components/CovidUpdate/CovidBtn";
+
+export default function Home() {
+
       return (
             <div>
                   <Header />
                   <NavigationBar />
+
                   <Hero newses={newses} />
                   <Coronavirus coronanews={coronanews} />
                   <Bangladesh bdnews={bdnews} />
@@ -31,6 +39,14 @@ export default function Home({newses}) {
                   <ScienceTechnology science={science}  />
                   <Exclusive newses={newses} />
                   <Business business={business} />
+
+                  <Hero />
+                  <Coronavirus />
+                  <Global />
+                  <CovidBtn />
+                  <Bangladesh />
+                  <International />
+
                   <ImageGallary />
                   <Opinion />
                   <Sports sports={sports} />
