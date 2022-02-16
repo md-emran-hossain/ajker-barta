@@ -11,7 +11,6 @@ import Sports from "../components/Home/Sports/Sports";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
-import axios from "axios";
 import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 export default function Home({ newses }) {
@@ -45,6 +44,10 @@ export default function Home({ newses }) {
       <Footer />
     </div>
   );
+
+
+
+
 }
 
 export const getServerSideProps = async () => {

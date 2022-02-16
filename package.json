@@ -26,7 +26,13 @@
     "react-resize-detector": "^7.0.0",
     "react-share": "^4.4.0",
     "react-smooth": "^2.0.0",
+
+    
+
+
     "recharts": "^2.1.9",
+
+
     "sweetalert2": "^11.4.0",
     "swiper": "^8.0.3"
   },
