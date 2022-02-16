@@ -11,6 +11,9 @@ import Sports from "../components/Home/Sports/Sports";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
+import Global from "../components/CovidUpdate/Global";
+import CovidBtn from "../components/CovidUpdate/CovidBtn";
+
 
 import axios from 'axios'
 export default function Home({newses}) {
@@ -22,10 +25,8 @@ export default function Home({newses}) {
       const sports = newses.filter(news => news.category === 'sports')
       
 
-import Global from "../components/CovidUpdate/Global";
-import CovidBtn from "../components/CovidUpdate/CovidBtn";
 
-export default function Home() {
+
 
       return (
             <div>
@@ -53,13 +54,15 @@ export default function Home() {
                   <Footer />
             </div>
       )
+
+
 }
 
 export const getServerSideProps = async () => {
-      const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-      return {
-        props: {
-          newses: res.data,
-        },
-      };
-    };
+  const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  return {
+    props: {
+      newses: res.data,
+    },
+  };
+};
