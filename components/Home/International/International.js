@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+
 import styles from "./International.module.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { IoIosArrowForward } from "react-icons/io";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -9,6 +9,7 @@ const International = ({ international }) => {
   const newsData = international.reverse();
   const singleData = newsData.slice(0, 1);
   const multiData = newsData.slice(1, 4);
+  const router = useRouter()
   return (
     <div className="container mx-auto lg:pb-5 lg:border-b  border-gray-200">
       <h2 className="text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold">
@@ -23,8 +24,9 @@ const International = ({ international }) => {
           <div>
             {singleData.map((single) => (
               <div
+              onClick={() => router.push(`/news/${single?._id}`)}
                 key={single?._id}
-                className=" lg:border-none border lg:border lg:border-r border-gray-200 lg:mr-3 lg:pr-3"
+                className=" lg:border-none border lg:border cursor-pointer lg:border-r border-gray-200 lg:mr-3 lg:pr-3"
               >
                 <div className="">
                   <img src={single?.images?.img1} alt="" className="" />
@@ -46,7 +48,7 @@ const International = ({ international }) => {
         <div className="col-span-12 lg:col-span-6">
           <div className="">
             {multiData.map((multi) => (
-              <div key={multi?._id} className="col-span-12 lg:col-span-4 mb-2">
+              <div key={multi?._id} onClick={() => router.push(`/news/${multi?._id}`)} className="col-span-12 lg:col-span-4 mb-2 cursor-pointer">
                 <div className="grid grid-cols-12 border border-gray-200 rounded-md">
                   <div className="col-span-8 p-2">
                     <h2 className="text-1xl  font-bold">

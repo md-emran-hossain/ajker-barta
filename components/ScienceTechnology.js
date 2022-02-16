@@ -19,7 +19,7 @@ const ScienceTechnology = ({ science }) => {
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {newses?.slice(0, 4).map((news) => (
-            <div key={news._id} className="">
+            <div key={news._id} className="cursor-pointer" onClick={() => router.push(`/news/${news?._id}`)}>
               <img
                 className="w-full h-52 object-cover"
                 src={news?.images?.img1}

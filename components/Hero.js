@@ -8,9 +8,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import styles from '../styles/Hero.module.css'
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper";
+import { useRouter } from 'next/router';
 
 const Hero = ({newses}) => {
   const latest = newses.reverse()
+  const router = useRouter()
   return (
     <div className='pb-6' id='hero'>
       <div className='container'>
@@ -29,7 +31,7 @@ const Hero = ({newses}) => {
           >
             {
               latest.slice(0, 3).map(news => <SwiperSlide className='h-full' key={news._id}>
-                <div className='relative w-full h-full'>
+                <div onClick={() => router.push(`/news/${news._id}`)} className='relative w-full h-full cursor-pointer'>
                   <img className='w-full h-full' src={news?.images.img1} alt='' />
                   <div className='absolute bottom-4 left-4 z-10'>
                     <p className='text-white text-sm italic'>{news?.category} / {news?.publishedDate}</p>
@@ -58,7 +60,7 @@ const Hero = ({newses}) => {
           >
             {
               latest.slice(3, 8).map(news => <SwiperSlide key={news._id}>
-                <div className='flex justify-center gap-3 h-full'>
+                <div onClick={() => router.push(`/news/${news._id}`)} className='flex justify-center gap-3 h-full cursor-pointer'>
                   <div className='w-2/5 h-full'>
                     <img className='w-full h-full object-cover' src={news?.images.img1} alt='' />
                   </div>

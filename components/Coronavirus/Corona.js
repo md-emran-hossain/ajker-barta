@@ -1,10 +1,12 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 
-const Corona = (props) => {
-   
-    const {heading,description,images,publishedDate}=props.news
+const Corona = ({news}) => {
+
+const router = useRouter()   
+    const {heading,description,images,publishedDate}=news
     return (
-        <div className="rounded overflow-hidden shadow-lg">
+        <div onClick={() => router.push(`/news/${news._id}`)} className="rounded overflow-hidden shadow-lg cursor-pointer">
         <img className="w-full" src={images.img1} alt="Mountain"/>
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{heading}</div>

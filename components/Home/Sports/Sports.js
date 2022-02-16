@@ -19,7 +19,7 @@ const Sports = ({sports}) => {
                         {
                             singleData.map(single => <div
                                 key={single._id}
-                                className=" lg:border-none border lg:border lg:border-r border-gray-200 lg:mr-3 lg:pr-3" >
+                                className=" lg:border-none border lg:border lg:border-r border-gray-200 lg:mr-3 lg:pr-3 cursor-pointer" onClick={() => router.push(`/news/${single._id}`)}>
                                 <div className=''>
                                     <img src={single?.images?.img1} alt="" className="" />
                                 </div>
@@ -37,7 +37,7 @@ const Sports = ({sports}) => {
                     <div className="">
                         {multiData.map(multi => (<div
                             key={multi?._id}
-                            className='col-span-12 lg:col-span-4 mb-2'>
+                            className='col-span-12 lg:col-span-4 mb-2' onClick={() => router.push(`/news/${multi._id}`)}>
                             <div className='grid grid-cols-12 border border-gray-200 rounded-md'>
                                 <div className="col-span-8 p-2">
                                     <h2 className="text-1xl  font-bold">{multi?.heading}</h2>

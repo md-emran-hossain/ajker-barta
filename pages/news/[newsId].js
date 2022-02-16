@@ -9,20 +9,15 @@ import {
 } from "react-icons/fa";
 import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
+import axios from 'axios'
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
-const Newsdetails = () => {
-  const [news, setNews] = useState({});
-  const [remaining, setRemaining] = useState([]);
+const Newsdetails = ({newses}) => {
+  
   const router = useRouter();
   const newsId = router.query.newsId;
-  useEffect(() => {
-    fetch("/Bangladesh.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setNews(data.find((item) => item.id === newsId));
-        setRemaining(data.filter((item) => item.id !== newsId));
-      });
-  }, [newsId]);
+  const news = newses.find(news => news._id === newsId)
+  const category = news.category;
+  const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   const iconClass = "p-2 flex-initial bg-gray-200 rounded-full cursor-pointer";
   const Actions = () => {
     return (
@@ -54,18 +49,18 @@ const Newsdetails = () => {
           <h3 className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
-          <h1 className="text-4xl mb-3 font-semibold">{news?.title}</h1>
+          <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
           <div className="flex items-end justify-between mb-2">
             <div>
-              <p className="font-bold">Ajker barta desk</p>
-              <p>Publish Date: {news?.date}</p>
+              <p className="font-bold">{news?.reporter}</p>
+              <p>Publish Date: {news?.publishedDate}</p>
             </div>
             <Actions />
           </div>
           <hr />
-          <img src={news?.img} className=" py-3 w-full" alt={news?.title} />
+          <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p className="py-3 text-lg">{news?.description}</p>
+          <p className="py-3 text-lg">{news?.description.join()}</p>
 
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
@@ -94,16 +89,16 @@ const Newsdetails = () => {
             You may also read
           </p>
 
-          {remaining.map((item) => {
+          {remaining.slice(0,10).map((item) => {
             return (
-              <div key={item.id}>
+              <div key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
-                  <h2 className="text-xl font-semibold">{item?.title}</h2>
+                  <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">
-                    <p>{item?.description.slice(0, 70)}</p>
-                    <img className="w-5/12" src={item.img} alt={item.title} />
+                    <p>{item?.description[0].slice(0, 70)}</p>
+                    <img className="w-5/12" src={item?.images?.img1} alt={item.title} />
                   </div>
-                  <p>{item.date}</p>
+                  <p>{item.publishedDate}</p>
                 </div>
               </div>
             );
@@ -116,3 +111,11 @@ const Newsdetails = () => {
 };
 
 export default Newsdetails;
+export const getServerSideProps = async () => {
+      const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+      return {
+        props: {
+          newses: res.data,
+        },
+      };
+    };

@@ -29,7 +29,7 @@ export default function Home({newses}) {
                   <Bangladesh bdnews={bdnews} />
                   <International international={international} />
                   <ScienceTechnology science={science}  />
-                  <Exclusive />
+                  <Exclusive newses={newses} />
                   <Business business={business} />
                   <ImageGallary />
                   <Opinion />
