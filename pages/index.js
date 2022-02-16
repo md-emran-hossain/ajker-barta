@@ -17,15 +17,11 @@ import CovidBtn from "../components/CovidUpdate/CovidBtn";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
-  const international = newses.filter(
-    (news) => news.category === "international"
-  );
-  const science = newses.filter(
-    (news) => news.category === "sciencetechnology"
-  );
+  const international = newses.filter((news) => news.category === "international");
+  const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
-
+  console.log(coronanews);
   return (
     <div>
       <Header />
@@ -37,12 +33,12 @@ export default function Home({ newses }) {
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
       <Business business={business} />
-      <Hero />
+      <Hero newses={newses} />
       <Coronavirus />
       <Global />
       <CovidBtn />
-      <Bangladesh />
-      <International />
+      <Bangladesh bdnews={bdnews} />
+      <International international={international} />
       <ImageGallary />
       <Opinion />
       <Sports sports={sports} />
