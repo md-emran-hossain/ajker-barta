@@ -18,7 +18,10 @@ const Login = () => {
     const isDesktop = useMediaQuery('(min-width: 900px)');
     // const location = ""
     const location = useRouter()
-    const locationURL = Object.keys(location.components)[2]
+    let locationURL = ''
+    if (typeof location.components === 'object') {
+        locationURL = Object.keys(location.components)[2]
+    }
 
     //// Login with google 
     const handleGoogleLogin = () => {
