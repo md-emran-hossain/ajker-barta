@@ -9,23 +9,22 @@ import styles from '../../styles/CategoryDetails.module.css'
 
 const SubCategoryDetails = ({ newses }) => {
   const [visible, setVisible] = useState(10)
-  
+
   const subCategories = newses.map(news => news.subCategory && news.category)
   const router = useRouter()
   const subCategory = router.query.subcategory;
   const category = router.query.category;
   const unique = [...new Set(subCategories)];
   const displayNews = newses.filter(news => news.subCategory === subCategory).reverse()
-  
-  
+
+
   const loadmore = () => {
     setVisible(prev => prev + 5)
-    if(visible >= displayNews.length - 1){
+    if (visible >= displayNews.length - 1) {
       setShow(false)
     }
-   
+
   }
-  
   return (
     <div>
       <Header />
@@ -46,8 +45,8 @@ const SubCategoryDetails = ({ newses }) => {
             displayNews?.slice(0, 5).map(news => <div onClick={() => router.push(`/news/${news?._id}`)} className={`${styles.itemBox} cursor-pointer`} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
-              <p>{news.description?.[0].slice(0,100)}</p>
-              <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
+              <p>{news.description?.[0].slice(0, 100)}</p>
+              <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
             </div>)
           }
         </div>
@@ -58,8 +57,7 @@ const SubCategoryDetails = ({ newses }) => {
               <div>
                 <h1 className='text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading}</h1>
                 <p className='text-sm my-2'>{news?.description?.[0]}</p>
-                <p className='text-blue-600 text-md'>{news?.date}</p>
-                <p className='text-blue-600 text-md'>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
+                <p className='text-blue-600 text-md'>{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
               </div>
             </div>)
           }
@@ -78,14 +76,14 @@ const SubCategoryDetails = ({ newses }) => {
   );
 };
 
- 
+
 
 export default SubCategoryDetails;
 export const getServerSideProps = async () => {
-    const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-    return {
-      props: {
-        newses: res.data,
-      },
-    };
+  const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  return {
+    props: {
+      newses: res.data,
+    },
   };
+};

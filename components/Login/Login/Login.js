@@ -8,7 +8,7 @@ import Router from 'next/router';
 import useAuth from '../../../hooks/useAuth';
 import Header from '../../Shared/Header/Header';
 import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
-
+import { useRouter } from 'next/router'
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -16,14 +16,14 @@ const Login = () => {
     const [newName, setNewName] = React.useState("");
     const [newEmail, setNewEmail] = React.useState("");
     const [newPass, setNewPass] = React.useState("");
-
     const isDesktop = useMediaQuery('(min-width: 900px)');
-    const location = ""
-
+    // const location = ""
+    const location = useRouter()
+    const locationURL = Object.keys(location.components)[2]
 
     //// Login with google 
     const handleGoogleLogin = () => {
-        signInWithGoogle(location, Router);
+        signInWithGoogle(locationURL, Router);
     };
 
     //// handle register
@@ -34,7 +34,7 @@ const Login = () => {
     //// handle login
     const handleLoginSubmit = (data) => {
         console.log(data)
-        loginUser(data.email, data.password, location, Router)
+        loginUser(data.email, data.password, locationURL, Router)
     };
 
 

@@ -22,9 +22,7 @@ export default function useFirebase() {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-
-                const destination = location?.state?.from || '/';
-                Router.push(destination);
+                Router.push(location || '/');
                 const user = result.user;
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
@@ -118,9 +116,7 @@ export default function useFirebase() {
 
     // handle logged in user
     const handleResponse = (user, location, Router) => {
-
-        const destination = location?.state?.from || '/';
-        Router.push(destination);
+        Router.push(location);
         setAuthError('');
         if (user.email === 'admin@gmail.com') {
 
@@ -206,41 +202,32 @@ export default function useFirebase() {
 
 
     // admin set to database 
-    // useEffect(() => {
-    //     fetch(`/users/${user.email}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setAdmin(data.admin)
-    //             console.log(data.admin)
-    //         })
-    //         .catch(error => {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Oops...',
-    //                 text: `${error} `,
+    useEffect(() => {
+        fetch(`https://ajker-barta.vercel.app/api/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setAdmin(data.admin)
+            })
+    }, [user.email]);
 
-    //             })
-    //         })
-    // }, [user.email]);
-
-    /// user info save to the database 
-    // const saveUser = (email, displayName, method) => {
-    //     const user = { email, displayName };
-    //     console.log(user);
-    //     fetch('', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => {
-    //             setLoading(false)
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // };
+    // user info save to the database 
+    const saveUser = (email, name, method) => {
+        const user = { name, email };
+        console.log(user);
+        fetch('https://ajker-barta.vercel.app/api/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => {
+                setLoading(false)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    };
 
     return {
         user, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
