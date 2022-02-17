@@ -25,7 +25,6 @@ const SubCategoryDetails = ({ newses }) => {
     }
 
   }
-
   return (
     <div>
       <Header />

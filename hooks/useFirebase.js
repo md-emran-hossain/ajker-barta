@@ -185,11 +185,6 @@ export default function useFirebase() {
                 )
             }
         })
-
-
-
-
-
     };
 
     // firebase observer user state

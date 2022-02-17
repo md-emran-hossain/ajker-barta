@@ -23,7 +23,6 @@ const CategoryDetails = ({ newses }) => {
   const loadmore = () => {
     setVisible((prev) => prev + 5);
   };
-
   return (
     <div>
       <Header />

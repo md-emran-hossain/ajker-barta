@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     const news = database.collection('news');
 
     if (req.method === 'PUT') {
-        const id = req.params.id;
+        const id = req.query.id;
         console.log(id);
         const comments = req.body;
         console.log(comments);

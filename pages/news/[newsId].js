@@ -8,8 +8,14 @@ import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
+import { useForm } from "react-hook-form";
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 const Newsdetails = ({ newses }) => {
+  const [success, setSuccess] = useState([])
+
+  const { user } = useAuth()
 
   const router = useRouter();
   const newsId = router.query.newsId;
@@ -18,7 +24,33 @@ const Newsdetails = ({ newses }) => {
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
-  console.log()
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const onSubmit = data => {
+
+    const dataup = {
+
+      ...data,
+      name: user.displayName,
+      img: user.photoURL,
+      date: new Date().toLocaleString(),
+      email: user.email
+    }
+    const objShallowCopy = [...success, dataup];
+    setSuccess(objShallowCopy);
+    // Send a POST request
+
+    fetch(`/api/news?id=${newsId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(objShallowCopy)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+
+    console.log(newsId)
+    console.log(objShallowCopy);
+  };
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -96,8 +128,9 @@ const Newsdetails = ({ newses }) => {
             </div>
           </div>
           <div>
-            <form action="">
-              <input placeholder="Write your comment here" type="text" className="border-2 rounded block w-full my-2 p-2" />
+            <h1>{success?.map(item => <h1 key={item.comment}>{item.comment}</h1>)}</h1>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
               <input className="bg-orange-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Post" />
             </form>
           </div>
