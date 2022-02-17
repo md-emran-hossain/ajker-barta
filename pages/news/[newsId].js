@@ -26,7 +26,7 @@ const Newsdetails = ({newses}) => {
   console.log(user)
 
 
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const onSubmit = data => {
      
       const dataup = {
@@ -75,7 +75,7 @@ const Newsdetails = ({newses}) => {
       </div>
     );
   };
-  // console.log(url)
+
   return (
 
     
