@@ -4,33 +4,36 @@ import useMediaQuery from '../../Shared/useMediaQuery/useMediaQuery';
 import { TextField, Button, } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import Router from 'next/router';
-// import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
+import Header from '../../Shared/Header/Header';
+import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
 
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    // const { signInWithGoogle, registerUser, loginUser } = useAuth();
+    const { signInWithGoogle, registerUser, loginUser } = useAuth();
     const [newName, setNewName] = React.useState("");
     const [newEmail, setNewEmail] = React.useState("");
     const [newPass, setNewPass] = React.useState("");
 
     const isDesktop = useMediaQuery('(min-width: 900px)');
+    const location = ""
 
 
     //// Login with google 
     const handleGoogleLogin = () => {
-        // signInWithGoogle(location, Router);
+        signInWithGoogle(location, Router);
     };
 
     //// handle register
     const handleRegisterSubmit = () => {
-        // registerUser(newEmail, newPass, newName, Router)
+        registerUser(newEmail, newPass, newName, Router)
     }
 
     //// handle login
     const handleLoginSubmit = (data) => {
         console.log(data)
-        // loginUser(data.email, data.password, location, Router)
+        loginUser(data.email, data.password, location, Router)
     };
 
 
@@ -40,13 +43,13 @@ const Login = () => {
 
     return (
         <>
+            <Header></Header>
+            <NavigationBar></NavigationBar>
             {isDesktop &&
-                <div className="bg-stone-100" style={{ height: '100vh' }}>
-
-                    <div className="first-form">
-                        <p className="tip pt-12">Please click on button in image container</p>
-                        <div className="cont bg-white-500 shadow " style={{ borderRadius: '20px' }}>
-                            <div className="form sign-in">
+                <div className="" style={{ height: '100vh' }}>
+                    <div className="first-form drop-shadow-md">
+                        <div className="cont" style={{ borderRadius: '20px' }}>
+                            <div className="form sign-in bg-gray-100">
                                 <div style={{ width: '60%', margin: '0 auto' }}>
                                     <h2>Welcome back,</h2>
                                     <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
@@ -80,7 +83,7 @@ const Login = () => {
                                         <span className="m--in">Sign In</span>
                                     </div>
                                 </div>
-                                <div className="form sign-up">
+                                <div className="form sign-up bg-gray-100">
                                     <div style={{ width: '60%', margin: '0 auto' }}>
                                         <h2>Time to feel like home,</h2>
                                         <form className='mb-4'>

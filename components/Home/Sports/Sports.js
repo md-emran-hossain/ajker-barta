@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Sports.module.css';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { IoIosArrowForward } from 'react-icons/io';
 
 
 const Sports = (intDatas) => {
-    console.log(intDatas);
     const [sportsData, setSportsData] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Sports = (intDatas) => {
     const multiData = sportsData.slice(1, 4);
     return (
         <div className='container mx-auto lg:pb-5 lg:border-b  border-gray-200'>
-            <h2 className='text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold'>Sports <ChevronRightIcon /></h2>
+            <h2 className='text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold'><span className='text-black'>Sports </span> <ChevronRightIcon /></h2>
             <div className="grid grid-cols-12">
                 <div className='col-span-12 lg:col-span-6 mb-3 lg:mb-0' >
                     <div>
