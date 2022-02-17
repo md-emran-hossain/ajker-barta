@@ -12,7 +12,7 @@ import NavigationBar from '../components/Shared/NavigationBar/NavigationBar';
 //   }
 // }
 const scienceTechnology = () => {
-    const [newses, setNewses] = useState([])
+    const [newses, setNewses] = useState([]);
     useEffect(() => {
         fetch('./news.json')
             .then(res => res.json())

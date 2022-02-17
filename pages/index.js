@@ -12,8 +12,11 @@ import Sports from "../components/Home/Sports/Sports";
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
+import Entertainment from "../components/Home/Entertainment/Entertainment";
+
 
 export default function Home() {
+
       return (
             <div>
                   <Header />
@@ -27,8 +30,9 @@ export default function Home() {
                   <Business />
                   <Opinion />
                   <International />
+                  <Entertainment />
                   <Sports />
                   <Footer />
             </div>
-      )
-}
+      );
+};

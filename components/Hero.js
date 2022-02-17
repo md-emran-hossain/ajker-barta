@@ -17,8 +17,8 @@ const Hero = () => {
       .then(data => setNewses(data))
   }, [])
   return (
-    <div className='pb-6' id='hero'>
-      <div className='container'>
+    <div className='pb-6 border-b border-gray-400' id='hero'>
+      <div className='mx-auto' style={{ width: '98%' }}>
         <div className={styles.slidRow}>
           <Swiper
             spaceBetween={30}

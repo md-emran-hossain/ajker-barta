@@ -243,15 +243,11 @@ body {
 .first-form input {
   display: block;
   width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
+   margin-top: 5px; 
+  padding-bottom: 5px; 
+  font-size: 16px; 
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
-}
-.fb-btn {
-  border: 2px solid #d3dae9;
-  color: #8fa1c7;
 }
 .fb-btn span {
   font-weight: bold;
@@ -272,21 +268,6 @@ body {
 }
 .cont.s--signup .sign-up {
   transform: translate3d(0, 0, 0);
-}
-
-.icon-link {
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-  width: 32px;
-}
-.icon-link img {
-  width: 100%;
-  vertical-align: top;
-}
-.icon-link--twitter {
-  left: auto;
-  right: 5px;
 }
 
   /* second login form  */
