@@ -10,14 +10,14 @@
 }
 .itemBox{
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.05);
-  padding: 10px;
-  border-radius: 5px;
+  padding: 0 10px;
+  
 }
 .itemBox img{
   height: 230px;
   width: 100%;
   object-fit: cover;
-  border-radius: 5px;
+  
 }
 .itemBox h1{
   font-size: 22px;
@@ -81,7 +81,7 @@
   width: 95%;
   max-width: 733px;
   padding: 20px;
-  border-radius: 10px;
+  
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.05);
   margin: 20px auto 20px;
   gap: 10px;
@@ -92,7 +92,7 @@
 .singleNews img{
   width: 50%;
   height: 220px;
-  border-radius: 10px;
+  
 }
 
 @media only screen and (max-width:900px) {
