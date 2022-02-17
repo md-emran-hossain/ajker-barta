@@ -9,16 +9,14 @@ import styles from '../../styles/CategoryDetails.module.css'
 
 const SubCategoryDetails = ({ newses }) => {
   const [visible, setVisible] = useState(10)
-  const [show, setShow] = useState(false)
+  
   const subCategories = newses.map(news => news.subCategory && news.category)
   const router = useRouter()
   const subCategory = router.query.subcategory;
   const category = router.query.category;
   const unique = [...new Set(subCategories)];
   const displayNews = newses.filter(news => news.subCategory === subCategory).reverse()
-  if(displayNews.length > 10){
-    setShow(true)
-  }
+  
   
   const loadmore = () => {
     setVisible(prev => prev + 5)
@@ -65,11 +63,14 @@ const SubCategoryDetails = ({ newses }) => {
             </div>)
           }
         </div>
-        {
-              show && <button onClick={loadmore} className="w-32 block py-2 mx-auto my-5 px-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition-bg duration-300">
-              Load More
-            </button>
-            }
+        {visible < displayNews.length && (
+          <button
+            onClick={loadmore}
+            className="w-32 block py-2 mx-auto my-5 px-3 rounded-full bg-red-500 text-white hover:bg-red-600 transition-bg duration-300"
+          >
+            Load More
+          </button>
+        )}
       </div>
       <Footer />
     </div>
