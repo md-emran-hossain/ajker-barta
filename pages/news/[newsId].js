@@ -1,9 +1,6 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import {
-  FaRegBookmark,
-  FaPrint,
-} from "react-icons/fa";
+import { FaRegBookmark, FaPrint, } from "react-icons/fa";
 import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -27,9 +24,7 @@ const Newsdetails = ({ newses }) => {
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = data => {
-
     const dataup = {
-
       ...data,
       name: user.displayName,
       img: user.photoURL,
@@ -39,17 +34,18 @@ const Newsdetails = ({ newses }) => {
     const objShallowCopy = [...success, dataup];
     setSuccess(objShallowCopy);
     // Send a POST request
-
-    fetch(`/api/news?id=${newsId}`, {
+    fetch(`/api/news/${newsId}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(objShallowCopy)
     })
       .then(res => res.json())
-      .then(data => console.log(data))
-
-    console.log(newsId)
-    console.log(objShallowCopy);
+      .then(data => {
+        if (data.modifiedCount > 0) {
+          alert("comment added");
+          reset();
+        }
+      })
   };
   const Actions = () => {
     return (
