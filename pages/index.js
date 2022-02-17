@@ -7,10 +7,13 @@ import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
-import Sports from "../components/Home/Sports/Sports";
+
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
+import OpinionSubItem from "../components/OpinionSubItem/OpinionSubItem";
+import SportAndVoting from "../components/SportAndVoting";
+import Comment from "../components/Comment/Comment";
 
 export default function Home() {
       return (
@@ -26,7 +29,9 @@ export default function Home() {
                   <Exclusive />
                   <Business />
                   <Opinion />
-                  <Sports />
+                  <OpinionSubItem></OpinionSubItem>
+                  <SportAndVoting />
+                  <Comment></Comment>
                   <Footer />
             </div>
       )
