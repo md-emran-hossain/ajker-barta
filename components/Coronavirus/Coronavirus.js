@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
 import Corona from "./Corona";
 
 const Coronavirus = ({ coronanews }) => {
   const router = useRouter();
 
-  const latestNews = coronanews.reverse().slice(0, 4);
+  const latestNews = coronanews?.reverse().slice(0, 4);
   return (
     <div className="container xl mx-auto">
       <div
@@ -15,7 +14,7 @@ const Coronavirus = ({ coronanews }) => {
         Coronavirus <span className="text-red-500">Worldwide</span>{" "}
       </div>
       <div className="py-5 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
-        {latestNews.map((news) => (
+        {latestNews?.map((news) => (
           <Corona key={news._id} news={news}></Corona>
         ))}
       </div>

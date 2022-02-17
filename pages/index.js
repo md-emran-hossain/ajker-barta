@@ -13,6 +13,7 @@ import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
 import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
+import axios from 'axios'
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
