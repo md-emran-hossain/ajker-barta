@@ -1,15 +1,13 @@
 import { useRouter } from "next/router";
 import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
 import {
-  FaFacebookF,
-  FaTwitter,
-  FaShare,
   FaRegBookmark,
   FaPrint,
 } from "react-icons/fa";
 import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import axios from 'axios'
+import {formatDistanceToNow} from 'date-fns'
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 const Newsdetails = ({newses}) => {
   
@@ -18,8 +16,9 @@ const Newsdetails = ({newses}) => {
   const news = newses.find(news => news._id === newsId)
   const category = news.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
-  const url = window.location.href
+  const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
+  console.log()
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -117,7 +116,7 @@ const Newsdetails = ({newses}) => {
                     <p>{item?.description[0].slice(0, 70)}</p>
                     <img className="w-5/12" src={item?.images?.img1} alt={item.title} />
                   </div>
-                  <p>{item.publishedDate}</p>
+                  <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
                 </div>
               </div>
             );

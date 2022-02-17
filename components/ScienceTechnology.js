@@ -1,3 +1,4 @@
+import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
@@ -29,8 +30,8 @@ const ScienceTechnology = ({ science }) => {
                 {news?.heading}
               </h1>
               <p className="text-sm">{news.description[0].slice(0, 100)}...</p>
-              <p className="text-md italic text-blue-600">
-                {news?.publishedDate}
+              <p className="text-md  text-blue-600">
+              {`${formatDistanceToNow(new Date(news.publishedDate))} ago` }
               </p>
             </div>
           ))}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import {formatDistanceToNow} from 'date-fns'
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -34,7 +34,7 @@ const Hero = ({newses}) => {
                 <div onClick={() => router.push(`/news/${news._id}`)} className='relative w-full h-full cursor-pointer'>
                   <img className='w-full h-full' src={news?.images.img1} alt='' />
                   <div className='absolute bottom-4 left-4 z-10'>
-                    <p className='text-white text-sm italic'>{news?.category} / {news?.publishedDate}</p>
+                    <p className='text-white text-sm italic'>{news?.category} / {`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
                     <h1 className='text-white text-xl md:text-3xl cursor-pointer hover:text-red-600 leading-5 md:leading-8 sm:my-1 md:my-2 font-semibold transition-colors duration-300'>{news.heading}</h1>
                     <p className='text-white text-sm md:text-md'>{news?.description[0]}...</p>
                   </div>
@@ -65,7 +65,7 @@ const Hero = ({newses}) => {
                     <img className='w-full h-full object-cover' src={news?.images.img1} alt='' />
                   </div>
                   <div className='w-3/5'>
-                    <p className='text-sm italic'><span className='text-blue-500'>{news?.category}</span> / {news?.publishedDate}</p>
+                    <p className='text-sm italic'><span className='text-blue-500'>{news?.category}</span> / {`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
                     <h1 className='md:text-lg text-md leading-5 md:leading-4 xl:leading-6 cursor-pointer hover:text-red-600 font-medium transition-colors duration-300'>{news?.heading}</h1>
                   </div>
                 </div>

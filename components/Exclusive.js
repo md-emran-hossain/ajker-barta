@@ -1,3 +1,4 @@
+import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/exclusive.module.css'
@@ -29,7 +30,7 @@ const Exclusive = ({newses}) => {
                   <img className='w-full h-32 object-cover' src={news?.images.img1} alt="" />
                   <h1 className='text-lg my-1 font-medium leading-5 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading}</h1>
                   <p className='text-sm leading-4'>{news?.description[0]?.slice(0, 100)}</p>
-                  <p className=' text-blue-600 mt-1'>{news?.publishedDate}</p>
+                  <p className=' text-blue-600 mt-1'>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
                 </div>)
               }
             </div>

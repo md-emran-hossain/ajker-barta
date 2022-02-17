@@ -1,3 +1,4 @@
+import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -21,7 +22,7 @@ const Bangladesh = ({bdnews}) => {
             <Link href={`/news/${col2?._id}`}>
               <div>
                 <h1 className="font-bold">{col2?.heading}</h1>
-                <p>{col2?.publishedDate}</p>
+                <p>{`${formatDistanceToNow(new Date(col2?.publishedDate))} ago` }</p>
               </div>
             </Link>
           </div>
@@ -40,7 +41,7 @@ const Bangladesh = ({bdnews}) => {
 
               <div className="mr-1 ">
                 <h1 className="font-bold">{col1?.heading}</h1>
-                <p>{col1?.publishedDate}</p>
+                <p>{`${formatDistanceToNow(new Date(col1?.publishedDate))} ago` }</p>
                 <p>{col1?.description[0].slice(0,100)}</p>
               </div>
             </div>
@@ -52,7 +53,7 @@ const Bangladesh = ({bdnews}) => {
 
               <div onClick={() => router.push(`/news/${item._id}`)} className="mr-1 w-7/12 cursor-pointer">
                 <h1 className="font-bold">{item?.heading}</h1>
-                <p>{item?.publishedDate}</p>
+                <p>{`${formatDistanceToNow(new Date(item?.publishedDate))} ago` }</p>
               </div>
 
               <img

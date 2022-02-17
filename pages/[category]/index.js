@@ -1,5 +1,6 @@
 import { async } from '@firebase/util';
 import axios from 'axios'
+import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from "next/router";
 import Footer from '../../components/Shared/Footer/Footer';
 import Header from '../../components/Shared/Header/Header';
@@ -33,24 +34,24 @@ const CategoryDetails = ({ newses }) => {
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
-            <div className={styles.itemBox} key={news.id}>
+            <div onClick={() => router.push(`/news/${news?._id}`)} className={`${styles.itemBox} cursor-pointer`} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
-              <p>{news?.description?.[0]}</p>
-              <p>{news?.publishedDate}</p>
+              <p>{news?.description?.[0].slice(0,100)}</p>
+              <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
             </div>
           ))}
         </div>
         <div>
           {displayNews?.slice(5).map((news) => (
-            <div className={styles.singleNews} key={news.id}>
+            <div onClick={() => router.push(`/news/${news?._id}`)} className={`${styles.singleNews} cursor-pointer`} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <div>
                 <h1 className="text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer">
                   {news?.heading}
                 </h1>
                 <p className="text-sm my-2">{news.description?.[0]}</p>
-                <p className="text-blue-600 text-md">{news?.publishedDate}</p>
+                <p className="text-blue-600 text-md">{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
               </div>
             </div>
           ))}

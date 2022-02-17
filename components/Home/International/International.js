@@ -4,6 +4,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { formatDistanceToNow } from "date-fns";
 
 const International = ({ international }) => {
   const newsData = international.reverse();
@@ -36,7 +37,7 @@ const International = ({ international }) => {
                   <p className="">{single?.description[0].slice(0, 100)}</p>
                   <p>
                     <small className="text-gray-500">
-                      {single?.publishedDate}
+                    {`${formatDistanceToNow(new Date(single?.publishedDate))} ago` }
                     </small>
                   </p>
                 </div>
@@ -57,7 +58,7 @@ const International = ({ international }) => {
                     <p>{multi?.description[0].slice(0, 100)}</p>
                     <p>
                       <small className="text-gray-500">
-                        {multi?.publishedDate}
+                      {`${formatDistanceToNow(new Date(multi?.publishedDate))} ago` }
                       </small>
                     </p>
                   </div>

@@ -2,6 +2,7 @@
 import styles from './Sports.module.css';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useRouter } from 'next/router';
+import { formatDistanceToNow } from 'date-fns';
 
 
 const Sports = ({sports}) => {
@@ -26,7 +27,7 @@ const Sports = ({sports}) => {
                                 <div className="p-3">
                                     <h2 className="text-2xl font-bold">{single?.heading}</h2>
                                     <p className="">{single.description[0].slice(0,100)}</p>
-                                    <p><small className='text-gray-500'>{single?.publishedDate}</small></p>
+                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(single?.publishedDate))} ago` }</small></p>
                                 </div>
                             </div>)
                         }
@@ -42,7 +43,7 @@ const Sports = ({sports}) => {
                                 <div className="col-span-8 p-2">
                                     <h2 className="text-1xl  font-bold">{multi?.heading}</h2>
                                     <p>{multi.description[0].slice(0, 100)}</p>
-                                    <p><small className='text-gray-500'>{multi?.publishedDate}</small></p>
+                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(multi?.publishedDate))} ago` }</small></p>
                                 </div>
                                 <div className="col-span-4">
                                     <img src={multi?.images?.img1} alt="" />

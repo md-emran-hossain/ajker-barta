@@ -33,12 +33,11 @@ export default function Home({ newses }) {
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
       <Business business={business} />
-      <Hero newses={newses} />
+     
       <Coronavirus />
       <Global />
       <CovidBtn />
-      <Bangladesh bdnews={bdnews} />
-      <International international={international} />
+    
       <ImageGallary />
       <Opinion />
       <Sports sports={sports} />
