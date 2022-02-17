@@ -23,21 +23,21 @@ const CategoryDetails = ({ newses }) => {
   const loadmore = () => {
     setVisible((prev) => prev + 5);
   };
-  console.log(displayNews.length);
+
   return (
     <div>
       <Header />
       <NavigationBar />
       <div className={styles.smallContainer}>
-        <h1 className="text-3xl font-bold">{category}</h1>
-        <div className="flex flex-wrap gap-3 my-2">
+        <h1 className="text-3xl font-bold capitalize">{category}</h1>
+        <div className="flex flex-wrap gap-6 my-4 capitalize">
           {unique.map((sub, i) => (
             <span
               onClick={() => router.push(`/${category}/${sub}`)}
-              className={`cursor-pointer ${styles.subcategorylink}`}
+              className='cursor-pointer'
               key={i}
             >
-              {sub}{" "}
+              {sub}
             </span>
           ))}
         </div>

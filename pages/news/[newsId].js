@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import {FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon} from 'react-share'
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
 import {
   FaRegBookmark,
   FaPrint,
@@ -7,10 +7,10 @@ import {
 import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import axios from 'axios'
-import {formatDistanceToNow} from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
-const Newsdetails = ({newses}) => {
-  
+const Newsdetails = ({ newses }) => {
+
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
@@ -25,7 +25,7 @@ const Newsdetails = ({newses}) => {
         <span>
           <FacebookShareButton url={url}>
 
-          <FacebookIcon size={40} round={true} />
+            <FacebookIcon size={40} round={true} />
           </FacebookShareButton>
         </span>
         <span >
@@ -34,9 +34,9 @@ const Newsdetails = ({newses}) => {
           </TwitterShareButton>
         </span>
         <span >
-         <LinkedinShareButton url={url}>
-          <LinkedinIcon round={true} size={40} />
-         </LinkedinShareButton>
+          <LinkedinShareButton url={url}>
+            <LinkedinIcon round={true} size={40} />
+          </LinkedinShareButton>
         </span>
         <span className={`${iconClass} bg-orange-500 text-white`}>
           <FaRegBookmark />
@@ -47,7 +47,7 @@ const Newsdetails = ({newses}) => {
       </div>
     );
   };
-  console.log(url)
+  // console.log(url)
   return (
     <div>
       <Header />
@@ -68,11 +68,11 @@ const Newsdetails = ({newses}) => {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p className="py-3 text-lg">{news?.description.slice(0,5).join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
-          <p className="py-3 text-lg">{news?.description.slice(5,10).join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(5, 10).join()}</p>
           {
             news?.images?.img3 && <img src={news?.images?.img3} alt='img2' />
           }
@@ -107,7 +107,7 @@ const Newsdetails = ({newses}) => {
             You may also read
           </p>
 
-          {remaining.slice(0,10).map((item) => {
+          {remaining.slice(0, 10).map((item) => {
             return (
               <div onClick={() => router.push(`/news/${item._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
@@ -116,7 +116,7 @@ const Newsdetails = ({newses}) => {
                     <p>{item?.description[0].slice(0, 70)}</p>
                     <img className="w-5/12" src={item?.images?.img1} alt={item.title} />
                   </div>
-                  <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago` }</p>
+                  <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
                 </div>
               </div>
             );
@@ -130,10 +130,10 @@ const Newsdetails = ({newses}) => {
 
 export default Newsdetails;
 export const getServerSideProps = async () => {
-      const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-      return {
-        props: {
-          newses: res.data,
-        },
-      };
-    };
+  const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  return {
+    props: {
+      newses: res.data,
+    },
+  };
+};
