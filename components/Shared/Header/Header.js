@@ -10,7 +10,6 @@ import useAuth from '../../../hooks/useAuth';
 import Router from 'next/router';
 import Link from 'next/link'
 
-
 const Header = () => {
     const { user, logOut } = useAuth();
     const isMobile = useMediaQuery('(max-width: 765px)');
@@ -170,7 +169,6 @@ const Header = () => {
                                 !isMobile ? <button onClick={goLoginPage} className='cursor-pointer font-bold text-blue-600 hover:bg-gray-200 border-2 px-6 py-1'>Login</button>
                                     :
                                     <h2 onClick={goLoginPage} style={{ cursor: 'pointer' }}><LoginIcon></LoginIcon></h2>
-
                         }
                     </div>
                 </div>

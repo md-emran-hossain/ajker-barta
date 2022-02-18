@@ -60,7 +60,7 @@ export default function useFirebase() {
                 })
 
                 // database save user
-                saveUser(email, name, 'POST');
+                saveUser(email, name, "POST");
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -192,6 +192,7 @@ export default function useFirebase() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                // getAdmin(user.email)
             } else {
                 setUser({});
             }
@@ -202,31 +203,25 @@ export default function useFirebase() {
 
 
     // admin set to database 
-    useEffect(() => {
-        fetch(`https://ajker-barta.vercel.app/api/users/${user.email}`)
+    const getAdmin = (email) => {
+        fetch(`/api/users?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin)
             })
-    }, [user.email]);
+    }
 
     // user info save to the database 
     const saveUser = (email, name, method) => {
         const user = { name, email };
-        console.log(user);
-        fetch('https://ajker-barta.vercel.app/api/users', {
+        fetch('/api/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-            .then(res => {
-                setLoading(false)
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            .then()
     };
 
     return {
