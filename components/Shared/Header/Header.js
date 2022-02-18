@@ -1,135 +1,67 @@
 import React from 'react';
 import styles from '../../../styles/NavigationBar.module.css';
-import useMediaQuery from '../useMediaQuery/useMediaQuery';
-import SearchIcon from '@mui/icons-material/Search';
-import { styled } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import { Toolbar, Box, Tooltip, Menu, MenuItem, Avatar, IconButton, Button, Typography } from '@mui/material';
-import LoginIcon from '@mui/icons-material/Login';
+import { Box, Tooltip, Menu, Avatar, IconButton } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
 import Router from 'next/router';
 import Link from 'next/link'
+import { FaTimes } from 'react-icons/fa'
+import { VscThreeBars } from 'react-icons/vsc'
 
 const Header = () => {
     const { user, logOut } = useAuth();
-    const isMobile = useMediaQuery('(max-width: 765px)');
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    const [isOpen, setIsOpen] = React.useState(false)
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
-
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-
-
-
-
-    const Search = styled('div')(({ theme }) => ({
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
-    }));
-
-    const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }));
-
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: '',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            transition: theme.transitions.create('width'),
-            width: '100%',
-            [theme.breakpoints.up('sm')]: {
-                width: '12ch',
-                '&:focus': {
-                    width: '20ch',
-                },
-            },
-        },
-    }));
-
     const goLoginPage = () => {
         Router.push("/login")
     }
-
     return (
-        <div className={isMobile ? "z-50 fixed bg-gray-100 drop-shadow w-full" : " bg-white w-full"}>
-            <div className=' container mx-auto' >
-                <div className="grid grid-cols-12 gap-2 py-5 place-content-between  ">
-
-                    {/* Side menu bar */}
-                    {
-                        isMobile &&
-                        <nav className={`${styles.nav} ""`} role="navigation">
-                            <div className={`${styles.clickNav} "col-span-3 place-self-center"`}>
-                                <input type="checkbox" />
-
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-
-                                <ul className={styles.navData} role="list" style={{ height: '100vh', paddingTop: '110px', }}>
-                                    <li><h2 className='text-center text-2xl font-bold text-red-600'>AJKER BARTA</h2></li>
-                                    <li><Link className={styles.link} href="bangladesh">Bangladesh</Link></li>
-                                    <li><Link className={styles.link} href="international" data-title="About" aria-label="About">International</Link></li>
-                                    <li><Link className={styles.link} href="sports" data-title="My Expertise" aria-label="My Expertise">Sports</Link></li>
-                                    <li><Link className={styles.link} href="scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
-                                    <li><Link className={styles.link} href="" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
-                                    <li className="separator"></li>
-                                    <li><Link className={styles.link} href="" data-title="Force Framework" aria-label="Force Framework">Youth</Link></li>
-                                    <li><Link className={styles.link} href="" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
-                                    <li><Link className={styles.link} href="" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
-                                    <li><Link className={styles.link} href="" data-title="Force Framework" aria-label="Force Framework">Custom Search Engine</Link></li>
-                                    <li><Link className={styles.link} href="" data-title="DograsWeblog Free Themes" aria-label="DograsWeblog Free Themes">DEV HEROS</Link></li>
-                                    <li className="separator"></li>
-                                    <li>
-                                        <p className='ml-5'><strong> © AJKER BARTA</strong></p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    }
-
-                    {
-                        !isMobile &&
-
-                        <Toolbar className='col-span-3 place-self-center'>
-                            <Search className='bg-gray-200'>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <StyledInputBase
-                                    placeholder="Search…"
-                                    inputProps={{ 'aria-label': 'search' }}
-                                />
-                            </Search>
-                        </Toolbar>
-
-                    }
-
-                    <div className=' col-span-6'>
-                        <Link href="/"><h1 className='text-gray-600 text-3xl md:text-5xl text-center font-bold lg:ml-0 ml-5 cursor-pointer'>AJKER BARTA</h1 ></Link>
+        <div className='bg-white sticky md:unset z-50 top-0 w-full'>
+            <div className='container' >
+                <div className="flex items-center justify-between py-4">
+                    < nav className={!isOpen ? `${styles.sideNav}` : `${styles.sideNav} ${styles.show}`}>
+                        <div onClick={() => setIsOpen(!isOpen)} className="absolute right-5 top-6 w-10 h-10 bg-red-500 text-white flex items-center justify-center rounded-full text-lg cursor-pointer">
+                            <FaTimes />
+                        </div>
+                        <div>
+                            <ul className='px-6 py-8'>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg'>
+                                    <Link href='/'><a className='text-2xl font-serif font-semibold'>AJKER <span className='text-red-500'>BARTA</span></a></Link>
+                                </li>
+                                <li>
+                                    <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' />
+                                </li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="bangladesh">Bangladesh</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="international" data-title="About" aria-label="About">International</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="sports" data-title="My Expertise" aria-label="My Expertise">Sports</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="Force Framework" aria-label="Force Framework">Youth</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
+                                <li className='text-lg mt-5'>
+                                    <p className='ml-5'><strong> © AJKER BARTA</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div className="sm:flex-1 text-2xl md:hidden cursor-pointer">
+                        <VscThreeBars onClick={() => setIsOpen(!isOpen)} />
                     </div>
-
-                    <div className='col-span-3 place-self-center'>
+                    <div className="flex-1 hidden md:block">
+                        <input className='py-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' />
+                    </div>
+                    <div className='sm:flex-1 text-center'>
+                        <Link href="/">
+                            <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>Ajker <span className='text-red-500'>Barta</span></a>
+                        </Link>
+                    </div>
+                    <div className='sm:flex-1 text-right'>
                         {
                             user.email ? <>
 
@@ -166,9 +98,7 @@ const Header = () => {
                                 </Box>
                             </>
                                 :
-                                !isMobile ? <button onClick={goLoginPage} className='cursor-pointer font-bold text-blue-600 hover:bg-gray-200 border-2 px-6 py-1'>Login</button>
-                                    :
-                                    <h2 onClick={goLoginPage} style={{ cursor: 'pointer' }}><LoginIcon></LoginIcon></h2>
+                                <button onClick={goLoginPage} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
                     </div>
                 </div>
