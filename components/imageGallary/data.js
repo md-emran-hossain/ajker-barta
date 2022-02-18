@@ -28,7 +28,7 @@ const data = [
         items: [
             {   id:1,
                 caption: 'Peoples of bangladesh taking covid 19 vaccine',
-                img: '/image/bus.jpg'
+                img: '/image/bus.png'
             },
             {   id:2,
                 caption: 'Peoples of bangladesh taking covid 19 vaccine',

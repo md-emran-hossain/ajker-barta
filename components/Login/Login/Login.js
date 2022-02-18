@@ -1,7 +1,8 @@
 import React from 'react';
+import Head from 'next/head'
 import { useForm } from "react-hook-form";
 import useMediaQuery from '../../Shared/useMediaQuery/useMediaQuery';
-import { TextField, Button, } from '@mui/material';
+import { TextField, Button, CircularProgress, } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import Router from 'next/router';
 import useAuth from '../../../hooks/useAuth';
@@ -11,7 +12,7 @@ import { useRouter } from 'next/router'
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
-    const { signInWithGoogle, registerUser, loginUser } = useAuth();
+    const { signInWithGoogle, registerUser, loginUser, loading } = useAuth();
     const [newName, setNewName] = React.useState("");
     const [newEmail, setNewEmail] = React.useState("");
     const [newPass, setNewPass] = React.useState("");
@@ -46,9 +47,17 @@ const Login = () => {
 
     return (
         <>
+            <Head>
+                <title>
+                    Login
+                </title>
+            </Head>
             <Header></Header>
             <NavigationBar></NavigationBar>
-            {isDesktop &&
+
+            {loading ? <h1 className='mt-12 w-24 mx-auto'><CircularProgress /></h1>
+                :
+                isDesktop &&
                 <div className="" style={{ height: '100vh' }}>
                     <div className="first-form drop-shadow-md">
                         <div className="cont" style={{ borderRadius: '20px' }}>
