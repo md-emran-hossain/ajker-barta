@@ -2,10 +2,10 @@ import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import Footer from '../../components/Shared/Footer/Footer';
-import Header from '../../components/Shared/Header/Header';
-import NavigationBar from '../../components/Shared/NavigationBar/NavigationBar';
-import styles from '../../styles/CategoryDetails.module.css'
+import Footer from '../../../components/Shared/Footer/Footer';
+import Header from '../../../components/Shared/Header/Header';
+import NavigationBar from '../../../components/Shared/NavigationBar/NavigationBar';
+import styles from '../../../styles/CategoryDetails.module.css'
 
 const SubCategoryDetails = ({ newses }) => {
   const [visible, setVisible] = useState(10)
@@ -42,7 +42,7 @@ const SubCategoryDetails = ({ newses }) => {
         </div>
         <div className={styles.categoryGrid}>
           {
-            displayNews?.slice(0, 5).map(news => <div onClick={() => router.push(`/news/${news?._id}`)} className={`${styles.itemBox} cursor-pointer`} key={news.id}>
+            displayNews?.slice(0, 5).map(news => <div onClick={() => router.push(`/${category}/${subCategory}/${news?._id}`)} className={`${styles.itemBox} cursor-pointer`} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
               <p>{news.description?.[0].slice(0, 100)}</p>
@@ -52,7 +52,7 @@ const SubCategoryDetails = ({ newses }) => {
         </div>
         <div>
           {
-            displayNews?.slice(5,).map(news => <div onClick={() => router.push(`/news/${news?._id}`)} className={`${styles.singleNews} cursor-pointer`} key={news.id}>
+            displayNews?.slice(5,).map(news => <div onClick={() => router.push(`/${category}/${subCategory}/${news?._id}`)} className={`${styles.singleNews} cursor-pointer`} key={news.id}>
               <img src={news?.images?.img1} alt="" />
               <div>
                 <h1 className='text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading}</h1>
@@ -71,7 +71,7 @@ const SubCategoryDetails = ({ newses }) => {
           </button>
         )}
       </div>
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 };

@@ -25,7 +25,7 @@ const International = ({ international }) => {
           <div>
             {singleData.map((single) => (
               <div
-              onClick={() => router.push(`/news/${single?._id}`)}
+                onClick={() => router.push(`/${single.category}/${single.subCategory}/${single?._id}`)}
                 key={single?._id}
                 className=" lg:border-none border lg:border cursor-pointer lg:border-r border-gray-200 lg:mr-3 lg:pr-3"
               >
@@ -37,7 +37,7 @@ const International = ({ international }) => {
                   <p className="">{single?.description[0].slice(0, 100)}</p>
                   <p>
                     <small className="text-gray-500">
-                    {`${formatDistanceToNow(new Date(single?.publishedDate))} ago` }
+                      {`${formatDistanceToNow(new Date(single?.publishedDate))} ago`}
                     </small>
                   </p>
                 </div>
@@ -53,12 +53,12 @@ const International = ({ international }) => {
                 <div className="grid grid-cols-12 border border-gray-200 rounded-md">
                   <div className="col-span-8 p-2">
                     <h2 className="text-1xl  font-bold">
-                     {multi?.heading}
+                      {multi?.heading}
                     </h2>
                     <p>{multi?.description[0].slice(0, 100)}</p>
                     <p>
                       <small className="text-gray-500">
-                      {`${formatDistanceToNow(new Date(multi?.publishedDate))} ago` }
+                        {`${formatDistanceToNow(new Date(multi?.publishedDate))} ago`}
                       </small>
                     </p>
                   </div>

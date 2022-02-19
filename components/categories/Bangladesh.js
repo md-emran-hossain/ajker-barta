@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-const Bangladesh = ({bdnews}) => {
+const Bangladesh = ({ bdnews }) => {
   const latest = bdnews.reverse()
   const col1 = latest[0];
   const col2 = latest[1];
@@ -12,8 +12,8 @@ const Bangladesh = ({bdnews}) => {
   return (
     <div className="container h-auto mb-4">
       <div className='flex mb-4 items-center'>
-          <h1 onClick={() => router.push('/bangladesh')} className=' text-xl cursor-pointer font-medium text-blue-900'>Bangladesh </h1><IoIosArrowForward className='text-red-600 mt-2' />
-        </div>
+        <h1 onClick={() => router.push('/bangladesh')} className=' text-xl cursor-pointer font-medium text-blue-900'>Bangladesh </h1><IoIosArrowForward className='text-red-600 mt-2' />
+      </div>
       <div
         className={`grid gap-3 md:grid-cols-3 sm:grid-cols-1`}
       >
@@ -22,7 +22,7 @@ const Bangladesh = ({bdnews}) => {
             <Link href={`/news/${col2?._id}`}>
               <div>
                 <h1 className="font-bold">{col2?.heading}</h1>
-                <p>{`${formatDistanceToNow(new Date(col2?.publishedDate))} ago` }</p>
+                <p>{`${formatDistanceToNow(new Date(col2?.publishedDate))} ago`}</p>
               </div>
             </Link>
           </div>
@@ -41,8 +41,8 @@ const Bangladesh = ({bdnews}) => {
 
               <div className="mr-1 ">
                 <h1 className="font-bold">{col1?.heading}</h1>
-                <p>{`${formatDistanceToNow(new Date(col1?.publishedDate))} ago` }</p>
-                <p>{col1?.description[0].slice(0,100)}</p>
+                <p>{`${formatDistanceToNow(new Date(col1?.publishedDate))} ago`}</p>
+                <p>{col1?.description[0].slice(0, 100)}</p>
               </div>
             </div>
           </Link>
@@ -51,16 +51,16 @@ const Bangladesh = ({bdnews}) => {
           return (
             <div className="flex justify-between auto-cols-fr" key={item._id}>
 
-              <div onClick={() => router.push(`/news/${item._id}`)} className="mr-1 w-7/12 cursor-pointer">
+              <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className="mr-1 w-7/12 cursor-pointer">
                 <h1 className="font-bold">{item?.heading}</h1>
-                <p>{`${formatDistanceToNow(new Date(item?.publishedDate))} ago` }</p>
+                <p>{`${formatDistanceToNow(new Date(item?.publishedDate))} ago`}</p>
               </div>
 
               <img
                 className="w-5/12 object-fill cursor-pointer"
                 src={item?.images?.img1}
                 alt={item.title}
-                onClick={() => router.push(`/news/${item._id}`)}
+                onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)}
               />
             </div>
           );

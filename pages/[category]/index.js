@@ -85,7 +85,7 @@ const CategoryDetails = ({ newses }) => {
           </button>
         )}
       </div>
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 };
