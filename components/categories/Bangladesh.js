@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
 const Bangladesh = ({bdnews}) => {
-
-  const col1 = bdnews[0];
-  const col2 = bdnews[1];
-  const col3 = bdnews.slice(2, 7);
+  const latest = bdnews.reverse()
+  const col1 = latest[0];
+  const col2 = latest[1];
+  const col3 = latest.slice(2, 7);
   const router = useRouter()
   return (
     <div className="container h-auto mb-4">
