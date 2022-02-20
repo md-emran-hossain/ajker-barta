@@ -16,7 +16,6 @@ export default async function handler(req, res) {
     }
     else if (req.method === 'POST') {
         const user = req.body;
-        console.log(user)
         const result = await users.insertOne(user);
         res.status(201).json(result);
     }

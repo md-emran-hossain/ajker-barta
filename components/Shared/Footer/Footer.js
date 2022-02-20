@@ -56,7 +56,7 @@ const Footer = ({ newses }) => {
           <div className={styles.infoBox}>
             <h1 className='text-white text-xl font-medium border-red-500'>Recent Feeds</h1>
             {
-              newses?.slice(0, 3).map((news => <div className='flex items-center gap-2 my-2' key={news.id}>
+              newses?.slice(0, 3).map((news => <div className='flex items-center gap-2 my-2' key={news._id}>
                 <img className='w-24 rounded-md' src={news.images.img1} alt="" />
                 <div>
                   <p className='text-sm'>{news.publishedDate?.split(', ')[0]}</p>

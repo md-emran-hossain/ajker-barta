@@ -29,21 +29,23 @@ const CategoryDetails = ({ newses }) => {
       <NavigationBar />
       <div className={styles.smallContainer}>
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
+        {/* all subcategory routing show */}
         <div className="flex flex-wrap gap-6 my-4 capitalize">
-          {unique.map((sub, i) => (
+          {console.log(unique)}
+          {unique.map((subCategory, i) => (
             <span
-              onClick={() => router.push(`/${category}/${sub}`)}
+              onClick={() => router.push(`/${category}/${subCategory}`)}
               className='cursor-pointer'
               key={i}
             >
-              {sub}
+              {subCategory}
             </span>
           ))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
               key={news.id}
             >
@@ -59,7 +61,7 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.singleNews} cursor-pointer`}
               key={news.id}
             >

@@ -69,7 +69,7 @@ const Newsdetails = ({ newses }) => {
         <span className={`${iconClass} bg-orange-500 text-white`}>
           <FaRegBookmark />
         </span>
-        <span onClick={() => window.print()} className={iconClass}>
+        <span title='Print' onClick={() => window.print()} className={iconClass}>
           <FaPrint />
         </span>
       </div>
@@ -81,8 +81,8 @@ const Newsdetails = ({ newses }) => {
       <Header />
       <NavigationBar />
       <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
-        <div className="col-span-2 mt-20">
-          <h3 onClick={() => router.push(`/${category}`)} className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
+        <div className="col-span-2 mt-6">
+          <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
@@ -127,7 +127,7 @@ const Newsdetails = ({ newses }) => {
             <h1>{success?.map(item => <h1 key={item.comment}>{item.comment}</h1>)}</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
-              <input className="bg-orange-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Post" />
+              <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
             </form>
           </div>
         </div>
@@ -158,7 +158,7 @@ const Newsdetails = ({ newses }) => {
 };
 
 export default Newsdetails;
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   return {
     props: {
@@ -166,3 +166,9 @@ export const getServerSideProps = async () => {
     },
   };
 };
+export async function getStaticPaths() {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking' //indicates the type of fallback
+  }
+}

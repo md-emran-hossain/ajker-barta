@@ -123,7 +123,7 @@ export const theme = createTheme({
             disabled: 'rgba(55, 65, 81, 0.26)'
         },
         background: {
-            default: '#F9FAFC',
+            default: '#FFFFFF',
             paper: '#FFFFFF'
         },
         divider: '#E6E8F0',
@@ -172,37 +172,38 @@ export const theme = createTheme({
     shape: {
         borderRadius: 8
     },
-    // typography: {
-    //     button: {
-    //         fontWeight: 600
-    //     },
-    //     fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-    //     body1: {
-    //         fontSize: '1rem',
-    //         fontWeight: 400,
-    //         lineHeight: 1.5
-    //     },
-    //     body2: {
-    //         fontSize: '0.875rem',
-    //         fontWeight: 400,
-    //         lineHeight: 1.57
-    //     },
-    //     subtitle1: {
-    //         fontSize: '1rem',
-    //         fontWeight: 500,
-    //         lineHeight: 1.75
-    //     },
-    //     subtitle2: {
-    //         fontSize: '0.875rem',
-    //         fontWeight: 500,
-    //         lineHeight: 1.57
-    //     },
-    //     overline: {
-    //         fontSize: '0.75rem',
-    //         fontWeight: 600,
-    //         letterSpacing: '0.5px',
-    //         lineHeight: 2.5,
-    //         textTransform: 'uppercase'
-    //     }
-    // }
+    typography: {
+        // button: {
+        //     fontWeight: 600
+        // },
+        fontFamily: '"Merriweather", "serif"',
+        // fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
+        // body1: {
+        //     fontSize: '1rem',
+        //     fontWeight: 400,
+        //     lineHeight: 1.5
+        // },
+        // body2: {
+        //     fontSize: '0.875rem',
+        //     fontWeight: 400,
+        //     lineHeight: 1.57
+        // },
+        // subtitle1: {
+        //     fontSize: '1rem',
+        //     fontWeight: 500,
+        //     lineHeight: 1.75
+        // },
+        // subtitle2: {
+        //     fontSize: '0.875rem',
+        //     fontWeight: 500,
+        //     lineHeight: 1.57
+        // },
+        // overline: {
+        //     fontSize: '0.75rem',
+        //     fontWeight: 600,
+        //     letterSpacing: '0.5px',
+        //     lineHeight: 2.5,
+        //     textTransform: 'uppercase'
+        // }
+    }
 });
