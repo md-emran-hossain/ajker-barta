@@ -1,4 +1,4 @@
-import Bangladesh from "../components/categories/Bangladesh";
+import Bangladesh from "../components/Home/Bangladesh/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";
 import ImageGallary from "../components/imageGallary/imageGallary";
@@ -7,7 +7,6 @@ import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
-
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
@@ -25,22 +24,19 @@ export default function Home({ newses }) {
   const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
-
   return (
     <div>
       <Header />
       <NavigationBar />
       <Hero newses={newses} />
       <Coronavirus coronanews={coronanews} />
+      <Global />
+      <CovidBtn />
       <Bangladesh bdnews={bdnews} />
       <International international={international} />
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
       <Business business={business} />
-
-      <Coronavirus />
-      <Global />
-      <CovidBtn />
       <Entertainment entertainment={entertainment} />
       <ImageGallary />
       <Opinion />

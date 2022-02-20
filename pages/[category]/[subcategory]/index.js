@@ -17,7 +17,6 @@ const SubCategoryDetails = ({ newses }) => {
   const unique = [...new Set(subCategories)];
   const displayNews = newses.filter(news => news.subCategory === subCategory).reverse()
 
-
   const loadmore = () => {
     setVisible(prev => prev + 5)
     if (visible >= displayNews.length - 1) {

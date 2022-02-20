@@ -36,14 +36,13 @@ const Header = () => {
                                 <li>
                                     <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' />
                                 </li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="bangladesh">Bangladesh</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="international" data-title="About" aria-label="About">International</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="sports" data-title="My Expertise" aria-label="My Expertise">Sports</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="Force Framework" aria-label="Force Framework">Youth</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">Bangladesh</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">International</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/sports" data-title="My Expertise" aria-label="My Expertise">Sports</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/business" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/entertainment" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/ifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
                                 <li className='text-lg mt-5'>
                                     <p className='ml-5'><strong> © AJKER BARTA</strong></p>
                                 </li>

@@ -34,20 +34,17 @@ const CategoryDetails = ({ newses }) => {
           {console.log(unique)}
           {unique.map((subCategory, i) => (
             <span
-              onClick={() => router.push(`/${category}/${subCategory}`)}
-              className='cursor-pointer'
               key={i}
-            >
-              {subCategory}
-            </span>
-          ))}
+              onClick={() => router.push(`/${category}/${subCategory}`)}
+              className='cursor-pointer'>
+            </span>))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
               onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
@@ -61,9 +58,9 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
               className={`${styles.singleNews} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <div>

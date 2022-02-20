@@ -6,9 +6,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Merriweather', serif;
-  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
 }
 .container{
@@ -62,19 +61,6 @@ body {
 .slim-border{
   border-width: 1px;
 }
-
-/* Main Nav  */
-.nav-bg-color{
-  background-color: rgba(255, 255, 255, 0.885);
-}
-
-.navbar {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  transition: all 0.5s;
-}
-
-
  /* Login page Style  */
 
 .first-form{
