@@ -36,7 +36,7 @@ const CategoryDetails = ({ newses }) => {
             <span
               key={i}
               onClick={() => router.push(`/${category}/${subCategory}`)}
-              className='cursor-pointer'>
+              className='cursor-pointer'>{subCategory}
             </span>))}
         </div>
         <div className={styles.categoryGrid}>

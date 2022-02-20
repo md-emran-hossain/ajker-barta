@@ -32,11 +32,11 @@ const SubCategoryDetails = ({ newses }) => {
       <div className={styles.smallContainer}>
         <div className='flex gap-2 items-center'>
           <h1 className='text-3xl font-bold capitalize'>{category}</h1>
-          <p className='capitalize'>{subCategory}</p>
+          <p className='capitalize -mb-3'>{subCategory}</p>
         </div>
         <div className='flex flex-wrap gap-4 capitalize my-4'>
           {
-            unique.map((sub, i) => <span onClick={() => router.push(`/${category}/${sub}`)} className={sub === subCategory ? 'text-blue-600 cursor-pointer' : 'cursor-pointer'} key={i}>{sub}  </span>)
+            unique.map((sub, i) => <span onClick={() => router.push(`/${category}/${sub}`)} className={sub === subCategory ? 'text-blue-600 font-semibold cursor-pointer' : 'cursor-pointer'} key={i}>{sub}</span>)
           }
         </div>
         <div className={styles.categoryGrid}>
