@@ -15,6 +15,7 @@ import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
+import Entertainment from "../components/Home/Entertainment/Entertainment";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
@@ -34,13 +35,12 @@ export default function Home({ newses }) {
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
       <Business business={business} />
-
       <Coronavirus />
       <Global />
       <CovidBtn />
-
       <ImageGallary />
       <Opinion />
+      <Entertainment />
       <Sports sports={sports} />
       <Footer />
     </div>

@@ -19,11 +19,11 @@ const Login = () => {
     const isDesktop = useMediaQuery('(min-width: 900px)');
     // const location = ""
     const location = useRouter()
-    const locationURL = Object.keys(location.components)[2]
+    // const locationURL = Object?.keys(location.components)[2]
 
     //// Login with google 
     const handleGoogleLogin = () => {
-        signInWithGoogle(locationURL, Router);
+        signInWithGoogle(location, Router);
     };
 
     //// handle register
@@ -57,24 +57,24 @@ const Login = () => {
                 isDesktop &&
                 <div className="" style={{ height: '100vh' }}>
                     <div className="first-form drop-shadow-md">
-                        <div className="cont" style={{ borderRadius: '20px' }}>
-                            <div className="form sign-in bg-gray-100">
+                        <div className="cont rounded-3xl">
+                            <div className="form sign-in  bg-gray-200">
                                 <div style={{ width: '60%', margin: '0 auto' }}>
-                                    <h2>Welcome back,</h2>
+                                    <h2 className='font-semibold text-green-500'>Welcome back,</h2>
                                     <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
-                                        <TextField style={{ width: '100%' }} className="mb-2 text-center"
+                                        <TextField color='success' style={{ width: '100%' }} className="mb-2 text-center"
                                             defaultValue="admin@gmail.com"
                                             type="email" {...register("email")} label="Your Email" variant="standard" required /> <br />
 
-                                        <TextField style={{ width: '100%' }} className="mb-4 text-center"
+                                        <TextField color='success' style={{ width: '100%', marginBottom: "15px" }} className="mb-4 text-center"
                                             defaultValue="123456"
                                             name="password" {...register("password")} label="Your Password"
                                             type="password"
                                             variant="standard" required />
 
-                                        <Button className="fb-btn" type="submit" style={{ width: '100%', }} variant="outlined"><span>Login</span></Button>
+                                        <Button color='success' type="submit" style={{ width: '100%', }} variant="contained"><span>Login</span></Button>
                                     </form>
-                                    <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn" variant="outlined"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
+                                    <Button color='success' onClick={handleGoogleLogin} style={{ width: '100%' }} variant="contained"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
                                 </div>
                             </div>
                             <div className="sub-cont">
@@ -92,22 +92,22 @@ const Login = () => {
                                         <span className="m--in">Sign In</span>
                                     </div>
                                 </div>
-                                <div className="form sign-up bg-gray-100">
+                                <div className="form sign-up bg-gray-200">
                                     <div style={{ width: '60%', margin: '0 auto' }}>
-                                        <h2>Time to feel like home,</h2>
+                                        <h2 className='text-green-500'>Time to feel like home,</h2>
                                         <form className='mb-4'>
-                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                            <TextField color='success' sx={{ width: '100%' }} className="mb-2"
                                                 name="name" type="text" onChange={(e) => setNewName(e.target.value)} label="Your Name" variant="standard" required />
 
-                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                            <TextField color='success' sx={{ width: '100%' }} className="mb-2"
                                                 name="email" type="email" onChange={(e) => setNewEmail(e.target.value)} label="Your Email" variant="standard" required />
 
-                                            <TextField sx={{ width: '100%' }}
+                                            <TextField color='success' sx={{ width: '100%', marginBottom: "15px" }}
                                                 name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
 
-                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%' }} variant="outlined"><span>Sign up</span></Button>
+                                            <Button color='success' onClick={handleRegisterSubmit} style={{ width: '100%' }} variant="contained"><span>Sign up</span></Button>
                                         </form>
-                                        <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn " variant="outlined"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
+                                        <Button color='success' onClick={handleGoogleLogin} style={{ width: '100%' }} variant="contained"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
                                     </div>
                                 </div>
                             </div>
