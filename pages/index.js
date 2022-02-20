@@ -15,10 +15,12 @@ import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
+import Entertainment from "../components/Home/Entertainment/Entertainment";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
   const international = newses.filter((news) => news.category === "international");
+  const entertainment = newses.filter((news) => news.category === "entertainment");
   const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
@@ -38,11 +40,11 @@ export default function Home({ newses }) {
       <Coronavirus />
       <Global />
       <CovidBtn />
-
+      <Entertainment entertainment={entertainment} />
       <ImageGallary />
       <Opinion />
       <Sports sports={sports} />
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 

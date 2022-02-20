@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
 import { FaRegBookmark, FaPrint, } from "react-icons/fa";
-import Footer from "../../components/Shared/Footer/Footer";
-import Header from "../../components/Shared/Header/Header";
+import Footer from "../../../components/Shared/Footer/Footer";
+import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import { useForm } from "react-hook-form";
-import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
+import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
 
@@ -19,7 +19,7 @@ const Newsdetails = ({ newses }) => {
   const news = newses.find(news => news._id === newsId)
   const category = news.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
-  const url = window?.location?.href
+  // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -51,18 +51,18 @@ const Newsdetails = ({ newses }) => {
     return (
       <div className="flex items-start gap-3">
         <span>
-          <FacebookShareButton url={url}>
+          <FacebookShareButton >
 
             <FacebookIcon size={40} round={true} />
           </FacebookShareButton>
         </span>
         <span >
-          <TwitterShareButton url={url}>
+          <TwitterShareButton >
             <TwitterIcon size={40} round={true} />
           </TwitterShareButton>
         </span>
         <span >
-          <LinkedinShareButton url={url}>
+          <LinkedinShareButton>
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
@@ -152,7 +152,7 @@ const Newsdetails = ({ newses }) => {
           })}
         </div>
       </div>
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 };

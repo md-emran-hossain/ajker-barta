@@ -1,6 +1,6 @@
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 
 const ScienceTechnology = ({ science }) => {
@@ -20,7 +20,7 @@ const ScienceTechnology = ({ science }) => {
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {newses?.slice(0, 4).map((news) => (
-            <div key={news._id} className="cursor-pointer" onClick={() => router.push(`/news/${news?._id}`)}>
+            <div key={news._id} className="cursor-pointer" onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)}>
               <img
                 className="w-full h-52 object-cover"
                 src={news?.images?.img1}
@@ -31,7 +31,7 @@ const ScienceTechnology = ({ science }) => {
               </h1>
               <p className="text-sm">{news.description[0].slice(0, 100)}...</p>
               <p className="text-md  text-blue-600">
-              {`${formatDistanceToNow(new Date(news.publishedDate))} ago` }
+                {`${formatDistanceToNow(new Date(news.publishedDate))} ago`}
               </p>
             </div>
           ))}

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { formatDistanceToNow } from 'date-fns';
 
 
-const Sports = ({sports}) => {
+const Sports = ({ sports }) => {
     const router = useRouter()
 
     const sportsData = sports.reverse()
@@ -26,8 +26,8 @@ const Sports = ({sports}) => {
                                 </div>
                                 <div className="p-3">
                                     <h2 className="text-2xl font-bold">{single?.heading}</h2>
-                                    <p className="">{single.description[0].slice(0,100)}</p>
-                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(single?.publishedDate))} ago` }</small></p>
+                                    <p className="">{single.description[0].slice(0, 100)}</p>
+                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(single?.publishedDate))} ago`}</small></p>
                                 </div>
                             </div>)
                         }
@@ -38,12 +38,12 @@ const Sports = ({sports}) => {
                     <div className="">
                         {multiData.map(multi => (<div
                             key={multi?._id}
-                            className='col-span-12 lg:col-span-4 mb-2' onClick={() => router.push(`/news/${multi._id}`)}>
+                            className='col-span-12 lg:col-span-4 mb-2' onClick={() => router.push(`/${multi.category}/${multi.subCategory}/${multi?._id}`)}>
                             <div className='grid grid-cols-12 border border-gray-200 rounded-md'>
                                 <div className="col-span-8 p-2">
                                     <h2 className="text-1xl  font-bold">{multi?.heading}</h2>
                                     <p>{multi.description[0].slice(0, 100)}</p>
-                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(multi?.publishedDate))} ago` }</small></p>
+                                    <p><small className='text-gray-500'>{`${formatDistanceToNow(new Date(multi?.publishedDate))} ago`}</small></p>
                                 </div>
                                 <div className="col-span-4">
                                     <img src={multi?.images?.img1} alt="" />
