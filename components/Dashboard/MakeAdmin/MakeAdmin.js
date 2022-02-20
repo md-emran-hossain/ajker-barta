@@ -69,68 +69,42 @@ const MakeAdmin = () => {
     }
 
     return (
-        <div className='w-92 mx-auto'>
-            <Box sx={{ maxWidth: "90%", marginX: 'auto' }}>
-                <Card sx={{ borderRadius: '20px' }}>
-                    <form onSubmit={handleMakeAdmin}>
-                        <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', paddingY: 2 }} >
-                            <Typography sx={{ m: 1, fontWeight: 'bold' }} variant="h4" >  Make Admin </Typography>
-                            <Box sx={{ m: 1 }}>
-                                <Button type='submit' color="success" variant="contained" > Create Admin </Button>
-                            </Box>
+        <div>
+            <Card sx={{ borderRadius: '20px', maxWidth: '600px', marginX: 'auto' }}>
+                <form onSubmit={handleMakeAdmin}>
+                    <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', paddingY: 2 }} >
+                        <Typography sx={{ m: 1, fontWeight: 'bold' }} variant="h4" >  Make Admin </Typography>
+                        <Box sx={{ m: 1 }}>
+                            <Button type='submit' color="success" variant="contained" > Create Admin </Button>
                         </Box>
-                        <CardActionArea sx={{}}>
-                            <CardMedia className='object-cover'
-                                component="img"
-                                image={"https://i.ibb.co/KKfz3rj/admin.png"}
-                                alt="Admin"
-                                sx={{ borderRadius: '20px', width: '100%', height: 'auto', maxHeight: '550px' }}
-                            />
-
-                        </CardActionArea>
-                        <CardContent>
-                            <Box >
-                                <TextField fullWidth onChange={e => setEmail(e.target.value)} required type={"email"}
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <SvgIcon color="success" fontSize="medium"  ><PersonAddIcon /> </SvgIcon>
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                    label="Create Admin"
-                                    color='success'
-                                    placeholder="Create Admin"
-                                    variant="outlined" />
-                            </Box>
-                        </CardContent>
-                    </form>
-                </Card>
-
-
-
-                {/* <Card className='shadow w-75 mx-auto' >
-                    <CardActionArea>
-                        <CardMedia className='img-fluid'
+                    </Box>
+                    <CardActionArea sx={{}}>
+                        <CardMedia className='object-cover'
                             component="img"
                             image={"https://i.ibb.co/KKfz3rj/admin.png"}
                             alt="Admin"
-                            sx={{ borderRadius: '20px', maxHeight: '400px' }}
+                            sx={{ borderRadius: '20px', width: '100%', height: 'auto', maxHeight: '550px' }}
                         />
-                        <CardContent>
-                            <form onSubmit={handleMakeAdmin} className="mt-2">
-                                <TextField id="admin-input"
-                                    className="w-100" type="email" required onChange={e => setEmail(e.target.value)} label="ENTER A EMAIL AND CREATE A ADMIN" variant="standard" />
-                                <Button type="submit" variant="contained" className=" w-100  rounded-pill mt-4 ">
-                                    CREATE NEW ADMIN
-                                </Button>
-                            </form>
-                        </CardContent>
+
                     </CardActionArea>
-                </Card> */}
-
-
-            </Box>
+                    <CardContent>
+                        <Box >
+                            <TextField fullWidth onChange={e => setEmail(e.target.value)} required type={"email"}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SvgIcon color="success" fontSize="medium"  ><PersonAddIcon /> </SvgIcon>
+                                        </InputAdornment>
+                                    )
+                                }}
+                                label="Create Admin"
+                                color='success'
+                                placeholder="Create Admin"
+                                variant="outlined" />
+                        </Box>
+                    </CardContent>
+                </form>
+            </Card>
         </div >
     );
 };
