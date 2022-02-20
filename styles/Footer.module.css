@@ -1,0 +1,50 @@
+.footer{
+  background-color: #1f1f1f;
+  padding: 30px 0 0;
+}
+.infoBox{
+  margin-top: 15px;
+  color: rgba(255, 255, 255, 0.5);
+}
+.infoBox:nth-child(4){
+  margin-left: 30px;
+}
+.infoBox h1{
+  position: relative;
+  margin-bottom: 20px;
+}
+.infoBox h1::after{
+  position: absolute;
+  content: '';
+  bottom: -10px;
+  width: 80px;
+  background-color: rgb(245, 78, 78);
+  height: 2px;
+  left: 0;
+}
+.infoBox ul li a{
+  cursor: pointer;
+}
+.infoBox ul li a:hover{
+  color: #ffffff;
+}
+.infoBox input{
+  padding: 15px 10px;
+  width: 100%;
+  margin: 5px 0;
+  border: none;
+  outline: none;
+  background-color: #111111;
+  border-radius: 5px;
+}
+.copyRight{
+  padding: 30px;
+  margin-top: 30px;
+  background-color: #101010;
+}
+.copyRight span a{
+  color: rgba(255, 255, 255, 0.5);
+}
+.copyRight span a:hover{
+  color: #ffffff;
+}
