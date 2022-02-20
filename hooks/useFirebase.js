@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, } from "firebase/auth";
 import Swal from 'sweetalert2'
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import initializeFirebase from '../components/Login/Firebase/Firebase.init';
 // initialize firebase app
@@ -13,17 +13,19 @@ export default function useFirebase() {
     const [loading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
 
+    const router = useRouter();
     const auth = getAuth();
 
     const googleProvider = new GoogleAuthProvider();
 
 
-    const signInWithGoogle = (location, Router) => {
+    const signInWithGoogle = (location) => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-                Router.push(location || '/');
+                router.push(location || '/');
                 const user = result.user;
+
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')
@@ -46,7 +48,7 @@ export default function useFirebase() {
     }
 
     // create new user with register
-    const registerUser = (email, Password, name, Router) => {
+    const registerUser = (email, Password, name) => {
         createUserWithEmailAndPassword(auth, email, Password)
             .then(() => {
                 setAuthError('');
@@ -60,7 +62,7 @@ export default function useFirebase() {
                 })
 
                 // database save user
-                saveUser(email, name, 'POST');
+                saveUser(email, name, "POST");
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -88,13 +90,13 @@ export default function useFirebase() {
     };
 
     // all ready create user login
-    const loginUser = (email, password, location, Router) => {
+    const loginUser = (email, password, location) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 setUser(user)
-                // console.log(user.user)
+                router.push(location || '/');
                 setAuthError('');
-                handleResponse(user.user, location, Router)
+                handleResponse(user.user, location)
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -115,8 +117,8 @@ export default function useFirebase() {
 
 
     // handle logged in user
-    const handleResponse = (user, location, Router) => {
-        Router.push(location);
+    const handleResponse = (user, location) => {
+        router.push(location);
         setAuthError('');
         if (user.email === 'admin@gmail.com') {
 
@@ -177,12 +179,7 @@ export default function useFirebase() {
                     setAuthError(error.message);
                 })
                     .finally(() => setLoading(false));
-                Router.push('/')
-                Swal.fire(
-                    'Login out',
-                    'Logout successfully.',
-                    'success'
-                )
+                router.push('/')
             }
         })
     };
@@ -192,6 +189,7 @@ export default function useFirebase() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                // getAdmin(user.email)
             } else {
                 setUser({});
             }
@@ -202,31 +200,25 @@ export default function useFirebase() {
 
 
     // admin set to database 
-    useEffect(() => {
-        fetch(`https://ajker-barta.vercel.app/api/users/${user.email}`)
+    const getAdmin = (email) => {
+        fetch(`/api/users?email=${email}`)
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin)
             })
-    }, [user.email]);
+    }
 
     // user info save to the database 
     const saveUser = (email, name, method) => {
         const user = { name, email };
-        console.log(user);
-        fetch('https://ajker-barta.vercel.app/api/users', {
+        fetch('/api/users', {
             method: method,
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(user)
         })
-            .then(res => {
-                setLoading(false)
-            })
-            .catch(error => {
-                console.log(error);
-            })
+            .then()
     };
 
     return {

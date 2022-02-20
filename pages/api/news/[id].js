@@ -1,4 +1,5 @@
 import run from '../../../utils/database';
+const ObjectId = require('mongodb').ObjectId;
 
 export default async function handler(req, res) {
     const { database } = await run();
@@ -6,9 +7,7 @@ export default async function handler(req, res) {
 
     if (req.method === 'PUT') {
         const id = req.query.id;
-        console.log(id);
         const comments = req.body;
-        console.log(comments);
         const query = { _id: ObjectId(id) };
         const options = { upsert: true };
         const updateDoc = {

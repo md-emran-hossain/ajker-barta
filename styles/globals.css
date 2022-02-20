@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap');
 html,
 body {
   padding: 0;
@@ -60,19 +61,6 @@ body {
 .slim-border{
   border-width: 1px;
 }
-
-/* Main Nav  */
-.nav-bg-color{
-  background-color: rgba(255, 255, 255, 0.885);
-}
-
-.navbar {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  transition: all 0.5s;
-}
-
-
  /* Login page Style  */
 
 .first-form{

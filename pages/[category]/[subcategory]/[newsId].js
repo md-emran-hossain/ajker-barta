@@ -1,17 +1,15 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import {
-  FaRegBookmark,
-  FaPrint,
-} from "react-icons/fa";
-import Footer from "../../components/Shared/Footer/Footer";
-import Header from "../../components/Shared/Header/Header";
+import { FaRegBookmark, FaPrint, } from "react-icons/fa";
+import Footer from "../../../components/Shared/Footer/Footer";
+import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import { useForm } from "react-hook-form";
-import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
+import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
 import { useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
 
@@ -22,58 +20,107 @@ const Newsdetails = ({ newses }) => {
   const news = newses.find(news => news._id === newsId)
   const category = news.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
-  const url = window?.location?.href
+  // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const onSubmit = data => {
-
     const dataup = {
-
       ...data,
       name: user.displayName,
       img: user.photoURL,
       date: new Date().toLocaleString(),
       email: user.email
     }
+
+
     const objShallowCopy = [...success, dataup];
     setSuccess(objShallowCopy);
     // Send a POST request
 
-    fetch(`/api/news?id=${newsId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(objShallowCopy)
-    })
-      .then(res => res.json())
-      .then(data => console.log(data))
+    if (!user.email) {
+      Swal.fire({
+        title: 'You are not signed in',
+        text: "You want to comment? please Sign in first",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3ae374',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sign in '
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/login')
+        }
+      })
+    }
+    else {
+      fetch(`/api/news/${newsId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(objShallowCopy)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.modifiedCount > 0) {
+            alert("comment added");
+            reset();
+          }
+        })
+        .catch(err => {
 
-    console.log(newsId)
-    console.log(objShallowCopy);
+        })
+    }
   };
+
+
+
+
+
+
+
+  // confirmButton: 'bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-5 border-b-2 border-green-700 hover:border-green-500 rounded ml-2',
+  // cancelButton: 'bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-5 border-b-2 border-red-700 hover:border-red-500 rounded mr-2'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
         <span>
-          <FacebookShareButton url={url}>
+          <FacebookShareButton >
 
             <FacebookIcon size={40} round={true} />
           </FacebookShareButton>
         </span>
         <span >
-          <TwitterShareButton url={url}>
+          <TwitterShareButton >
             <TwitterIcon size={40} round={true} />
           </TwitterShareButton>
         </span>
         <span >
-          <LinkedinShareButton url={url}>
+          <LinkedinShareButton>
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
         <span className={`${iconClass} bg-orange-500 text-white`}>
           <FaRegBookmark />
         </span>
-        <span onClick={() => window.print()} className={iconClass}>
+        <span title='Print' onClick={() => window.print()} className={iconClass}>
           <FaPrint />
         </span>
       </div>
@@ -85,8 +132,8 @@ const Newsdetails = ({ newses }) => {
       <Header />
       <NavigationBar />
       <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
-        <div className="col-span-2 mt-20">
-          <h3 onClick={() => router.push(`/${category}`)} className="cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
+        <div className="col-span-2 mt-6">
+          <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
@@ -131,7 +178,7 @@ const Newsdetails = ({ newses }) => {
             <h1>{success?.map(item => <h1 key={item.comment}>{item.comment}</h1>)}</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
-              <input className="bg-orange-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Post" />
+              <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
             </form>
           </div>
         </div>
@@ -156,13 +203,13 @@ const Newsdetails = ({ newses }) => {
           })}
         </div>
       </div>
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 };
 
 export default Newsdetails;
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   return {
     props: {
@@ -170,3 +217,9 @@ export const getServerSideProps = async () => {
     },
   };
 };
+export async function getStaticPaths() {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking' //indicates the type of fallback
+  }
+}

@@ -29,23 +29,22 @@ const CategoryDetails = ({ newses }) => {
       <NavigationBar />
       <div className={styles.smallContainer}>
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
+        {/* all subcategory routing show */}
         <div className="flex flex-wrap gap-6 my-4 capitalize">
-          {unique.map((sub, i) => (
+          {console.log(unique)}
+          {unique.map((subCategory, i) => (
             <span
-              onClick={() => router.push(`/${category}/${sub}`)}
-              className='cursor-pointer'
               key={i}
-            >
-              {sub}
-            </span>
-          ))}
+              onClick={() => router.push(`/${category}/${subCategory}`)}
+              className='cursor-pointer'>
+            </span>))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
@@ -59,9 +58,9 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
               className={`${styles.singleNews} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <div>
@@ -85,18 +84,24 @@ const CategoryDetails = ({ newses }) => {
           </button>
         )}
       </div>
-      <Footer />
+      <Footer newses={newses} />
     </div>
   );
 };
 
 export default CategoryDetails;
-
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   return {
     props: {
       newses: res.data,
     },
+    revalidate: 10
   };
 };
+export async function getStaticPaths() {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: 'blocking' //indicates the type of fallback
+  }
+}
