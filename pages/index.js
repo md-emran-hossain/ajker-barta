@@ -1,4 +1,4 @@
-import Bangladesh from "../components/categories/Bangladesh";
+import Bangladesh from "../components/Home/Bangladesh/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";
 import ImageGallary from "../components/imageGallary/imageGallary";
@@ -24,22 +24,19 @@ export default function Home({ newses }) {
   const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
-  console.log(coronanews);
   return (
     <div>
       <Header />
       <NavigationBar />
       <Hero newses={newses} />
       <Coronavirus coronanews={coronanews} />
+      <Global />
+      <CovidBtn />
       <Bangladesh bdnews={bdnews} />
       <International international={international} />
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
       <Business business={business} />
-
-      <Coronavirus />
-      <Global />
-      <CovidBtn />
       <Entertainment entertainment={entertainment} />
       <ImageGallary />
       <Opinion />

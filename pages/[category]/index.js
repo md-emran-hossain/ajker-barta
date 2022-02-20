@@ -29,11 +29,11 @@ const CategoryDetails = ({ newses }) => {
       <NavigationBar />
       <div className={styles.smallContainer}>
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
-        <div className="flex flex-wrap gap-6 my-4 capitalize">
+        <div className="flex flex-wrap gap-3 my-4 capitalize">
           {unique.map((sub, i) => (
             <span
               onClick={() => router.push(`/${category}/${sub}`)}
-              className='cursor-pointer'
+              className='cursor-pointer py-1 px-4 slim-border border-blue-200 active:bg-blue-500 active:text-white'
               key={i}
             >
               {sub}
@@ -45,7 +45,7 @@ const CategoryDetails = ({ newses }) => {
             <div
               onClick={() => router.push(`/news/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <h1>{news?.heading}</h1>
@@ -59,9 +59,9 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
               className={`${styles.singleNews} cursor-pointer`}
-              key={news.id}
+              key={news._id}
             >
               <img src={news?.images?.img1} alt="" />
               <div>
