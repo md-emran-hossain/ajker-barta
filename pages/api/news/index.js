@@ -13,4 +13,9 @@ export default async function handler(req, res) {
         const result = await news.insertOne(singleNews);
         res.status(201).json(result);
     }
+    else if (req.method === 'PUT') {
+        const singleNews = req.body;
+        const result = await news.insertOne(singleNews);
+        res.status(201).json(result);
+    }
 }

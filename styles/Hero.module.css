@@ -9,7 +9,7 @@
   position: relative;
 }
 .secondSlide{
-  width: 32%;
+  width: 33%;
 }
 .overlay{
   width: 100%;
@@ -19,16 +19,13 @@
   background-image: linear-gradient(to top, rgba(0,0,0,0.8),rgba(0,0,0,0.05));
   position: absolute;
 }
-.swiper-button-prev::after,
-.swiper-button-next::after{
-  background-color: #fff;
-}
+
 @media only screen and (max-width:1100px){
   .firstSlider{
     width: 55%;
   }
   .secondSlide{
-    width: 42%;
+    width: 43%;
   }
 }
 @media only screen and (max-width:850px){

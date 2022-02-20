@@ -22,9 +22,7 @@ export default function useFirebase() {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-
-                const destination = location?.state?.from || '/';
-                Router.push(destination);
+                Router.push(location || '/');
                 const user = result.user;
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
@@ -62,7 +60,7 @@ export default function useFirebase() {
                 })
 
                 // database save user
-                saveUser(email, name, 'POST');
+                saveUser(email, name, "POST");
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -118,9 +116,7 @@ export default function useFirebase() {
 
     // handle logged in user
     const handleResponse = (user, location, Router) => {
-
-        const destination = location?.state?.from || '/';
-        Router.push(destination);
+        Router.push(location);
         setAuthError('');
         if (user.email === 'admin@gmail.com') {
 
@@ -189,11 +185,6 @@ export default function useFirebase() {
                 )
             }
         })
-
-
-
-
-
     };
 
     // firebase observer user state
@@ -201,6 +192,7 @@ export default function useFirebase() {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
+                // getAdmin(user.email)
             } else {
                 setUser({});
             }
@@ -211,41 +203,26 @@ export default function useFirebase() {
 
 
     // admin set to database 
-    // useEffect(() => {
-    //     fetch(`/users/${user.email}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setAdmin(data.admin)
-    //             console.log(data.admin)
-    //         })
-    //         .catch(error => {
-    //             Swal.fire({
-    //                 icon: 'error',
-    //                 title: 'Oops...',
-    //                 text: `${error} `,
+    const getAdmin = (email) => {
+        fetch(`/api/users?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                setAdmin(data.admin)
+            })
+    }
 
-    //             })
-    //         })
-    // }, [user.email]);
-
-    /// user info save to the database 
-    // const saveUser = (email, displayName, method) => {
-    //     const user = { email, displayName };
-    //     console.log(user);
-    //     fetch('', {
-    //         method: method,
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //         .then(res => {
-    //             setLoading(false)
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         })
-    // };
+    // user info save to the database 
+    const saveUser = (email, name, method) => {
+        const user = { name, email };
+        fetch('/api/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    };
 
     return {
         user, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
