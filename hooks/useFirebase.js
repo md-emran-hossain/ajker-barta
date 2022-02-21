@@ -18,7 +18,6 @@ export default function useFirebase() {
 
     const googleProvider = new GoogleAuthProvider();
 
-
     const signInWithGoogle = (location) => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
@@ -75,7 +74,7 @@ export default function useFirebase() {
                     })
                 });
 
-                Router.push('/');
+                router.push('/');
             })
             .catch((error) => {
                 Swal.fire({
@@ -219,6 +218,13 @@ export default function useFirebase() {
             body: JSON.stringify(user)
         })
             .then()
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.message} `,
+                })
+            })
     };
 
     return {
