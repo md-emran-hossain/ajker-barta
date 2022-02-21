@@ -31,12 +31,11 @@ const CategoryDetails = ({ newses }) => {
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
         {/* all subcategory routing show */}
         <div className="flex flex-wrap gap-6 my-4 capitalize">
-          {console.log(unique)}
           {unique.map((subCategory, i) => (
             <span
               key={i}
               onClick={() => router.push(`/${category}/${subCategory}`)}
-              className='cursor-pointer'>{subCategory}
+              className='cursor-pointer py-1 px-2 border border-blue-100'>{subCategory}
             </span>))}
         </div>
         <div className={styles.categoryGrid}>

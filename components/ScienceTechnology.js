@@ -20,12 +20,14 @@ const ScienceTechnology = ({ science }) => {
         </div>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border-b pb-3">
           {newses?.slice(0, 4).map((news) => (
-            <div key={news._id} className="cursor-pointer border-r pr-3 pb-3 last:border-0" onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)}>
-              <img
-                className="w-full h-52 object-cover"
-                src={news?.images?.img1}
-                alt=""
-              />
+            <div key={news._id} className="cursor-pointer imageEffect border-r pr-3 pb-3 last:border-0" onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)}>
+              <div className="overflow-hidden">
+                <img
+                  className="w-full h-52 object-cover"
+                  src={news?.images?.img1}
+                  alt=""
+                />
+              </div>
               <h1 className="text-lg leading-6 my-1 font-semibold hover:text-red-600 transition-colors duration-300 cursor-pointer">
                 {news?.heading}
               </h1>
