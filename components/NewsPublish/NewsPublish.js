@@ -153,6 +153,7 @@ const NewsPublish = () => {
                                 <option value="editorial">Editorial</option>
                                 <option value="interview">Interview</option>
                                 <option value="analysis">Analysis</option>
+                                <option value="world media">World Media</option>
                                 <option value="Op-Ed">Op-Ed</option>
                             </>
                         }
