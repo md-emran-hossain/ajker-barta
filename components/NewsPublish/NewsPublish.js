@@ -79,6 +79,7 @@ const NewsPublish = () => {
                     <option value="coronavirus">CORONAVIRUS</option>
                     <option value="bangladesh">Bangladesh</option>
                     <option value="international">International</option>
+                    <option value="entertainment">Entertainment</option>
                     <option value="sciencetechnology">Science & Technology</option>
                     <option value="business">Business</option>
                     <option value="sports">Sports</option>
@@ -133,6 +134,17 @@ const NewsPublish = () => {
                             <>
                                 <option value="local">Local</option>
                                 <option value="global">Global</option>
+                            </>
+                        }
+                        {category === 'entertainment' &&
+                            <>
+                                <option value="dhallywood">Dhallywood</option>
+                                <option value="bollywood">Bollywood</option>
+                                <option value="hollywood">Hollywood</option>
+                                <option value="music">Music</option>
+                                <option value="movies">Movies</option>
+                                <option value="television">Television</option>
+                                <option value="OTT">OTT</option>
                             </>
                         }
                     </select>
