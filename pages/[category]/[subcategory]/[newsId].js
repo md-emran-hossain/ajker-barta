@@ -12,7 +12,7 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
-  
+  const [speed, setSpeed] = useState(1)
   const { user } = useAuth()
 
   const router = useRouter();
@@ -54,7 +54,7 @@ const Newsdetails = ({ newses }) => {
     }
     if (speechSynthesis.speaking) return
     const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate =  1
+    utterance.rate =  speed
    
     speechSynthesis.speak(utterance)
 }
@@ -110,11 +110,12 @@ function stop() {
           {/* Listening feature  start*/}
         <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
             <h5>Listen Now</h5>
-           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} />
+           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed</span>
+           <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
           </div>
 
                {/* Listening feature  end*/}
-          <div className="flex items-end justify-between mb-2 inline-block">
+          <div className="flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
