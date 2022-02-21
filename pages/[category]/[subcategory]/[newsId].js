@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import { FaRegBookmark, FaPrint, } from "react-icons/fa";
+import { FaRegBookmark, FaPrint,FaPlay, FaPause, FaStop} from "react-icons/fa";
+import { MdHeadset} from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -11,7 +12,7 @@ import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
-
+  
   const { user } = useAuth()
 
   const router = useRouter();
@@ -47,6 +48,24 @@ const Newsdetails = ({ newses }) => {
         }
       })
   };
+  const playNow = (text) =>{
+    if (speechSynthesis.paused && speechSynthesis.speaking) {
+      return speechSynthesis.resume()
+    }
+    if (speechSynthesis.speaking) return
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.rate =  1
+   
+    speechSynthesis.speak(utterance)
+}
+const pause = () => {
+  if(speechSynthesis.speaking) speechSynthesis.pause()
+}
+function stop() {
+  speechSynthesis.resume()
+  speechSynthesis.cancel()
+}
+  console.log(news)
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -75,7 +94,7 @@ const Newsdetails = ({ newses }) => {
       </div>
     );
   };
-  // console.log(url)
+ 
   return (
     <div>
       <Header />
@@ -86,7 +105,16 @@ const Newsdetails = ({ newses }) => {
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
-          <div className="flex items-end justify-between mb-2">
+
+
+          {/* Listening feature  start*/}
+        <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
+            <h5>Listen Now</h5>
+           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} />
+          </div>
+
+               {/* Listening feature  end*/}
+          <div className="flex items-end justify-between mb-2 inline-block">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
