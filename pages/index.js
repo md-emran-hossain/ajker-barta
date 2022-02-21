@@ -7,7 +7,6 @@ import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
-
 import Header from "../components/Shared/Header/Header";
 import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
@@ -16,6 +15,7 @@ import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
+import OpinionSubItem from "../components/OpinionSubItem/OpinionSubItem";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
@@ -40,21 +40,19 @@ export default function Home({ newses }) {
       <Entertainment entertainment={entertainment} />
       <ImageGallary />
       <Opinion />
+      <OpinionSubItem />
       <Sports sports={sports} />
       <Footer newses={newses} />
     </div>
   );
-
-
-
-
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   return {
     props: {
       newses: res.data,
     },
+    revalidate: 10
   };
 };

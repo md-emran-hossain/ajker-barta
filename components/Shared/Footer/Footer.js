@@ -57,10 +57,10 @@ const Footer = ({ newses }) => {
             <h1 className='text-white text-xl font-medium border-red-500'>Recent Feeds</h1>
             {
               newses?.slice(0, 3).map((news => <div key={news._id} className='flex items-center gap-2 my-2'>
-                <img className='w-24 rounded-md' src={news.images.img1} alt="" />
+                <img className='w-24 rounded-md' src={news?.images?.img1} alt="" />
                 <div>
-                  <p className='text-sm'>{news.publishedDate?.split(', ')[0]}</p>
-                  <h3 className='text-white text-sm font-normal leading-4 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news.heading?.slice(0, 50)}</h3>
+                  <p className='text-sm'>{news?.publishedDate?.split(', ')[0]}</p>
+                  <h3 className='text-white text-sm font-normal leading-4 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading?.slice(0, 50)}</h3>
                 </div>
               </div>))
             }

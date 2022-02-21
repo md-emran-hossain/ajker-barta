@@ -66,17 +66,16 @@ const Login = () => {
                                 <div style={{ width: '60%', margin: '0 auto' }}>
                                     <h2>Welcome back,</h2>
                                     <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
-                                        <TextField style={{ width: '100%' }} className="mb-2 text-center"
-                                            defaultValue="admin@gmail.com"
-                                            type="email" {...register("email")} label="Your Email" variant="standard" required /> <br />
+                                        <TextField style={{ width: '100%' }} className="mb-2"
+                                            type="email" {...register("email")} label="Your Email"
+                                            variant="standard" required /> <br />
 
-                                        <TextField style={{ width: '100%' }} className="mb-4 text-center"
-                                            defaultValue="123456"
+                                        <TextField style={{ width: '100%' }} className="mb-4"
                                             name="password" {...register("password")} label="Your Password"
                                             type="password"
                                             variant="standard" required />
 
-                                        <Button className="fb-btn" type="submit" style={{ width: '100%', }} variant="outlined"><span>Login</span></Button>
+                                        <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px' }} variant="outlined"><span>Login</span></Button>
                                     </form>
                                     <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn" variant="outlined"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
                                 </div>
@@ -85,7 +84,7 @@ const Login = () => {
                                 <div className="img">
                                     <div className="img__text m--up">
                                         <h2>New here?</h2>
-                                        <p>Sign up and discover great amount of new opportunities!</p>
+                                        <p>Sign up and discover great amount of news!</p>
                                     </div>
                                     <div className="img__text m--in">
                                         <h2>One of us?</h2>
@@ -109,7 +108,7 @@ const Login = () => {
                                             <TextField sx={{ width: '100%' }}
                                                 name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
 
-                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%' }} variant="outlined"><span>Sign up</span></Button>
+                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="outlined"><span>Sign up</span></Button>
                                         </form>
                                         <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn " variant="outlined"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
                                     </div>

@@ -29,21 +29,20 @@ const CategoryDetails = ({ newses }) => {
       <NavigationBar />
       <div className={styles.smallContainer}>
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
-        <div className="flex flex-wrap gap-3 my-4 capitalize">
-          {unique.map((sub, i) => (
+        {/* all subcategory routing show */}
+        <div className="flex flex-wrap gap-6 my-4 capitalize">
+          {console.log(unique)}
+          {unique.map((subCategory, i) => (
             <span
-              onClick={() => router.push(`/${category}/${sub}`)}
-              className='cursor-pointer py-1 px-4 slim-border border-blue-200 active:bg-blue-500 active:text-white'
               key={i}
-            >
-              {sub}
-            </span>
-          ))}
+              onClick={() => router.push(`/${category}/${subCategory}`)}
+              className='cursor-pointer'>{subCategory}
+            </span>))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() => router.push(`/news/${news?._id}`)}
+              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
