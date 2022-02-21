@@ -27,7 +27,7 @@ const MakeAdmin = () => {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch('/users/admin', {
+                fetch('/api/users/admin', {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'
