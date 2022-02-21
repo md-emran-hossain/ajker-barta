@@ -31,7 +31,6 @@ const CategoryDetails = ({ newses }) => {
         <h1 className="text-3xl font-bold capitalize">{category}</h1>
         {/* all subcategory routing show */}
         <div className="flex flex-wrap gap-6 my-4 capitalize">
-          {console.log(unique)}
           {unique.map((subCategory, i) => (
             <span
               key={i}

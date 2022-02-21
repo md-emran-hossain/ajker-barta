@@ -1,14 +1,10 @@
 import { formatDistanceToNow } from "date-fns";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from '../../../styles/Bangladesh.module.css'
 const Bangladesh = ({ bdnews }) => {
   const latest = bdnews.reverse()
-  const col1 = latest[0];
-  const col2 = latest[1];
-  const col3 = latest.slice(2, 7);
   const router = useRouter()
   return (
     <div className="container h-auto mb-4">
@@ -17,7 +13,7 @@ const Bangladesh = ({ bdnews }) => {
       </div>
       <div className={styles.bdRow}>
         {
-          bdnews?.slice(1, 8).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className={styles.newsBox} key={news._id}>
+          latest?.slice(1, 8).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className={styles.newsBox} key={news._id}>
             <img className="object-cover rounded-sm w-32 h-24" src={news.images.img1} alt="" />
             <div>
               <h1 className="font-semibold text-black leading-5">{news.heading}</h1>

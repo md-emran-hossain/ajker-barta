@@ -22,9 +22,8 @@ export default function useFirebase() {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-                router.push(location || '/');
                 const user = result.user;
-
+                Router.replace(location || '/');
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')

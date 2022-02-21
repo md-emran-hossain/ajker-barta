@@ -21,6 +21,7 @@ const Login = () => {
     let locationURL = ''
     if (typeof location.components === 'object') {
         locationURL = Object.keys(location.components)[2]
+        console.log(locationURL)
     }
 
     //// Login with google 
