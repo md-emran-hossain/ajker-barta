@@ -2,9 +2,6 @@ import Head from 'next/head';
 import { Box, Container } from '@mui/material';
 import { CustomerListResults } from './CustomerListResults';
 import { CustomerListToolbar } from './CustomerListToolbar';
-
-
-
 import { v4 as uuid } from 'uuid';
 
 export const customers = [
@@ -157,13 +154,7 @@ const Customers = () => (
                 Users
             </title>
         </Head>
-        <Box
-            component="main"
-            sx={{
-                flexGrow: 1,
-                py: 8
-            }}
-        >
+        <Box component="main" sx={{ flexGrow: 1, }}>
             <Container maxWidth={false}>
                 <CustomerListToolbar />
                 <Box sx={{ mt: 3 }}>

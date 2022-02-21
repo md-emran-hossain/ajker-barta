@@ -17,7 +17,6 @@ import { ShoppingBag as ShoppingBagIcon } from '../../../icons/shopping-bag';
 import { User as UserIcon } from '../../../icons/user';
 import { UserAdd as UserAddIcon } from '../../../icons/user-add';
 import { Users as UsersIcon } from '../../../icons/users';
-import { XCircle as XCircleIcon } from '../../../icons/x-circle';
 import { Divider } from '@mui/material';
 import { NavItem } from '../NavItem/NavItem';
 import NextLink from 'next/link';
@@ -35,7 +34,7 @@ import Customers from '../Customers/Customers';
 import Account from '../Account/Accoutn';
 import Settings from '../Settings/Settings';
 import Newses from '../Newses/Newses';
-
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
 
 const items = [
     {
@@ -64,23 +63,18 @@ const items = [
         title: 'Settings'
     },
     {
-        href: '/login',
+        href: '/dashboard/makeAdmin',
         icon: (<LockIcon fontSize="small" />),
-        title: 'Login'
+        title: 'Make Admin'
     },
     {
         href: '/login',
         icon: (<UserAddIcon fontSize="small" />),
-        title: 'Register'
+        title: 'Login'
     }
 ];
 
-
-
-
-
 // drawer style //////////////////////////
-
 const drawerWidth = 260;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -123,9 +117,8 @@ const AppBar = styled(MuiAppBar, {
 
 const DashboardHome = () => {
     const [dPanel, setDPanel] = React.useState("")
+    const [navTitle, setNavTitle] = React.useState("Ajker Barta")
     console.log(dPanel)
-
-
 
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -137,7 +130,6 @@ const DashboardHome = () => {
         setOpen(false);
     };
 
-
     ///// Side bar content///// 
     const router = useRouter();
 
@@ -146,9 +138,7 @@ const DashboardHome = () => {
             if (!router.isReady) {
                 return;
             }
-
             if (open) {
-                // onClose?.();
                 console.log("");
             }
         },
@@ -158,58 +148,27 @@ const DashboardHome = () => {
 
     const content = (
         <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: '100%',
-                    color: 'white',
-                }}
-            >
+            <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', color: 'white', }} >
                 <div>
                     <Box sx={{ p: 3 }}>
-                        <NextLink
-                            href="/"
-                            passHref
-                        >
-                            <a>
-                                <Logo
-                                    sx={{
-                                        height: 42,
-                                        width: 42
-                                    }}
-                                />
-                            </a>
+                        <NextLink href="/" passHref>
+                            <a> <Logo sx={{ height: 42, width: 42 }} /> </a>
                         </NextLink>
                     </Box>
                     <Box sx={{ px: 2 }}>
-                        <Box
-                            sx={{
-                                alignItems: 'center',
-                                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                                cursor: 'pointer',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                px: 3,
-                                py: '11px',
-                                borderRadius: 1
-                            }}
-                        >
+                        <Box sx={{
+                            alignItems: 'center',
+                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            px: 3,
+                            py: '11px',
+                            borderRadius: 1
+                        }}>
                             <div>
-                                <Typography
-                                    color="inherit"
-                                    variant="subtitle1"
-                                >
-                                    Ajker Barta
-                                </Typography>
-                                <Typography
-                                    color="neutral.400"
-                                    variant="body2"
-                                >
-                                    Update
-                                    {' '}
-                                    : Newses
-                                </Typography>
+                                <Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography>
+                                <Typography color="neutral.400" variant="body2" >  Update {' '} : Newses</Typography>
                             </div>
                             <SelectorIcon
                                 sx={{
@@ -239,14 +198,7 @@ const DashboardHome = () => {
                     ))}
                 </Box>
                 <Divider sx={{ borderColor: '#2D3748' }} />
-                <Box
-                    sx={{
-                        px: 2,
-                        py: 3
-                    }}
-                >
-
-                </Box>
+                <Box sx={{ px: 2, py: 3 }} > </Box>
             </Box>
         </>
     );
@@ -264,23 +216,20 @@ const DashboardHome = () => {
                     <IconButton onClick={handleDrawerClose}
                         sx={{ mr: 2, ...(!open && { display: 'none' }) }}
                         className="fs-2">
-                        {theme.direction === 'ltr' ? <CloseIcon className="text-4xl" /> : <CloseIcon className="text-4xl" />}
+                        {theme.direction === 'ltr' ? <CloseIcon fontSize='large' sx={{ color: 'black' }} /> : <CloseIcon fontSize='large' sx={{ color: 'black' }} />}
                     </IconButton>
                     <IconButton
                         onClick={handleDrawerOpen}
                         edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-
-                    >
-                        <MenuIcon className="text-4xl" />
+                        sx={{ mr: 2, ...(open && { display: 'none' }) }}>
+                        <MenuIcon fontSize='large' sx={{ color: 'black' }} />
                     </IconButton>
                     <br />
-                    <Typography className='text-black font-bold' variant="h6" noWrap component="div">
-                        AJKER BARTA
+                    <Typography className='text-black font-bold' variant="h5" noWrap component="div">
+                        {navTitle}
                     </Typography>
                 </Toolbar>
             </AppBar>
-
 
             {/* Drawer  */}
 
@@ -305,61 +254,39 @@ const DashboardHome = () => {
 
             {/* Dashboard main */}
             <Main open={open} >
-                {
-                    dPanel === "/dashboard" ? <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2 pt-20'>
-                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
-
-                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
-
-                        <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
-
-                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
-
-                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
-
-                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
-
-                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
-
-                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
-                    </div>
-
-                        :
-                        dPanel === "/dashboard/account" ? <Account />
-
-                            :
-
-                            dPanel === "/dashboard/customers" ? <Customers />
-
-                                :
-                                dPanel === "/dashboard/newses" ? <Newses />
-
-
-                                    : dPanel === "/dashboard/settings" ? <Settings />
-
-
-                                        :
-                                        <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2 pt-20'>
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
-
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
-
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
-
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
-
-                                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
-
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
-
-                                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
-
-                                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
-                                        </div>
-                }
+                <div className="pt-20">
+                    {
+                        dPanel === "/dashboard" ? <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2'>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
+                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
+                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
+                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
+                        </div>
+                            : dPanel === "/dashboard/account" ? <Account />
+                                : dPanel === "/dashboard/customers" ? <Customers />
+                                    : dPanel === "/dashboard/newses" ? <Newses />
+                                        : dPanel === "/dashboard/settings" ? <Settings />
+                                            : dPanel === "/dashboard/makeAdmin" ? <MakeAdmin />
+                                                : dPanel === "/login" ? router.push('/login')
+                                                    :
+                                                    <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2'>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
+                                                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
+                                                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
+                                                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
+                                                    </div>
+                    }
+                </div>
             </Main>
         </Box>
     );
 };
-
 export default DashboardHome;
