@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { FaRegImages } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
-import styles from "../../styles/Hero.module.css";
+import styles from "../../../styles/Hero.module.css";
 import data from './data'
-const ImageGallary = () => {
+const ImageGallery = () => {
   return (
     <div className="container overflow-hidden mb-24">
       <div className='flex mb-3 mt-5 items-center'>
@@ -78,4 +78,4 @@ const ImageGallary = () => {
   );
 };
 
-export default ImageGallary;
+export default ImageGallery;
