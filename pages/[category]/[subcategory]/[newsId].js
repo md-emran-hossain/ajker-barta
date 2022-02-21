@@ -94,7 +94,10 @@ function stop() {
       </div>
     );
   };
- 
+  const handleSelection = () =>{
+    let text = window.getSelection().toString();
+    console.log(text);
+  }
   return (
     <div>
       <Header />
@@ -110,7 +113,7 @@ function stop() {
           {/* Listening feature  start*/}
         <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
             <h5>Listen Now</h5>
-           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed</span>
+           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed {speed}</span>
            <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
           </div>
 
@@ -124,8 +127,8 @@ function stop() {
           </div>
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
-
-          <p className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          
+          <p onMouseUp={handleSelection} className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
@@ -136,7 +139,7 @@ function stop() {
           <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-
+          <template><span className="control"></span></template>
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
