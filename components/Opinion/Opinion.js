@@ -4,8 +4,8 @@ import { IoIosArrowForward } from "react-icons/io";
 const Opinion = () => {
   return (
     <div className="container xl mx-auto">
-      <div className="flex items-center justify-start ">
-      <h1 className='py-2 text-xl cursor-pointer font-medium text-blue-900'>Opinion Worldwide </h1><IoIosArrowForward className='text-red-600 mt-1' />
+      <div className="flex items-center justify-start mt-5 mb-3">
+        <h1 className='py-2 text-xl cursor-pointer font-medium text-blue-900'>Opinion Worldwide </h1><IoIosArrowForward className='text-red-600 mt-1' />
       </div>
       <div className="px-5 grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 grid-rows-1 gap-0">
         <div>

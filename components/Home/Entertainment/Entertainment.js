@@ -19,7 +19,7 @@ const Entertainment = () => {
 
     return (
         <div className="container overflow-hidden ">
-            <h2 className='text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold'><span className='text-black'>Entertainment </span><ChevronRightIcon /></h2>
+            <h2 className='text-xl text-blue-900 font-semibold mb-3'><span className='text-gray-700'>Entertainment </span><ChevronRightIcon className='text-red-500' /></h2>
 
 
             <div className="grid grid-cols-12 lg:gap-3 gap-2">
