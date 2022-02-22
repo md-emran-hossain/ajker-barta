@@ -1,9 +1,7 @@
 import Bangladesh from "../components/Home/Bangladesh/Bangladesh";
 import International from "../components/Home/International/International";
 import Hero from "../components/Hero";
-import ImageGallary from "../components/imageGallary/imageGallary";
 import Coronavirus from "../components/Coronavirus/Coronavirus";
-import Opinion from "../components/Opinion/Opinion";
 import Exclusive from "../components/Exclusive";
 import ScienceTechnology from "../components/ScienceTechnology";
 import Business from "../components/Business";
@@ -15,7 +13,8 @@ import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
-import OpinionSubItem from "../components/OpinionSubItem/OpinionSubItem";
+import Opinion from "../components/Home/Opinion/Opinion";
+import ImageGallery from "../components/Home/imageGallery/imageGallery";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
@@ -38,9 +37,8 @@ export default function Home({ newses }) {
       <Exclusive newses={newses} />
       <Business business={business} />
       <Entertainment entertainment={entertainment} />
-      <ImageGallary />
+      <ImageGallery />
       <Opinion />
-      <OpinionSubItem />
       <Sports sports={sports} />
       <Footer newses={newses} />
     </div>

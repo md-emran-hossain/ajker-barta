@@ -37,8 +37,10 @@ const Exclusive = ({ newses }) => {
             <h1 className={styles.exclusive}>Exclusive</h1>
             <div className='grid sm:grid-cols-2 gap-3'>
               {
-                latest?.slice(16, 20).map(news => <div className='cursor-pointer' onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} key={news?._id}>
-                  <img className='w-full h-32 object-cover' src={news?.images.img1} alt="" />
+                latest?.slice(16, 20).map(news => <div className='cursor-pointer imageEffect' onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} key={news?._id}>
+                  <div className='overflow-hidden'>
+                    <img className='w-full h-32 object-cover' src={news?.images.img1} alt="" />
+                  </div>
                   <h1 className='text-lg my-1 font-medium leading-5 hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading}</h1>
                   <p className='text-sm leading-4'>{news?.description[0]?.slice(0, 100)}</p>
                   <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500">{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
