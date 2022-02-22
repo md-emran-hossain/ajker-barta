@@ -216,6 +216,7 @@ export const getStaticProps = async () => {
     props: {
       newses: res.data,
     },
+    revalidate: 10
   };
 };
 export async function getStaticPaths() {

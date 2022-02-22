@@ -34,11 +34,6 @@ const Search = ({ searchText, setSearchText }) => {
 
     return (
         <>
-            {/* <div className='flex items-center justify-center bg-gray-100 px-4 py-2'>
-            <input onChange={e => setSearchText(e.target.value)} className='my-2 px-2 focus:outline-none bg-transparent' type="text" value={searchText || ""} />
-            <SearchIcon fontSize='large' onClick={handleSearch} sx={{ color: 'red', cursor: 'pointer' }} /> */}
-            {/* </div> */}
-
             <div className="w-80 mx-auto">
                 <TextField onChange={e => setSearchText(e.target.value)}
                     type="text"
@@ -48,7 +43,7 @@ const Search = ({ searchText, setSearchText }) => {
                         startAdornment: (
                             <InputAdornment
                                 sx={{ paddingY: '0px' }}
-                                position="center">
+                                position="start">
                                 <SearchIcon fontSize='large' onClick={handleSearch} sx={{ color: 'red', cursor: 'pointer' }} />
                             </InputAdornment>
                         )

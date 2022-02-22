@@ -16,7 +16,7 @@ const ImageGallery = () => {
       <h2 className='text-xl text-blue-900 font-semibold mb-3 mt-5'><span className='text-gray-700'> Todays Gallery </span><ChevronRightIcon className='text-red-500' /></h2>
       <div className={styles.galleryRow}>
         {
-          images?.slice(0, 4).map(news => <div className={styles.gallery} key={news._id}>
+          images?.slice(0, 4).map((news, i) => <div className={styles.gallery} key={i}>
             <img className='w-full h-full object-cover' src={news?.img} alt="" />
             <div>
               <h1 className='text-lg leading-5 font-semibold absolute bottom-4 left-3 text-white'>{news?.title}</h1>
