@@ -15,6 +15,9 @@ import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
+import OpinionSubItem from "../components/OpinionSubItem/OpinionSubItem";
+import Voting from "../components/Voting/Voting";
+import Lifestyle from "../components/Lifestyle/Lifestyle";
 export default function Home({ newses }) {
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
@@ -41,7 +44,10 @@ export default function Home({ newses }) {
     
       <ImageGallary />
       <Opinion />
+      <OpinionSubItem></OpinionSubItem>
       <Sports sports={sports} />
+      {/* <Voting></Voting> */}
+      <Lifestyle newses={newses}></Lifestyle>
       <Footer />
     </div>
   );
