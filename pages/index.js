@@ -12,6 +12,8 @@ import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
+import Voting from "../components/Voting/Voting";
+import Lifestyle from "../components/Lifestyle/Lifestyle";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
@@ -41,6 +43,8 @@ export default function Home({ newses }) {
       <ImageGallery />
       <Opinion opinion={opinion} />
       <Sports sports={sports} />
+      {/* <Voting></Voting> */}
+      <Lifestyle newses={newses}></Lifestyle>
       <Footer newses={newses} />
     </div>
   );
