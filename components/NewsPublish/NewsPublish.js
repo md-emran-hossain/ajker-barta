@@ -77,6 +77,7 @@ const NewsPublish = () => {
                     onChange={(e) => setCategory(e.target.value)}>
                     <option value="not defined">Please select a category</option>
                     <option value="coronavirus">CORONAVIRUS</option>
+                    <option value="opinion">Opinion</option>
                     <option value="bangladesh">Bangladesh</option>
                     <option value="international">International</option>
                     <option value="entertainment">Entertainment</option>
@@ -147,8 +148,22 @@ const NewsPublish = () => {
                                 <option value="OTT">OTT</option>
                             </>
                         }
+                        {category === 'opinion' &&
+                            <>
+                                <option value="editorial">Editorial</option>
+                                <option value="interview">Interview</option>
+                                <option value="analysis">Analysis</option>
+                                <option value="Op-Ed">Op-Ed</option>
+                            </>
+                        }
                     </select>
                 }
+                {category === 'opinion' && <input
+                    className="ring-2 ring-red-600 rounded-sm p-2"
+                    type="text"
+                    {...register("subHeading")}
+                    placeholder="Sub heading"
+                />}
 
                 <input className="bg-red-600 mb-12 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white rounded-sm p-2" type="submit" value="Add News" />
             </form>

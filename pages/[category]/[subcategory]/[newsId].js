@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
@@ -32,21 +33,44 @@ const Newsdetails = ({ newses }) => {
       date: new Date().toLocaleString(),
       email: user.email
     }
+
+
     const objShallowCopy = [...success, dataup];
     setSuccess(objShallowCopy);
     // Send a POST request
-    fetch(`/api/news/${newsId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(objShallowCopy)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.modifiedCount > 0) {
-          alert("comment added");
-          reset();
+
+    if (!user.email) {
+      Swal.fire({
+        title: 'You are not signed in',
+        text: "You want to comment? please Sign in first",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3ae374',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sign in '
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/login')
         }
       })
+    }
+    else {
+      fetch(`/api/news/${newsId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(objShallowCopy)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.modifiedCount > 0) {
+            alert("comment added");
+            reset();
+          }
+        })
+        .catch(err => {
+
+        })
+    }
   };
   const playNow = (text) =>{
     if (speechSynthesis.paused && speechSynthesis.speaking) {

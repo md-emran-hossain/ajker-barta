@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, } from "firebase/auth";
 import Swal from 'sweetalert2'
-import Router from "next/router";
+import { useRouter } from "next/router";
 
 import initializeFirebase from '../components/Login/Firebase/Firebase.init';
 // initialize firebase app
@@ -13,17 +13,18 @@ export default function useFirebase() {
     const [loading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
 
+    const router = useRouter();
     const auth = getAuth();
 
     const googleProvider = new GoogleAuthProvider();
 
-
-    const signInWithGoogle = (location, Router) => {
+    const signInWithGoogle = (location) => {
         setLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-                Router.push(location || '/');
+                router.push(location || '/');
                 const user = result.user;
+
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')
@@ -46,7 +47,7 @@ export default function useFirebase() {
     }
 
     // create new user with register
-    const registerUser = (email, Password, name, Router) => {
+    const registerUser = (email, Password, name) => {
         createUserWithEmailAndPassword(auth, email, Password)
             .then(() => {
                 setAuthError('');
@@ -73,7 +74,7 @@ export default function useFirebase() {
                     })
                 });
 
-                Router.push('/');
+                router.push('/');
             })
             .catch((error) => {
                 Swal.fire({
@@ -88,13 +89,13 @@ export default function useFirebase() {
     };
 
     // all ready create user login
-    const loginUser = (email, password, location, Router) => {
+    const loginUser = (email, password, location) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 setUser(user)
-                // console.log(user.user)
+                router.push(location || '/');
                 setAuthError('');
-                handleResponse(user.user, location, Router)
+                handleResponse(user.user, location)
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -115,8 +116,8 @@ export default function useFirebase() {
 
 
     // handle logged in user
-    const handleResponse = (user, location, Router) => {
-        Router.push(location);
+    const handleResponse = (user, location) => {
+        router.push(location);
         setAuthError('');
         if (user.email === 'admin@gmail.com') {
 
@@ -177,12 +178,7 @@ export default function useFirebase() {
                     setAuthError(error.message);
                 })
                     .finally(() => setLoading(false));
-                Router.push('/')
-                Swal.fire(
-                    'Login out',
-                    'Logout successfully.',
-                    'success'
-                )
+                router.push('/')
             }
         })
     };
@@ -222,6 +218,13 @@ export default function useFirebase() {
             body: JSON.stringify(user)
         })
             .then()
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.message} `,
+                })
+            })
     };
 
     return {

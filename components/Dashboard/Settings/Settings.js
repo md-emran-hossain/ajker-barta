@@ -5,23 +5,10 @@ import { SettingsPassword } from './SettingsPassword';
 
 const Settings = () => (
     <>
-        <Head>
-            <title>
-                Settings
-            </title>
-        </Head>
-        <Box
-            component="main"
-            sx={{
-                flexGrow: 1,
-                py: 8
-            }}
-        >
+        <Head><title> Settings </title> </Head>
+        <Box component="main" sx={{ flexGrow: 1 }} >
             <Container maxWidth="lg">
-                <Typography
-                    sx={{ mb: 3 }}
-                    variant="h4"
-                >
+                <Typography sx={{ mb: 3 }} variant="h4" >
                     Settings
                 </Typography>
                 <SettingsNotifications />
