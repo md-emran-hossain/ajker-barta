@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardHeader, CardMedia, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Swal from 'sweetalert2';
@@ -69,8 +69,8 @@ const MakeAdmin = () => {
     }
 
     return (
-        <div>
-            <Card sx={{ borderRadius: '20px', maxWidth: '600px', marginX: 'auto' }}>
+        <Container maxWidth={"lg"}>
+            <Card sx={{ borderRadius: '20px', maxWidth: '650px', margin: ' 0 auto' }}>
                 <form onSubmit={handleMakeAdmin}>
                     <Box sx={{ alignItems: 'center', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', paddingY: 2 }} >
                         <Typography sx={{ m: 1, fontWeight: 'bold' }} variant="h4" >  Make Admin </Typography>
@@ -105,7 +105,7 @@ const MakeAdmin = () => {
                     </CardContent>
                 </form>
             </Card>
-        </div >
+        </Container>
     );
 };
 
