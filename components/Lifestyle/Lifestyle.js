@@ -1,7 +1,7 @@
 import React from 'react';
 import { Swiper, SwiperSlide  } from "swiper/react";
 
-
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -10,12 +10,23 @@ import styles from '../../styles/lifestyle.module.css';
 
 
 import { Navigation,Autoplay } from "swiper";
+import Link from 'next/link';
 const Lifestyle = ({newses}) => {
     console.log(newses[1].images.img1);
     return (
         <div className="container xl mx-auto">
+
+        <h2 className="text-xl font-medium mt-5 mb-2">
+                <span className="text-blue-900">
+                    <Link href="/international">Life style</Link>{" "}
+                </span>
+                <ChevronRightIcon className="text-red-500" />
+            </h2>
+
+
+
        <Swiper
-        slidesPerView={5}
+        slidesPerView={4}
         spaceBetween={10}
         slidesPerGroup={1}
         loop={true}

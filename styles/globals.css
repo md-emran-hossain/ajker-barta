@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities; 
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap');
 html,
 body {
   padding: 0;
@@ -13,6 +14,12 @@ body {
   width: 95%;
   max-width: 1280px;
   margin: 0 auto;
+}
+.imageEffect:hover > div img{
+  transform: scale(1.1);
+}
+.imageEffect > div img{
+  transition: 0.2s ease-in transform;
 }
 
 ::-webkit-scrollbar {
@@ -60,19 +67,6 @@ body {
 .slim-border{
   border-width: 1px;
 }
-
-/* Main Nav  */
-.nav-bg-color{
-  background-color: rgba(255, 255, 255, 0.885);
-}
-
-.navbar {
-  padding-top: 15px;
-  padding-bottom: 15px;
-  transition: all 0.5s;
-}
-
-
  /* Login page Style  */
 
 .first-form{
@@ -157,7 +151,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(12, 2, 2, 0.4);
 }
 .cont.s--signup .img:before {
   transform: translate3d(640px, 0, 0);
@@ -243,15 +237,11 @@ body {
 .first-form input {
   display: block;
   width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
+   margin-top: 5px; 
+  padding-bottom: 5px; 
+  font-size: 16px; 
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
-}
-.fb-btn {
-  border: 2px solid #d3dae9;
-  color: #8fa1c7;
 }
 .fb-btn span {
   font-weight: bold;
@@ -272,21 +262,6 @@ body {
 }
 .cont.s--signup .sign-up {
   transform: translate3d(0, 0, 0);
-}
-
-.icon-link {
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-  width: 32px;
-}
-.icon-link img {
-  width: 100%;
-  vertical-align: top;
-}
-.icon-link--twitter {
-  left: auto;
-  right: 5px;
 }
 
   /* second login form  */
