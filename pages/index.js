@@ -23,6 +23,7 @@ export default function Home({ newses }) {
   const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
+  const opinion = newses.filter(news => news.category === 'opinion')
   return (
     <div>
       <Header />
@@ -38,7 +39,7 @@ export default function Home({ newses }) {
       <Business business={business} />
       <Entertainment entertainment={entertainment} />
       <ImageGallery />
-      <Opinion />
+      <Opinion opinion={opinion} />
       <Sports sports={sports} />
       <Footer newses={newses} />
     </div>

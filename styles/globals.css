@@ -21,7 +21,6 @@ body {
 .imageEffect > div img{
   transition: 0.2s ease-in transform;
 }
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -34,8 +33,6 @@ body {
   border-radius: 20px;
   /* box-shadow: inset 0 0 5px 0 rgba(100, 67, 67, 0.2); */
 }
-
-
 * {
   box-sizing: border-box;
 }
@@ -79,7 +76,6 @@ body {
   margin: 40px auto 50px;
   text-align: center;
 }
-
 .cont {
   overflow: hidden;
   position: relative;
