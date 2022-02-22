@@ -22,7 +22,6 @@ const SubCategoryDetails = ({ newses }) => {
     if (visible >= displayNews.length - 1) {
       setShow(false)
     }
-
   }
   return (
     <div>

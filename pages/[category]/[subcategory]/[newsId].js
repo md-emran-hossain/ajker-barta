@@ -72,32 +72,6 @@ const Newsdetails = ({ newses }) => {
     }
   };
 
-
-
-
-
-
-
-  // confirmButton: 'bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-5 border-b-2 border-green-700 hover:border-green-500 rounded ml-2',
-  // cancelButton: 'bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-5 border-b-2 border-red-700 hover:border-red-500 rounded mr-2'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
