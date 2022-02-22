@@ -9,6 +9,7 @@ import useAuth from '../../../hooks/useAuth';
 import Header from '../../Shared/Header/Header';
 import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
 import { useRouter } from 'next/router'
+import ReCaptcha from '../../ReCaptcha/ReCaptcha';
 
 const Login = () => {
     const { register, handleSubmit } = useForm();
@@ -46,11 +47,8 @@ const Login = () => {
 
     return (
         <>
-            <Head>
-                <title>
-                    Login
-                </title>
-            </Head>
+            <Head> <title> Login </title> </Head>
+
             <Header></Header>
             <NavigationBar></NavigationBar>
 
@@ -76,6 +74,10 @@ const Login = () => {
                                         <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px', }} variant="contained">Login</Button>
                                     </form>
                                     <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: '#eb3b5a', backgroundColor: 'white' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
+
+                                    <div className='mt-10 flex justify-center'>
+                                        <ReCaptcha />
+                                    </div>
                                 </div>
                             </div>
                             <div className="sub-cont">
@@ -109,6 +111,10 @@ const Login = () => {
                                             <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="contained">Sign up</Button>
                                         </form>
                                         <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: 'eb3b5a' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
+
+                                        <div className='mt-10 flex justify-center'>
+                                            <ReCaptcha />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

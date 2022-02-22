@@ -69,7 +69,7 @@ const Products = () => (
                 py: 8
             }}
         >
-            <Container maxWidth={false}>
+            <Container maxWidth={"lg"}>
                 <ProductListToolbar />
                 <Box sx={{ pt: 3 }}>
                     <Grid

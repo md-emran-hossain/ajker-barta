@@ -22,19 +22,6 @@ import { NavItem } from '../NavItem/NavItem';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Logo } from '../Logo/Logo';
-import { Budget } from '../DashboardHomeContent/Budget';
-import { TotalCustomers } from '../DashboardHomeContent/TotalCustomers';
-import { TasksProgress } from '../DashboardHomeContent/TasksProgress';
-import { TotalProfit } from '../DashboardHomeContent/TotalProfit';
-import { Sales } from '../DashboardHomeContent/Sales';
-import { TrafficByDevice } from '../DashboardHomeContent/TrafficByDevice';
-import { LatestProducts } from '../DashboardHomeContent/LatestProducts';
-import { LatestOrders } from '../DashboardHomeContent/LatestOrder';
-import Customers from '../Customers/Customers';
-import Account from '../Account/Accoutn';
-import Settings from '../Settings/Settings';
-import Newses from '../Newses/Newses';
-import MakeAdmin from '../MakeAdmin/MakeAdmin';
 
 const items = [
     {
@@ -48,14 +35,14 @@ const items = [
         title: 'Account'
     },
     {
-        href: '/dashboard/customers',
+        href: '/dashboard/users',
         icon: (<UsersIcon fontSize="small" />),
         title: 'Users'
     },
     {
-        href: '/dashboard/newses',
+        href: '/dashboard/manageNews',
         icon: (<ShoppingBagIcon fontSize="small" />),
-        title: 'Newses'
+        title: 'Manage News'
     },
     {
         href: '/dashboard/settings',
@@ -115,11 +102,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 /////////////////
 
-const DashboardHome = () => {
-    const [dPanel, setDPanel] = React.useState("")
-    const [navTitle, setNavTitle] = React.useState("Ajker Barta")
-    console.log(dPanel)
-
+const DashboardHome = ({ children }) => {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -156,27 +139,12 @@ const DashboardHome = () => {
                         </NextLink>
                     </Box>
                     <Box sx={{ px: 2 }}>
-                        <Box sx={{
-                            alignItems: 'center',
-                            backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                            cursor: 'pointer',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            px: 3,
-                            py: '11px',
-                            borderRadius: 1
-                        }}>
+                        <Box sx={{ alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.04)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', px: 3, py: '11px', borderRadius: 1 }}>
                             <div>
                                 <Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography>
                                 <Typography color="neutral.400" variant="body2" >  Update {' '} : Newses</Typography>
                             </div>
-                            <SelectorIcon
-                                sx={{
-                                    color: 'neutral.500',
-                                    width: 14,
-                                    height: 14
-                                }}
-                            />
+                            <SelectorIcon sx={{ color: 'neutral.500', width: 14, height: 14 }} />
                         </Box>
                     </Box>
                 </div>
@@ -193,7 +161,7 @@ const DashboardHome = () => {
                             icon={item.icon}
                             href={item.href}
                             title={item.title}
-                            setDPanel={setDPanel}
+                        // setDPanel={setDPanel}
                         />
                     ))}
                 </Box>
@@ -202,17 +170,13 @@ const DashboardHome = () => {
             </Box>
         </>
     );
-
-
-
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
 
             {/* Dashboard navbar */}
-
             <AppBar open={open} className="bg-white">
-                <Toolbar className="d-flex align-items-center">
+                <Toolbar>
                     <IconButton onClick={handleDrawerClose}
                         sx={{ mr: 2, ...(!open && { display: 'none' }) }}
                         className="fs-2">
@@ -225,14 +189,15 @@ const DashboardHome = () => {
                         <MenuIcon fontSize='large' sx={{ color: 'black' }} />
                     </IconButton>
                     <br />
-                    <Typography className='text-black font-bold' variant="h5" noWrap component="div">
-                        {navTitle}
-                    </Typography>
+                    <div className='container'>
+                        <Typography className='text-black font-bold' variant="h5" noWrap component="div">
+                            Ajker Barta
+                        </Typography>
+                    </div>
                 </Toolbar>
             </AppBar>
 
             {/* Drawer  */}
-
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -255,35 +220,7 @@ const DashboardHome = () => {
             {/* Dashboard main */}
             <Main open={open} >
                 <div className="pt-20">
-                    {
-                        dPanel === "/dashboard" ? <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2'>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
-                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
-                            <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
-                            <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
-                        </div>
-                            : dPanel === "/dashboard/account" ? <Account />
-                                : dPanel === "/dashboard/customers" ? <Customers />
-                                    : dPanel === "/dashboard/newses" ? <Newses />
-                                        : dPanel === "/dashboard/settings" ? <Settings />
-                                            : dPanel === "/dashboard/makeAdmin" ? <MakeAdmin />
-                                                : dPanel === "/login" ? router.push('/login')
-                                                    :
-                                                    <div className='grid grid-cols-12 gap-2 md:px-5 lg:px-5 px-2'>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><Budget /></div>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalCustomers /></div>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'> <TasksProgress /></div>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
-                                                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
-                                                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
-                                                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
-                                                    </div>
-                    }
+                    {children}
                 </div>
             </Main>
         </Box>
