@@ -1,6 +1,6 @@
 import React from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import styles from '../../../styles/ImageGallery.module.css'
+import styles from '../../../styles/ImageGallery.module.css';
 import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from "next/router";
 

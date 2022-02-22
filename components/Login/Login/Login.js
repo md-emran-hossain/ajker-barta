@@ -17,7 +17,6 @@ const Login = () => {
     const [newEmail, setNewEmail] = React.useState("");
     const [newPass, setNewPass] = React.useState("");
     const isDesktop = useMediaQuery('(min-width: 900px)');
-    // const location = ""
     const location = useRouter()
     let locationURL = ''
     if (typeof location.components === 'object') {
@@ -27,20 +26,19 @@ const Login = () => {
 
     //// Login with google 
     const handleGoogleLogin = () => {
-        signInWithGoogle(locationURL, Router);
+        signInWithGoogle(locationURL);
     };
 
     //// handle register
     const handleRegisterSubmit = () => {
-        registerUser(newEmail, newPass, newName, Router)
+        registerUser(newEmail, newPass, newName)
     }
 
     //// handle login
     const handleLoginSubmit = (data) => {
         console.log(data)
-        loginUser(data.email, data.password, locationURL, Router)
+        loginUser(data.email, data.password, locationURL)
     };
-
 
     const imageButton = () => {
         document.querySelector('.cont').classList.toggle('s--signup');
@@ -61,10 +59,10 @@ const Login = () => {
                 isDesktop &&
                 <div className="" style={{ height: '100vh' }}>
                     <div className="first-form drop-shadow-md">
-                        <div className="cont" style={{ borderRadius: '20px' }}>
-                            <div className="form sign-in bg-gray-100">
+                        <div className="cont rounded-3xl border-2">
+                            <div className="form sign-in ">
                                 <div style={{ width: '60%', margin: '0 auto' }}>
-                                    <h2>Welcome back,</h2>
+                                    <h2 className='font-semibold text-red-500'>Welcome back,</h2>
                                     <form onSubmit={handleSubmit(handleLoginSubmit)} className='mb-4'>
                                         <TextField style={{ width: '100%' }} className="mb-2"
                                             type="email" {...register("email")} label="Your Email"
@@ -75,9 +73,9 @@ const Login = () => {
                                             type="password"
                                             variant="standard" required />
 
-                                        <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px' }} variant="outlined"><span>Login</span></Button>
+                                        <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px', }} variant="contained">Login</Button>
                                     </form>
-                                    <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn" variant="outlined"> <span className=''>Connect with</span> <span><GoogleIcon /></span></Button>
+                                    <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: '#eb3b5a', backgroundColor: 'white' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
                                 </div>
                             </div>
                             <div className="sub-cont">
@@ -95,22 +93,22 @@ const Login = () => {
                                         <span className="m--in">Sign In</span>
                                     </div>
                                 </div>
-                                <div className="form sign-up bg-gray-100">
+                                <div className="form sign-up ">
                                     <div style={{ width: '60%', margin: '0 auto' }}>
-                                        <h2>Time to feel like home,</h2>
+                                        <h2 className='text-red-500'>Time to feel like home,</h2>
                                         <form className='mb-4'>
-                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                            <TextField color='success' sx={{ width: '100%' }} className="mb-2"
                                                 name="name" type="text" onChange={(e) => setNewName(e.target.value)} label="Your Name" variant="standard" required />
 
-                                            <TextField sx={{ width: '100%' }} className="mb-2"
+                                            <TextField color='success' sx={{ width: '100%' }} className="mb-2"
                                                 name="email" type="email" onChange={(e) => setNewEmail(e.target.value)} label="Your Email" variant="standard" required />
 
-                                            <TextField sx={{ width: '100%' }}
+                                            <TextField color='success' sx={{ width: '100%', marginBottom: "15px" }}
                                                 name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
 
-                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="outlined"><span>Sign up</span></Button>
+                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="contained">Sign up</Button>
                                         </form>
-                                        <Button onClick={handleGoogleLogin} style={{ width: '100%' }} className="fb-btn " variant="outlined"> <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></Button>
+                                        <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: 'eb3b5a' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
                                     </div>
                                 </div>
                             </div>

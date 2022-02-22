@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import styles from '../../styles/ImageGallery.module.css'
+import styles from '../../../styles/ImageGallery.module.css'
 import { FcGallery } from 'react-icons/fc'
 
 const ImageGallery = () => {

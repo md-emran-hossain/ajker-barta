@@ -1,4 +1,3 @@
-
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useRouter } from 'next/router';
 import { formatDistanceToNow } from 'date-fns';
@@ -31,7 +30,7 @@ const Sports = ({ sports }) => {
                                     <img src={single?.images?.img1} alt="" className="rounded-md" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl mt-2 font-bold">{single?.heading}</h2>
+                                    <h2 className="text-xl mt-2 font-bold hover:text-red-500 duration-300 transitions-colors">{single?.heading}</h2>
                                     <p className="my-2 text-md">{single?.description[0].slice(0, 100)}</p>
                                     <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit">{`${formatDistanceToNow(new Date(single.publishedDate))} ago`}</p>
                                 </div>
@@ -46,7 +45,7 @@ const Sports = ({ sports }) => {
                             <div key={multi?._id} onClick={() => router.push(`/${multi.category}/${multi.subCategory}/${multi?._id}`)} className="col-span-12 lg:col-span-4 mb-2 cursor-pointer p-2.5 border-l border-b rounded-md imageEffect">
                                 <div className="grid grid-cols-12">
                                     <div className="col-span-8">
-                                        <h2 className="text-lg font-semibold leading-6">
+                                        <h2 className="text-lg font-semibold leading-6 hover:text-red-500 duration-300 transitions-colors">
                                             {multi?.heading}
                                         </h2>
                                         <p className="text-sm my-1">{multi?.description[0]?.slice(0, 100)}</p>

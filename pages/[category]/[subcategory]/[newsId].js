@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
 
@@ -31,22 +32,72 @@ const Newsdetails = ({ newses }) => {
       date: new Date().toLocaleString(),
       email: user.email
     }
+
+
     const objShallowCopy = [...success, dataup];
     setSuccess(objShallowCopy);
     // Send a POST request
-    fetch(`/api/news/${newsId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(objShallowCopy)
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.modifiedCount > 0) {
-          alert("comment added");
-          reset();
+
+    if (!user.email) {
+      Swal.fire({
+        title: 'You are not signed in',
+        text: "You want to comment? please Sign in first",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3ae374',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sign in '
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push('/login')
         }
       })
+    }
+    else {
+      fetch(`/api/news/${newsId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(objShallowCopy)
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.modifiedCount > 0) {
+            alert("comment added");
+            reset();
+          }
+        })
+        .catch(err => {
+
+        })
+    }
   };
+
+
+
+
+
+
+
+  // confirmButton: 'bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-5 border-b-2 border-green-700 hover:border-green-500 rounded ml-2',
+  // cancelButton: 'bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-5 border-b-2 border-red-700 hover:border-red-500 rounded mr-2'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -135,10 +186,9 @@ const Newsdetails = ({ newses }) => {
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-
           {remaining.slice(0, 10).map((item) => {
             return (
-              <div onClick={() => router.push(`/news/${item._id}`)} className="cursor-pointer" key={item._id}>
+              <div onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
                   <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">
