@@ -191,10 +191,9 @@ function stop() {
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-
           {remaining.slice(0, 10).map((item) => {
             return (
-              <div onClick={() => router.push(`/news/${item._id}`)} className="cursor-pointer" key={item._id}>
+              <div onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
                   <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">

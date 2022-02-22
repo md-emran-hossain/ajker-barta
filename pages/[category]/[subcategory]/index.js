@@ -36,7 +36,7 @@ const SubCategoryDetails = ({ newses }) => {
         </div>
         <div className='flex flex-wrap gap-4 capitalize my-4'>
           {
-            unique.map((sub, i) => <span onClick={() => router.push(`/${category}/${sub}`)} className={sub === subCategory ? 'text-blue-600 font-semibold cursor-pointer' : 'cursor-pointer'} key={i}>{sub}</span>)
+            unique.map((sub, i) => <span onClick={() => router.push(`/${category}/${sub}`)} className={sub === subCategory ? 'text-blue-500 cursor-pointer' : 'cursor-pointer'} key={i}>{sub}</span>)
           }
         </div>
         <div className={styles.categoryGrid}>
