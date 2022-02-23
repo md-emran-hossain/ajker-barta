@@ -154,10 +154,10 @@ const Newsdetails = ({ newses }) => {
 
             {
 
-              news.comments.map(item =>
+              news?.comments?.map(item =>
                 <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
                   <div className="mr-4"><div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl" >
-                    <img class="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
+                    <img className="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
                   </div>
                   </div>
                   <div>
@@ -171,13 +171,7 @@ const Newsdetails = ({ newses }) => {
 
 
               )
-
-
             }
-
-
-
-
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
               <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
@@ -188,7 +182,7 @@ const Newsdetails = ({ newses }) => {
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-          {remaining.slice(0, 10).map((item) => {
+          {remaining?.slice(0, 10).map((item) => {
             return (
               <div onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
