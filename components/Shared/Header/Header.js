@@ -11,7 +11,7 @@ import Search from '../Search/Search';
 
 const Header = () => {
     const { user, logOut } = useAuth();
-    const [searchText, setSearchText] = React.useState("");
+    // const [searchText, setSearchText] = React.useState("");
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
     const handleOpenUserMenu = (event) => {
@@ -58,7 +58,7 @@ const Header = () => {
                         <VscThreeBars onClick={() => setIsOpen(!isOpen)} />
                     </div>
                     <div>
-                        <Search searchText={searchText} setSearchText={setSearchText} />
+                        <Search />
                     </div>
                     <div className='sm:flex-1 text-center'>
                         <Link href="/">
