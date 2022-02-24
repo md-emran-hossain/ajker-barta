@@ -28,6 +28,7 @@ body {
   display: none;
   color: #fff;
   border-radius: 10px;
+  z-index: 10;
 }
 .afterSelectBtn::after{
   content: '';
