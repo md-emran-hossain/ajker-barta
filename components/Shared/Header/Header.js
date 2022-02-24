@@ -21,7 +21,7 @@ const Header = () => {
         Router.push("/login")
     }
     return (
-        <div className='bg-white sticky md:static z-50 top-0 w-full'>
+        <div className='bg-white sticky md:static top-0 w-full z-50'>
             <div className='container' >
                 <div className="flex items-center justify-between py-4">
                     < nav className={!isOpen ? `${styles.sideNav}` : `${styles.sideNav} ${styles.show}`}>
