@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
+  const [text, setText] = useState('')
   const { user } = useAuth()
 
   const router = useRouter();
@@ -118,10 +119,9 @@ function stop() {
       </div>
     );
   };
-  const handleSelection = () =>{
-    let text = window.getSelection().toString();
-    console.log(text);
-  }
+ 
+ 
+ 
   return (
     <div>
       <Header />
@@ -152,7 +152,8 @@ function stop() {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
           
-          <p onMouseUp={handleSelection} className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          <p  className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
@@ -163,7 +164,11 @@ function stop() {
           <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-          <template><span className="control"></span></template>
+
+          {/* Selection Item */}
+          
+          
+          {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
