@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
+
 import {
     Box,
     Button,
@@ -26,18 +28,15 @@ const states = [
 ];
 
 export const AccountProfileDetails = (props) => {
-    const [values, setValues] = useState({
-        firstName: 'Katarina',
-        lastName: 'Smith',
-        email: 'demo@devias.io',
-        phone: '',
-        state: 'Alabama',
-        country: 'USA'
-    });
+    const {user} = useAuth();
+    console.log(user.email);
+    const [account, setAccount] = useState({});
+
+    
 
     const handleChange = (event) => {
-        setValues({
-            ...values,
+        setAccount({
+            ...account,
             [event.target.name]: event.target.value
         });
     };
@@ -67,29 +66,15 @@ export const AccountProfileDetails = (props) => {
                             <TextField
                                 fullWidth
                                 helperText="Please specify the first name"
-                                label="First name"
-                                name="firstName"
+                                label="Full name"
+                                name="fullName"
                                 onChange={handleChange}
                                 required
-                                value={values.firstName}
+                                value={account.fullName}
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
-                            <TextField
-                                fullWidth
-                                label="Last name"
-                                name="lastName"
-                                onChange={handleChange}
-                                required
-                                value={values.lastName}
-                                variant="outlined"
-                            />
-                        </Grid>
+                        
                         <Grid
                             item
                             md={6}
@@ -101,7 +86,7 @@ export const AccountProfileDetails = (props) => {
                                 name="email"
                                 onChange={handleChange}
                                 required
-                                value={values.email}
+                                value={account.email}
                                 variant="outlined"
                             />
                         </Grid>
@@ -116,7 +101,7 @@ export const AccountProfileDetails = (props) => {
                                 name="phone"
                                 onChange={handleChange}
                                 type="number"
-                                value={values.phone}
+                                value={account.phone}
                                 variant="outlined"
                             />
                         </Grid>
@@ -131,7 +116,7 @@ export const AccountProfileDetails = (props) => {
                                 name="country"
                                 onChange={handleChange}
                                 required
-                                value={values.country}
+                                value={account.country}
                                 variant="outlined"
                             />
                         </Grid>
@@ -148,7 +133,7 @@ export const AccountProfileDetails = (props) => {
                                 required
                                 select
                                 SelectProps={{ native: true }}
-                                value={values.state}
+                                value={account.state}
                                 variant="outlined"
                             >
                                 {states.map((option) => (
