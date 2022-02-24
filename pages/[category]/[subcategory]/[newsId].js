@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import { FaRegBookmark, FaPrint, } from "react-icons/fa";
+import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa";
+import { MdHeadset } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -12,7 +13,7 @@ import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
-
+  const [speed, setSpeed] = useState(1)
   const { user } = useAuth()
 
   const router = useRouter();
@@ -71,7 +72,24 @@ const Newsdetails = ({ newses }) => {
         })
     }
   };
+  const playNow = (text) => {
+    if (speechSynthesis.paused && speechSynthesis.speaking) {
+      return speechSynthesis.resume()
+    }
+    if (speechSynthesis.speaking) return
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.rate = speed
 
+    speechSynthesis.speak(utterance)
+  }
+  const pause = () => {
+    if (speechSynthesis.speaking) speechSynthesis.pause()
+  }
+  function stop() {
+    speechSynthesis.resume()
+    speechSynthesis.cancel()
+  }
+  console.log(news)
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -100,7 +118,10 @@ const Newsdetails = ({ newses }) => {
       </div>
     );
   };
-  // console.log(url)
+  const handleSelection = () => {
+    let text = window.getSelection().toString();
+    console.log(text);
+  }
   return (
     <div>
       <Header />
@@ -111,7 +132,17 @@ const Newsdetails = ({ newses }) => {
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
-          <div className="flex items-end justify-between mb-2">
+
+
+          {/* Listening feature  start*/}
+          <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
+            <h5>Listen Now</h5>
+            <FaPlay onClick={() => playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed {speed}</span>
+            <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
+          </div>
+
+          {/* Listening feature  end*/}
+          <div className="flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
@@ -121,7 +152,7 @@ const Newsdetails = ({ newses }) => {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          <p onMouseUp={handleSelection} className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
@@ -132,7 +163,7 @@ const Newsdetails = ({ newses }) => {
           <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-
+          <template><span className="control"></span></template>
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
