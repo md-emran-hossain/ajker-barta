@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, getIdToken, } from "firebase/auth";
 import Swal from 'sweetalert2'
 import { useRouter } from "next/router";
 
@@ -12,6 +12,7 @@ export default function useFirebase() {
     const [authError, setAuthError] = useState('');
     const [loading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
+    const [jwtToken, setJwtToken] = useState('')
 
     const router = useRouter();
     const auth = getAuth();
@@ -23,7 +24,7 @@ export default function useFirebase() {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
-                Router.replace(location || '/');
+                router.replace(location || '/');
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')
@@ -186,8 +187,13 @@ export default function useFirebase() {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                getIdToken(user)
+                    .then(idToken => {
+                        setJwtToken(idToken)
+                        // console.log(idToken);
+                    })
                 setUser(user);
-                // getAdmin(user.email)
+                getAdmin(user.email)
             } else {
                 setUser({});
             }
@@ -199,13 +205,16 @@ export default function useFirebase() {
 
     // admin set to database 
     const getAdmin = (email) => {
-        fetch(`/api/users?email=${email}`)
+        fetch(`/api/users?email=${email}`, {
+            headers: {
+                'authorization': `Bearer ${localStorage.getItem('idToken')}`
+            }
+        })
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin)
             })
     }
-
     // user info save to the database 
     const saveUser = (email, name, method) => {
         const user = { name, email };
@@ -226,8 +235,9 @@ export default function useFirebase() {
             })
     };
 
+
     return {
-        user, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
+        user, jwtToken, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
     }
 };
 
