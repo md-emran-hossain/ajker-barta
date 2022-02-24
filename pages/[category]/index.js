@@ -6,6 +6,7 @@ import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 import styles from "../../styles/CategoryDetails.module.css";
+import Image from 'next/image';
 
 const CategoryDetails = ({ newses }) => {
   const [visible, setVisible] = useState(10);
@@ -35,17 +36,26 @@ const CategoryDetails = ({ newses }) => {
             <span
               key={i}
               onClick={() => router.push(`/${category}/${subCategory}`)}
-              className='cursor-pointer'>{subCategory}
-            </span>))}
+              className="cursor-pointer"
+            >
+              {subCategory}
+            </span>
+          ))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
+              onClick={() =>
+                router.push(`/${category}/${news?.subCategory}/${news?._id}`)
+              }
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
-              <img src={news?.images?.img1} alt="" />
+              <Image src={news?.images?.img1}
+                width="750"
+                height="500"
+                priority
+                alt="hi" />
               <h1>{news?.heading}</h1>
               <p>{news?.description?.[0].slice(0, 100)}</p>
               <p>{`${formatDistanceToNow(
@@ -57,11 +67,17 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
+              onClick={() =>
+                router.push(`/${category}/${news.subCategories}/${news?._id}`)
+              }
               className={`${styles.singleNews} cursor-pointer`}
               key={news._id}
             >
-              <img src={news?.images?.img1} alt="" />
+              <Image
+                width="400"
+                height="300"
+                alt=""
+                src={news?.images?.img1} />
               <div>
                 <h1 className="text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer">
                   {news?.heading}
@@ -95,12 +111,12 @@ export const getStaticProps = async () => {
     props: {
       newses: res.data,
     },
-    revalidate: 10
+    revalidate: 10,
   };
 };
 export async function getStaticPaths() {
   return {
     paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking' //indicates the type of fallback
-  }
+    fallback: "blocking", //indicates the type of fallback
+  };
 }

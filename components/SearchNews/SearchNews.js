@@ -1,46 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import { CircularProgress } from '@mui/material';
+import React from 'react'
 import useAuth from '../../hooks/useAuth';
-
+import Header from '../Shared/Header/Header';
+import Search from '../Shared/Search/Search';
+import NavigationBar from '../Shared/NavigationBar/NavigationBar';
 
 const SearchNews = () => {
-    const { user, setLoading, loading } = useAuth();
-    const [newsData, setNewsData] = useState([]);
-    // console.log(newsData)
+    const { loading } = useAuth();
 
-    useEffect(() => {
-        setLoading(true)
-        fetch("/api/news")
-            .then(res => res.json())
-            .then(data => setNewsData(data))
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false));
+    const [searchText, setSearchText] = React.useState("");
 
-    }, [setLoading])
-
-    const handleSearch = (e) => {
-        const searchText = e.target.value;
-        const matchedNews = newsData?.filter((data) => data.category.toLowerCase().includes(searchText.toLowerCase()));
-
-        console.log(matchedNews);
-        e.target.value
-    };
 
     return (
-        <div>
-            {loading ? <h1 className="text-center pt-18 text-5xl">Loading....</h1> :
-                <h2 className="text-4xl text-center font-bold pt-14">this is Search news: {newsData.length} </h2>}
+        <>
+            {/* <Header />
+            <NavigationBar /> */}
+            {loading && <h1 className="text-center  text-5xl"><CircularProgress fontSize="large " /> </h1>}
 
-            <div className="mt-5 w-72 mx-auto">
-                <label className="relative block">
-                    <span className="sr-only">Search</span>
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                        <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"></svg>
-                    </span>
-                    <input onBlur={handleSearch} className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search" />
-                </label>
+            <h2 className="text-4xl text-center font-bold pt-3">Search Result By News </h2>
+            <div className="mt-5 mx-auto">
+                <Search searchText={searchText} setSearchText={setSearchText} />
             </div>
 
-        </div>
+        </>
     );
 };
 

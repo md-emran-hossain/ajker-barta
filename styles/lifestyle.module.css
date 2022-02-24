@@ -1,0 +1,146 @@
+
+.backgroundimg{
+  
+  height: 400px;
+    width: 318px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: cover;
+    margin: 5% auto;
+    padding:20px;
+  
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px #d87f9a;
+    position: relative;
+  }
+  .lititl{
+    background-color: red;
+    position: absolute;
+    top: 0px;
+    left: 132px;
+    padding: 4px 13px;
+ 
+    color: white;
+    font-weight: 700;
+  }
+  .lititle{ font-size: 19px;
+    position: relative;
+    bottom: -237px;
+    text-align: left;
+    font-weight: 500;
+    color: #fffcfc;}
+  
+  .box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+   
+    box-sizing: border-box;
+    overflow: hidden;
+  
+    color: white;
+    padding: 20px;
+  }
+  
+  .box:before{
+    content: '';
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    /* background: rgba(255,255,255,0.1); */
+    transition:0.5s;
+    pointer-events: none;
+  } 
+  
+  .box:hover:before{
+    left:-50%;
+    transform: skewX(-5deg);
+  }
+  
+  
+  .content{
+    position:absolute;
+    top:15px;
+    left:-15px;
+    right:15px;
+    bottom:15px;
+    
+    padding:20px;
+    text-align:center;
+    
+    
+  }
+  
+   .lispanitem{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    box-sizing: border-box;
+    
+  }
+  
+   /* .lispanitem:nth-child(1)
+  {
+    transform:rotate(0deg);
+  }
+  
+   .lispanitem:nth-child(2)
+  {
+    transform:rotate(90deg);
+  }
+  
+  .lispanitem:nth-child(3)
+  {
+    transform:rotate(180deg);
+  }
+  
+   .lispanitem:nth-child(4)
+  {
+    transform:rotate(270deg);
+  }
+  
+   .lispanitem:before
+  {
+    content: '';
+    position: absolute;
+    width:100%;
+    height: 2px;
+    background: #50dfdb;
+    /* animation: animate 4s linear infinite; */
+  /* } */
+   
+  /* @keyframes animate {
+    0% {
+    transform:scaleX(0);
+    transform-origin: left;
+    }
+    50%
+    {
+      transform:scaleX(1);
+    transform-origin: left;
+    }
+    50.1%
+    {
+      transform:scaleX(1);
+    transform-origin: right;
+      
+    }
+    
+    100%
+    {
+      transform:scaleX(0);
+    transform-origin: right;
+      
+    }
+    
+    
+  }  */

@@ -18,7 +18,7 @@ export const ProductListToolbar = (props) => (
                 sx={{ m: 1 }}
                 variant="h4"
             >
-                Products
+                Manage News
             </Typography>
             <Box sx={{ m: 1 }}>
                 <Button
@@ -37,7 +37,7 @@ export const ProductListToolbar = (props) => (
                     color="primary"
                     variant="contained"
                 >
-                    Add products
+                    Add News
                 </Button>
             </Box>
         </Box>

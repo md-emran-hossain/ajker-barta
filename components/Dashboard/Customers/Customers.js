@@ -155,7 +155,7 @@ const Customers = () => (
             </title>
         </Head>
         <Box component="main" sx={{ flexGrow: 1, }}>
-            <Container maxWidth={false}>
+            <Container maxWidth={"lg"}>
                 <CustomerListToolbar />
                 <Box sx={{ mt: 3 }}>
                     <CustomerListResults customers={customers} />

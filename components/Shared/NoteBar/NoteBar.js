@@ -6,7 +6,15 @@ const NoteBar = ({ isShowNoteBar, setIsShowNoteBar, selectedText }) => {
   const [note, setNote] = useState('')
   const saveNote = () => {
     const newObj = { note, selectedText, email: user.email }
-    console.log(newObj)
+    fetch('/api/users/note', {
+      method: "PUT",
+      headers: {
+        'content-type': "application/json"
+      },
+      body: JSON.stringify(newObj)
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
   }
   return (
     <div className={isShowNoteBar ? 'w-96 bg-white fixed h-screen top-0 right-0 z-50 py-16 px-3 transition-right duration-300' : 'w-96 bg-white fixed h-screen top-0 -right-96 z-50 py-16 px-3 transition-right duration-300'}>
