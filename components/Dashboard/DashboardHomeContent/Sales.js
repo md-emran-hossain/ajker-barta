@@ -92,7 +92,7 @@ export const Sales = (props) => {
                         Last 7 days
                     </Button>
                 )}
-                title="Latest Sales"
+                title="Letest Update"
             />
             <Divider />
             <CardContent>
@@ -116,13 +116,6 @@ export const Sales = (props) => {
                     p: 2
                 }}
             >
-                <Button
-                    color="primary"
-                    endIcon={<ArrowRightIcon fontSize="small" />}
-                    size="small"
-                >
-                    Overview
-                </Button>
             </Box>
         </Card>
     );

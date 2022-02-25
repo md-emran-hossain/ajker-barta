@@ -24,7 +24,6 @@ const Header = () => {
         Router.push("/login")
     }
 
-
     return (
         <div className='bg-white sticky md:static top-0 w-full z-50'>
             <div className='container' >

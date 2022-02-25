@@ -1,6 +1,6 @@
 import { Avatar, Box, Card, CardContent, Grid, Typography } from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import PeopleIcon from '@mui/icons-material/PeopleOutlined';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 export const TotalCustomers = (props) => (
     <Card {...props}>
@@ -16,24 +16,24 @@ export const TotalCustomers = (props) => (
                         gutterBottom
                         variant="overline"
                     >
-                        TOTAL CUSTOMERS
+                        YouTube Subscriber
                     </Typography>
                     <Typography
                         color="textPrimary"
                         variant="h4"
                     >
-                        1,6k
+                        1.5M
                     </Typography>
                 </Grid>
                 <Grid item>
                     <Avatar
                         sx={{
-                            backgroundColor: 'success.main',
+                            backgroundColor: 'red',
                             height: 56,
                             width: 56
                         }}
                     >
-                        <PeopleIcon />
+                        <YouTubeIcon />
                     </Avatar>
                 </Grid>
             </Grid>
