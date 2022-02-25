@@ -6,6 +6,7 @@ import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 import styles from "../../styles/CategoryDetails.module.css";
+import Image from 'next/image';
 
 const CategoryDetails = ({ newses }) => {
   const [visible, setVisible] = useState(10);
@@ -50,7 +51,11 @@ const CategoryDetails = ({ newses }) => {
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
-              <img src={news?.images?.img1} alt="" />
+              <Image src={news?.images?.img1}
+                width="750"
+                height="500"
+                priority
+                alt="hi" />
               <h1>{news?.heading}</h1>
               <p>{news?.description?.[0].slice(0, 100)}</p>
               <p>{`${formatDistanceToNow(
@@ -68,7 +73,11 @@ const CategoryDetails = ({ newses }) => {
               className={`${styles.singleNews} cursor-pointer`}
               key={news._id}
             >
-              <img src={news?.images?.img1} alt="" />
+              <Image
+                width="400"
+                height="300"
+                alt=""
+                src={news?.images?.img1} />
               <div>
                 <h1 className="text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer">
                   {news?.heading}

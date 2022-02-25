@@ -91,6 +91,7 @@ function stop() {
   speechSynthesis.cancel()
 }
   console.log(news)
+
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -185,7 +186,35 @@ function stop() {
             </div>
           </div>
           <div>
-            <h1>{success?.map(item => <h1 key={item.comment}>{item.comment}</h1>)}</h1>
+            {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
+
+
+            {
+
+              news?.comments?.map(item =>
+                <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
+                  <div className="mr-4"><div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl" >
+                    <img class="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
+                  </div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm">{item.name}</div>
+                    <div className="text-base text-gray-500">{item.comment}</div>
+                    <div className="text-xs text-gray-500">
+                      <span className="mr-2">{item.date}</span>
+                    </div>
+                  </div>
+                </div>
+
+
+              )
+
+
+            }
+
+
+
+
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
               <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
@@ -224,6 +253,7 @@ export const getStaticProps = async () => {
     props: {
       newses: res.data,
     },
+    revalidate: 10
   };
 };
 export async function getStaticPaths() {

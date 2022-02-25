@@ -12,6 +12,8 @@ import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
 import axios from 'axios'
 import Sports from "../components/Home/Sports/Sports";
+import Voting from "../components/Voting/Voting";
+import Lifestyle from "../components/Lifestyle/Lifestyle";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
@@ -23,6 +25,7 @@ export default function Home({ newses }) {
   const science = newses.filter((news) => news.category === "sciencetechnology");
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
+  const opinion = newses.filter(news => news.category === 'opinion')
   return (
     <div>
       <Header />
@@ -38,8 +41,10 @@ export default function Home({ newses }) {
       <Business business={business} />
       <Entertainment entertainment={entertainment} />
       <ImageGallery />
-      <Opinion />
+      <Opinion opinion={opinion} />
       <Sports sports={sports} />
+      {/* <Voting></Voting> */}
+      <Lifestyle newses={newses}></Lifestyle>
       <Footer newses={newses} />
     </div>
   );

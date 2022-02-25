@@ -6,9 +6,12 @@ import Router from 'next/router';
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import { VscThreeBars } from 'react-icons/vsc'
+import SearchIcon from '@mui/icons-material/Search';
+import Search from '../Search/Search';
 
 const Header = () => {
     const { user, logOut } = useAuth();
+    const [searchText, setSearchText] = React.useState("");
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
     const handleOpenUserMenu = (event) => {
@@ -20,6 +23,8 @@ const Header = () => {
     const goLoginPage = () => {
         Router.push("/login")
     }
+
+
     return (
         <div className='bg-white sticky md:static z-50 top-0 w-full'>
             <div className='container' >
@@ -33,8 +38,8 @@ const Header = () => {
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg'>
                                     <Link href='/'><a className='text-2xl font-serif font-semibold'>AJKER <span className='text-red-500'>BARTA</span></a></Link>
                                 </li>
-                                <li>
-                                    <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' />
+                                <li className='flex items-center justify-center'>
+                                    <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' /> <SearchIcon fontSize='large' sx={{ color: 'red' }} />
                                 </li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">Bangladesh</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">International</Link></li>
@@ -52,8 +57,8 @@ const Header = () => {
                     <div className="sm:flex-1 text-2xl md:hidden cursor-pointer">
                         <VscThreeBars onClick={() => setIsOpen(!isOpen)} />
                     </div>
-                    <div className="flex-1 hidden md:block">
-                        <input className='py-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' />
+                    <div>
+                        <Search searchText={searchText} setSearchText={setSearchText} />
                     </div>
                     <div className='sm:flex-1 text-center'>
                         <Link href="/">
