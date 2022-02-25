@@ -7,6 +7,10 @@ import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import { VscThreeBars } from 'react-icons/vsc'
 import SearchIcon from '@mui/icons-material/Search';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 const Header = () => {
     const { user, logOut } = useAuth();
@@ -18,10 +22,21 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-    const goLoginPage = () => {
-        Router.push("/login")
-    }
 
+    const handleRouting = (location) => {
+        if (location === "login") {
+            Router.push("/login")
+        }
+        else if (location === "dashboard") {
+            Router.push("/dashboard")
+        }
+        else if (location === "account") {
+            Router.push("/dashboard/account")
+        }
+        else {
+            Router.push('/')
+        }
+    }
 
     return (
         <div className='bg-white sticky md:static z-50 top-0 w-full'>
@@ -67,42 +82,38 @@ const Header = () => {
                     </div>
                     <div className='sm:flex-1 text-right'>
                         {
-                            user.email ? <>
+                            user.email ?
+                                <>
+                                    <Box sx={{ flexGrow: 0 }}>
+                                        <Tooltip title="Open settings">
+                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                                <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Menu
+                                            sx={{ mt: '45px', width: '500px' }}
+                                            id="menu-appbar"
+                                            anchorEl={anchorElUser}
+                                            anchorOrigin={{
+                                                vertical: 'top', horizontal: 'right',
+                                            }}
+                                            keepMounted
+                                            transformOrigin={{
+                                                vertical: 'top', horizontal: 'right',
+                                            }}
+                                            open={Boolean(anchorElUser)}
+                                            onClose={handleCloseUserMenu} >
+                                            <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
+                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => handleRouting('account')} ><PersonIcon />  Profile</h5>}
 
-                                <Box sx={{ flexGrow: 0 }}>
-                                    <Tooltip title="Open settings">
-                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Menu
-                                        sx={{ mt: '45px' }}
-                                        id="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        <div onClick={handleCloseUserMenu} className="flex flex-col px-3 w-36">
-                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600' >Profile</h5>
-
-                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600'>Account</h5>
-
-                                            <h5 className='cursor-pointer mb-3 lg:text-2xl text-1xl font-bold text-gray-600' onClick={logOut}>Logout</h5>
-                                        </div>
-                                    </Menu>
-                                </Box>
-                            </>
+                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => handleRouting("dashboard")}><DashboardIcon /> Dashboard</h5>}
+                                                <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
+                                            </div>
+                                        </Menu>
+                                    </Box>
+                                </>
                                 :
-                                <button onClick={goLoginPage} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
+                                <button onClick={() => handleRouting('login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
                     </div>
                 </div>
