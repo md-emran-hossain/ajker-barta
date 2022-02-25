@@ -7,11 +7,9 @@ import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import { VscThreeBars } from 'react-icons/vsc'
 import SearchIcon from '@mui/icons-material/Search';
-import Search from '../Search/Search';
 
 const Header = () => {
     const { user, logOut } = useAuth();
-    // const [searchText, setSearchText] = React.useState("");
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
     const handleOpenUserMenu = (event) => {
@@ -57,9 +55,11 @@ const Header = () => {
                     <div className="sm:flex-1 text-2xl md:hidden cursor-pointer">
                         <VscThreeBars onClick={() => setIsOpen(!isOpen)} />
                     </div>
-                    <div>
-                        <Search />
+
+                    <div className='md:w-96'>
+                        <SearchIcon onClick={() => Router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
                     </div>
+
                     <div className='sm:flex-1 text-center'>
                         <Link href="/">
                             <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>Ajker <span className='text-red-500'>Barta</span></a>
