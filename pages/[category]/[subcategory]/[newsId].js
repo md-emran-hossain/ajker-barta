@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import { FaRegBookmark, FaPrint,FaPlay, FaPause, FaStop} from "react-icons/fa";
-import { MdHeadset} from "react-icons/md";
+import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa";
+import { MdHeadset } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -20,7 +20,7 @@ const Newsdetails = ({ newses }) => {
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
-  const category = news.category;
+  const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
@@ -73,25 +73,24 @@ const Newsdetails = ({ newses }) => {
         })
     }
   };
-  const playNow = (text) =>{
+  const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
       return speechSynthesis.resume()
     }
     if (speechSynthesis.speaking) return
     const utterance = new SpeechSynthesisUtterance(text)
-    utterance.rate =  speed
-   
-    speechSynthesis.speak(utterance)
-}
-const pause = () => {
-  if(speechSynthesis.speaking) speechSynthesis.pause()
-}
-function stop() {
-  speechSynthesis.resume()
-  speechSynthesis.cancel()
-}
-  console.log(news)
+    utterance.rate = speed
 
+    speechSynthesis.speak(utterance)
+  }
+  const pause = () => {
+    if (speechSynthesis.speaking) speechSynthesis.pause()
+  }
+  function stop() {
+    speechSynthesis.resume()
+    speechSynthesis.cancel()
+  }
+  console.log(news)
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -120,9 +119,10 @@ function stop() {
       </div>
     );
   };
- 
- 
- 
+  const handleSelection = () => {
+    let text = window.getSelection().toString();
+    console.log(text);
+  }
   return (
     <div>
       <Header />
@@ -136,13 +136,13 @@ function stop() {
 
 
           {/* Listening feature  start*/}
-        <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
+          <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
             <h5>Listen Now</h5>
-           <FaPlay onClick={() =>playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed {speed}</span>
-           <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
+            <FaPlay onClick={() => playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed {speed}</span>
+            <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
           </div>
 
-               {/* Listening feature  end*/}
+          {/* Listening feature  end*/}
           <div className="flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
@@ -152,9 +152,8 @@ function stop() {
           </div>
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
-          
-          <p  className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
-          
+
+          <p onMouseUp={handleSelection} className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
@@ -194,7 +193,7 @@ function stop() {
               news?.comments?.map(item =>
                 <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
                   <div className="mr-4"><div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl" >
-                    <img class="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
+                    <img className="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
                   </div>
                   </div>
                   <div>
@@ -208,13 +207,7 @@ function stop() {
 
 
               )
-
-
             }
-
-
-
-
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
               <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
@@ -225,7 +218,7 @@ function stop() {
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-          {remaining.slice(0, 10).map((item) => {
+          {remaining?.slice(0, 10).map((item) => {
             return (
               <div onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
