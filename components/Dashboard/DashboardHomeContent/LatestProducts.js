@@ -52,7 +52,7 @@ export const LatestProducts = (props) => (
                     key={product.id}
                 >
                     <ListItemAvatar>
-                        <image
+                        <img
                             alt={product?.name}
                             src="https://i.ibb.co/ScbTKWS/admin.png"
                             style={{

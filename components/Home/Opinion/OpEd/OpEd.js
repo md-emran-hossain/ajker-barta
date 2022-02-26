@@ -23,9 +23,7 @@ const OpEd = ({ opinion }) => {
             {
               oped?.slice(0, 4).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news._id}`)} className='flex items-center gap-4 mb-4 cursor-pointer' key={news._id}>
                 <div>
-                  <Image
-                    width='100'
-                    height='100'
+                  <img
                     className='rounded-full'
                     src={news.images?.img1}
                     alt="" />

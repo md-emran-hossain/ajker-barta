@@ -41,7 +41,6 @@ export const AccountProfileDetails = (props) => {
             [event.target.name]: event.target.value
         });
     };
-
     return (
         <form
             autoComplete="off"

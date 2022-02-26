@@ -47,7 +47,7 @@ const Footer = ({ newses }) => {
               <li className='my-1'><Link href='/sports'><a>Sports</a></Link></li>
               <li className='my-1'><Link href='/scienceTechnology'><a>Science & Technology</a></Link></li>
               <li className='my-1'><Link href='/business'><a>Business</a></Link></li>
-              <li className='my-1'><Link href='entertainment'><a>Entertainment</a></Link></li>
+              <li className='my-1'><Link href='/entertainment'><a>Entertainment</a></Link></li>
               <li className='my-1'><Link href='/lifestyle'><a>LifeStyle</a></Link></li>
             </ul>
           </div>

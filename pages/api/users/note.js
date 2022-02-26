@@ -5,14 +5,20 @@ export default async function handler(req, res) {
     const users = database.collection('users');
     if (req.method === 'PUT') {
         const data = req.body;
-        const noteText = { note: data.note, selectedText: data.selectedText }
-        const filter = { email: data.email };
+        const allNotes = data.allNotes
+        const email = data.email
+        const filter = { email: email };
         const updateDoc = {
             $set: {
-                note: [noteText]
+                notes: allNotes
             }
         };
         const result = await users.updateOne(filter, updateDoc);
+        res.status(201).json(result);
+    } else if (req.method === 'GET') {
+        const email = req.query.email
+        const query = { email: email }
+        const result = await users.findOne(query)
         res.status(201).json(result);
     }
 }
