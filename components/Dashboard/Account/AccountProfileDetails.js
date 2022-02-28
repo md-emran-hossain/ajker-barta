@@ -50,7 +50,7 @@ export const AccountProfileDetails = () => {
                 }
             })
     }
-
+    console.log(userData)
     return (
         <form
             autoComplete="off"
