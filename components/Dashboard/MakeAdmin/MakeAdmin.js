@@ -1,11 +1,13 @@
-import { Box, Button, Card, CardActionArea, CardContent, CardHeader, CardMedia, Container, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
 import React from 'react';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Swal from 'sweetalert2';
+import useAuth from '../../../hooks/useAuth';
+
+
 const MakeAdmin = () => {
+    const { jwtToken } = useAuth()
     const [email, setEmail] = React.useState('');
-    const [adminSuccess, setAdminSuccess] = React.useState(false);
-    console.log(email, adminSuccess)
 
     const handleMakeAdmin = (e) => {
         e.preventDefault();
@@ -30,6 +32,7 @@ const MakeAdmin = () => {
                 fetch('/api/users/admin', {
                     method: 'PUT',
                     headers: {
+                        'authorization': `${jwtToken}`,
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify(user)
@@ -39,7 +42,6 @@ const MakeAdmin = () => {
                         if (data.modifiedCount) {
                             console.log(data);
                             setEmail('');
-                            setAdminSuccess(true);
                             swalWithBootstrapButtons.fire(
                                 'Created',
                                 'New admin created successfully.',
