@@ -37,10 +37,10 @@ const NewsPublish = () => {
 
     return (
         <div className='container'>
-            <h2 className='text-center text-2xl'>Add a news</h2>
-            <form className="flex flex-col space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <h2 className='text-4xl uppercase w-fit border-b-2 border-red-500 mx-auto mb-6'>Add a news</h2>
+            <form className="flex flex-col space-y-4 md:w-3/4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
                 <input
-                    className="ring-2 ring-red-600 rounded-sm p-2"
+                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
                     type="text"
                     {...register("heading", { required: true })}
                     placeholder="Give a attractive heading"
@@ -51,13 +51,13 @@ const NewsPublish = () => {
                 }
 
                 <textarea
-                    className="ring-2 ring-red-600 rounded-sm h-28 p-2"
+                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
                     {...register("description", { required: true })}
                     placeholder="Description"
                 />
                 {errors.description && <span className="bg-red-50 text-red-500 rounded-md">This field is required</span>}
                 <textarea
-                    className="ring-2 ring-red-600 rounded-sm p-2"
+                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
                     {...register("images", { required: true })}
                     placeholder="Please provide relevant image"
                 />
@@ -66,14 +66,14 @@ const NewsPublish = () => {
                     errors.images && <span className="bg-red-50 text-red-500 rounded-md">This field is required</span>
                 }
                 <input
-                    className="ring-2 ring-red-600 rounded-sm p-2"
+                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
                     type="text"
                     {...register("reporter", { required: true })}
                     placeholder="Reporter"
                 />
                 {/* errors will return when field validation fails  */}
                 {errors.reporter && <span className="bg-red-50 text-red-500 rounded-md">This field is required</span>}
-                <select className='ring-2 ring-red-600 rounded-sm p-2'
+                <select className='px-2 py-3 outline-0 border rounded-md border-red-100'
                     onChange={(e) => setCategory(e.target.value)}>
                     <option value="not defined">Please select a category</option>
                     <option value="coronavirus">CORONAVIRUS</option>
@@ -87,7 +87,7 @@ const NewsPublish = () => {
                 </select>
 
                 {category === 'coronavirus' ||
-                    <select className='ring-2 ring-red-600 rounded-sm p-2' {...register("subCategory", { required: true })}>
+                    <select className='px-2 py-3 outline-0 border rounded-md border-red-100' {...register("subCategory", { required: true })}>
                         <option value="not defined">Please select a sub category</option>
                         {category === 'international' &&
                             <>
@@ -166,7 +166,7 @@ const NewsPublish = () => {
                     placeholder="Sub heading"
                 />}
 
-                <input className="bg-red-600 mb-12 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white rounded-sm p-2" type="submit" value="Add News" />
+                <input className="w-36 bg-red-500 py-2.5 text-white font-medium uppercase text-lg rounded-md hover:bg-red-600 transition-colors duration-300 cursor-pointer" type="submit" value="Add News" />
             </form>
         </div>
     );

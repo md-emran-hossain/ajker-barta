@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import DashboardHome from '../../components/Dashboard/DashboardHome/DashboardHome';
 import { Budget } from '../../components/Dashboard/DashboardHomeContent/Budget';
-import { LatestOrders } from '../../components/Dashboard/DashboardHomeContent/LatestOrder';
-import { LatestProducts } from '../../components/Dashboard/DashboardHomeContent/LatestProducts';
 import { Sales } from '../../components/Dashboard/DashboardHomeContent/Sales';
 import { TasksProgress } from '../../components/Dashboard/DashboardHomeContent/TasksProgress';
 import { TotalCustomers } from '../../components/Dashboard/DashboardHomeContent/TotalCustomers';
@@ -25,8 +23,6 @@ const Index = () => {
 
     return (
         <div>
-            {/* {loading ? <h1 className='mt-12 w-24 mx-auto'><CircularProgress /></h1> :
-                <DashboardHome />} */}
 
             <DashboardHome>
                 <Container maxWidth={"lg"}>
@@ -37,8 +33,6 @@ const Index = () => {
                         <div className='col-span-12 md:col-span-6 lg:col-span-3'><TotalProfit sx={{ height: '100%' }} /> </div>
                         <div className='col-span-12 md:col-span-12 lg:col-span-8'><Sales /></div>
                         <div className='col-span-12 md:col-span-6 lg:col-span-4'><TrafficByDevice sx={{ height: '100%' }} /> </div>
-                        <div className='col-span-12 md:col-span-6 lg:col-span-4'><LatestProducts sx={{ height: '100%' }} /></div>
-                        <div className='col-span-12 md:col-span-12 lg:col-span-8'><LatestOrders /></div>
                     </div>
                 </Container>
             </DashboardHome>
