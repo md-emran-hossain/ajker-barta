@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Avatar, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography } from '@mui/material';
 import { getInitials } from '../../../utils/get-initials';
 
-export const CustomerListResults = ({ customers, ...rest }) => {
+export const CustomerListResults = ({ employees, ...rest }) => {
     const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
     const [limit, setLimit] = useState(10);
     const [page, setPage] = useState(0);
@@ -13,7 +13,7 @@ export const CustomerListResults = ({ customers, ...rest }) => {
         let newSelectedCustomerIds;
 
         if (event.target.checked) {
-            newSelectedCustomerIds = customers.map((customer) => customer.id);
+            newSelectedCustomerIds = employee.map((employee) => employee._id);
         } else {
             newSelectedCustomerIds = [];
         }
@@ -84,16 +84,16 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {customers.slice(0, limit).map((customer) => (
+                        {employees.slice(0, limit).map((employee) => (
                             <TableRow
                                 hover
-                                key={customer.id}
-                                selected={selectedCustomerIds.indexOf(customer.id) !== -1}
+                                key={employee._id}
+                                selected={selectedCustomerIds.indexOf(employee.id) !== -1}
                             >
                                 <TableCell padding="checkbox">
                                     <Checkbox
-                                        checked={selectedCustomerIds.indexOf(customer.id) !== -1}
-                                        onChange={(event) => handleSelectOne(event, customer.id)}
+                                        checked={selectedCustomerIds.indexOf(employee._id) !== -1}
+                                        onChange={(event) => handleSelectOne(event, employee._id)}
                                         value="true"
                                     />
                                 </TableCell>
@@ -105,30 +105,30 @@ export const CustomerListResults = ({ customers, ...rest }) => {
                                         }}
                                     >
                                         <Avatar
-                                            src={customer.avatarUrl}
+                                            src={employee.avatarUrl}
                                             sx={{ mr: 2 }}
                                         >
-                                            {getInitials(customer.name)}
+                                            {getInitials(employee.name)}
                                         </Avatar>
                                         <Typography
                                             color="textPrimary"
                                             variant="body1"
                                         >
-                                            {customer.name}
+                                            {employee.name}
                                         </Typography>
                                     </Box>
                                 </TableCell>
                                 <TableCell>
-                                    {customer.email}
+                                    {employee.email}
                                 </TableCell>
                                 <TableCell>
-                                    {`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}
+                                    {`${employee?.country}, ${employee.state}, ${employee.country}`}
                                 </TableCell>
                                 <TableCell>
-                                    {customer.phone}
+                                    {employee.phone}
                                 </TableCell>
                                 <TableCell>
-                                    {format(customer.createdAt, 'dd/MM/yyyy')}
+                                    {format(employee?.createdAt, 'dd/MM/yyyy')}
                                 </TableCell>
                             </TableRow>
                         ))}
