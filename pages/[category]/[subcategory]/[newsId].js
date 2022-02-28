@@ -8,11 +8,13 @@ import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { AiOutlineTwitter } from "react-icons/ai";
 import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
@@ -68,6 +70,10 @@ const Newsdetails = ({ newses }) => {
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
+  const [likes, setLikes] = useState([])
+  useEffect(() => {
+    setLikes(news?.likes)
+  }, [news.likes])
   const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   // const url = window?.location?.href
@@ -121,6 +127,50 @@ const Newsdetails = ({ newses }) => {
         })
     }
   };
+  //like functionality
+  const handleLike = (id) => {
+    fetch(`/api/news/like?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = [...likes, user.email]
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  console.log(news)
+
+  //unlike functionality
+  const handleUnLike = (id) => {
+    fetch(`/api/news/unlike?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = news?.likes.filter(ele => ele !== user.email)
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  console.log(news)
+
   const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
       return speechSynthesis.resume()
@@ -207,13 +257,22 @@ const Newsdetails = ({ newses }) => {
           {
             news?.images?.img3 && <img src={news?.images?.img3} alt='img2' />
           }
-          <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
-          <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
-          <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-
+          <p className="text-lg">{news?.description.slice(10, 15).join()}</p>
+          <p className="text-lg">{news?.description.slice(15, 20).join()}</p>
+          <p className="text-lg">{news?.description.slice(20, 25).join()}</p>
+          {user.email && <div className="flex items-center gap-3">
+            {
+              likes.includes(user.email) ? <div title='Unlike the news'>
+                <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer', color: "#1976d2" }} />
+              </div> : <div title='Give thumbs up'>
+                <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer' }} />
+              </div>
+            }
+            <span className="mt-3 font-semibold">{likes.length || 0} likes</span>
+          </div>}
           {/* Selection Item */}
-          
-          
+
+
           {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
