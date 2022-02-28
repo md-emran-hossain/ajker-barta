@@ -75,9 +75,9 @@ const Login = () => {
                                     </form>
                                     <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: '#eb3b5a', backgroundColor: 'white' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
 
-                                    <div className='mt-10 flex justify-center'>
+                                    {/* <div className='mt-10 flex justify-center'>
                                         <ReCaptcha />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <div className="sub-cont">
@@ -112,9 +112,9 @@ const Login = () => {
                                         </form>
                                         <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: 'eb3b5a' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
 
-                                        <div className='mt-10 flex justify-center'>
+                                        {/* <div className='mt-10 flex justify-center'>
                                             <ReCaptcha />
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
