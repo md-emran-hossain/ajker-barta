@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
 import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa";
-import { MdHeadset } from "react-icons/md";
+import { MdFacebook, MdHeadset, MdOutlineEditNote } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -11,10 +11,58 @@ import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBa
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { AiOutlineTwitter } from "react-icons/ai";
+import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
   const { user } = useAuth()
+
+  //text select state
+  const [selectedText, setSelectedText] = useState('')
+  const [showTextOption, setShowTextOption] = useState(false)
+  const [xValue, setxVlue] = useState(0)
+  const [yValue, setyVlue] = useState(0)
+  const [isShowNoteBar, setIsShowNoteBar] = useState(false)
+
+  //handle selection
+  const handleSelection = (e) => {
+    setTimeout(() => {
+      const text = window.getSelection().toString().trim();
+      if (text.length) {
+        setSelectedText(text)
+        setShowTextOption(true)
+        const x = e.pageX;
+        const y = e.pageY;
+        setxVlue(x)
+        setyVlue(y)
+      } else {
+        setShowTextOption(false)
+      }
+    }, 0)
+  };
+  const addToNote = (e) => {
+    e.preventDefault()
+    setIsShowNoteBar(true)
+    setShowTextOption(false)
+  }
+
+  //twitter share
+  const shareOnTwitter = () => {
+    const twitterShareUrl = "https://twitter.com/intent/tweet";
+    const text = `${encodeURIComponent(selectedText)}`;
+    const currentUrl = encodeURIComponent(window.location.href);
+    const hashtags = "HotNews, Recent, Letest";
+    const via = "Ajker Barta";
+    window.open(`${twitterShareUrl}?text="${text}"&url=${currentUrl}&hashtags=${hashtags}&via=${via}`);
+  }
+
+  //facebook share
+  const faceBookShare = () => {
+    window.open(`https://www.facebook.com/sharer.php?`)
+  }
+
+  ////handle selection end
 
   const router = useRouter();
   const newsId = router.query.newsId;
@@ -89,7 +137,6 @@ const Newsdetails = ({ newses }) => {
     speechSynthesis.resume()
     speechSynthesis.cancel()
   }
-  console.log(news)
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -118,15 +165,14 @@ const Newsdetails = ({ newses }) => {
       </div>
     );
   };
-  const handleSelection = () => {
-    let text = window.getSelection().toString();
-    console.log(text);
-  }
+
+
+
   return (
     <div>
       <Header />
       <NavigationBar />
-      <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
+      <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-6">
           <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
@@ -152,7 +198,7 @@ const Newsdetails = ({ newses }) => {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p onMouseUp={handleSelection} className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          <p className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
@@ -230,6 +276,12 @@ const Newsdetails = ({ newses }) => {
         </div>
       </div>
       <Footer newses={newses} />
+      <div style={{ left: (xValue - 70) + 'px', top: (yValue - 60) + 'px', }} className={showTextOption ? 'afterSelectBtn showOption' : 'afterSelectBtn'}>
+        <button onClick={addToNote} ><MdOutlineEditNote className='pointer-events-none' /></button>
+        <button onClick={shareOnTwitter}><AiOutlineTwitter className='pointer-events-none' /></button>
+        <button onClick={faceBookShare}><MdFacebook className='pointer-events-none' /></button>
+      </div>
+      <NoteBar isShowNoteBar={isShowNoteBar} setIsShowNoteBar={setIsShowNoteBar} selectedText={selectedText} />
     </div>
   );
 };

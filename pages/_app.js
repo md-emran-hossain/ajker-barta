@@ -9,9 +9,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
-
 const clientSideEmotionCache = createEmotionCache();
-
 
 
 function MyApp({ Component, pageProps }) {
@@ -21,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
 
-    <>
+    <div >
       <CacheProvider value={emotionCache}>
         <Head>
           <title>
@@ -43,7 +41,8 @@ function MyApp({ Component, pageProps }) {
         </LocalizationProvider>
 
       </CacheProvider>
-    </>
+
+    </div >
   )
 };
 
