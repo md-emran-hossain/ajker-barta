@@ -16,6 +16,7 @@ import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
+  const [text, setText] = useState('')
   const { user } = useAuth()
 
   //text select state
@@ -67,7 +68,7 @@ const Newsdetails = ({ newses }) => {
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
-  const category = news.category;
+  const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
@@ -209,7 +210,11 @@ const Newsdetails = ({ newses }) => {
           <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-          <template><span className="control"></span></template>
+
+          {/* Selection Item */}
+          
+          
+          {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
