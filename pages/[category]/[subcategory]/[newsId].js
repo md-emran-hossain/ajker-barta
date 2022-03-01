@@ -72,7 +72,11 @@ const Newsdetails = ({ newses }) => {
   const news = newses.find(news => news._id === newsId)
   const [likes, setLikes] = useState([])
   useEffect(() => {
-    setLikes(news?.likes)
+    if (news.likes) {
+      setLikes(news?.likes)
+    } else {
+      setLikes([])
+    }
   }, [news.likes])
   const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)

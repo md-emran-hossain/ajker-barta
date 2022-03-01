@@ -12,6 +12,7 @@ import { useRouter } from 'next/router';
 
 const Hero = ({ newses }) => {
   const latest = newses.reverse()
+  console.log(newses)
   const router = useRouter()
   return (
     <div className='pb-6 border-b border-gray-100' id='hero'>
