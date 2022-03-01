@@ -24,11 +24,12 @@ export default function Home({ newses }) {
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
   const opinion = newses.filter(news => news.category === 'opinion')
+  const heroNews = newses.reverse().slice(0,15)
   return (
     <div>
       <Header />
       <NavigationBar />
-      <Hero newses={newses} />
+      <Hero heroNews={heroNews} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
