@@ -64,15 +64,8 @@ export const AccountProfileDetails = () => {
                 />
                 <Divider />
                 <CardContent>
-                    <Grid
-                        container
-                        spacing={3}
-                    >
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                    <Grid container spacing={3}  >
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 fullWidth
                                 helperText="Please specify the first name"
@@ -84,11 +77,7 @@ export const AccountProfileDetails = () => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                        <Grid item md={6} xs={12} >
                             <TextField
                                 fullWidth
                                 label="Last name"
@@ -98,11 +87,7 @@ export const AccountProfileDetails = () => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 fullWidth
                                 label="Email Address"
@@ -113,11 +98,7 @@ export const AccountProfileDetails = () => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 fullWidth
                                 label="Phone Number"
@@ -128,11 +109,7 @@ export const AccountProfileDetails = () => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                        <Grid item md={6} xs={12} >
                             <TextField
                                 fullWidth
                                 label="Country"
@@ -142,11 +119,7 @@ export const AccountProfileDetails = () => {
                                 variant="outlined"
                             />
                         </Grid>
-                        <Grid
-                            item
-                            md={6}
-                            xs={12}
-                        >
+                        <Grid item md={6} xs={12} >
                             <TextField
                                 fullWidth
                                 label="State Name"

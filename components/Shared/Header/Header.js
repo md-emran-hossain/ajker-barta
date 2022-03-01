@@ -23,6 +23,24 @@ const Header = () => {
         setAnchorElUser(null);
     };
 
+
+    const handleRouting = (location) => {
+        if (location === "login") {
+            Router.push("/login")
+        }
+        else if (location === "dashboard") {
+            Router.push("/dashboard")
+        }
+        else if (location === "account") {
+            Router.push("/dashboard/account")
+        }
+        else {
+            Router.push('/')
+        }
+    }
+
+
+
     return (
         <div className='bg-white sticky md:static top-0 w-full z-50'>
             <div className='container' >

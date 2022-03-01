@@ -117,7 +117,12 @@ const Newsdetails = ({ newses }) => {
           }
         })
         .catch(err => {
-
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+            showCancelButton: true
+          })
         })
     }
   };
@@ -212,8 +217,8 @@ const Newsdetails = ({ newses }) => {
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
 
           {/* Selection Item */}
-          
-          
+
+
           {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
