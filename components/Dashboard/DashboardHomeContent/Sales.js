@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 export const Sales = (props) => {
     const [news, setNews] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:3000/api/news')
+        fetch('https://ajker-barta.vercel.app/api/news')
         .then(response => response.json())
         .then(json => setNews(json))
     },[])
