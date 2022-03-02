@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import Push from 'push.js'
 const NewsPublish = () => {
     const [category, setCategory] = useState('');
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -29,12 +29,13 @@ const NewsPublish = () => {
         })
         const result = await res.json();
         if (result.insertedId) {
+            Push.create('Hello World!')
             alert("News added");
             reset();
         }
 
     };
-
+   
     return (
         <div className='container'>
             <h2 className='text-4xl uppercase w-fit border-b-2 border-red-500 mx-auto mb-6'>Add a news</h2>

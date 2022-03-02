@@ -19,7 +19,7 @@ const Analysis = ({ opinion }) => {
                     <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{analysis[1].subHeading ? <div> <span className='text-red-500'>{analysis[1].subHeading}</span>/{analysis[1].heading}</div> : <div>{analysis[1].heading}</div>}</h1>
                 </div>
                 <div onClick={() => router.push(`/${analysis[2].category}/${analysis[2].subCategory}/${analysis[2]._id}`)} className='border-t py-2 cursor-pointer'>
-                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{analysis[2].subHeading ? <div> <span className='text-red-500'>{analysis[2].subHeading}</span>/{analysis[1].heading}</div> : <div>{analysis[3].heading}</div>}</h1>
+                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{analysis[2]?.subHeading ? <div> <span className='text-red-500'>{analysis[2]?.subHeading}</span>/{analysis[1]?.heading}</div> : <div>{analysis[3]?.heading}</div>}</h1>
                 </div>
             </div>
         </div>

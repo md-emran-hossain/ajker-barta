@@ -16,6 +16,7 @@ import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
 export default function Home({ newses }) {
+ 
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
   const international = newses.filter((news) => news.category === "international");
@@ -29,7 +30,7 @@ export default function Home({ newses }) {
     <div>
       <Header />
       <NavigationBar />
-      <Hero heroNews={heroNews} />
+      {/* <Hero heroNews={heroNews} /> */}
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
