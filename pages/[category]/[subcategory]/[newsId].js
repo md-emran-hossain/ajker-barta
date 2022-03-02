@@ -23,7 +23,7 @@ import * as React from "react";
 import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { AiOutlineTwitter } from "react-icons/ai";
@@ -34,6 +34,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import MuiAlert from "@mui/material/Alert";
 
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([]);
   const [speed, setSpeed] = useState(1);
@@ -116,6 +118,15 @@ const Newsdetails = ({ newses }) => {
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find((news) => news._id === newsId);
+ 
+  const [likes, setLikes] = useState([])
+  useEffect(() => {
+    if (news.likes) {
+      setLikes(news?.likes)
+    } else {
+      setLikes([])
+    }
+  }, [news.likes])
   const category = news?.category;
   const remaining = newses.filter(
     (item) => item.category === category && item._id !== news._id
@@ -172,6 +183,50 @@ const Newsdetails = ({ newses }) => {
         .catch((err) => {});
     }
   };
+  //like functionality
+  const handleLike = (id) => {
+    fetch(`/api/news/like?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = [...likes, user.email]
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  console.log(news)
+
+  //unlike functionality
+  const handleUnLike = (id) => {
+    fetch(`/api/news/unlike?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = news?.likes.filter(ele => ele !== user.email)
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  console.log(news)
+
   const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
       return speechSynthesis.resume();
@@ -316,6 +371,29 @@ const Newsdetails = ({ newses }) => {
 
           {/* Selection Item */}
 
+          {
+            news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
+          }
+          <p className="py-3 text-lg">{news?.description.slice(5, 10).join()}</p>
+          {
+            news?.images?.img3 && <img src={news?.images?.img3} alt='img2' />
+          }
+          <p className="text-lg">{news?.description.slice(10, 15).join()}</p>
+          <p className="text-lg">{news?.description.slice(15, 20).join()}</p>
+          <p className="text-lg">{news?.description.slice(20, 25).join()}</p>
+          {user.email && <div className="flex items-center gap-3">
+            {
+              likes.includes(user.email) ? <div title='Unlike the news'>
+                <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer', color: "#1976d2" }} />
+              </div> : <div title='Give thumbs up'>
+                <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer' }} />
+              </div>
+            }
+            <span className="mt-3 font-semibold">{likes.length || 0} likes</span>
+          </div>}
+          {/* Selection Item */}
+
+
           {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
@@ -373,11 +451,11 @@ const Newsdetails = ({ newses }) => {
             </form>
           </div>
         </div>
-        <div className="col-span-1">
+        <div className="col-span-1 sticky">
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-          {remaining?.slice(0, 10).map((item) => {
+          {remaining?.slice(0, 6).map((item) => {
             return (
               <div
                 onClick={() =>
