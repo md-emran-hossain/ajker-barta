@@ -8,16 +8,36 @@ import axios from 'axios'
 import { formatDistanceToNow } from 'date-fns'
 import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { AiOutlineTwitter } from "react-icons/ai";
 import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Menu } from '@mui/material';
+import React from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditNews from "../../../components/EditNews/EditNews";
+
+
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
   const [speed, setSpeed] = useState(1)
   const [text, setText] = useState('')
   const { user } = useAuth()
+
+  // manage news option
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
 
   //text select state
   const [selectedText, setSelectedText] = useState('')
@@ -68,6 +88,14 @@ const Newsdetails = ({ newses }) => {
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
+  const [likes, setLikes] = useState([])
+  useEffect(() => {
+    if (news.likes) {
+      setLikes(news?.likes)
+    } else {
+      setLikes([])
+    }
+  }, [news.likes])
   const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   // const url = window?.location?.href
@@ -126,6 +154,48 @@ const Newsdetails = ({ newses }) => {
         })
     }
   };
+  //like functionality
+  const handleLike = (id) => {
+    fetch(`/api/news/like?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = [...likes, user.email]
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  //unlike functionality
+  const handleUnLike = (id) => {
+    fetch(`/api/news/unlike?id=${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ email: user.email })
+    })
+      .then(res => res.json())
+      .then(result => {
+        if (result.modifiedCount === 1) {
+          const newLikes = news?.likes.filter(ele => ele !== user.email)
+          setLikes(newLikes)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+  // console.log(news)
+
   const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
       return speechSynthesis.resume()
@@ -173,6 +243,59 @@ const Newsdetails = ({ newses }) => {
   };
 
 
+  // handle delete 
+  const handleDeleteNews = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'ml-2 bg-green-500 text-white rounded-full px-8 py-1',
+        cancelButton: 'bg-red-500 text-white rounded-full px-8 py-1'
+      },
+      buttonsStyling: false
+    })
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to delete this item!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const url = `/api/news/${id}`;
+        fetch(url, {
+          method: 'DELETE'
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data.deletedCount > 0) {
+              router.push('/')
+              swalWithBootstrapButtons.fire(
+                'Deleted!',
+                'This News has been deleted.',
+                'success'
+              )
+            }
+          })
+
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'this file is safe :)',
+          'error'
+        )
+      }
+    })
+  };
+
+
+  // news modal control 
+  // modal control
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div>
@@ -183,7 +306,37 @@ const Newsdetails = ({ newses }) => {
           <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
-          <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
+          <div className=" flex items-center justify-between">
+            <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
+
+            <div className="hover:bg-gray-200 rounded-full p-1">
+              <MoreVertIcon onClick={handleOpenUserMenu} fontSize="large" sx={{ borderRadius: '50%', cursor: 'pointer' }} />
+            </div>
+            <Menu sx={{ mt: '45px', width: '500px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top', horizontal: 'center',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top', horizontal: 'center',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu} >
+              <div onClick={handleCloseUserMenu} className="flex flex-col w-48">
+                <h5 onClick={handleOpen} className='mx-2 mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon />  Edit</h5>
+                <EditNews
+                  news={news}
+                  open={open}
+                  handleClose={handleClose}
+                ></EditNews>
+
+                <h5 onClick={() => handleDeleteNews(news?._id)} className='mx-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' ><DeleteForeverIcon />  Delete</h5>
+              </div>
+            </Menu>
+
+          </div>
 
 
           {/* Listening feature  start*/}
@@ -204,18 +357,36 @@ const Newsdetails = ({ newses }) => {
           <hr />
           <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
-          <p className="py-3 text-lg">{news?.description.slice(0, 5).join()}</p>
+          {news?.description?.slice(0, 5).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
           {
             news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
           }
-          <p className="py-3 text-lg">{news?.description.slice(5, 10).join()}</p>
+          {news?.description?.slice(6, 10).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
           {
-            news?.images?.img3 && <img src={news?.images?.img3} alt='img2' />
+            news?.images?.img3 && <img src={news?.images?.img3} alt='img3' />
           }
-          <p className="py-3 text-lg">{news?.description.slice(10, 15).join()}</p>
-          <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
-          <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
-
+          {news?.description?.slice(11, 15).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
+          {
+            news?.images?.img4 && <img className="w-8/12 mx-auto" src={news?.images?.img4} alt='img4' />
+          }
+          {news?.description?.slice(16, 20).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
+          {
+            news?.images?.img5 && <img className="w-8/12 mx-auto" src={news?.images?.img5} alt='img5' />
+          }
+          {news?.description?.slice(21, 25).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
+          {
+            news?.images?.img6 && <img className="w-8/12 mx-auto" src={news?.images?.img6} alt='img6' />
+          }
+          {user.email && <div className="flex items-center gap-3">
+            {
+              likes.includes(user.email) ? <div title='Unlike the news'>
+                <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer', color: "#1976d2" }} />
+              </div> : <div title='Give thumbs up'>
+                <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer' }} />
+              </div>
+            }
+            <span className="mt-3 font-semibold">{likes.length || 0} likes</span>
+          </div>}
           {/* Selection Item */}
 
 
