@@ -9,7 +9,7 @@ const OpEd = ({ opinion }) => {
   const router = useRouter()
   return (
     <div className='pt-5'>
-      <div className='container border-b'>
+      <div className='container'>
         <div className='flex items-center mb-4'>
           <h1 onClick={() => router.push('/opinion')} className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Opinion </h1><IoIosArrowForward className='text-red-600 mt-1' />
         </div>
@@ -23,10 +23,8 @@ const OpEd = ({ opinion }) => {
             {
               oped?.slice(0, 4).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news._id}`)} className='flex items-center gap-4 mb-4 cursor-pointer' key={news._id}>
                 <div>
-                  <Image
-                    width='100'
-                    height='100'
-                    className='rounded-full'
+                  <img
+                    className='rounded-full w-24 h-24 '
                     src={news.images?.img1}
                     alt="" />
                 </div>

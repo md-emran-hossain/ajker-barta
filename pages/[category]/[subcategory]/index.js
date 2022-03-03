@@ -41,9 +41,7 @@ const SubCategoryDetails = ({ newses }) => {
         <div className={styles.categoryGrid}>
           {
             displayNews?.slice(0, 5).map(news => <div onClick={() => router.push(`/${category}/${subCategory}/${news?._id}`)} className={`${styles.itemBox} cursor-pointer`} key={news._id}>
-              <Image src={news?.images?.img1}
-                width="800"
-                height="500"
+              <img src={news?.images?.img1}
                 alt="" />
               <h1>{news?.heading}</h1>
               <p>{news.description?.[0].slice(0, 100)}</p>
@@ -54,9 +52,7 @@ const SubCategoryDetails = ({ newses }) => {
         <div>
           {
             displayNews?.slice(5,).map(news => <div onClick={() => router.push(`/${category}/${subCategory}/${news?._id}`)} className={`${styles.singleNews} cursor-pointer`} key={news.id}>
-              <Image src={news?.images?.img1}
-                width="400"
-                height="300"
+              <img src={news?.images?.img1}
                 alt="" />
               <div>
                 <h1 className='text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer'>{news?.heading}</h1>

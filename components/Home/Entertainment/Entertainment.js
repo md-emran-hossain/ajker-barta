@@ -6,7 +6,10 @@ import { useRouter } from "next/router";
 
 const Entertainment = ({ entertainment }) => {
     const router = useRouter()
-
+    // const handle = () => {
+    //     const text = window.getSelection().toString().trim();
+    //     console.log(text)
+    // };
     return (
         <div className="container overflow-hidden ">
             <h2 className='text-xl text-blue-900 font-semibold mb-3'><span className='text-gray-700'>Entertainment </span><ChevronRightIcon className='text-red-500' /></h2>

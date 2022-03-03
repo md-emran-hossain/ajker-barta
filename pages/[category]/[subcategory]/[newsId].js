@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
+<<<<<<< HEAD
 import { FaRegBookmark, FaPrint, } from "react-icons/fa";
+=======
+import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa";
+import { MdFacebook, MdHeadset, MdOutlineEditNote } from "react-icons/md";
+>>>>>>> aff65cffdf71f29e389a72024e9b7e20c892ef21
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -10,10 +15,63 @@ import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBa
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { AiOutlineTwitter } from "react-icons/ai";
+import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
+<<<<<<< HEAD
 
+=======
+  const [speed, setSpeed] = useState(1)
+  const [text, setText] = useState('')
+>>>>>>> aff65cffdf71f29e389a72024e9b7e20c892ef21
   const { user } = useAuth()
+
+  //text select state
+  const [selectedText, setSelectedText] = useState('')
+  const [showTextOption, setShowTextOption] = useState(false)
+  const [xValue, setxVlue] = useState(0)
+  const [yValue, setyVlue] = useState(0)
+  const [isShowNoteBar, setIsShowNoteBar] = useState(false)
+
+  //handle selection
+  const handleSelection = (e) => {
+    setTimeout(() => {
+      const text = window.getSelection().toString().trim();
+      if (text.length) {
+        setSelectedText(text)
+        setShowTextOption(true)
+        const x = e.pageX;
+        const y = e.pageY;
+        setxVlue(x)
+        setyVlue(y)
+      } else {
+        setShowTextOption(false)
+      }
+    }, 0)
+  };
+  const addToNote = (e) => {
+    e.preventDefault()
+    setIsShowNoteBar(true)
+    setShowTextOption(false)
+  }
+
+  //twitter share
+  const shareOnTwitter = () => {
+    const twitterShareUrl = "https://twitter.com/intent/tweet";
+    const text = `${encodeURIComponent(selectedText)}`;
+    const currentUrl = encodeURIComponent(window.location.href);
+    const hashtags = "HotNews, Recent, Letest";
+    const via = "Ajker Barta";
+    window.open(`${twitterShareUrl}?text="${text}"&url=${currentUrl}&hashtags=${hashtags}&via=${via}`);
+  }
+
+  //facebook share
+  const faceBookShare = () => {
+    window.open(`https://www.facebook.com/sharer.php?`)
+  }
+
+  ////handle selection end
 
   const router = useRouter();
   const newsId = router.query.newsId;
@@ -72,6 +130,18 @@ const Newsdetails = ({ newses }) => {
     }
   };
 
+<<<<<<< HEAD
+=======
+    speechSynthesis.speak(utterance)
+  }
+  const pause = () => {
+    if (speechSynthesis.speaking) speechSynthesis.pause()
+  }
+  function stop() {
+    speechSynthesis.resume()
+    speechSynthesis.cancel()
+  }
+>>>>>>> aff65cffdf71f29e389a72024e9b7e20c892ef21
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -100,12 +170,18 @@ const Newsdetails = ({ newses }) => {
       </div>
     );
   };
+<<<<<<< HEAD
   // console.log(url)
+=======
+
+
+
+>>>>>>> aff65cffdf71f29e389a72024e9b7e20c892ef21
   return (
     <div>
       <Header />
       <NavigationBar />
-      <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
+      <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-6">
           <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
@@ -133,6 +209,13 @@ const Newsdetails = ({ newses }) => {
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
 
+<<<<<<< HEAD
+=======
+          {/* Selection Item */}
+          
+          
+          {/* Show after selection */}
+>>>>>>> aff65cffdf71f29e389a72024e9b7e20c892ef21
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
@@ -205,6 +288,12 @@ const Newsdetails = ({ newses }) => {
         </div>
       </div>
       <Footer newses={newses} />
+      <div style={{ left: (xValue - 70) + 'px', top: (yValue - 60) + 'px', }} className={showTextOption ? 'afterSelectBtn showOption' : 'afterSelectBtn'}>
+        <button onClick={addToNote} ><MdOutlineEditNote className='pointer-events-none' /></button>
+        <button onClick={shareOnTwitter}><AiOutlineTwitter className='pointer-events-none' /></button>
+        <button onClick={faceBookShare}><MdFacebook className='pointer-events-none' /></button>
+      </div>
+      <NoteBar isShowNoteBar={isShowNoteBar} setIsShowNoteBar={setIsShowNoteBar} selectedText={selectedText} />
     </div>
   );
 };

@@ -37,7 +37,12 @@ const items = [
     {
         href: '/dashboard/users',
         icon: (<UsersIcon fontSize="small" />),
-        title: 'Users'
+        title: 'Employee'
+    },
+    {
+        href: '/dashboard/addNews',
+        icon: (<UsersIcon fontSize="small" />),
+        title: 'Add News'
     },
     {
         href: '/dashboard/manageNews',

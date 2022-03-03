@@ -46,9 +46,7 @@ const CategoryDetails = ({ newses }) => {
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
-              <Image src={news?.images?.img1}
-                width="750"
-                height="500"
+              <img src={news?.images?.img1}
                 priority
                 alt="hi" />
               <h1>{news?.heading}</h1>
@@ -66,9 +64,7 @@ const CategoryDetails = ({ newses }) => {
               className={`${styles.singleNews} cursor-pointer`}
               key={news._id}
             >
-              <Image
-                width="400"
-                height="300"
+              <img
                 alt=""
                 src={news?.images?.img1} />
               <div>
