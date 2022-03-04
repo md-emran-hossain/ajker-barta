@@ -182,7 +182,10 @@ const Newsdetails = ({ newses }) => {
         confirmButtonText: "Sign in ",
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push("/login");
+          router.push({
+            pathname: '/login',
+            query: { from: `/${news?.category}/${news?.subCategory}/${news?._id}` }
+          })
         }
       });
     } else {
@@ -248,7 +251,26 @@ const Newsdetails = ({ newses }) => {
         console.log(err)
       })
   }
-  // console.log(news)
+
+  const addToWishList = () => {
+    fetch(`/api/users/wishlist?email=${user.email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({ id: news._id })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.modifiedCount === 1) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: `This news Added to your wish list`,
+          })
+        }
+      })
+  }
 
   const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
@@ -296,10 +318,7 @@ const Newsdetails = ({ newses }) => {
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
-        <span
-          title="Save News"
-          className={`${iconClass} bg-orange-500 text-white`}
-        >
+        <span onClick={addToWishList} className={`${iconClass} bg-orange-500 text-white`}>
           <FaRegBookmark />
         </span>
         <span
@@ -547,15 +566,7 @@ const Newsdetails = ({ newses }) => {
           </p>
           {remaining?.slice(0, 6).map((item) => {
             return (
-              <div
-                onClick={() =>
-                  router.push(
-                    `/${item.category}/${item.subCategory}/${item?._id}`
-                  )
-                }
-                className="cursor-pointer"
-                key={item._id}
-              >
+              <div onClick={() => router.push(`/${item?.category}/${item?.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
                   <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">
