@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import Swal from 'sweetalert2'
 import { Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField, Avatar, CardActions, Typography } from '@mui/material';
@@ -37,6 +38,7 @@ export const AccountProfileDetails = () => {
         newObj[property] = value
         delete newObj._id
         setUserData(newObj)
+
     };
 
     useEffect(() => {
@@ -139,7 +141,6 @@ export const AccountProfileDetails = () => {
                         </Box>
                     </Card>
                 </form>
-
             </Grid>
         </Grid>
     );
