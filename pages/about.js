@@ -1,10 +1,16 @@
 import React from 'react';
-
+import Footer from '../components/Shared/Footer/Footer';
+import Header from "../components/Shared/Header/Header";
+import AboutUs from "../components/AboutUs/AboutUs";
+import NavigationBar from '../components/Shared/NavigationBar/NavigationBar';
 const about = () => {
 
     return (
         <div>
-            <h2 className='text-5xl text-center text-red-500'>this is about</h2>
+         <Header />
+         <NavigationBar />
+         <AboutUs></AboutUs>
+        <Footer />
         </div>
     );
 };
