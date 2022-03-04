@@ -11,30 +11,16 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+
 const Header = () => {
     const { user, logOut } = useAuth();
-    const [isOpen, setIsOpen] = React.useState(false)
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [isOpen, setIsOpen] = React.useState(false)
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
-    };
-
-    const handleRouting = (location) => {
-        if (location === "login") {
-            Router.push("/login")
-        }
-        else if (location === "dashboard") {
-            Router.push("/dashboard")
-        }
-        else if (location === "account") {
-            Router.push("/dashboard/account")
-        }
-        else {
-            Router.push('/')
-        }
     };
 
     return (
@@ -59,7 +45,7 @@ const Header = () => {
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/business" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/entertainment" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/lifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/ifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
                                 <li className='text-lg mt-5'>
                                     <p className='ml-5'><strong> © AJKER BARTA</strong></p>
                                 </li>
@@ -86,7 +72,7 @@ const Header = () => {
                                     <Box sx={{ flexGrow: 0 }}>
                                         <Tooltip title="Open settings">
                                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                                                <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
                                             </IconButton>
                                         </Tooltip>
                                         <Menu

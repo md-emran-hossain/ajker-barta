@@ -1,35 +1,37 @@
 import { Bar } from 'react-chartjs-2';
 import { Box, Button, Card, CardContent, CardHeader, Divider, useTheme } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import { useEffect, useState } from 'react';
+
 
 export const Sales = (props) => {
+    const [news, setNews] = useState([])
+    useEffect(() => {
+        fetch('/api/news')
+            .then(response => response.json())
+            .then(json => setNews(json))
+    }, [])
+    const all = news.map(item => item?.category)
+    const occurrences = all.reduce(function (acc, curr) {
+        return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+    }, {});
+    const numberOfNews = Object.values(occurrences)
+    const categories = [...new Set(all)];
     const theme = useTheme();
-
     const data = {
         datasets: [
             {
-                backgroundColor: '#3F51B5',
+                backgroundColor: '#EF4444',
                 barPercentage: 0.5,
-                barThickness: 12,
-                borderRadius: 4,
+                barThickness: 20,
+                borderRadius: 0,
                 categoryPercentage: 0.5,
-                data: [18, 5, 19, 27, 29, 19, 20],
-                label: 'This year',
-                maxBarThickness: 10
+                data: numberOfNews,
+                maxBarThickness: 50
             },
-            {
-                backgroundColor: '#EEEEEE',
-                barPercentage: 0.5,
-                barThickness: 12,
-                borderRadius: 4,
-                categoryPercentage: 0.5,
-                data: [11, 20, 12, 29, 30, 25, 13],
-                label: 'Last year',
-                maxBarThickness: 10
-            }
+
         ],
-        labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug', '7 aug']
+        labels: categories
     };
 
     const options = {
@@ -92,7 +94,7 @@ export const Sales = (props) => {
                         Last 7 days
                     </Button>
                 )}
-                title="Letest Update"
+                title="Number of News By Category"
             />
             <Divider />
             <CardContent>

@@ -78,7 +78,7 @@ export const AccountProfileDetails = () => {
     const uploadFile = () => {
         document.getElementById('profileImg').click();
     }
-
+    console.log(userData)
     return (
         <Grid container spacing={3} >
             <Grid item lg={4} md={6} xs={12}>

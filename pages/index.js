@@ -20,6 +20,7 @@ import Voting from "../components/Voting/Voting";
 
 
 export default function Home({ newses }) {
+
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
   const international = newses.filter((news) => news.category === "international");
@@ -28,7 +29,6 @@ export default function Home({ newses }) {
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
   const opinion = newses.filter(news => news.category === 'opinion')
-
   return (
     <div>
       <Header />
