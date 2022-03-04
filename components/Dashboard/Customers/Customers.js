@@ -18,6 +18,7 @@ const Customers = () => {
         fetch('/api/users')
             .then(res => res.json())
             .then(data => setEmployees(data))
+            .catch(err => console.log(err.message))
     }, [employees])
     const handleDesignation = (e, id) => {
         const designationObj = { designation: e.target.value }

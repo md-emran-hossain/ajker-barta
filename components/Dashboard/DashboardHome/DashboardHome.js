@@ -22,53 +22,12 @@ import { NavItem } from '../NavItem/NavItem';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Logo } from '../Logo/Logo';
+import useAuth from '../../../hooks/useAuth';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
-import useAuth from '../../../hooks/useAuth';
 
-
-const items = [
-    {
-        href: '/dashboard',
-        icon: (<ChartBarIcon fontSize="small" />),
-        title: 'Dashboard'
-    },
-    {
-        href: '/dashboard/account',
-        icon: (<UserIcon fontSize="small" />),
-        title: 'Account'
-    },
-    {
-        href: '/dashboard/users',
-        icon: (<UsersIcon fontSize="small" />),
-        title: 'Employee'
-    },
-    {
-        href: '/dashboard/addNews',
-        icon: (<UsersIcon fontSize="small" />),
-        title: 'Add News'
-    },
-    {
-        href: '/dashboard/manageNews',
-        icon: (<ShoppingBagIcon fontSize="small" />),
-        title: 'Manage News'
-    },
-    {
-        href: '/dashboard/settings',
-        icon: (<CogIcon fontSize="small" />),
-        title: 'Settings'
-    },
-    {
-        href: '/dashboard/makeAdmin',
-        icon: (<LockIcon fontSize="small" />),
-        title: 'Make Admin'
-    },
-    {
-        href: '/',
-        icon: (<UserAddIcon fontSize="small" />),
-        title: 'Back to home'
-    }
-];
 
 // drawer style //////////////////////////
 const drawerWidth = 260;
@@ -112,7 +71,7 @@ const AppBar = styled(MuiAppBar, {
 /////////////////
 
 const DashboardHome = ({ children }) => {
-    const { user, logOut } = useAuth();
+    const { admin, user, logOut } = useAuth();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const router = useRouter();
@@ -174,15 +133,68 @@ const DashboardHome = ({ children }) => {
                     }}
                 />
                 <Box sx={{ flexGrow: 1 }}>
-                    {items.map((item) => (
-                        <NavItem
-                            key={item.title}
-                            icon={item.icon}
-                            href={item.href}
-                            title={item.title}
-                        // setDPanel={setDPanel}
-                        />
-                    ))}
+                    <NavItem
+                        key='Dashboard'
+                        icon={(<ChartBarIcon fontSize="small" />)}
+                        href={'/dashboard'}
+                        title='Dashboard'
+                    // setDPanel={setDPanel}
+                    />
+                    <NavItem
+                        key='Account'
+                        icon={(<UserIcon fontSize="small" />)}
+                        href={'/dashboard/account'}
+                        title='Account'
+                    />
+                    {admin && <NavItem
+                        key='Employee'
+                        icon={(<UsersIcon fontSize="small" />)}
+                        href={'/dashboard/users'}
+                        title='Employee'
+                    />}
+                    {admin && <NavItem
+                        key='Add News'
+                        icon={(<AddIcon fontSize="small" />)}
+                        href={'/dashboard/addNews'}
+                        title='Add News'
+                    />}
+                    {admin && <NavItem
+                        key='Make Admin'
+                        icon={(<LockIcon fontSize="small" />)}
+                        href={'/dashboard/makeAdmin'}
+                        title='Make Admin'
+                    />}
+                    {<NavItem
+                        key='My Notes'
+                        icon={(<EventNoteIcon fontSize="small" />)}
+                        href={'/dashboard/mynotes'}
+                        title='My Notes'
+                    />}
+                    <NavItem
+                        key='Settings'
+                        icon={(<CogIcon fontSize="small" />)}
+                        href={'/dashboard/settings'}
+                        title='Settings'
+                    />
+                    <NavItem
+                        key='Wish List'
+                        icon={(<CogIcon fontSize="small" />)}
+                        href={'/dashboard/wishlist'}
+                        title='Wish List'
+                    />
+                    <NavItem
+                        key='Back To Home'
+                        icon={(<HomeIcon fontSize="small" />)}
+                        href='/'
+                        title='Back To Home'
+                    />
+                    <NavItem
+                        key='Log Out'
+                        icon={(<LogoutIcon fontSize="small" />)}
+                        href=''
+                        title='LogOut'
+                        onClick={logOut}
+                    />
                 </Box>
                 <Divider sx={{ borderColor: '#2D3748' }} />
                 <Box sx={{ px: 2, py: 3 }} > </Box>
