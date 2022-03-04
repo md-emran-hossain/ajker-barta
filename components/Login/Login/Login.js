@@ -19,11 +19,11 @@ const Login = () => {
     const [human, setHuman] = React.useState(false);
     const isDesktop = useMediaQuery('(min-width: 900px)');
     const location = useRouter()
-    let locationURL = ''
-    if (typeof location.components === 'object') {
-        locationURL = Object.keys(location.components)[2]
-        console.log(locationURL)
-    }
+    // let locationURL = ''
+    // if (typeof location.components === 'object') {
+    //     locationURL = Object.keys(location.components)[2]
+    //     console.log(locationURL)
+    // }
 
     function onChange(value) {
         fetch('/api/users/auth', {
@@ -48,7 +48,7 @@ const Login = () => {
 
     // Login with google 
     const handleGoogleLogin = () => {
-        signInWithGoogle(locationURL);
+        signInWithGoogle(location);
     };
 
     // handle register
@@ -59,7 +59,7 @@ const Login = () => {
     // handle login
     const handleLoginSubmit = (data) => {
         console.log(data)
-        loginUser(data.email, data.password, locationURL)
+        loginUser(data.email, data.password, location)
     };
 
     const imageButton = () => {

@@ -6,13 +6,19 @@ import Global from '../components/CovidUpdate/Global';
 import useAuth from '../hooks/useAuth';
 
 const CovidDashboard = () => {
-  const { user } = useAuth()
+  const { user, loading } = useAuth()
   const router = useRouter()
   useEffect(() => {
-    if (!user.email) {
-      router.replace('/login')
+    if (loading) {
+      return <div>Nothing</div>
     }
-  }, [user.email, router])
+    if (!user.email) {
+      router.push({
+        pathname: '/login',
+        query: { from: router.pathname }
+      })
+    }
+  }, [user.email, router, loading])
   return (
     <div>
       <CovidHeader />

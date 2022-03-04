@@ -11,16 +11,16 @@ import { TrafficByDevice } from '../../components/Dashboard/DashboardHomeContent
 import useAuth from '../../hooks/useAuth';
 
 const Index = () => {
-    const { user, loading, setLoading } = useAuth()
+    const { user, loading } = useAuth()
     const router = useRouter()
-    setLoading(true)
     React.useEffect(() => {
-        // if (!user.email) {
-        //     return router.push('/login')
-        // }
-    }, [user.email, router])
-    setLoading(false)
-
+        if (loading) {
+            return <div>Nothing</div>
+        }
+        if (!user.email) {
+            return router.push('/login')
+        }
+    }, [user.email, router, loading])
     return (
         <div>
 

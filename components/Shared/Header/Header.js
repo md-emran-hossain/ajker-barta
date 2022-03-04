@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../../styles/NavigationBar.module.css';
 import { Box, Tooltip, Menu, Avatar, IconButton } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import { VscThreeBars } from 'react-icons/vsc'
@@ -16,6 +16,7 @@ const Header = () => {
     const { user, logOut } = useAuth();
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
+    const router = useRouter()
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -57,7 +58,7 @@ const Header = () => {
                     </div>
 
                     <div className='md:w-96'>
-                        <SearchIcon onClick={() => Router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
+                        <SearchIcon onClick={() => router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
                     </div>
 
                     <div className='sm:flex-1 text-center'>
@@ -89,16 +90,16 @@ const Header = () => {
                                             open={Boolean(anchorElUser)}
                                             onClose={handleCloseUserMenu} >
                                             <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
-                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => handleRouting('account')} ><PersonIcon />  Profile</h5>}
+                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/account')} ><PersonIcon />  Profile</h5>}
 
-                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => handleRouting("dashboard")}><DashboardIcon /> Dashboard</h5>}
+                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => router.push("/dashboard")}><DashboardIcon /> Dashboard</h5>}
                                                 <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
                                             </div>
                                         </Menu>
                                     </Box>
                                 </>
                                 :
-                                <button onClick={() => handleRouting('login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
+                                <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
                     </div>
                 </div>
