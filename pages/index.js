@@ -15,6 +15,7 @@ import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
+import Voting from "../components/Voting/Voting";
 
 
 
@@ -28,12 +29,12 @@ export default function Home({ newses }) {
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
   const opinion = newses.filter(news => news.category === 'opinion')
-
   return (
     <div>
       <Header />
       <NavigationBar />
       <Hero newses={newses} />
+      <Voting newses={newses} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />

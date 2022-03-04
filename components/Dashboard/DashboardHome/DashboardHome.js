@@ -71,7 +71,7 @@ const AppBar = styled(MuiAppBar, {
 /////////////////
 
 const DashboardHome = ({ children }) => {
-    const { user, logOut, admin } = useAuth();
+    const { admin, user, logOut } = useAuth();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const router = useRouter();

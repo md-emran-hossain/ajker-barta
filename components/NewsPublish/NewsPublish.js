@@ -27,38 +27,38 @@ const NewsPublish = () => {
         console.log(error);
       });
     if (e.target.files.length == 2) {
-        const imageData = new FormData();
+      const imageData = new FormData();
 
-        imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
-        await imageData.append("image", e.target.files[1]);
-  
-        axios
-          .post("https://api.imgbb.com/1/upload", imageData)
-          .then((response) => {
-            
-            images.push(response.data.data.display_url);
-            console.log(images)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
+      await imageData.append("image", e.target.files[1]);
+
+      axios
+        .post("https://api.imgbb.com/1/upload", imageData)
+        .then((response) => {
+
+          images.push(response.data.data.display_url);
+          console.log(images)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
     if (e.target.files.length == 3) {
-        const imageData = new FormData();
+      const imageData = new FormData();
 
-        imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
-        await imageData.append("image", e.target.files[2]);
-  
-        axios
-          .post("https://api.imgbb.com/1/upload", imageData)
-          .then((response) => {
-            
-            images.push(response.data.data.display_url);
-            console.log(images)
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+      imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
+      await imageData.append("image", e.target.files[2]);
+
+      axios
+        .post("https://api.imgbb.com/1/upload", imageData)
+        .then((response) => {
+
+          images.push(response.data.data.display_url);
+          console.log(images)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
   const onSubmit = async (data) => {
