@@ -15,16 +15,7 @@ import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
-import { useState } from 'react';
-
-// import LanguageControl from "../components/Shared/LanguageControl/LanguageControl";
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { Box, Menu } from '@mui/material';
+import Voting from "../components/Voting/Voting";
 
 
 
@@ -38,68 +29,12 @@ export default function Home({ newses }) {
   const sports = newses.filter((news) => news.category === "sports");
   const opinion = newses.filter(news => news.category === 'opinion')
 
-
-  //language control function
-
-  const [bengali, setBengaliNews] = useState(false);
-  const englishNews = () => setBengaliNews(false);
-  const bengaliNews = () => setBengaliNews(true);
-  console.log("Bengali and english clickable ", bengali)
-
-  // language control popover
-  const [language, setLanguage] = useState(null);
-  const handleOpenLanguage = (event) => {
-    setLanguage(event.currentTarget);
-  };
-  const handleCloseLanguage = () => {
-    setLanguage(null);
-  };
-
-
-  const languagePopOver = (
-    <Box sx={{ flexGrow: 0, marginTop: 2 }}>
-      {!bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>Edition:</span> English {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-
-      {bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>সংস্করণ :</span> বাংলা  {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-      <Menu
-        sx={{ mt: '45px', width: '500px' }}
-        id="menu-appbar"
-        anchorEl={language}
-        anchorOrigin={{
-          vertical: 'top', horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top', horizontal: 'right',
-        }}
-        open={Boolean(language)}
-        onClose={handleCloseLanguage} >
-        <div onClick={handleCloseLanguage} className="flex flex-col px-3 py-2 w-48">
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
-              <div onClick={() => englishNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                <FormControlLabel control={<Radio />} label="English" />
-              </div>
-              <div onClick={() => bengaliNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                <FormControlLabel control={<Radio />} label="Bengali" />
-              </div>
-            </RadioGroup>
-          </FormControl>
-        </div>
-      </Menu>
-    </Box>
-  );
-
-
   return (
     <div>
-      <Header languagePopOver={languagePopOver} />
+      <Header />
       <NavigationBar />
       <Hero newses={newses} />
+      <Voting newses={newses} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />

@@ -11,7 +11,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const Header = ({ languagePopOver }) => {
+const Header = () => {
     const { user, logOut } = useAuth();
     const [isOpen, setIsOpen] = React.useState(false)
     const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -21,7 +21,6 @@ const Header = ({ languagePopOver }) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
 
     const handleRouting = (location) => {
         if (location === "login") {
@@ -115,48 +114,6 @@ const Header = ({ languagePopOver }) => {
                                 :
                                 <button onClick={() => handleRouting('login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
-
-                        {/* Bengali and English news option  */}
-                        <div className='mt-2'>
-                            {languagePopOver}
-                        </div>
-
-                        {/* <Box sx={{ flexGrow: 0, marginTop: 2 }}>
-                            {!bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>Edition:</span> English {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-
-                            {bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>সংস্করণ :</span> বাংলা  {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-                            <Menu
-                                sx={{ mt: '45px', width: '500px' }}
-                                id="menu-appbar"
-                                anchorEl={language}
-                                anchorOrigin={{
-                                    vertical: 'top', horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top', horizontal: 'right',
-                                }}
-                                open={Boolean(language)}
-                                onClose={handleCloseLanguage} >
-                                <div onClick={handleCloseLanguage} className="flex flex-col px-3 py-2 w-48">
-                                    <FormControl>
-                                        <RadioGroup
-                                            aria-labelledby="demo-radio-buttons-group-label"
-                                            defaultValue="female"
-                                            name="radio-buttons-group"
-                                        >
-                                            <div onClick={() => englishNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                                                <FormControlLabel control={<Radio />} label="English" />
-                                            </div>
-                                            <div onClick={() => bengaliNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                                                <FormControlLabel control={<Radio />} label="Bengali" />
-                                            </div>
-                                        </RadioGroup>
-                                    </FormControl>
-                                </div>
-                            </Menu>
-                        </Box> */}
-
                     </div>
                 </div>
             </div>
