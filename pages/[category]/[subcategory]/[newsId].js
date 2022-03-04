@@ -4,7 +4,7 @@ import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa"
 import { MdFacebook, MdHeadset, MdOutlineEditNote } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
-import axios from 'axios'
+import axios from 'axios';
 import { formatDistanceToNow } from 'date-fns'
 import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
