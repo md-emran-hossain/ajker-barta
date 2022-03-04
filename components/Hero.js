@@ -36,6 +36,7 @@ const Hero = ({ newses }) => {
                   <img className='w-full h-full' src={news?.images?.img1} alt='' />
                   <div className='absolute bottom-4 left-4 z-10'>
                     <p className='text-white text-sm capitalize'>{news?.category} / {`${formatDistanceToNow(new Date(news?.publishedDate))} ago`}</p>
+                    <h1 className='text-white text-xl md:text-3xl cursor-pointer hover:text-red-600 leading-5 md:leading-8 sm:my-1 md:my-2 font-semibold transition-colors duration-300'>{news?.heading}</h1>
                     <h1 className='text-white text-xl md:text-3xl cursor-pointer hover:text-red-600 leading-5 md:leading-8 sm:my-1 md:my-2 font-semibold transition-colors duration-300'>{news.heading}</h1>
                     <p className='text-white text-sm md:text-md'>{news?.description[0]}...</p>
                   </div>
@@ -60,13 +61,13 @@ const Hero = ({ newses }) => {
             className={styles.secondSlide}
           >
             {
-              latest.slice(3, 8).map(news => <SwiperSlide key={news._id}>
-                <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className='flex justify-center gap-3 h-full cursor-pointer'>
+              latest.slice(3, 8).map(news => <SwiperSlide key={news?._id}>
+                <div onClick={() => router.push(`/${news?.category}/${news?.subCategory}/${news?._id}`)} className='flex justify-center gap-3 h-full cursor-pointer'>
                   <div className='w-2/5 h-full'>
-                    <img className='w-full h-full object-cover' src={news?.images.img1} alt='' />
+                    <img className='w-full h-full object-cover' src={news?.images?.img1} alt='' />
                   </div>
                   <div className='w-3/5'>
-                    <p className='text-sm capitalize'><span className='text-blue-500'>{news?.category}</span> / {`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
+                    <p className='text-sm capitalize'><span className='text-blue-500'>{news?.category}</span> / {`${formatDistanceToNow(new Date(news?.publishedDate))} ago`}</p>
                     <h1 className='md:text-lg text-md leading-5 md:leading-4 xl:leading-6 cursor-pointer hover:text-red-600 font-medium transition-colors duration-300'>{news?.heading}</h1>
                   </div>
                 </div>

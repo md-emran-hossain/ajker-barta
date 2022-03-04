@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../../styles/NavigationBar.module.css';
 import { Box, Tooltip, Menu, Avatar, IconButton } from '@mui/material';
 import useAuth from '../../../hooks/useAuth';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { FaTimes } from 'react-icons/fa'
 import { VscThreeBars } from 'react-icons/vsc'
@@ -11,31 +11,17 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const Header = ({ languagePopOver }) => {
+
+const Header = () => {
     const { user, logOut } = useAuth();
-    const [isOpen, setIsOpen] = React.useState(false)
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [isOpen, setIsOpen] = React.useState(false)
+    const router = useRouter()
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
-    };
-
-
-    const handleRouting = (location) => {
-        if (location === "login") {
-            Router.push("/login")
-        }
-        else if (location === "dashboard") {
-            Router.push("/dashboard")
-        }
-        else if (location === "account") {
-            Router.push("/dashboard/account")
-        }
-        else {
-            Router.push('/')
-        }
     };
 
     return (
@@ -60,7 +46,7 @@ const Header = ({ languagePopOver }) => {
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/business" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/entertainment" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/lifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/ifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
                                 <li className='text-lg mt-5'>
                                     <p className='ml-5'><strong> © AJKER BARTA</strong></p>
                                 </li>
@@ -72,7 +58,7 @@ const Header = ({ languagePopOver }) => {
                     </div>
 
                     <div className='md:w-96'>
-                        <SearchIcon onClick={() => Router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
+                        <SearchIcon onClick={() => router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
                     </div>
 
                     <div className='sm:flex-1 text-center'>
@@ -87,7 +73,7 @@ const Header = ({ languagePopOver }) => {
                                     <Box sx={{ flexGrow: 0 }}>
                                         <Tooltip title="Open settings">
                                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar alt="Remy Sharp" src={user?.photoURL} />
+                                                <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
                                             </IconButton>
                                         </Tooltip>
                                         <Menu
@@ -104,59 +90,17 @@ const Header = ({ languagePopOver }) => {
                                             open={Boolean(anchorElUser)}
                                             onClose={handleCloseUserMenu} >
                                             <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
-                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => handleRouting('account')} ><PersonIcon />  Profile</h5>}
+                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/account')} ><PersonIcon />  Profile</h5>}
 
-                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => handleRouting("dashboard")}><DashboardIcon /> Dashboard</h5>}
+                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => router.push("/dashboard")}><DashboardIcon /> Dashboard</h5>}
                                                 <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
                                             </div>
                                         </Menu>
                                     </Box>
                                 </>
                                 :
-                                <button onClick={() => handleRouting('login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
+                                <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
-
-                        {/* Bengali and English news option  */}
-                        <div className='mt-2'>
-                            {languagePopOver}
-                        </div>
-
-                        {/* <Box sx={{ flexGrow: 0, marginTop: 2 }}>
-                            {!bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>Edition:</span> English {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-
-                            {bengali && <h5 onClick={handleOpenLanguage} className='text-md cursor-pointer w-48 ml-auto'> <span className='text-gray-500'>সংস্করণ :</span> বাংলা  {!language ? <KeyboardArrowDownIcon /> : <KeyboardArrowUpIcon />} </h5>}
-                            <Menu
-                                sx={{ mt: '45px', width: '500px' }}
-                                id="menu-appbar"
-                                anchorEl={language}
-                                anchorOrigin={{
-                                    vertical: 'top', horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top', horizontal: 'right',
-                                }}
-                                open={Boolean(language)}
-                                onClose={handleCloseLanguage} >
-                                <div onClick={handleCloseLanguage} className="flex flex-col px-3 py-2 w-48">
-                                    <FormControl>
-                                        <RadioGroup
-                                            aria-labelledby="demo-radio-buttons-group-label"
-                                            defaultValue="female"
-                                            name="radio-buttons-group"
-                                        >
-                                            <div onClick={() => englishNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                                                <FormControlLabel control={<Radio />} label="English" />
-                                            </div>
-                                            <div onClick={() => bengaliNews()} className='hover:bg-gray-100 rounded-md px-2 py-0'>
-                                                <FormControlLabel control={<Radio />} label="Bengali" />
-                                            </div>
-                                        </RadioGroup>
-                                    </FormControl>
-                                </div>
-                            </Menu>
-                        </Box> */}
-
                     </div>
                 </div>
             </div>
