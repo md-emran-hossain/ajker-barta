@@ -68,6 +68,7 @@ const Newsdetails = ({ newses }) => {
 
   // news modal control 
   const [open, setOpen] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -75,13 +76,13 @@ const Newsdetails = ({ newses }) => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
-  //   setOpen(false);
-  // };
+    setOpenSnack(false);
+  };
 
   const action = (
     <>
@@ -298,7 +299,7 @@ const Newsdetails = ({ newses }) => {
     try {
       const toCopy = url || location.href;
       await navigator.clipboard.writeText(toCopy);
-      setOpen(true);
+      setOpenSnack(true);
       console.log("Text or Page URL copied");
     } catch (err) {
       console.error("Failed to copy: ", err);
@@ -610,12 +611,12 @@ const Newsdetails = ({ newses }) => {
         selectedText={selectedText}
       />
       <Snackbar
-        open={open}
+        open={openSnack}
         autoHideDuration={3000}
-        onClose={handleClose}
+        onClose={handleCloseSnack}
         action={action}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+        <Alert onClose={handleCloseSnack} severity="success" sx={{ width: "100%" }}>
           News Link Copied!
         </Alert>
       </Snackbar>
