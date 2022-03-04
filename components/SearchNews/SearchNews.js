@@ -1,46 +1,58 @@
-import React, { useEffect, useState } from 'react'
-import useAuth from '../../hooks/useAuth';
+import { Container, TextField } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import React from 'react'
+import Header from '../Shared/Header/Header';
+import NavigationBar from '../Shared/NavigationBar/NavigationBar';
+import { useRouter } from 'next/router';
 
+const SearchNews = ({ newses }) => {
+    const [searchText, setSearchText] = React.useState("");
+    const [searchResult, setSearchResult] = React.useState([]);
 
-const SearchNews = () => {
-    const { user, setLoading, loading } = useAuth();
-    const [newsData, setNewsData] = useState([]);
-    // console.log(newsData)
-
-    useEffect(() => {
-        setLoading(true)
-        fetch("/api/news")
-            .then(res => res.json())
-            .then(data => setNewsData(data))
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false));
-
-    }, [setLoading])
-
-    const handleSearch = (e) => {
-        const searchText = e.target.value;
-        const matchedNews = newsData?.filter((data) => data.category.toLowerCase().includes(searchText.toLowerCase()));
-
-        console.log(matchedNews);
-        e.target.value
-    };
+    const handleSearch = () => {
+        setSearchResult(newses.filter(news => (news.category.toLowerCase() || news.heading.toLowerCase()).includes(searchText.toLowerCase())));
+        console.log(searchResult);
+    }
+    const router = useRouter();
 
     return (
-        <div>
-            {loading ? <h1 className="text-center pt-18 text-5xl">Loading....</h1> :
-                <h2 className="text-4xl text-center font-bold pt-14">this is Search news: {newsData.length} </h2>}
+        <>
+            <Header />
+            <NavigationBar />
+            <Container maxWidth="lg">
+                <h2 className="text-4xl text-center font-bold pt-3 mb-5">Search Result By News </h2>
+                <div className=" mx-auto relative">
+                    <TextField onChange={e => setSearchText(e.target.value)}
+                        sx={{ width: '100%' }}
+                        type="text"
+                        color='success'
+                        placeholder="Search News"
+                        variant="outlined" />
+                    <SearchIcon onClick={handleSearch} sx={{ color: 'red', cursor: 'pointer', position: 'absolute', right: '10px', top: '5px', fontSize: '50px' }} />
+                </div>
 
-            <div className="mt-5 w-72 mx-auto">
-                <label className="relative block">
-                    <span className="sr-only">Search</span>
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                        <svg className="h-5 w-5 fill-slate-300" viewBox="0 0 20 20"></svg>
-                    </span>
-                    <input onBlur={handleSearch} className="placeholder:italic placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" placeholder="Search for anything..." type="text" name="search" />
-                </label>
-            </div>
+                {
+                    !searchResult.length ? <h1 className='text-red-500 text-center font-semibold text-2xl'>No Result Found Please Search Again By Category and Headline</h1>
+                        :
 
-        </div>
+                        <div className=" mx-auto mt-8 w-6/12">
+                            {searchResult?.map(news => <div
+                                key={news._id}
+                                className='flex my-6 border-b-2 pb-2 cursor-pointer'
+                                onClick={() => router.push(`/${news.category}/${news.subCategory}/${news._id}`)}>
+                                <div className='' >
+                                    <h2 className='md:text-2xl text-xl font-semibold hover:text-red-500'>{news?.heading}</h2>
+                                    <p>{news.publishedDate}</p>
+                                </div>
+                                <img className='w-4/12 ml-auto' src={news?.images?.img1} alt="" />
+                            </div>)
+                            }
+                        </div>
+
+                }
+            </Container>
+
+        </>
     );
 };
 

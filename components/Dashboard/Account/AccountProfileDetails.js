@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'
 import {
     Box,
     Button,
@@ -9,44 +10,52 @@ import {
     Grid,
     TextField
 } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
 
-const states = [
-    {
-        value: 'alabama',
-        label: 'Alabama'
-    },
-    {
-        value: 'new-york',
-        label: 'New York'
-    },
-    {
-        value: 'san-francisco',
-        label: 'San Francisco'
-    }
-];
+export const AccountProfileDetails = () => {
+    const { user } = useAuth()
+    const [userData, setUserData] = useState({})
 
-export const AccountProfileDetails = (props) => {
-    const [values, setValues] = useState({
-        firstName: 'Katarina',
-        lastName: 'Smith',
-        email: 'demo@devias.io',
-        phone: '',
-        state: 'Alabama',
-        country: 'USA'
-    });
-
-    const handleChange = (event) => {
-        setValues({
-            ...values,
-            [event.target.name]: event.target.value
-        });
+    const handleChange = (e) => {
+        const value = e.target.value
+        const property = e.target.name
+        const newObj = { ...userData }
+        newObj[property] = value
+        delete newObj._id
+        setUserData(newObj)
     };
+    useEffect(() => {
+        fetch(`/api/users/note?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => setUserData(data))
+    }, [user.email])
+
+    const updateUser = (e) => {
+        e.preventDefault()
+        fetch('/api/users', {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount === 1) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: `Profile Updated`,
+                    })
+                }
+            })
+    }
 
     return (
         <form
             autoComplete="off"
             noValidate
-            {...props}
+            onSubmit={updateUser}
         >
             <Card>
                 <CardHeader
@@ -68,10 +77,10 @@ export const AccountProfileDetails = (props) => {
                                 fullWidth
                                 helperText="Please specify the first name"
                                 label="First name"
-                                name="firstName"
+                                name="name"
                                 onChange={handleChange}
                                 required
-                                value={values.firstName}
+                                value={userData.name || ''}
                                 variant="outlined"
                             />
                         </Grid>
@@ -85,8 +94,7 @@ export const AccountProfileDetails = (props) => {
                                 label="Last name"
                                 name="lastName"
                                 onChange={handleChange}
-                                required
-                                value={values.lastName}
+                                value={userData?.lastName || ''}
                                 variant="outlined"
                             />
                         </Grid>
@@ -101,7 +109,7 @@ export const AccountProfileDetails = (props) => {
                                 name="email"
                                 onChange={handleChange}
                                 required
-                                value={values.email}
+                                value={'' || userData.email}
                                 variant="outlined"
                             />
                         </Grid>
@@ -116,7 +124,7 @@ export const AccountProfileDetails = (props) => {
                                 name="phone"
                                 onChange={handleChange}
                                 type="number"
-                                value={values.phone}
+                                value={userData?.phone || ''}
                                 variant="outlined"
                             />
                         </Grid>
@@ -130,8 +138,7 @@ export const AccountProfileDetails = (props) => {
                                 label="Country"
                                 name="country"
                                 onChange={handleChange}
-                                required
-                                value={values.country}
+                                value={userData?.country || ''}
                                 variant="outlined"
                             />
                         </Grid>
@@ -142,23 +149,12 @@ export const AccountProfileDetails = (props) => {
                         >
                             <TextField
                                 fullWidth
-                                label="Select State"
+                                label="State Name"
                                 name="state"
                                 onChange={handleChange}
-                                required
-                                select
-                                SelectProps={{ native: true }}
-                                value={values.state}
+                                value={userData?.state || ''}
                                 variant="outlined"
                             >
-                                {states.map((option) => (
-                                    <option
-                                        key={option.value}
-                                        value={option.value}
-                                    >
-                                        {option.label}
-                                    </option>
-                                ))}
                             </TextField>
                         </Grid>
                     </Grid>
@@ -174,6 +170,7 @@ export const AccountProfileDetails = (props) => {
                     <Button
                         color="primary"
                         variant="contained"
+                        type='submit'
                     >
                         Save details
                     </Button>

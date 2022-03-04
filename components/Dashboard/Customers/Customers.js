@@ -1,168 +1,118 @@
 import Head from 'next/head';
 import { Box, Container } from '@mui/material';
-import { CustomerListResults } from './CustomerListResults';
 import { CustomerListToolbar } from './CustomerListToolbar';
-import { v4 as uuid } from 'uuid';
+import { useState, useEffect } from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import ClearIcon from '@mui/icons-material/Clear';
+import Swal from 'sweetalert2'
 
-export const customers = [
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'West Virginia',
-            city: 'Parkersburg',
-            street: '2849 Fulton Street'
-        },
-        avatarUrl: '/static/images/avatars/avatar_3.png',
-        createdAt: 1555016400000,
-        email: 'ekaterina.tankova@devias.io',
-        name: 'Ekaterina Tankova',
-        phone: '304-428-3097'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Bristow',
-            city: 'Iowa',
-            street: '1865  Pleasant Hill Road'
-        },
-        avatarUrl: '/static/images/avatars/avatar_4.png',
-        createdAt: 1555016400000,
-        email: 'cao.yu@devias.io',
-        name: 'Cao Yu',
-        phone: '712-351-5711'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Georgia',
-            city: 'Atlanta',
-            street: '4894  Lakeland Park Drive'
-        },
-        avatarUrl: '/static/images/avatars/avatar_2.png',
-        createdAt: 1555016400000,
-        email: 'alexa.richardson@devias.io',
-        name: 'Alexa Richardson',
-        phone: '770-635-2682'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Ohio',
-            city: 'Dover',
-            street: '4158  Hedge Street'
-        },
-        avatarUrl: '/static/images/avatars/avatar_5.png',
-        createdAt: 1554930000000,
-        email: 'anje.keizer@devias.io',
-        name: 'Anje Keizer',
-        phone: '908-691-3242'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Texas',
-            city: 'Dallas',
-            street: '75247'
-        },
-        avatarUrl: '/static/images/avatars/avatar_6.png',
-        createdAt: 1554757200000,
-        email: 'clarke.gillebert@devias.io',
-        name: 'Clarke Gillebert',
-        phone: '972-333-4106'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'California',
-            city: 'Bakerfield',
-            street: '317 Angus Road'
-        },
-        avatarUrl: '/static/images/avatars/avatar_1.png',
-        createdAt: 1554670800000,
-        email: 'adam.denisov@devias.io',
-        name: 'Adam Denisov',
-        phone: '858-602-3409'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'California',
-            city: 'Redondo Beach',
-            street: '2188  Armbrester Drive'
-        },
-        avatarUrl: '/static/images/avatars/avatar_7.png',
-        createdAt: 1554325200000,
-        email: 'ava.gregoraci@devias.io',
-        name: 'Ava Gregoraci',
-        phone: '415-907-2647'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Nevada',
-            city: 'Las Vegas',
-            street: '1798  Hickory Ridge Drive'
-        },
-        avatarUrl: '/static/images/avatars/avatar_8.png',
-        createdAt: 1523048400000,
-        email: 'emilee.simchenko@devias.io',
-        name: 'Emilee Simchenko',
-        phone: '702-661-1654'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Michigan',
-            city: 'Detroit',
-            street: '3934  Wildrose Lane'
-        },
-        avatarUrl: '/static/images/avatars/avatar_9.png',
-        createdAt: 1554702800000,
-        email: 'kwak.seong.min@devias.io',
-        name: 'Kwak Seong-Min',
-        phone: '313-812-8947'
-    },
-    {
-        id: uuid(),
-        address: {
-            country: 'USA',
-            state: 'Utah',
-            city: 'Salt Lake City',
-            street: '368 Lamberts Branch Road'
-        },
-        avatarUrl: '/static/images/avatars/avatar_10.png',
-        createdAt: 1522702800000,
-        email: 'merrile.burgett@devias.io',
-        name: 'Merrile Burgett',
-        phone: '801-301-7894'
+const Customers = () => {
+    const [employees, setEmployees] = useState([])
+    useEffect(() => {
+        fetch('/api/users')
+            .then(res => res.json())
+            .then(data => setEmployees(data))
+    }, [employees])
+    const handleDesignation = (e, id) => {
+        const designationObj = { designation: e.target.value }
+        fetch(`/api/users/updaterole?id=${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(designationObj)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
     }
-];
-
-const Customers = () => (
-    <>
-        <Head>
-            <title>
-                Users
-            </title>
-        </Head>
-        <Box component="main" sx={{ flexGrow: 1, }}>
-            <Container maxWidth={false}>
-                <CustomerListToolbar />
-                <Box sx={{ mt: 3 }}>
-                    <CustomerListResults customers={customers} />
-                </Box>
-            </Container>
-        </Box>
-    </>
-);
+    const handleDelete = (id) => {
+        fetch(`/api/users?id=${id}`, {
+            method: "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount === 1) {
+                    const newEmployee = employees.filter(employee => employee._id !== id)
+                    setEmployees(newEmployee)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: `Employee Deleted`,
+                    })
+                }
+            })
+    }
+    return (
+        <>
+            <Head>
+                <title>
+                    Employee
+                </title>
+            </Head>
+            <Box component="main" sx={{ flexGrow: 1, }}>
+                <Container maxWidth={"lg"}>
+                    <CustomerListToolbar employees={employees} />
+                    <Box sx={{ mt: 3 }}>
+                        <TableContainer component={Paper}>
+                            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                                <TableHead >
+                                    <TableRow >
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }} className=''>Name</TableCell >
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }}>Email</TableCell>
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }}>Country</TableCell>
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }}>State</TableCell>
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }}>Designation</TableCell>
+                                        <TableCell style={{ fontWeight: "500", fontSize: "18px" }} align='right'>Action</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {employees.map((employee) => (
+                                        <TableRow
+                                            key={employee._id}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                {employee.name}
+                                            </TableCell>
+                                            <TableCell component="th" scope="row">
+                                                {employee.email}
+                                            </TableCell>
+                                            <TableCell>{employee?.country}</TableCell>
+                                            <TableCell>{employee?.state}</TableCell>
+                                            <TableCell>
+                                                <select onChange={(e) => handleDesignation(e, employee._id)} className='border py-1 px-2'>
+                                                    <option value={employee.role}>{employee.role}</option>
+                                                    <option value="Sr. Reporter">Jr. Reporter</option>
+                                                    <option value="Sr. Reporter">Jr. Reporter</option>
+                                                    <option value="Editor">Editor</option>
+                                                    <option value="Publisher">Publisher</option>
+                                                    <option value="Chief Analyst">Chief Analyst</option>
+                                                    <option value="Production Manager">Production Manager</option>
+                                                </select>
+                                            </TableCell>
+                                            <TableCell align='right'>
+                                                <ClearIcon
+                                                    onClick={() => handleDelete(employee._id)}
+                                                    className='bg-red-500 rounded-full text-white cursor-pointer' />
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Box>
+                </Container>
+            </Box>
+        </>
+    )
+};
 
 export default Customers;

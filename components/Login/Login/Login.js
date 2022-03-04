@@ -4,18 +4,19 @@ import { useForm } from "react-hook-form";
 import useMediaQuery from '../../Shared/useMediaQuery/useMediaQuery';
 import { TextField, Button, CircularProgress, } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
-import Router from 'next/router';
 import useAuth from '../../../hooks/useAuth';
 import Header from '../../Shared/Header/Header';
 import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Login = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, reset } = useForm();
     const { signInWithGoogle, registerUser, loginUser, loading } = useAuth();
     const [newName, setNewName] = React.useState("");
     const [newEmail, setNewEmail] = React.useState("");
     const [newPass, setNewPass] = React.useState("");
+    const [human, setHuman] = React.useState(false);
     const isDesktop = useMediaQuery('(min-width: 900px)');
     const location = useRouter()
     let locationURL = ''
@@ -24,17 +25,38 @@ const Login = () => {
         console.log(locationURL)
     }
 
-    //// Login with google 
+    function onChange(value) {
+        fetch('/api/users/auth', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(value)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    setHuman(true);
+                }
+                else {
+                    setHuman(false);
+                    reset()
+                }
+            })
+        console.log("Captcha value:", value);
+    }
+
+    // Login with google 
     const handleGoogleLogin = () => {
         signInWithGoogle(locationURL);
     };
 
-    //// handle register
+    // handle register
     const handleRegisterSubmit = () => {
         registerUser(newEmail, newPass, newName)
     }
 
-    //// handle login
+    // handle login
     const handleLoginSubmit = (data) => {
         console.log(data)
         loginUser(data.email, data.password, locationURL)
@@ -46,11 +68,8 @@ const Login = () => {
 
     return (
         <>
-            <Head>
-                <title>
-                    Login
-                </title>
-            </Head>
+            <Head> <title> Login </title> </Head>
+
             <Header></Header>
             <NavigationBar></NavigationBar>
 
@@ -72,8 +91,13 @@ const Login = () => {
                                             name="password" {...register("password")} label="Your Password"
                                             type="password"
                                             variant="standard" required />
-
-                                        <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px', }} variant="contained">Login</Button>
+                                        {/* recaptcha */}
+                                        <ReCAPTCHA
+                                            sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+                                            className='mt-8'
+                                            onChange={onChange}
+                                        />
+                                        {human && <Button className="fb-btn" type="submit" style={{ width: '100%', marginTop: '25px', }} variant="contained">Login</Button>}
                                     </form>
                                     <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: '#eb3b5a', backgroundColor: 'white' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
                                 </div>
@@ -106,45 +130,52 @@ const Login = () => {
                                             <TextField color='success' sx={{ width: '100%', marginBottom: "15px" }}
                                                 name="password" type="password" className="mb-4" onChange={(e) => setNewPass(e.target.value)} label="Your Password" variant="standard" required />
 
-                                            <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="contained">Sign up</Button>
+                                            <ReCAPTCHA
+                                                sitekey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+                                                className='mt-8'
+                                                onChange={onChange}
+                                            />
+                                            {human && <Button className='fb-btn' onClick={handleRegisterSubmit} style={{ width: '100%', marginTop: '25px' }} variant="contained">Sign up</Button>}
                                         </form>
                                         <Button onClick={handleGoogleLogin} style={{ width: '100%', color: 'black', position: 'relative', borderColor: 'eb3b5a' }} variant="outlined"><GoogleIcon sx={{ color: '#eb3b5a', marginBottom: '3px', left: '10px', position: 'absolute' }} /> Connect with google</Button>
-                                    </div>
-                                </div>
+                                    </div >
+                                </div >
+                            </div >
+                        </div >
+                    </div >
+                </div >
+            }
+            {/* second login form  */}
+
+            {
+                !isDesktop && <div className="second-form-body">
+                    <div className="second-form ">
+                        <div className="second-form-main ">
+                            <input type="checkbox" id="chk" aria-hidden="true" />
+                            <div className="signup">
+                                <form onSubmit={handleRegisterSubmit}>
+                                    <label htmlFor="chk" aria-hidden="true">Sign up</label>
+                                    <input type="text" name="name" onChange={(e) => setNewName(e.target.value)} placeholder="User name" required />
+                                    <input type="email" name="email" onChange={(e) => setNewEmail(e.target.value)} placeholder="Email" required />
+                                    <input type="password" name="password" onChange={(e) => setNewPass(e.target.value)} placeholder="Password" required />
+                                    <button type='submit'>Sign up</button>
+                                </form>
+                                <button onClick={handleGoogleLogin} sx={{ width: '75%', m: 1, mt: 2 }} className="fb-btn " > <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></button>
+                            </div>
+
+                            <div className="login">
+                                <form onSubmit={handleSubmit(handleLoginSubmit)}>
+                                    <label htmlFor="chk" aria-hidden="true">Login</label>
+                                    <input type="email"   {...register("email")} placeholder="Email" required />
+                                    <input type="password"  {...register("password")} placeholder="Password" required />
+                                    <button type='submit'>Login</button>
+                                </form>
+                                <button onClick={handleGoogleLogin} sx={{ width: '75%', m: 1, mt: 2 }} className="fb-btn " > <span className=' text-white'>Connect with</span> <span><GoogleIcon /></span></button>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-            {/* second login form  */}
-
-            {!isDesktop && <div className="second-form-body">
-                <div className="second-form ">
-                    <div className="second-form-main ">
-                        <input type="checkbox" id="chk" aria-hidden="true" />
-                        <div className="signup">
-                            <form onSubmit={handleRegisterSubmit}>
-                                <label htmlFor="chk" aria-hidden="true">Sign up</label>
-                                <input type="text" name="name" onChange={(e) => setNewName(e.target.value)} placeholder="User name" required />
-                                <input type="email" name="email" onChange={(e) => setNewEmail(e.target.value)} placeholder="Email" required />
-                                <input type="password" name="password" onChange={(e) => setNewPass(e.target.value)} placeholder="Password" required />
-                                <button type='submit'>Sign up</button>
-                            </form>
-                            <button onClick={handleGoogleLogin} sx={{ width: '75%', m: 1, mt: 2 }} className="fb-btn " > <span className='text-dark '>Connect with</span> <span><GoogleIcon /></span></button>
-                        </div>
-
-                        <div className="login">
-                            <form onSubmit={handleSubmit(handleLoginSubmit)}>
-                                <label htmlFor="chk" aria-hidden="true">Login</label>
-                                <input type="email"   {...register("email")} placeholder="Email" required />
-                                <input type="password"  {...register("password")} placeholder="Password" required />
-                                <button type='submit'>Login</button>
-                            </form>
-                            <button onClick={handleGoogleLogin} sx={{ width: '75%', m: 1, mt: 2 }} className="fb-btn " > <span className=' text-white'>Connect with</span> <span><GoogleIcon /></span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>}
 
         </>
     );

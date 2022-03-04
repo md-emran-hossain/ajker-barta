@@ -5,16 +5,16 @@ import Interview from './Interview/Interview';
 import OpEd from './OpEd/OpEd';
 import WorldMedia from './WorldMedia/WorldMedia';
 
-const Opinion = () => {
+const Opinion = ({ opinion }) => {
     return (
         <>
-            <OpEd />
-            <div className='container mx-auto lg:pb-5 py-10'>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Editorial />
-                    <Interview />
-                    <Analysis />
-                    <WorldMedia />
+            <OpEd opinion={opinion} />
+            <div className='container mx-auto lg:pb-5 py-10 border-b'>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+                    <Editorial opinion={opinion} />
+                    <Interview opinion={opinion} />
+                    <Analysis opinion={opinion} />
+                    <WorldMedia opinion={opinion} />
                 </div>
             </div>
         </>

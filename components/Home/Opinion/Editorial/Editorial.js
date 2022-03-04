@@ -1,22 +1,25 @@
 import React from 'react';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-const Editorial = () => {
+import { formatDistanceToNow } from 'date-fns';
+import { useRouter } from 'next/router';
+
+const Editorial = ({ opinion }) => {
+  const editorial = opinion.filter(news => news.subCategory === 'editorial')
+  const router = useRouter()
   return (
     <div>
-      <h2 className='text-2xl pt-24 lg:pt-5 pb-5 text-red-500 font-bold'><span className='text-black'>Editorial </span><ChevronRightIcon /></h2>
-      <div className="rounded overflow-hidden shadow-lg">
-        <img className="w-full" src='https://images.prothomalo.com/prothomalo-english%2F2021-02%2Fd3aaa674-ab87-4dd2-aa1f-e1ca5757eb47%2Fed.png?rect=0%2C0%2C1600%2C1067&auto=format%2Ccompress&fmt=webp&format=webp&w=300&dpr=1.0' alt="Mountain" />
-        <div className="px-6 py-4">
-          <div className="text-lg font-bold mb-2 text-slate-400">Fear despite record results in HSC exam WASA’s corruption on consumers: Golam Rahman</div>
+      <h2 onClick={() => router.push(`/opinion/editorial`)} className='text-xl mb-3 text-red-500 font-serif font-medium cursor-pointer'><span className='text-black'>Editorial </span><ChevronRightIcon /></h2>
+      <div className='border-r pr-2'>
+        <div onClick={() => router.push(`/${editorial[0].category}/${editorial[0].subCategory}/${editorial[0]._id}`)} className='pb-3 cursor-pointer'>
+          <img className='rounded-t-md h-52 object-cover w-full' src={editorial[0]?.images.img1} alt="" />
+          <h1 className='text-xl font-serif my-1 hover:text-blue-500 transition-colors duration-300'>{editorial[0]?.heading}</h1>
+          <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500 ">{`${formatDistanceToNow(new Date(editorial[0]?.publishedDate))} ago`}</p>
         </div>
-        <div className="px-6 pt-1 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">12 hours ago</span>
+        <div onClick={() => router.push(`/${editorial[1].category}/${editorial[1].subCategory}/${editorial[1]._id}`)} className='border-t py-2 cursor-pointer'>
+          <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{editorial[1].subHeading ? <div> <span className='text-red-500'>{editorial[1].subHeading}</span>/{editorial[1].heading}</div> : <div>{editorial[1].heading}</div>}</h1>
         </div>
-        <div className="px-6 py-4 border-t-2 ">
-          <div className="text-base font-bold mb-2 text-slate-400"> <span className='text-orange-700'>Environment and development</span> / Do not ignore recommendations of experts</div>
-        </div>
-        <div className="px-6 py-4 border-t-2 ">
-          <div className="text-base font-bold mb-2 text-slate-400"> <span className='text-orange-700'>Disorder on the roads </span> / How do vehicles run without licences?</div>
+        <div onClick={() => router.push(`/${editorial[2].category}/${editorial[2].subCategory}/${editorial[2]._id}`)} className='border-t py-2 cursor-pointer'>
+          <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{editorial[2].subHeading ? <div> <span className='text-red-500'>{editorial[2].subHeading}</span>/{editorial[1].heading}</div> : <div>{editorial[3].heading}</div>}</h1>
         </div>
       </div>
     </div>

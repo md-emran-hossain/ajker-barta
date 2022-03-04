@@ -1,130 +1,39 @@
-import React from "react";
-import { IoIosArrowForward } from "react-icons/io";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { IoIosArrowForward } from 'react-icons/io';
+import Image from 'next/image';
 
-const OpEd = () => {
+const OpEd = ({ opinion }) => {
+  const oped = opinion.filter(news => news.subCategory === 'Op-Ed')
+  const oped1 = oped[0]
+  const router = useRouter()
   return (
-    <div className="container xl mx-auto">
-      <div className="flex items-center justify-start mt-5 mb-3">
-        <h1 className='py-2 text-xl cursor-pointer font-medium text-blue-900'>Opinion </h1><IoIosArrowForward className='text-red-600 mt-1' />
-      </div>
-      <div className="px-5 grid grid-flow-row-dense sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 grid-rows-1 gap-0">
-        <div>
-          <div
-            className="max-w-sm mx-auto rounded border-solid border-2 border-inherit py-6"
-            style={{ height: "420px" }}
-          >
-            <span
-              className="font-bold px-2 text-xl mb-2 mr-10 bg-blue-900 text-white	"
-              style={{ marginLeft: "-25px", marginTop: "20px" }}
-            >
-              Diplomacy or justice to{" "}
-            </span>{" "}
-            <br></br>
-            <span
-              className="font-bold px-2 text-xl mb-2 mr-10 bg-blue-900 mt-7 text-white"
-              style={{ marginLeft: "-25px" }}
-            >
-              tackle the sanctions?{" "}
-            </span>
-            <div className="px-6 py-4 my-10">
-              <p className="text-gray-700 text-base">
-                That means the government is taking the allegations of human
-                rights violations as mere propaganda in the international arena
-                and feels no need to address the issue, or to improve the state
-                of human ...
-              </p>
-            </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                Kamal Ahmed
-              </span>
-            </div>
-          </div>
+    <div className='pt-5'>
+      <div className='container'>
+        <div className='flex items-center mb-4'>
+          <h1 onClick={() => router.push('/opinion')} className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Opinion </h1><IoIosArrowForward className='text-red-600 mt-1' />
         </div>
-
-        <div className="col-span-2">
-          <div>
-            <div className="sm:flex sm:items-center  py-4">
-              <img
-                className="block h-14 sm:h-14 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-                src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4"
-                alt=""
-              />
-              <div className="text-center sm:text-left sm:flex-grow">
-                <div className="mb-4">
-                  <p className="text-2xl pb-3 leading-tight font-medium tracking-wider uppercase">
-                    No lobbyist to speak for the people
-                  </p>
-                  <span className="text-sm leading-tight  text-grey-dark border-t-4 border-inherit">
-                    Sohrab Hassan.
-                  </span>
-                </div>
-                <hr />
-              </div>
-            </div>
+        <div className="grid grid-cols-12 gap-6">
+          <div onClick={() => router.push(`/${oped1.category}/${oped1.subCategory}/${oped1._id}`)} style={{ height: "450px" }} className="lg:col-span-5 col-span-12 border-2 border-gray-200 relative flex items-center ml-8 p-12 cursor-pointer text-lg">
+            <h1 className='absolute text-xl top-8 bg-blue-900 px-4 -left-6 py-2 text-white'>{oped1.heading}</h1>
+            <p className='text-gray-600'>{oped1.description[0]?.slice(0, 400)}</p>
+            <h2 className='absolute bottom-5 left-4 text-xl text-white'>{oped1?.reporter}</h2>
           </div>
-
-          <div>
-            <div className="sm:flex sm:items-center  py-4">
-              <img
-                className="block h-14 sm:h-14 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-                src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4"
-                alt=""
-              />
-              <div className="text-center sm:text-left sm:flex-grow">
-                <div className="mb-4">
-                  <p className="text-2xl pb-3 leading-tight font-medium tracking-wider uppercase">
-                    No lobbyist to speak for the people
-                  </p>
-                  <span className="text-sm leading-tight  text-grey-dark border-t-4 border-inherit">
-                    Sohrab Hassan.
-                  </span>
+          <div className="lg:col-span-7 col-span-12">
+            {
+              oped?.slice(0, 4).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news._id}`)} className='flex items-center gap-4 mb-4 cursor-pointer' key={news._id}>
+                <div>
+                  <img
+                    className='rounded-full w-24 h-24 '
+                    src={news.images?.img1}
+                    alt="" />
                 </div>
-                <hr />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="sm:flex sm:items-center  py-4">
-              <img
-                className="block h-14 sm:h-14 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-                src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4"
-                alt=""
-              />
-              <div className="text-center sm:text-left sm:flex-grow">
-                <div className="mb-4">
-                  <p className="text-2xl pb-3 leading-tight font-medium tracking-wider uppercase">
-                    No lobbyist to speak for the people
-                  </p>
-                  <span className="text-sm leading-tight  text-grey-dark border-t-4 border-inherit">
-                    Sohrab Hassan.
-                  </span>
+                <div className='border-b pb-2 last:border-0'>
+                  <h1 className='text-xl mb-1 font-semibold'>{news.subHeading ? <div> <span className='text-red-500'>{news.subHeading}</span>/{news.heading}</div> : <div>{news.heading}</div>}</h1>
+                  <p className='font-serif font-medium text-lg border-t-4 w-fit'>{news.reporter}</p>
                 </div>
-                <hr />
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div className="sm:flex sm:items-center  py-4">
-              <img
-                className="block h-14 sm:h-14 rounded-full mx-auto mb-4 sm:mb-0 sm:mr-4 sm:ml-0"
-                src="https://avatars2.githubusercontent.com/u/4323180?s=400&u=4962a4441fae9fba5f0f86456c6c506a21ffca4f&v=4"
-                alt=""
-              />
-              <div className="text-center sm:text-left sm:flex-grow">
-                <div className="mb-4">
-                  <p className="text-2xl pb-3 leading-tight font-medium tracking-wider uppercase">
-                    No lobbyist to speak for the people
-                  </p>
-                  <span className="text-sm leading-tight  text-grey-dark border-t-4 border-inherit">
-                    Sohrab Hassan.
-                  </span>
-                </div>
-                <hr />
-              </div>
-            </div>
+              </div>)
+            }
           </div>
         </div>
       </div>

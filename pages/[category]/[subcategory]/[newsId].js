@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon } from 'react-share'
-import { FaRegBookmark, FaPrint, } from "react-icons/fa";
+import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop } from "react-icons/fa";
+import { MdFacebook, MdHeadset, MdOutlineEditNote } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from 'axios'
@@ -10,15 +11,64 @@ import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBa
 import { useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { AiOutlineTwitter } from "react-icons/ai";
+import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([])
-
+  const [speed, setSpeed] = useState(1)
+  const [text, setText] = useState('')
   const { user } = useAuth()
+
+  //text select state
+  const [selectedText, setSelectedText] = useState('')
+  const [showTextOption, setShowTextOption] = useState(false)
+  const [xValue, setxVlue] = useState(0)
+  const [yValue, setyVlue] = useState(0)
+  const [isShowNoteBar, setIsShowNoteBar] = useState(false)
+
+  //handle selection
+  const handleSelection = (e) => {
+    setTimeout(() => {
+      const text = window.getSelection().toString().trim();
+      if (text.length) {
+        setSelectedText(text)
+        setShowTextOption(true)
+        const x = e.pageX;
+        const y = e.pageY;
+        setxVlue(x)
+        setyVlue(y)
+      } else {
+        setShowTextOption(false)
+      }
+    }, 0)
+  };
+  const addToNote = (e) => {
+    e.preventDefault()
+    setIsShowNoteBar(true)
+    setShowTextOption(false)
+  }
+
+  //twitter share
+  const shareOnTwitter = () => {
+    const twitterShareUrl = "https://twitter.com/intent/tweet";
+    const text = `${encodeURIComponent(selectedText)}`;
+    const currentUrl = encodeURIComponent(window.location.href);
+    const hashtags = "HotNews, Recent, Letest";
+    const via = "Ajker Barta";
+    window.open(`${twitterShareUrl}?text="${text}"&url=${currentUrl}&hashtags=${hashtags}&via=${via}`);
+  }
+
+  //facebook share
+  const faceBookShare = () => {
+    window.open(`https://www.facebook.com/sharer.php?`)
+  }
+
+  ////handle selection end
 
   const router = useRouter();
   const newsId = router.query.newsId;
   const news = newses.find(news => news._id === newsId)
-  const category = news.category;
+  const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
@@ -71,10 +121,23 @@ const Newsdetails = ({ newses }) => {
         })
     }
   };
+  const playNow = (text) => {
+    if (speechSynthesis.paused && speechSynthesis.speaking) {
+      return speechSynthesis.resume()
+    }
+    if (speechSynthesis.speaking) return
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.rate = speed
 
-console.log(news.comments);
-
-
+    speechSynthesis.speak(utterance)
+  }
+  const pause = () => {
+    if (speechSynthesis.speaking) speechSynthesis.pause()
+  }
+  function stop() {
+    speechSynthesis.resume()
+    speechSynthesis.cancel()
+  }
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -103,18 +166,30 @@ console.log(news.comments);
       </div>
     );
   };
-  // console.log(url)
+
+
+
   return (
     <div>
       <Header />
       <NavigationBar />
-      <div className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
+      <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-6">
           <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3">
             {news?.category}
           </h3>
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
-          <div className="flex items-end justify-between mb-2">
+
+
+          {/* Listening feature  start*/}
+          <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
+            <h5>Listen Now</h5>
+            <FaPlay onClick={() => playNow(news?.description?.join())} /> <FaPause onClick={pause} /> <FaStop onClick={stop} /> <span>Speed {speed}</span>
+            <input type="range" name="speed" id="speed" min='.5' max='3' step='.5' onChange={e => setSpeed(e.target.value)} defaultValue={speed} />
+          </div>
+
+          {/* Listening feature  end*/}
+          <div className="flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
@@ -136,6 +211,10 @@ console.log(news.comments);
           <p className="py-3 text-lg">{news?.description.slice(15, 20).join()}</p>
           <p className="py-3 text-lg">{news?.description.slice(20, 25).join()}</p>
 
+          {/* Selection Item */}
+          
+          
+          {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
             <Actions />
@@ -157,30 +236,24 @@ console.log(news.comments);
 
             {
 
-news.comments.map(item=>
-  <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
-          <div className="mr-4"><div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl" >
-          <img className="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro"/>
-          </div>
-        </div>
-        <div>
-           <div className="font-semibold text-sm">{item.name}</div>
-           <div className="text-base text-gray-500">{item.comment}</div>
-          <div className="text-xs text-gray-500">
-            <span className="mr-2">{item.date}</span>
-          </div>
-        </div>
-      </div>
-  
-  
-  )
+              news?.comments?.map(item =>
+                <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
+                  <div className="mr-4"><div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl" >
+                    <img className="inline object-cover w-12 h-12 mr-2 rounded-full" src={item.img} alt="Pro" />
+                  </div>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-sm">{item.name}</div>
+                    <div className="text-base text-gray-500">{item.comment}</div>
+                    <div className="text-xs text-gray-500">
+                      <span className="mr-2">{item.date}</span>
+                    </div>
+                  </div>
+                </div>
 
 
+              )
             }
-
-
-          
-      
             <form onSubmit={handleSubmit(onSubmit)}>
               <input placeholder="Write your comment here" type="text" {...register("comment")} className="border-2 rounded block w-full my-2 p-2" required/>
               <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
@@ -191,7 +264,7 @@ news.comments.map(item=>
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
           </p>
-          {remaining.slice(0, 10).map((item) => {
+          {remaining?.slice(0, 10).map((item) => {
             return (
               <div onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
@@ -208,6 +281,12 @@ news.comments.map(item=>
         </div>
       </div>
       <Footer newses={newses} />
+      <div style={{ left: (xValue - 70) + 'px', top: (yValue - 60) + 'px', }} className={showTextOption ? 'afterSelectBtn showOption' : 'afterSelectBtn'}>
+        <button onClick={addToNote} ><MdOutlineEditNote className='pointer-events-none' /></button>
+        <button onClick={shareOnTwitter}><AiOutlineTwitter className='pointer-events-none' /></button>
+        <button onClick={faceBookShare}><MdFacebook className='pointer-events-none' /></button>
+      </div>
+      <NoteBar isShowNoteBar={isShowNoteBar} setIsShowNoteBar={setIsShowNoteBar} selectedText={selectedText} />
     </div>
   );
 };
@@ -219,6 +298,7 @@ export const getStaticProps = async () => {
     props: {
       newses: res.data,
     },
+    revalidate: 10
   };
 };
 export async function getStaticPaths() {

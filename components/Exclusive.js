@@ -34,7 +34,7 @@ const Exclusive = ({ newses }) => {
 
           </div>
           <div>
-            <h1 className={styles.exclusive}>Exclusive</h1>
+            <h1 className={styles.exclusive}>Satireday</h1>
             <div className='grid sm:grid-cols-2 gap-3'>
               {
                 latest?.slice(16, 20).map(news => <div className='cursor-pointer imageEffect' onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} key={news?._id}>
