@@ -80,6 +80,7 @@ const Newsdetails = ({ newses }) => {
   }, [news.likes])
   const category = news?.category;
   const remaining = newses.filter(item => item.category === category && item._id !== news._id)
+
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
