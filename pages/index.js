@@ -19,7 +19,9 @@ import Voting from "../components/Voting/Voting";
 
 
 
-export default function Home({ newses }) {
+export default function Home({ newses, polls }) {
+  console.log(polls)
+
 
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
@@ -34,7 +36,7 @@ export default function Home({ newses }) {
       <Header />
       <NavigationBar />
       <Hero newses={newses} />
-      <Voting newses={newses} />
+      <Voting polls={polls} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
@@ -54,9 +56,11 @@ export default function Home({ newses }) {
 }
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  const pollRes = await axios.get(`http://localhost:3000/api/poll`);
   return {
     props: {
       newses: res.data,
+      polls: pollRes.data,
     },
     revalidate: 10
   };
