@@ -16,7 +16,7 @@ const International = ({ international }) => {
         <span className="text-blue-900">
           <Link href="/international">International</Link>{" "}
         </span>
-        <ChevronRightIcon className="text-red-500" />
+        <ChevronRightIcon className="text-red-600" />
       </h2>
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-12 md:col-span-6 mb-3 lg:mb-0">

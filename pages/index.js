@@ -15,7 +15,11 @@ import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
+import Voting from "../components/Voting/Voting";
+
 export default function Home({ newses }) {
+
+
   const coronanews = newses.filter((news) => news.category === "coronavirus");
   const bdnews = newses.filter((news) => news.category === "bangladesh");
   const international = newses.filter((news) => news.category === "international");
@@ -24,11 +28,13 @@ export default function Home({ newses }) {
   const business = newses.filter((news) => news.category === "business");
   const sports = newses.filter((news) => news.category === "sports");
   const opinion = newses.filter(news => news.category === 'opinion')
+
   return (
     <div>
-      <Header />
+      <Header newses={newses} />
       <NavigationBar />
       <Hero newses={newses} />
+      <Voting newses={newses} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
@@ -44,8 +50,8 @@ export default function Home({ newses }) {
       <Footer newses={newses} />
     </div>
   );
-}
 
+}
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   return {
@@ -55,3 +61,4 @@ export const getStaticProps = async () => {
     revalidate: 10
   };
 };
+

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Avatar, Box, Menu, Tooltip } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -34,7 +34,7 @@ const drawerWidth = 260;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -71,9 +71,11 @@ const AppBar = styled(MuiAppBar, {
 /////////////////
 
 const DashboardHome = ({ children }) => {
+    const { admin, user, logOut } = useAuth();
     const theme = useTheme();
-    const { admin, logOut } = useAuth()
     const [open, setOpen] = React.useState(false);
+    const router = useRouter();
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -82,8 +84,15 @@ const DashboardHome = ({ children }) => {
         setOpen(false);
     };
 
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
     ///// Side bar content///// 
-    const router = useRouter();
 
     React.useEffect(
         () => {
@@ -211,10 +220,37 @@ const DashboardHome = ({ children }) => {
                         <MenuIcon fontSize='large' sx={{ color: 'black' }} />
                     </IconButton>
                     <br />
-                    <div className='container'>
+                    <div className='container flex items-center justify-between'>
                         <Typography className='text-black font-bold' variant="h5" noWrap component="div">
                             Ajker Barta
                         </Typography>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px', width: '500px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top', horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top', horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu} >
+                                <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
+                                    <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/')} >< HomeIcon />  Home</h5>
+
+                                    <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
+                                </div>
+                            </Menu>
+                        </Box>
                     </div>
                 </Toolbar>
             </AppBar>

@@ -64,7 +64,7 @@ const Footer = ({ newses }) => {
             <ul>
               <li className='my-1'><a>Digital Edition</a></li>
               <li className='my-1'><a>Side Map</a></li>
-              <li className='my-1'><a>About Us</a></li>
+              <li className='my-1'><Link href="/about"><a>About Us</a></Link></li>
               <li className='my-1'><a>career</a></li>
               <li className='my-1'><a>About Ads</a></li>
               <li className='my-1'><a>Give a Gift</a></li>
@@ -90,7 +90,7 @@ const Footer = ({ newses }) => {
           <div className='sm:flex items-center justify-between'>
             <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | &copy; Copyright with Love By DevHeros</p>
             <div>
-              <span><a className='cursor-pointer'>Privacy & Policy</a></span>
+              <span><Link href='/policy'><a className='cursor-pointer'>Policy</a></Link> </span>
               <span><a className='cursor-pointer ml-4'>Claim A Report</a></span>
             </div>
           </div>
