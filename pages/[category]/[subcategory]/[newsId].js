@@ -202,6 +202,7 @@ const Newsdetails = ({ newses }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
+            news.comment.push(objShallowCopy)
             alert("comment added");
             reset();
           }
