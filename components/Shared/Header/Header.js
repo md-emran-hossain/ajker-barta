@@ -10,6 +10,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Weather from '../../Weather/Weather';
 
 
 const Header = () => {
@@ -62,10 +63,17 @@ const Header = () => {
                     </div>
 
                     <div className='sm:flex-1 text-center'>
-                        <Link href="/">
+                        <div className='flex justify-evenly items-center md:ml-5'>
+                            <Link href="/" >
                             <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>Ajker <span className='text-red-500'>Barta</span></a>
+                        
                         </Link>
+                        <div>
+                            <Weather/>
+                        </div>
+                        </div>
                     </div>
+                    
                     <div className='sm:flex-1 text-right'>
                         {
                             user.email ?
