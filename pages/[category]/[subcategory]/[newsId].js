@@ -26,14 +26,13 @@ import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBa
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { AiOutlineTwitter } from "react-icons/ai";
+import { AiOutlineTwitter,AiOutlineQrcode } from "react-icons/ai";
 import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import MuiAlert from "@mui/material/Alert";
-
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -41,8 +40,9 @@ import { Menu } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNews from "../../../components/EditNews/EditNews";
-
-
+import Box from '@mui/material/Box';
+import QRCode from "qrcode.react";
+import Modal from '@mui/material/Modal';
 const Newsdetails = ({ newses }) => {
   const [success, setSuccess] = useState([]);
   const [speed, setSpeed] = useState(1);
@@ -57,7 +57,9 @@ const Newsdetails = ({ newses }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const [openqr, setOpenqr] = React.useState(false);
+  const handleOpenqr = () => setOpenqr(true);
+  const handleCloseqr = () => setOpenqr(false);
 
   //text select state
   const [selectedText, setSelectedText] = useState("");
@@ -306,6 +308,33 @@ const Newsdetails = ({ newses }) => {
       console.error("Failed to copy: ", err);
     }
   };
+  const generateCode =() => {
+    handleOpenqr()
+  }
+  const downloadQRCode = () => {
+    // Generate download with use canvas and stream
+    const canvas = document.getElementById("qr-gen");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `qrcode.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+  const qrstyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
   const Actions = () => {
     return (
       <div className="flex items-start gap-3">
@@ -320,7 +349,7 @@ const Newsdetails = ({ newses }) => {
           </TwitterShareButton>
         </span>
         <span url={url}>
-          <LinkedinShareButton>
+          <LinkedinShareButton url={url}>
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
@@ -333,6 +362,11 @@ const Newsdetails = ({ newses }) => {
           className={`${iconClass} bg-gray-500 text-white`}
         >
           <FaCopy />
+        </span>
+        <span title="Show QR Code"
+          onClick={generateCode}
+          className={iconClass}>
+          <AiOutlineQrcode />
         </span>
         <span
           title="Print"
@@ -408,7 +442,7 @@ const Newsdetails = ({ newses }) => {
           >
             {news?.category}
           </h3>
-          <div className=" flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
             <div className="hover:bg-gray-200 rounded-full p-1">
@@ -459,7 +493,7 @@ const Newsdetails = ({ newses }) => {
           </div>
 
           {/* Listening feature  end*/}
-          <div className="flex items-end justify-between mb-2 ">
+          <div className="md:flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
@@ -590,6 +624,23 @@ const Newsdetails = ({ newses }) => {
         </div>
       </div>
       <Footer newses={newses} />
+      <Modal
+        open={openqr}
+        onClose={handleCloseqr}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={qrstyle}>
+        <QRCode
+        id="qr-gen"
+        value={url}
+        size={290}
+        level={"H"}
+        includeMargin={true}
+      />
+      <button className="border bg-red-500 rounded block py-3 px-5 text-white" onClick={downloadQRCode}>Download QR Code</button>
+        </Box>
+      </Modal>
       <div
         style={{ left: xValue - 70 + "px", top: yValue - 60 + "px" }}
         className={
