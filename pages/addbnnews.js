@@ -82,6 +82,8 @@ const NewsPublish = () => {
                     <option value="sciencetechnology">Science & Technology</option>
                     <option value="business">Business</option>
                     <option value="sports">Sports</option>
+                    <option value="opinion">Opinion</option>
+                    <option value="entertainment">Entertainment</option>
                 </select>
 
                 {category === 'coronavirus' ||
@@ -135,9 +137,29 @@ const NewsPublish = () => {
                                 <option value="global">Global</option>
                             </>
                         }
+                         {category === "entertainment" && (
+              <>
+                <option value="dhallywood">Dhallywood</option>
+                <option value="bollywood">Bollywood</option>
+                <option value="hollywood">Hollywood</option>
+                <option value="music">Music</option>
+                <option value="movies">Movies</option>
+                <option value="television">Television</option>
+                <option value="OTT">OTT</option>
+              </>
+            )}
+            {category === "opinion" && (
+              <>
+                <option value="editorial">Editorial</option>
+                <option value="interview">Interview</option>
+                <option value="analysis">Analysis</option>
+                <option value="world media">World Media</option>
+                <option value="Op-Ed">Op-Ed</option>
+              </>
+            )}
                     </select>
                 }
-
+                
                 <input className="bg-red-600 mb-12 hover:bg-white hover:text-red-600 border-2 border-red-600 text-white rounded-sm p-2" type="submit" value="Add News" />
             </form>
         </div>

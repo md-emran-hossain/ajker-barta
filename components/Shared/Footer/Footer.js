@@ -4,12 +4,14 @@ import { CgFacebook, CgYoutube, CgGoogle, CgInstagram } from 'react-icons/cg'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Newsletter from './Newsletter'
+import ScrollToTop from "react-scroll-to-top";
 const Footer = ({ newses }) => {
   const router = useRouter()
 
   return (
     <div className={styles.footer}>
       <div className="container">
+      <ScrollToTop top='50' color='#EF4444' style={{padding: '5px'}} smooth />
         <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2">
           <div className={styles.infoBox}>
             <Link href='/'>
