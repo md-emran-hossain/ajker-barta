@@ -16,7 +16,6 @@ import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
 import Voting from "../components/Voting/Voting";
-import React from "react";
 import useAuth from "../hooks/useAuth";
 
 
