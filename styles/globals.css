@@ -550,7 +550,6 @@ color: black;
 background-color: white;
 opacity: 0.75;
 margin: auto;
-/*padding:20px;*/
 min-width: 20%;
 position: absolute;
 top: 400px;
@@ -645,10 +644,9 @@ overflow: hidden;
 display: inline-block;
 background-color: #498cbc;
 border: 2px solid white;
-/*box-shadow: 0px 2px 6px 0px #f2f2f2;*/
+
 }
 
-/*widget*/
 
 
 .widgetcnt{
@@ -699,15 +697,10 @@ width: 20%;
 list-style: none;
 background-color: white;
 border-left: .5px solid #a2c0ef;
-/* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
+
 }
 
 
-h3 {
-  text-decoration: none;
-  color: #424242;
-  font-family: karla;
-}
 
 .whr-info{
   margin-left: -40px;
@@ -719,13 +712,6 @@ ul.whr-item {
  margin-left: -30px;
 }
 
-li{
-  list-style:none;
-  font-size: 14x;
-  font-family: Karla;
-  color: #424242;
-  padding-left: -10px;
-}
 
 #whr_embed_hook{
 margin-left: 0px !important;
@@ -742,17 +728,7 @@ margin-left: 0px !important;
 }
 
 
-.animate{
-  -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -ms-transition: all .3s;
-  -ms-transition: all .3s;
-  transition: all .3s;  
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden; /* Chrome and Safari */
-  -moz-backface-visibility:hidden; /* Firefox */
-  -ms-backface-visibility:hidden; /* Internet Explorer */
-}
+
 
 
 
