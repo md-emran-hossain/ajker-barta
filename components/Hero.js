@@ -67,6 +67,7 @@ const Hero = ({ newses, bengaliNews }) => {
                   <div className='w-3/5'>
                     <p className='text-sm capitalize'><span className='text-blue-500'>{news?.category}</span> / {`${formatDistanceToNow(new Date(news?.publishedDate))} ago`}</p>
                     <h1 className='md:text-lg text-md leading-5 md:leading-4 xl:leading-6 cursor-pointer hover:text-red-600 font-medium transition-colors duration-300'>{news?.heading}</h1>
+                    <p className='text-white text-sm md:text-md'>{news?.description[0]}...</p>
                   </div>
                 </div>
               </SwiperSlide>)
