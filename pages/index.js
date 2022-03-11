@@ -19,7 +19,7 @@ import Voting from "../components/Voting/Voting";
 import useAuth from "../hooks/useAuth";
 
 
-export default function Home({ newses, polls, bengaliNews }) {
+const Home = ({ newses, polls, bengaliNews }) => {
   const { toggleLanguage } = useAuth();
 
 
@@ -85,9 +85,9 @@ export default function Home({ newses, polls, bengaliNews }) {
       </div>
     );
   }
-
-
 }
+export default Home;
+
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   const pollRes = await axios.get(`http://localhost:3000/api/poll`);
