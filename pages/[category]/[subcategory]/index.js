@@ -10,8 +10,8 @@ import useAuth from '../../../hooks/useAuth';
 
 const SubCategoryDetails = ({ newses, bengaliNews }) => {
   const { toggleLanguage } = useAuth();
-  const [visible, setVisible] = useState(10)
-  const router = useRouter()
+  const [visible, setVisible] = useState(10);
+  const router = useRouter();
   const subCategory = router.query.subcategory;
   const category = router.query.category;
 
@@ -46,7 +46,6 @@ const SubCategoryDetails = ({ newses, bengaliNews }) => {
     <div>
       <Header />
       <NavigationBar />
-
       <div className={styles.smallContainer}>
         <div className='flex gap-2 items-center'>
           <h1 className='text-3xl font-bold capitalize'>{category}</h1>

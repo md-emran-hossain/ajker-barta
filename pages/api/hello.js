@@ -1,18 +1,11 @@
-import { Server } from 'Socket.io'
+import { Server } from 'Socket.io';
 
 const SocketHandler = (req, res) => {
   if (res.socket.server.io) {
     console.log('Socket is already running')
   } else {
     console.log('Socket is initializing')
-    const io = new Server(res.socket.server)
-    // io.on('connection', socket => {
-    //   socket.on('sendNotification', data => {
-    //     console.log(data)
-    //     io.emit('sendNotification', data)
-    //     console.log(data)
-    //   })
-    // })
+    const io = new Server(res.socket.server);
     res.socket.server.io = io
     io.on('connection', socket => {
       socket.on('sendNotification', msg => {
@@ -21,25 +14,7 @@ const SocketHandler = (req, res) => {
       })
     })
   }
-  res.end()
+  res.end();
 }
 
-export default SocketHandler
-
-// import { socket } from 'socket-io'
-
-// const server = app.listen(port, () => {
-//   console.log("server running", port)
-// })
-
-// io = socket(server)
-// io.on("connection", (socket) => {
-
-//   socket.on('sendNotification', data => {
-//     io.emit('sendNotification', data)
-//     console.log(data)
-//   })
-
-//   socket.on('disconnect', () => {
-//   })
-// });
+export default SocketHandler;
