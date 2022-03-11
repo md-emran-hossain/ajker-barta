@@ -12,7 +12,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LanguageVersion from '../../LanguageVersion/LanguageVersion';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import Weather from '../../Weather/Weather';
 
 
 const Header = ({ newses }) => {
