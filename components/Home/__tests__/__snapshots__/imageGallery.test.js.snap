@@ -1,0 +1,300 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="pb-5"
+  data-testid="exclusiveId"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="grid lg:grid-cols-2 gap-3"
+    >
+      <div>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 border-blue-400 mr-2 bg-blue-500 text-white"
+          onClick={[Function]}
+        >
+          Letest
+        </button>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2"
+          onClick={[Function]}
+        >
+          Trending
+        </button>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+      <div>
+        <h1
+          className="exclusive"
+        >
+          Satireday
+        </h1>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`maching snapshot 2`] = `
+<div
+  className="container overflow-hidden "
+  data-testid="imageGalleryId"
+>
+  <h2
+    className="text-xl text-blue-900 font-semibold mb-3 mt-5"
+  >
+    <span
+      className="text-gray-700"
+    >
+       Todays Gallery 
+    </span>
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-red-500 css-i4bv87-MuiSvgIcon-root"
+      data-testid="ChevronRightIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+      />
+    </svg>
+  </h2>
+  <div
+    className="galleryRow"
+  >
+    <div
+      className="gallery"
+    >
+      <img
+        alt=""
+        className="w-full h-full object-cover"
+        src="https://i.ibb.co/1zDMSrv/bird-2.jpg"
+      />
+      <div>
+        <h1
+          className="text-lg leading-5 font-semibold absolute bottom-4 left-3 text-white"
+        >
+          “I’m Like A Bird” by Nelly Furtado
+        </h1>
+        <svg
+          className="absolute top-2 left-2 text-5xl"
+          enableBackground="new 0 0 48 48"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          version="1"
+          viewBox="0 0 48 48"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+            fill="#E65100"
+          />
+          <path
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+            fill="#F57C00"
+          />
+          <circle
+            cx="30"
+            cy="16"
+            fill="#FFF9C4"
+            r="3"
+          />
+          <polygon
+            fill="#942A09"
+            points="17,17.9 8,31 26,31"
+          />
+          <polygon
+            fill="#BF360C"
+            points="28,23.5 22,31 34,31"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="gallery"
+    >
+      <img
+        alt=""
+        className="w-full h-full object-cover"
+        src="https://i.ibb.co/D1dqj8R/girl.jpg"
+      />
+      <div>
+        <h1
+          className="text-lg leading-5 font-semibold absolute bottom-4 left-3 text-white"
+        >
+          Smiling Girl
+        </h1>
+        <svg
+          className="absolute top-2 left-2 text-5xl"
+          enableBackground="new 0 0 48 48"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          version="1"
+          viewBox="0 0 48 48"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+            fill="#E65100"
+          />
+          <path
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+            fill="#F57C00"
+          />
+          <circle
+            cx="30"
+            cy="16"
+            fill="#FFF9C4"
+            r="3"
+          />
+          <polygon
+            fill="#942A09"
+            points="17,17.9 8,31 26,31"
+          />
+          <polygon
+            fill="#BF360C"
+            points="28,23.5 22,31 34,31"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="gallery"
+    >
+      <img
+        alt=""
+        className="w-full h-full object-cover"
+        src="https://i.ibb.co/L16Dbqr/family.jpg"
+      />
+      <div>
+        <h1
+          className="text-lg leading-5 font-semibold absolute bottom-4 left-3 text-white"
+        >
+          Happy Family
+        </h1>
+        <svg
+          className="absolute top-2 left-2 text-5xl"
+          enableBackground="new 0 0 48 48"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          version="1"
+          viewBox="0 0 48 48"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+            fill="#E65100"
+          />
+          <path
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+            fill="#F57C00"
+          />
+          <circle
+            cx="30"
+            cy="16"
+            fill="#FFF9C4"
+            r="3"
+          />
+          <polygon
+            fill="#942A09"
+            points="17,17.9 8,31 26,31"
+          />
+          <polygon
+            fill="#BF360C"
+            points="28,23.5 22,31 34,31"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="gallery"
+    >
+      <img
+        alt=""
+        className="w-full h-full object-cover"
+        src="https://i.ibb.co/9nNLBv0/millionear.jpg"
+      />
+      <div>
+        <h1
+          className="text-lg leading-5 font-semibold absolute bottom-4 left-3 text-white"
+        >
+          Success
+        </h1>
+        <svg
+          className="absolute top-2 left-2 text-5xl"
+          enableBackground="new 0 0 48 48"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          version="1"
+          viewBox="0 0 48 48"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M41,42H13c-2.2,0-4-1.8-4-4V18c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C45,40.2,43.2,42,41,42z"
+            fill="#E65100"
+          />
+          <path
+            d="M35,36H7c-2.2,0-4-1.8-4-4V12c0-2.2,1.8-4,4-4h28c2.2,0,4,1.8,4,4v20C39,34.2,37.2,36,35,36z"
+            fill="#F57C00"
+          />
+          <circle
+            cx="30"
+            cy="16"
+            fill="#FFF9C4"
+            r="3"
+          />
+          <polygon
+            fill="#942A09"
+            points="17,17.9 8,31 26,31"
+          />
+          <polygon
+            fill="#BF360C"
+            points="28,23.5 22,31 34,31"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

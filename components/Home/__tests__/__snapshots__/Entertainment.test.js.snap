@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="pb-5"
+  data-testid="exclusiveId"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="grid lg:grid-cols-2 gap-3"
+    >
+      <div>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 border-blue-400 mr-2 bg-blue-500 text-white"
+          onClick={[Function]}
+        >
+          Letest
+        </button>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2"
+          onClick={[Function]}
+        >
+          Trending
+        </button>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+      <div>
+        <h1
+          className="exclusive"
+        >
+          Satireday
+        </h1>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`maching snapshot 2`] = `
+<div
+  className="container overflow-hidden "
+  data-testid="entertainmentId"
+>
+  <h2
+    className="text-xl text-blue-900 font-semibold mb-3"
+  >
+    <span
+      className="text-gray-700"
+    >
+      Entertainment 
+    </span>
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium text-red-500 css-i4bv87-MuiSvgIcon-root"
+      data-testid="ChevronRightIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+      />
+    </svg>
+  </h2>
+  <div
+    className="galleryRow"
+  />
+</div>
+`;

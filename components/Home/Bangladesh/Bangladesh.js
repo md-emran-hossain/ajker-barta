@@ -4,10 +4,10 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import styles from '../../../styles/Bangladesh.module.css'
 const Bangladesh = ({ bdnews }) => {
-  const latest = bdnews.reverse()
+  const latest = bdnews?.reverse()
   const router = useRouter()
   return (
-    <div className="container h-auto mb-4">
+    <div data-testid='bangladeshId' className="container h-auto mb-4">
       <div className='flex mb-4 items-center'>
         <h1 onClick={() => router.push('bangladesh')} className=' text-xl cursor-pointer font-medium text-blue-900'>Bangladesh </h1><IoIosArrowForward className='text-red-500' />
       </div>

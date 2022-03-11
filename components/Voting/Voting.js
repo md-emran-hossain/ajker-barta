@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 export default function Voting({ newses }) {
 
-	const voting = newses.slice(0, 3);
+	const voting = newses?.slice(0, 3);
 
 
 	const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -18,7 +18,7 @@ export default function Voting({ newses }) {
 			<h2 >this is Voting</h2>
 			<div className='flex gap-6'>
 				{
-					voting.map(vote => <div key={vote._id}>
+					voting?.map(vote => <div key={vote._id}>
 						<h1 className='my-3 text-2xl'>{vote.heading}</h1>
 						<form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
 							<div className='flex items-center justify-between'>

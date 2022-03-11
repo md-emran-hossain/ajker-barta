@@ -4,15 +4,27 @@ import styles from '../../../styles/ImageGallery.module.css'
 import { FcGallery } from 'react-icons/fc'
 
 const ImageGallery = () => {
-  const [images, setImages] = useState([])
-  useEffect(() => {
-    fetch('./data.json')
-      .then(res => res.json())
-      .then(data => setImages(data))
-  }, [])
+  const images = [
+    {
+      title: "“I’m Like A Bird” by Nelly Furtado",
+      img: "https://i.ibb.co/1zDMSrv/bird-2.jpg"
+    },
+    {
+      title: "Smiling Girl",
+      img: "https://i.ibb.co/D1dqj8R/girl.jpg"
+    },
+    {
+      title: "Happy Family",
+      img: "https://i.ibb.co/L16Dbqr/family.jpg"
+    },
+    {
+      title: "Success",
+      img: "https://i.ibb.co/9nNLBv0/millionear.jpg"
+    }
+  ]
 
   return (
-    <div className="container overflow-hidden ">
+    <div data-testid='imageGalleryId' className="container overflow-hidden ">
       <h2 className='text-xl text-blue-900 font-semibold mb-3 mt-5'><span className='text-gray-700'> Todays Gallery </span><ChevronRightIcon className='text-red-500' /></h2>
       <div className={styles.galleryRow}>
         {

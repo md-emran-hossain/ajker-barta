@@ -5,9 +5,9 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const ScienceTechnology = ({ science }) => {
   const router = useRouter();
-  const newses = science.reverse();
+  const newses = science?.reverse();
   return (
-    <div className="my-8">
+    <div data-testid="scienceTechnologyId" className="my-8">
       <div className="container">
         <div
           onClick={() => router.push("/sciencetechnology")}

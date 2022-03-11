@@ -10,8 +10,7 @@ const SearchNews = ({ newses }) => {
     const [searchResult, setSearchResult] = React.useState([]);
 
     const handleSearch = () => {
-        setSearchResult(newses.filter(news => (news.category.toLowerCase() || news.heading.toLowerCase()).includes(searchText.toLowerCase())));
-        console.log(searchResult);
+        setSearchResult(newses?.filter(news => (news.category.toLowerCase() || news.heading.toLowerCase()).includes(searchText.toLowerCase())));
     }
     const router = useRouter();
 

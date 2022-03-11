@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 const Sports = ({ sports }) => {
     const router = useRouter()
-    const sportsData = sports.reverse()
-    const singleData = sportsData.slice(0, 1);
-    const multiData = sportsData.slice(1, 4);
+    const sportsData = sports?.reverse()
+    const singleData = sportsData?.slice(0, 1);
+    const multiData = sportsData?.slice(1, 4);
     return (
         <div className="container">
             <h2 className="text-xl font-medium mt-5 mb-2">
@@ -20,7 +20,7 @@ const Sports = ({ sports }) => {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-6 mb-3 lg:mb-0">
                     <div className="p-3 rounded-md border-r border-b">
-                        {singleData.map((single) => (
+                        {singleData?.map((single) => (
                             <div
                                 onClick={() => router.push(`/${single.category}/${single.subCategory}/${single?._id}`)}
                                 key={single?._id}
@@ -41,7 +41,7 @@ const Sports = ({ sports }) => {
 
                 <div className="col-span-12 md:col-span-6">
                     <div className="">
-                        {multiData.map((multi) => (
+                        {multiData?.map((multi) => (
                             <div key={multi?._id} onClick={() => router.push(`/${multi.category}/${multi.subCategory}/${multi?._id}`)} className="col-span-12 lg:col-span-4 mb-2 cursor-pointer p-2.5 border-l border-b rounded-md imageEffect">
                                 <div className="grid grid-cols-12">
                                     <div className="col-span-8">

@@ -16,18 +16,19 @@ import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
 import Voting from "../components/Voting/Voting";
+import Lifestyle from "../components/Lifestyle/Lifestyle";
 
 export default function Home({ newses }) {
 
 
-  const coronanews = newses.filter((news) => news.category === "coronavirus");
-  const bdnews = newses.filter((news) => news.category === "bangladesh");
-  const international = newses.filter((news) => news.category === "international");
-  const entertainment = newses.filter((news) => news.category === "entertainment");
-  const science = newses.filter((news) => news.category === "sciencetechnology");
-  const business = newses.filter((news) => news.category === "business");
-  const sports = newses.filter((news) => news.category === "sports");
-  const opinion = newses.filter(news => news.category === 'opinion')
+  const coronanews = newses?.filter((news) => news.category === "coronavirus");
+  const bdnews = newses?.filter((news) => news.category === "bangladesh");
+  const international = newses?.filter((news) => news.category === "international");
+  const entertainment = newses?.filter((news) => news.category === "entertainment");
+  const science = newses?.filter((news) => news.category === "sciencetechnology");
+  const business = newses?.filter((news) => news.category === "business");
+  const sports = newses?.filter((news) => news.category === "sports");
+  const opinion = newses?.filter(news => news.category === 'opinion')
 
   return (
     <div>
