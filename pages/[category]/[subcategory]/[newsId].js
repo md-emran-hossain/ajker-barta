@@ -12,7 +12,7 @@ import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBa
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
-import { AiOutlineTwitter } from "react-icons/ai";
+import { AiOutlineTwitter, AiOutlineQrcode } from "react-icons/ai";
 import NoteBar from "../../../components/Shared/NoteBar/NoteBar";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
@@ -26,6 +26,9 @@ import { Menu } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNews from "../../../components/EditNews/EditNews";
+import Box from '@mui/material/Box';
+import QRCode from "qrcode.react";
+import Modal from '@mui/material/Modal';
 
 const Newsdetails = ({ newses, bengaliNews }) => {
   const { user, toggleLanguage, admin } = useAuth();
@@ -40,6 +43,9 @@ const Newsdetails = ({ newses, bengaliNews }) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const [openqr, setOpenqr] = React.useState(false);
+  const handleOpenqr = () => setOpenqr(true);
+  const handleCloseqr = () => setOpenqr(false);
 
   //text select state
   const [selectedText, setSelectedText] = useState("");
@@ -50,6 +56,7 @@ const Newsdetails = ({ newses, bengaliNews }) => {
 
   // news modal control 
   const [open, setOpen] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -63,6 +70,13 @@ const Newsdetails = ({ newses, bengaliNews }) => {
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
+  const handleCloseSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnack(false);
+  };
 
   const action = (
     <>
@@ -181,6 +195,7 @@ const Newsdetails = ({ newses, bengaliNews }) => {
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
+
             alert("comment added");
             reset();
           }
@@ -278,11 +293,38 @@ const Newsdetails = ({ newses, bengaliNews }) => {
     try {
       const toCopy = url || location.href;
       await navigator.clipboard.writeText(toCopy);
-      setOpen(true);
+      setOpenSnack(true);
       console.log("Text or Page URL copied");
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
+  };
+  const generateCode = () => {
+    handleOpenqr()
+  }
+  const downloadQRCode = () => {
+    // Generate download with use canvas and stream
+    const canvas = document.getElementById("qr-gen");
+    const pngUrl = canvas
+      .toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = `qrcode.png`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+  const qrstyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
   };
   const Actions = () => {
     return (
@@ -298,7 +340,7 @@ const Newsdetails = ({ newses, bengaliNews }) => {
           </TwitterShareButton>
         </span>
         <span url={url}>
-          <LinkedinShareButton>
+          <LinkedinShareButton url={url}>
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
@@ -311,6 +353,11 @@ const Newsdetails = ({ newses, bengaliNews }) => {
           className={`${iconClass} bg-gray-500 text-white`}
         >
           <FaCopy />
+        </span>
+        <span title="Show QR Code"
+          onClick={generateCode}
+          className={iconClass}>
+          <AiOutlineQrcode />
         </span>
         <span
           title="Print"
@@ -411,7 +458,7 @@ const Newsdetails = ({ newses, bengaliNews }) => {
           </div>
 
           {/* Listening feature  end*/}
-          <div className="flex items-end justify-between mb-2 ">
+          <div className="md:flex items-end justify-between mb-2 ">
             <div>
               <p className="font-bold">{news?.reporter}</p>
               <p>Publish Date: {news?.publishedDate}</p>
@@ -521,6 +568,23 @@ const Newsdetails = ({ newses, bengaliNews }) => {
         </div>
       </div>
       <Footer newses={newses} bengaliNews={bengaliNews} />
+      <Modal
+        open={openqr}
+        onClose={handleCloseqr}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={qrstyle}>
+          <QRCode
+            id="qr-gen"
+            value={url}
+            size={290}
+            level={"H"}
+            includeMargin={true}
+          />
+          <button className="border bg-red-500 rounded block py-3 px-5 text-white" onClick={downloadQRCode}>Download QR Code</button>
+        </Box>
+      </Modal>
       <div
         style={{ left: xValue - 70 + "px", top: yValue - 60 + "px" }}
         className={
@@ -542,8 +606,15 @@ const Newsdetails = ({ newses, bengaliNews }) => {
         setIsShowNoteBar={setIsShowNoteBar}
         selectedText={selectedText}
       />
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose} action={action}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}> News Link Copied! </Alert>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={3000}
+        onClose={handleCloseSnack}
+        action={action}
+      >
+        <Alert onClose={handleCloseSnack} severity="success" sx={{ width: "100%" }}>
+          News Link Copied!
+        </Alert>
       </Snackbar>
     </div>
   );
