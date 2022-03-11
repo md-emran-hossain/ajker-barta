@@ -63,6 +63,9 @@ body {
   background-color: #3b5998;
   padding: 5px;
 }
+.showNotification{
+  display: block;
+}
 .showOption{
   display: block;
   animation-duration: 0.2s;

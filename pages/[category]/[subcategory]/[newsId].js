@@ -7,7 +7,6 @@ import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
-import { useForm } from "react-hook-form";
 import NavigationBar from "../../../components/Shared/NavigationBar/NavigationBar";
 import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
@@ -155,20 +154,27 @@ const Newsdetails = ({ newses, bengaliNews }) => {
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
-  const { register, handleSubmit, reset, formState: { errors }, } = useForm();
-  const onSubmit = (data) => {
-    const dataup = {
-      ...data,
+
+  // add commnent functionality
+  const [commnetText, setCommentText] = useState('')
+  const [comments, setComments] = useState([])
+  useEffect(() => {
+    if (news?.comments) {
+      setComments(news?.comments)
+    } else {
+      setComments([])
+    }
+  }, [news])
+  const handleComment = (e) => {
+    e.preventDefault()
+    const commentObj = {
+      comment: commnetText,
       name: user.displayName,
       img: user.photoURL,
       date: new Date().toLocaleString(),
       email: user.email,
-    };
-
-    const objShallowCopy = [...success, dataup];
-    setSuccess(objShallowCopy);
-    // Send a POST request
-
+    }
+    setComments([commentObj, ...comments])
     if (!user.email) {
       Swal.fire({
         title: "You are not signed in",
@@ -190,14 +196,12 @@ const Newsdetails = ({ newses, bengaliNews }) => {
       fetch(`/api/news/${newsId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(objShallowCopy),
+        body: JSON.stringify(commentObj),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.modifiedCount > 0) {
-
-            alert("comment added");
-            reset();
+            e.target.reset()
           }
         })
         .catch(err => {
@@ -518,8 +522,12 @@ const Newsdetails = ({ newses, bengaliNews }) => {
           </div>
           <div>
             {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
-            {news?.comments?.map((item) => (
-              <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
+
+            {comments?.map((item) => (
+              <div
+                key={item.date}
+                className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer"
+              >
                 <div className="mr-4">
                   <div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl">
                     <img
@@ -538,9 +546,18 @@ const Newsdetails = ({ newses, bengaliNews }) => {
                 </div>
               </div>
             ))}
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input placeholder="Write your comment here" type="text"{...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
-              <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
+            <form onSubmit={handleComment}>
+              <input
+                placeholder="Write your comment here"
+                type="text"
+                className="border-2 rounded block w-full my-2 p-2"
+                onChange={(e) => setCommentText(e.target.value)}
+              />
+              <input
+                className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded"
+                type="submit"
+                value="Comment"
+              />
             </form>
           </div>
         </div>

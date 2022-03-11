@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Push from "push.js";
+
 const NewsPublish = () => {
+
   const [category, setCategory] = useState([]);
   let images = []
   const {
@@ -11,6 +13,7 @@ const NewsPublish = () => {
     formState: { errors },
     reset,
   } = useForm();
+
   const handleImgUpload = async (e) => {
     const imageData = new FormData();
     console.log(e.target.files);
@@ -89,6 +92,7 @@ const NewsPublish = () => {
       images = []
       reset();
     }
+    socket.emit('sendNotification', data)
   };
 
   return (

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="pb-5"
+  data-testid="exclusiveId"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="grid lg:grid-cols-2 gap-3"
+    >
+      <div>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 border-blue-400 mr-2 bg-blue-500 text-white"
+          onClick={[Function]}
+        >
+          Letest
+        </button>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2"
+          onClick={[Function]}
+        >
+          Trending
+        </button>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+      <div>
+        <h1
+          className="exclusive"
+        >
+          Satireday
+        </h1>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`maching snapshot 2`] = `
+<div
+  className="container h-auto mb-4"
+  data-testid="bangladeshId"
+>
+  <div
+    className="flex mb-4 items-center"
+  >
+    <h1
+      className=" text-xl cursor-pointer font-medium text-blue-900"
+      onClick={[Function]}
+    >
+      Bangladesh 
+    </h1>
+    <svg
+      className="text-red-500"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 512 512"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"
+      />
+    </svg>
+  </div>
+  <div
+    className="bdRow"
+  />
+</div>
+`;

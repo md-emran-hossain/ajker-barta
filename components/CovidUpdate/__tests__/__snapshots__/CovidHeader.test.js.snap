@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="header"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="sm:flex items-center justify-between"
+    >
+      <div
+        className="logo"
+      >
+        <img
+          alt=""
+          src="https://i.postimg.cc/2jbfZ5hW/coronavirus.png"
+        />
+        <h1>
+          Covid Update
+        </h1>
+      </div>
+      <p>
+         at undefined
+      </p>
+      <a
+        href="/"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+      >
+        Back To Home
+      </a>
+    </div>
+  </div>
+</div>
+`;

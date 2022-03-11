@@ -11,12 +11,17 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LanguageVersion from '../../LanguageVersion/LanguageVersion';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import Weather from '../../Weather/Weather';
 
 
-const Header = () => {
+const Header = ({ newses }) => {
     const { user, logOut, toggleLanguage } = useAuth();
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
+    const recent = newses?.reverse().slice(0, 3)
+    const [notification, setNotification] = React.useState(recent)
+    const [isShowNotification, setIsShowNotification] = React.useState(false)
     const router = useRouter()
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -24,6 +29,9 @@ const Header = () => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    const clearNotification = () => {
+        setNotification(recent)
+    }
 
     return (
         <div className='bg-white sticky md:static top-0 w-full z-50'>
@@ -55,59 +63,79 @@ const Header = () => {
                             </ul>
                         </div>
                     </nav>
-                    <div className="sm:flex-1 text-2xl md:hidden cursor-pointer">
-                        <VscThreeBars onClick={() => setIsOpen(!isOpen)} />
+
+                    <div className='sm:flex-1'>
+                        <div className='flex items-center gap-2'>
+                            <div className='md:hidden'>
+                                <VscThreeBars style={{ fontSize: "25px", cursor: 'pointer' }} onClick={() => setIsOpen(!isOpen)} />
+                            </div>
+                            <SearchIcon onClick={() => router.push('/search')} sx={{ color: '', fontSize: '30px', cursor: 'pointer' }} />
+                        </div>
                     </div>
 
-                    <div className='md:w-96'>
-                        <SearchIcon onClick={() => router.push('/search')} sx={{ color: '', fontSize: '40px', cursor: 'pointer' }} />
-                    </div>
-
-                    <div className='sm:flex-1 text-center'>
+                    <div className='flex-1 text-center'>
                         <Link href="/">
                             <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>{toggleLanguage ? "আজকের" : "AJKER"} <span className='text-red-500'>{toggleLanguage ? "বার্তা" : "BARTA"}</span></a>
                         </Link>
                     </div>
-                    <div className='sm:flex-1 text-right'>
-                        {
-                            user.email ?
-                                <>
-                                    <Box sx={{ flexGrow: 0 }}>
-                                        <Tooltip title="Open settings">
-                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
-                                            </IconButton>
-                                        </Tooltip>
-                                        <Menu
-                                            sx={{ mt: '45px', width: '500px' }}
-                                            id="menu-appbar"
-                                            anchorEl={anchorElUser}
-                                            anchorOrigin={{
-                                                vertical: 'top', horizontal: 'right',
-                                            }}
-                                            keepMounted
-                                            transformOrigin={{
-                                                vertical: 'top', horizontal: 'right',
-                                            }}
-                                            open={Boolean(anchorElUser)}
-                                            onClose={handleCloseUserMenu} >
-                                            <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
-                                                {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/account')} ><PersonIcon />  Profile</h5>}
+                    <div className='sm:flex-1 text-right flex'>
+                        <div className='flex gap-3 flex-col item-end w-full'>
+                            <div className='flex items-center justify-end w-full'>
+                                <div className="notifyIcon mr-6 relative">
+                                    <NotificationsNoneOutlinedIcon onClick={() => setIsShowNotification(!isShowNotification)} sx={{ fontSize: 30, cursor: "pointer" }} />
+                                    {notification?.length > 0 && <p onClick={() => setIsShowNotification(!isShowNotification)} className='absolute bg-red-500 w-5 h-5 rounded-full text-sm text-white flex items-center justify-center -top-1 -right-1 cursor-pointer'>{notification?.length > 9 ? '9+' : `${notification?.length}`}</p>}
+                                    <div style={{ height: 'auto', maxHeight: "70vh" }} className={isShowNotification ? 'showNotification absolute w-80 z-50 right-0 bg-white px-4 pt-4 border h-auto overflow-scroll' : 'absolute w-80 z-50 right-0 bg-white px-4 pt-4 border h-auto overflow-scroll hidden'} >
+                                        {
+                                            notification?.length || <h1 className='text-lg text-blue-500 text-left mt-3.5'>You have no notification</h1>
+                                        }
+                                        {
+                                            notification?.map(item => <div key={Math.floor(Math.random() * 1000000)}>
+                                                <h1 onClick={() => router.push(`/${item.category}/${item.subCategory}/${item?._id}`)} className='border-b text-left my-2 font-medium font-serif cursor-pointer hover:text-red-500 transition-colors duration-300'>{item?.heading}</h1>
+                                            </div>)
+                                        }
+                                        {notification?.length ? <button onClick={clearNotification} className='w-full py-1.5 bg-blue-500 text-white'>Mark As Read</button> : ''}
+                                    </div>
+                                </div>
+                                {
+                                    user.email ?
+                                        <>
+                                            <Box sx={{ flexGrow: 0 }}>
+                                                <Tooltip title="Open settings">
+                                                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                                        <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                                    </IconButton>
+                                                </Tooltip>
+                                                <Menu
+                                                    sx={{ mt: '45px', width: '500px' }}
+                                                    id="menu-appbar"
+                                                    anchorEl={anchorElUser}
+                                                    anchorOrigin={{
+                                                        vertical: 'top', horizontal: 'right',
+                                                    }}
+                                                    keepMounted
+                                                    transformOrigin={{
+                                                        vertical: 'top', horizontal: 'right',
+                                                    }}
+                                                    open={Boolean(anchorElUser)}
+                                                    onClose={handleCloseUserMenu} >
+                                                    <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
+                                                        {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/account')} ><PersonIcon />  Profile</h5>}
 
-                                                {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => router.push("/dashboard")}><DashboardIcon /> Dashboard</h5>}
-                                                <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
-                                            </div>
-                                        </Menu>
-                                    </Box>
-                                </>
-                                :
-                                <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
-                        }
-
-                        <div className='mt-3'>
+                                                        {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => router.push("/dashboard")}><DashboardIcon /> Dashboard</h5>}
+                                                        <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
+                                                    </div>
+                                                </Menu>
+                                            </Box>
+                                        </>
+                                        :
+                                        <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
+                                }
+                            </div>
                             <LanguageVersion />
                         </div>
+                        {/* <Weather /> */}
                     </div>
+
                 </div>
             </div>
         </div >

@@ -20,7 +20,6 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 
 
-
 export default function Home({ newses, polls, bengaliNews }) {
   const { toggleLanguage } = useAuth();
 
@@ -36,7 +35,7 @@ export default function Home({ newses, polls, bengaliNews }) {
     const opinion = bengaliNews.filter(news => news.category === 'opinion')
     return (
       <div>
-        <Header />
+        <Header newses={newses} />
         <NavigationBar />
         <Hero bengaliNews={bengaliNews} />
         <Voting polls={polls} />
@@ -67,7 +66,7 @@ export default function Home({ newses, polls, bengaliNews }) {
     const opinion = newses.filter(news => news.category === 'opinion')
     return (
       <div>
-        <Header />
+        <Header newses={newses} />
         <NavigationBar />
         <Hero newses={newses} />
         <Voting polls={polls} />

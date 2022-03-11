@@ -30,7 +30,7 @@ const Hero = ({ newses, bengaliNews }) => {
             className={styles.firstSlider}
           >
             {
-              latest.slice(0, 3).map(news => <SwiperSlide className='h-full' key={news._id}>
+              latest?.slice(0, 3).map(news => <SwiperSlide className='h-full' key={news._id}>
                 <div onClick={() => router.push(`/${news?.category}/${news?.subCategory}/${news?._id}`)} className='relative w-full h-full cursor-pointer'>
                   <img className='w-full h-full' src={news?.images?.img1} alt='' />
                   <div className='absolute bottom-4 left-4 z-10'>
@@ -59,7 +59,7 @@ const Hero = ({ newses, bengaliNews }) => {
             className={styles.secondSlide}
           >
             {
-              latest.slice(3, 8).map(news => <SwiperSlide key={news?._id}>
+              latest?.slice(3, 8).map(news => <SwiperSlide key={news?._id}>
                 <div onClick={() => router.push(`/${news?.category}/${news?.subCategory}/${news?._id}`)} className='flex justify-center gap-3 h-full cursor-pointer'>
                   <div className='w-2/5 h-full'>
                     <img className='w-full h-full object-cover' src={news?.images?.img1} alt='' />

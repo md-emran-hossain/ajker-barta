@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="countriesUpdate"
+>
+  <div
+    className="container"
+  >
+    <h2
+      className="title"
+    >
+      Countries Update
+    </h2>
+    <div
+      className="searchBar"
+    >
+      <input
+        name="search"
+        onChange={[Function]}
+        placeholder="search.."
+        type="text"
+      />
+      <div>
+        <input
+          list="filterList"
+          name="filter"
+          onChange={[Function]}
+          placeholder="Flter By"
+          type="text"
+        />
+        <datalist
+          id="filterList"
+        >
+          <option
+            value="Top 10 Cases"
+          />
+          <option
+            value="Top 20 Cases"
+          />
+          <option
+            value="Top 10 Deaths"
+          />
+          <option
+            value="Top 20 Deaths"
+          />
+        </datalist>
+      </div>
+      <div>
+        <input
+          list="sortList"
+          name="sort"
+          onChange={[Function]}
+          placeholder="Sort By"
+          type="text"
+        />
+        <datalist
+          id="sortList"
+        >
+          <option
+            value="Sort By Name"
+          />
+          <option
+            value="Sort By Top Cases"
+          />
+          <option
+            value="Sort By Top Deaths"
+          />
+          <option
+            value="Sort By Low Cases"
+          />
+          <option
+            value="Sort By Low Deaths"
+          />
+        </datalist>
+      </div>
+    </div>
+    <div
+      className="tableContainer"
+    >
+      <table
+        className="table"
+      >
+        <thead>
+          <tr>
+            <td>
+              Serial
+            </td>
+            <td>
+              Country
+            </td>
+            <td>
+              Total Cases
+            </td>
+            <td>
+              New Cases
+            </td>
+            <td>
+              Total Deaths
+            </td>
+            <td>
+              New Deaths
+            </td>
+            <td>
+              Total Recovered
+            </td>
+            <td>
+              New Recovered
+            </td>
+          </tr>
+        </thead>
+        <tbody />
+      </table>
+    </div>
+  </div>
+</div>
+`;

@@ -9,13 +9,12 @@ export default async function handler(req, res) {
         const id = req.query.id;
         const comments = req.body;
         const query = { _id: ObjectId(id) };
-        const options = { upsert: true };
         const updateDoc = {
-            $set: {
-                comments
+            $push: {
+                comments: comments
             },
         };
-        const result = await news.updateOne(query, updateDoc, options);
+        const result = await news.updateOne(query, updateDoc);
         res.status(200).json(result);
     }
     // delete news
