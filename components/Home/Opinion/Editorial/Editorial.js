@@ -19,7 +19,7 @@ const Editorial = ({ opinion }) => {
           <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{editorial[1].subHeading ? <div> <span className='text-red-500'>{editorial[1].subHeading}</span>/{editorial[1].heading}</div> : <div>{editorial[1].heading}</div>}</h1>
         </div>
         <div onClick={() => router.push(`/${editorial[2].category}/${editorial[2].subCategory}/${editorial[2]._id}`)} className='border-t py-2 cursor-pointer'>
-          <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{editorial[2].subHeading ? <div> <span className='text-red-500'>{editorial[2].subHeading}</span>/{editorial[1].heading}</div> : <div>{editorial[3].heading}</div>}</h1>
+          <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{editorial[2]?.subHeading ? <div> <span className='text-red-500'>{editorial[2]?.subHeading}</span>/{editorial[1]?.heading}</div> : <div>{editorial[3]?.heading}</div>}</h1>
         </div>
       </div>
     </div>

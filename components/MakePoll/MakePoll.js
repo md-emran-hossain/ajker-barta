@@ -1,36 +1,43 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { CircularProgress } from "@mui/material";
 
 const MakePoll = () => {
+    const [uploading, setUploading] = useState(false)
+
     let images = []
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const handleImgUpload = async (e) => {
         const imageData = new FormData();
-        console.log(e.target.files);
         imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
         await imageData.append("image", e.target.files[0]);
-
+        setUploading(true)
         axios
             .post("https://api.imgbb.com/1/upload", imageData)
             .then((response) => {
                 images.push(response.data.data.display_url);
-                console.log(images)
+                console.log(response.data.data.display_url)
+                setUploading(false)
             })
             .catch((error) => {
                 console.log(error);
             });
+        setUploading(false)
         if (e.target.files.length == 2) {
             const imageData = new FormData();
 
             imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
             await imageData.append("image", e.target.files[1]);
-
+            setUploading(true)
             axios
                 .post("https://api.imgbb.com/1/upload", imageData)
                 .then((response) => {
 
                     images.push(response.data.data.display_url);
+                    console.log(response.data.data.display_url)
+
                 })
                 .catch((error) => {
                     console.log(error);
@@ -41,17 +48,19 @@ const MakePoll = () => {
 
             imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
             await imageData.append("image", e.target.files[2]);
-
+            setUploading(true)
             axios
                 .post("https://api.imgbb.com/1/upload", imageData)
                 .then((response) => {
 
                     images.push(response.data.data.display_url);
-                    console.log(images)
+                    console.log(response.data.data.display_url)
+                    setUploading(false)
                 })
                 .catch((error) => {
                     console.log(error);
                 });
+            setUploading(false)
         }
     };
     const onSubmit = async (data) => {
@@ -64,19 +73,26 @@ const MakePoll = () => {
         }
         data.images = obj;
         data.publishedDate = new Date().toLocaleString();
+        data.vote = { yes: 0, no: 0, noComment: 0 };
 
-        const res = await fetch("/api/poll", {
-            method: "POST",
-            headers: {
-                "Content-type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
-        const result = await res.json();
-        if (result.insertedId) {
-            alert("poll created");
-            images = []
-            reset();
+        if (pollImg) {
+            const res = await fetch("/api/poll", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
+            const result = await res.json();
+            if (result.insertedId) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: `Vote success for this news`,
+                });
+                images = []
+                reset();
+            }
         }
 
     };
@@ -90,6 +106,7 @@ const MakePoll = () => {
                 className="flex flex-col space-y-4 md:w-3/4 mx-auto"
                 onSubmit={handleSubmit(onSubmit)}
             >
+                {uploading && <h1 className="text-center text-3xl"> <CircularProgress /> </h1>}
 
                 <input
                     onChange={handleImgUpload}

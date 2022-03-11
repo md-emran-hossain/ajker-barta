@@ -11,64 +11,6 @@ export const theme = createTheme({
     }
   },
   components: {
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true
-      },
-      // styleOverrides: {
-      //     root: {
-      //         textTransform: 'none'
-      //     },
-      //     sizeSmall: {
-      //         padding: '6px 16px'
-      //     },
-      //     sizeMedium: {
-      //         padding: '8px 20px'
-      //     },
-      //     sizeLarge: {
-      //         padding: '11px 24px'
-      //     },
-      //     textSizeSmall: {
-      //         padding: '7px 12px'
-      //     },
-      //     textSizeMedium: {
-      //         padding: '9px 16px'
-      //     },
-      //     textSizeLarge: {
-      //         padding: '12px 16px'
-      //     }
-      // }
-    },
-    // MuiButtonBase: {
-    //     defaultProps: {
-    //         disableRipple: true
-    //     }
-    // },
-    // MuiCardContent: {
-    //     styleOverrides: {
-    //         root: {
-    //             padding: '32px 24px',
-    //             '&:last-child': {
-    //                 paddingBottom: '32px'
-    //             }
-    //         }
-    //     }
-    // },
-    // MuiCardHeader: {
-    //     defaultProps: {
-    //         titleTypographyProps: {
-    //             variant: 'h6'
-    //         },
-    //         subheaderTypographyProps: {
-    //             variant: 'body2'
-    //         }
-    //     },
-    //     styleOverrides: {
-    //         root: {
-    //             padding: '32px 24px'
-    //         }
-    //     }
-    // },
     MuiCssBaseline: {
     },
     palette: {
@@ -137,13 +79,6 @@ export const theme = createTheme({
         secondary: '#65748B',
         disabled: 'rgba(55, 65, 81, 0.48)'
       },
-      // MuiOutlinedInput: {
-      //     styleOverrides: {
-      //         notchedOutline: {
-      //             borderColor: '#E6E8F0'
-      //         }
-      //     }
-      // },
       MuiTableHead: {
         styleOverrides: {
           root: {
@@ -188,40 +123,6 @@ export const theme = createTheme({
         disabledBackground: 'rgba(55, 65, 81, 0.12)',
         disabled: 'rgba(55, 65, 81, 0.26)'
       },
-      typography: {
-        // button: {
-        //     fontWeight: 600
-        // },
-        fontFamily: '"Merriweather", "serif"',
-        // fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
-        // body1: {
-        //     fontSize: '1rem',
-        //     fontWeight: 400,
-        //     lineHeight: 1.5
-        // },
-        // body2: {
-        //     fontSize: '0.875rem',
-        //     fontWeight: 400,
-        //     lineHeight: 1.57
-        // },
-        // subtitle1: {
-        //     fontSize: '1rem',
-        //     fontWeight: 500,
-        //     lineHeight: 1.75
-        // },
-        // subtitle2: {
-        //     fontSize: '0.875rem',
-        //     fontWeight: 500,
-        //     lineHeight: 1.57
-        // },
-        // overline: {
-        //     fontSize: '0.75rem',
-        //     fontWeight: 600,
-        //     letterSpacing: '0.5px',
-        //     lineHeight: 2.5,
-        //     textTransform: 'uppercase'
-        // }
-      }
     }
   }
 });

@@ -9,8 +9,9 @@ import styles from '../styles/Hero.module.css';
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper";
 import { useRouter } from 'next/router';
 
-const Hero = ({ newses }) => {
-  const latest = newses.reverse()
+const Hero = ({ newses, bengaliNews }) => {
+  let optionNews = newses || bengaliNews;
+  const latest = optionNews.reverse()
   const router = useRouter()
   return (
     <div className='pb-6 border-b border-gray-100' id='hero'>

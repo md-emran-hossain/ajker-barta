@@ -13,6 +13,8 @@ export default function useFirebase() {
     const [loading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
     const [jwtToken, setJwtToken] = useState('')
+    // toggle language 
+    const [toggleLanguage, setToggleLanguage] = useState(false)
 
     const router = useRouter();
     const auth = getAuth();
@@ -237,7 +239,7 @@ export default function useFirebase() {
 
 
     return {
-        user, jwtToken, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
+        user, jwtToken, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError, setToggleLanguage, toggleLanguage
     }
 };
 
