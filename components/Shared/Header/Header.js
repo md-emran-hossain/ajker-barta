@@ -69,7 +69,7 @@ const Header = ({ newses }) => {
                             <div className='md:hidden'>
                                 <VscThreeBars style={{ fontSize: "25px", cursor: 'pointer' }} onClick={() => setIsOpen(!isOpen)} />
                             </div>
-                            <SearchIcon onClick={() => router.push('/search')} sx={{ color: '', fontSize: '30px', cursor: 'pointer' }} />
+                            <p className='bg-white rounded-full drop-shadow-md p-2'><SearchIcon onClick={() => router.push('/search')} sx={{ fontSize: '35px', cursor: 'pointer' }} /></p>
                         </div>
                     </div>
 
