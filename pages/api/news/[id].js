@@ -37,7 +37,6 @@ export default async function handler(req, res) {
         const updateDoc = {
             $set: data
         };
-
         const result = await news.updateOne(query, updateDoc, options);
         res.status(200).json(result);
     }

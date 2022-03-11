@@ -10,10 +10,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LanguageVersion from '../../LanguageVersion/LanguageVersion';
 
 
 const Header = () => {
-    const { user, logOut } = useAuth();
+    const { user, logOut, toggleLanguage } = useAuth();
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [isOpen, setIsOpen] = React.useState(false)
     const router = useRouter()
@@ -35,20 +36,21 @@ const Header = () => {
                         <div>
                             <ul className='px-6 py-8'>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg'>
-                                    <Link href='/'><a className='text-2xl font-serif font-semibold'>AJKER <span className='text-red-500'>BARTA</span></a></Link>
+                                    <Link href='/'><a className='text-2xl font-serif font-semibold'>{toggleLanguage ? "আজকের" : "AJKER"} <span className='text-red-500'>{toggleLanguage ? "বার্তা" : "BARTA"}</span></a></Link>
                                 </li>
                                 <li className='flex items-center justify-center'>
                                     <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' /> <SearchIcon fontSize='large' sx={{ color: 'red' }} />
                                 </li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">Bangladesh</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">International</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/sports" data-title="My Expertise" aria-label="My Expertise">Sports</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">Science & Technology</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/business" data-title="My twitter moments" aria-label="My twitter moments">Business</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/entertainment" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">Entertainment</Link></li>
-                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/ifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">Lifestyle</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">{toggleLanguage ? "বাংলাদেশ" : "Bangladesh"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">{toggleLanguage ? "বিশ্ব" : "International"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/sports" data-title="My Expertise" aria-label="My Expertise">{toggleLanguage ? "খেলা" : "Sports"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/scienceTechnology" data-title="My Technical articles" aria-label="My Technical articles">{toggleLanguage ? "বিজ্ঞান ও প্রযুক্তি" : "Science & Technology"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/business" data-title="My twitter moments" aria-label="My twitter moments">{toggleLanguage ? "বাণিজ্য" : "Business"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/coronavirus" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">{toggleLanguage ? "করোনাভাইরাস" : "Coronavirus"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/entertainment" data-title="Don't Waste Good Time" aria-label="Don't Waste Good Time">{toggleLanguage ? "বিনোদন" : "Entertainment"}</Link></li>
+                                <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/ifestyle" data-title="QuotesByDogra" aria-label="QuotesByDogra">{toggleLanguage ? "  লাইফস্টাইল" : "Lifestyle"}</Link></li>
                                 <li className='text-lg mt-5'>
-                                    <p className='ml-5'><strong> © AJKER BARTA</strong></p>
+                                    <p className='ml-5'><strong> &copy; {toggleLanguage ? "আজকের বার্তা" : "AJKER BARTA"}</strong></p>
                                 </li>
                             </ul>
                         </div>
@@ -63,7 +65,7 @@ const Header = () => {
 
                     <div className='sm:flex-1 text-center'>
                         <Link href="/">
-                            <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>Ajker <span className='text-red-500'>Barta</span></a>
+                            <a className='md:text-3xl text-2xl uppercase font-serif font-bold'>{toggleLanguage ? "আজকের" : "AJKER"} <span className='text-red-500'>{toggleLanguage ? "বার্তা" : "BARTA"}</span></a>
                         </Link>
                     </div>
                     <div className='sm:flex-1 text-right'>
@@ -101,6 +103,10 @@ const Header = () => {
                                 :
                                 <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                         }
+
+                        <div className='mt-3'>
+                            <LanguageVersion />
+                        </div>
                     </div>
                 </div>
             </div>

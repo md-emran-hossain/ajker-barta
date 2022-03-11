@@ -1,24 +1,10 @@
+import * as React from "react";
 import { useRouter } from "next/router";
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-} from "react-share";
-import {
-  FaRegBookmark,
-  FaPrint,
-  FaPlay,
-  FaPause,
-  FaStop,
-  FaCopy,
-} from "react-icons/fa";
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon, } from "react-share";
+import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop, FaCopy } from "react-icons/fa";
 import { MdFacebook, MdOutlineEditNote } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
-import * as React from "react";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { useForm } from "react-hook-form";
@@ -43,11 +29,12 @@ import EditNews from "../../../components/EditNews/EditNews";
 import Box from '@mui/material/Box';
 import QRCode from "qrcode.react";
 import Modal from '@mui/material/Modal';
-const Newsdetails = ({ newses }) => {
+
+
+const Newsdetails = ({ newses, bengaliNews }) => {
+  const { user, toggleLanguage, admin } = useAuth();
   const [success, setSuccess] = useState([]);
   const [speed, setSpeed] = useState(1);
-  const [text, setText] = useState("");
-  const { user } = useAuth();
 
   // manage news option
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -75,6 +62,12 @@ const Newsdetails = ({ newses }) => {
   const handleClose = () => setOpen(false);
 
 
+  // news modal control 
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleEditModalOpen = () => setModalOpen(true);
+  const handleEditModalClose = () => setModalOpen(false);
+
+
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
@@ -89,12 +82,7 @@ const Newsdetails = ({ newses }) => {
   const action = (
     <>
       <Button color="secondary" size="small" onClick={handleClose}></Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
+      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose} >
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
@@ -139,19 +127,28 @@ const Newsdetails = ({ newses }) => {
   };
 
   ////handle selection end
-
   const router = useRouter();
   const newsId = router.query.newsId;
-  const news = newses.find((news) => news._id === newsId);
+  let news = null;
+  if (toggleLanguage) {
+    const banglaData = bengaliNews?.find((news) => news._id === newsId)
+    news = banglaData;
+  }
+  else {
+    const englishData = newses?.find((news) => news._id === newsId)
+    news = englishData;
+  }
+
+
 
   const [likes, setLikes] = useState([])
   useEffect(() => {
-    if (news.likes) {
+    if (news?.likes) {
       setLikes(news?.likes)
     } else {
       setLikes([])
     }
-  }, [news.likes])
+  }, [news?.likes])
   const category = news?.category;
   const remaining = newses.filter(
     (item) => item.category === category && item._id !== news._id
@@ -159,12 +156,7 @@ const Newsdetails = ({ newses }) => {
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset, formState: { errors }, } = useForm();
   const onSubmit = (data) => {
     const dataup = {
       ...data,
@@ -379,7 +371,6 @@ const Newsdetails = ({ newses }) => {
     );
   };
 
-
   // handle delete 
   const handleDeleteNews = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -431,10 +422,7 @@ const Newsdetails = ({ newses }) => {
     <div>
       <Header />
       <NavigationBar />
-      <div
-        onMouseUp={handleSelection}
-        className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1"
-      >
+      <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-6">
           <h3
             onClick={() => router.push(`/${category}`)}
@@ -445,33 +433,25 @@ const Newsdetails = ({ newses }) => {
           <div className="flex items-center justify-between">
             <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
-            <div className="hover:bg-gray-200 rounded-full p-1">
+            {admin && <div className="hover:bg-gray-200 rounded-full p-1">
               <MoreVertIcon onClick={handleOpenUserMenu} fontSize="large" sx={{ borderRadius: '50%', cursor: 'pointer' }} />
-            </div>
-            <Menu sx={{ mt: '45px', width: '500px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top', horizontal: 'center',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top', horizontal: 'center',
-              }}
+            </div>}
+
+            <Menu sx={{ mt: '45px', width: '500px' }} id="menu-appbar" anchorEl={anchorElUser}
+              anchorOrigin={{ vertical: 'top', horizontal: 'center', }} keepMounted
+              transformOrigin={{ vertical: 'top', horizontal: 'center', }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu} >
               <div onClick={handleCloseUserMenu} className="flex flex-col w-48">
-                <h5 onClick={handleOpen} className='mx-2 mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon />  Edit</h5>
+                <h5 onClick={handleEditModalOpen} className='mx-2 mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon />  Edit</h5>
                 <EditNews
                   news={news}
-                  open={open}
-                  handleClose={handleClose}
-                ></EditNews>
+                  modalOpen={modalOpen}
+                  handleEditModalClose={handleEditModalClose} />
 
                 <h5 onClick={() => handleDeleteNews(news?._id)} className='mx-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' ><DeleteForeverIcon />  Delete</h5>
               </div>
             </Menu>
-
           </div>
 
           {/* Listening feature  start*/}
@@ -480,16 +460,7 @@ const Newsdetails = ({ newses }) => {
             <FaPlay onClick={() => playNow(news?.description?.join())} />{" "}
             <FaPause onClick={pause} /> <FaStop onClick={stop} />{" "}
             <span>Speed {speed}</span>
-            <input
-              type="range"
-              name="speed"
-              id="speed"
-              min=".5"
-              max="3"
-              step=".5"
-              onChange={(e) => setSpeed(e.target.value)}
-              defaultValue={speed}
-            />
+            <input type="range" name="speed" id="speed" min=".5" max="3" step=".5" onChange={(e) => setSpeed(e.target.value)} defaultValue={speed} />
           </div>
 
           {/* Listening feature  end*/}
@@ -501,11 +472,7 @@ const Newsdetails = ({ newses }) => {
             <Actions />
           </div>
           <hr />
-          <img
-            src={news?.images?.img1}
-            className=" py-3 w-full"
-            alt={news?.title}
-          />
+          <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
 
           {news?.description?.slice(0, 5).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
           {
@@ -539,7 +506,6 @@ const Newsdetails = ({ newses }) => {
           </div>}
           {/* Selection Item */}
 
-
           {/* Show after selection */}
           <div className="border-y border-gray-300 flex items-center justify-between">
             <h2 className="text-xl font-semibold py-3">Comments</h2>
@@ -558,12 +524,8 @@ const Newsdetails = ({ newses }) => {
           </div>
           <div>
             {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
-
             {news?.comments?.map((item) => (
-              <div
-                key={item.date}
-                className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer"
-              >
+              <div key={item.date} className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer">
                 <div className="mr-4">
                   <div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl">
                     <img
@@ -583,17 +545,8 @@ const Newsdetails = ({ newses }) => {
               </div>
             ))}
             <form onSubmit={handleSubmit(onSubmit)}>
-              <input
-                placeholder="Write your comment here"
-                type="text"
-                {...register("comment")}
-                className="border-2 rounded block w-full my-2 p-2"
-              />
-              <input
-                className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded"
-                type="submit"
-                value="Comment"
-              />
+              <input placeholder="Write your comment here" type="text"{...register("comment")} className="border-2 rounded block w-full my-2 p-2" />
+              <input className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded" type="submit" value="Comment" />
             </form>
           </div>
         </div>
@@ -614,12 +567,9 @@ const Newsdetails = ({ newses }) => {
                       alt={item.title}
                     />
                   </div>
-                  <p>{`${formatDistanceToNow(
-                    new Date(news.publishedDate)
-                  )} ago`}</p>
+                  <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
                 </div>
-              </div>
-            );
+              </div>)
           })}
         </div>
       </div>
@@ -677,11 +627,14 @@ const Newsdetails = ({ newses }) => {
 };
 
 export default Newsdetails;
+
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
   return {
     props: {
       newses: res.data,
+      bengaliNews: bengali.data,
     },
     revalidate: 10,
   };

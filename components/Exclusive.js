@@ -2,8 +2,9 @@ import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import styles from '../styles/exclusive.module.css'
-const Exclusive = ({ newses }) => {
-  const latest = newses.reverse()
+const Exclusive = ({ newses, bengaliNews }) => {
+  let optionNews = newses || bengaliNews;
+  const latest = optionNews?.reverse()
   const router = useRouter()
   const [isLetest, setIsLetest] = useState(true)
   let count = 1

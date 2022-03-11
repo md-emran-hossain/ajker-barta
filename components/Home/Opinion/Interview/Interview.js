@@ -16,10 +16,10 @@ const Interview = ({ opinion }) => {
                     <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500 ">{`${formatDistanceToNow(new Date(interview[0]?.publishedDate))} ago`}</p>
                 </div>
                 <div onClick={() => router.push(`/${interview[1].category}/${interview[1].subCategory}/${interview[1]._id}`)} className='border-t py-2 cursor-pointer'>
-                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{interview[1].subHeading ? <div> <span className='text-red-500'>{interview[1].subHeading}</span>/{interview[1].heading}</div> : <div>{interview[1].heading}</div>}</h1>
+                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{interview[1]?.subHeading ? <div> <span className='text-red-500'>{interview[1]?.subHeading}</span>/{interview[1]?.heading}</div> : <div>{interview[1]?.heading}</div>}</h1>
                 </div>
-                <div onClick={() => router.push(`/${interview[2].category}/${interview[2].subCategory}/${interview[2]._id}`)} className='border-t py-2 cursor-pointer'>
-                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{interview[2].subHeading ? <div> <span className='text-red-500'>{interview[2].subHeading}</span>/{interview[1].heading}</div> : <div>{interview[3].heading}</div>}</h1>
+                <div onClick={() => router.push(`/${interview[2].category}/${interview[2].subCategory}/${interview[2]?._id}`)} className='border-t py-2 cursor-pointer'>
+                    <h1 className='text-xl font-serif hover:text-blue-500 transition-colors duration-300'>{interview[2]?.subHeading ? <div> <span className='text-red-500'>{interview[2]?.subHeading}</span>/{interview[1]?.heading}</div> : <div>{interview[3]?.heading}</div>}</h1>
                 </div>
             </div>
         </div>
