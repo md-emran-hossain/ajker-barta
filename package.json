@@ -40,8 +40,6 @@
     "react-share": "^4.4.0",
     "react-smooth": "^2.0.0",
     "recharts": "^2.1.9",
-    "socket.io": "^4.4.1",
-    "socket.io-client": "^4.4.1",
     "sweetalert2": "^11.4.0",
     "swiper": "^8.0.7",
     "tw-elements": "^1.0.0-alpha10",
