@@ -32,11 +32,10 @@ export default async function handler(req, res) {
         const data = req.body;
         const id = req.query.id;
         const query = { _id: ObjectId(id) };
-        const options = { upsert: true };
         const updateDoc = {
             $set: data
         };
-        const result = await news.updateOne(query, updateDoc, options);
+        const result = await news.updateOne(query, updateDoc);
         res.status(200).json(result);
     }
 

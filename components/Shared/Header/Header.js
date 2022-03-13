@@ -104,21 +104,13 @@ const Header = ({ newses }) => {
                                                         <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
                                                     </IconButton>
                                                 </Tooltip>
-                                                <Menu
-                                                    sx={{ mt: '45px', width: '500px' }}
-                                                    id="menu-appbar"
-                                                    anchorEl={anchorElUser}
-                                                    anchorOrigin={{
-                                                        vertical: 'top', horizontal: 'right',
-                                                    }}
-                                                    keepMounted
-                                                    transformOrigin={{
-                                                        vertical: 'top', horizontal: 'right',
-                                                    }}
-                                                    open={Boolean(anchorElUser)}
+                                                <Menu sx={{ mt: '45px', width: '500px' }} id="menu-appbar" anchorEl={anchorElUser}
+                                                    anchorOrigin={{ vertical: 'top', horizontal: 'right', }} keepMounted
+                                                    transformOrigin={{ vertical: 'top', horizontal: 'right', }}
+                                                    open={anchorElUser}
                                                     onClose={handleCloseUserMenu} >
                                                     <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
-                                                        {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/account')} ><PersonIcon />  Profile</h5>}
+                                                        {user.email && <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/dashboard/account')} ><PersonIcon />  Profile</h5>}
 
                                                         {user.email && <h5 className='ml-2 cursor-pointer my-4 font-bold text-gray-600' onClick={() => router.push("/dashboard")}><DashboardIcon /> Dashboard</h5>}
                                                         <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
