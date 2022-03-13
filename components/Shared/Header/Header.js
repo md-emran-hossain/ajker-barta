@@ -45,8 +45,8 @@ const Header = ({ newses }) => {
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg'>
                                     <Link href='/'><a className='text-2xl font-serif font-semibold'>{toggleLanguage ? "আজকের" : "AJKER"} <span className='text-red-500'>{toggleLanguage ? "বার্তা" : "BARTA"}</span></a></Link>
                                 </li>
-                                <li className='flex items-center justify-center'>
-                                    <input className='py-2 my-2 bg-gray-100 px-2 outline-0' type="text" placeholder='Search News' /> <SearchIcon fontSize='large' sx={{ color: 'red' }} />
+                                <li>
+                                    <p className='bg-white rounded-full drop-shadow-md p-2'><SearchIcon onClick={() => router.push('/search')} sx={{ fontSize: '35px', cursor: 'pointer' }} /></p>
                                 </li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">{toggleLanguage ? "বাংলাদেশ" : "Bangladesh"}</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">{toggleLanguage ? "বিশ্ব" : "International"}</Link></li>

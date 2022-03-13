@@ -30,7 +30,6 @@ export default function Home({ englishNews, polls, bengaliNews }) {
   else {
     const english = englishNews
     newses = english;
-
   }
 
   const coronanews = newses?.filter((news) => news.category === "coronavirus");
@@ -72,7 +71,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       englishNews: res.data,
-      // polls: pollRes.data,
+      polls: pollRes.data,
       bengaliNews: bengali.data,
     },
     revalidate: 10
