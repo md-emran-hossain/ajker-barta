@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon, } from "react-share";
 import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop, FaCopy } from "react-icons/fa";
@@ -29,7 +29,7 @@ import Box from '@mui/material/Box';
 import QRCode from "qrcode.react";
 import Modal from '@mui/material/Modal';
 
-const Newsdetails = ({ newses, bengaliNews }) => {
+const Newsdetails = ({ englishNews, bengaliNews }) => {
   const { user, toggleLanguage, admin } = useAuth();
   const [success, setSuccess] = useState([]);
   const [speed, setSpeed] = useState(1);
@@ -127,16 +127,14 @@ const Newsdetails = ({ newses, bengaliNews }) => {
   ////handle selection end
   const router = useRouter();
   const newsId = router.query.newsId;
-  let news = null;
+  let newses = null;
   if (toggleLanguage) {
-    const banglaData = bengaliNews?.find((news) => news._id === newsId)
-    news = banglaData;
+    newses = bengaliNews;
   }
   else {
-    const englishData = newses?.find((news) => news._id === newsId)
-    news = englishData;
+    newses = englishNews;
   }
-
+  const news = newses?.find((news) => news._id === newsId);
 
 
   const [likes, setLikes] = useState([])
@@ -644,7 +642,7 @@ export const getStaticProps = async () => {
   const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
   return {
     props: {
-      newses: res.data,
+      englishNews: res.data,
       bengaliNews: bengali.data,
     },
     revalidate: 10,

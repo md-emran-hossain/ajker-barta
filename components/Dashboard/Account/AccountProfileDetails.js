@@ -71,7 +71,7 @@ export const AccountProfileDetails = () => {
 
     useEffect(() => {
         fetch(`/api/users/note?email=${user.email}`)
-            .then(res => res.json())
+            .then(res => res?.json())
             .then(data => setUserData(data))
     }, [user.email])
 

@@ -8,22 +8,21 @@ import NavigationBar from '../../../components/Shared/NavigationBar/NavigationBa
 import styles from '../../../styles/CategoryDetails.module.css';
 import useAuth from '../../../hooks/useAuth';
 
-const SubCategoryDetails = ({ newses, bengaliNews }) => {
+const SubCategoryDetails = ({ englishNews, bengaliNews }) => {
   const { toggleLanguage } = useAuth();
   const [visible, setVisible] = useState(10)
   const router = useRouter()
   const subCategory = router.query.subcategory;
   const category = router.query.category;
 
-  let subCategories = null;
+  let newses = null;
   if (toggleLanguage) {
-    const banglaNews = newses?.filter(news => news.category === category).map(news => news.category && news.subCategory)
-    subCategories = banglaNews;
+    newses = bengaliNews;
   }
   else {
-    const englishNews = newses?.filter(news => news.category === category).map(news => news.category && news.subCategory)
-    subCategories = englishNews;
+    newses = englishNews;
   }
+  const subCategories = newses?.filter(news => news.category === category).map(news => news.category && news.subCategory)
 
   const unique = [...new Set(subCategories)];
   let displayNews = null
@@ -103,7 +102,7 @@ export const getStaticProps = async () => {
   const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
   return {
     props: {
-      newses: res.data,
+      englishNews: res.data,
       bengaliNews: bengali.data
     },
     revalidate: 10
