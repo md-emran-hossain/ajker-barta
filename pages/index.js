@@ -16,11 +16,10 @@ import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
 import Voting from "../components/Voting/Voting";
-import React from "react";
 import useAuth from "../hooks/useAuth";
 
 
-export default function Home({ newses, polls, bengaliNews }) {
+const Home = ({ newses, polls, bengaliNews }) => {
   const { toggleLanguage } = useAuth();
 
 
@@ -86,9 +85,9 @@ export default function Home({ newses, polls, bengaliNews }) {
       </div>
     );
   }
-
-
 }
+export default Home;
+
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
   const pollRes = await axios.get(`http://localhost:3000/api/poll`);
