@@ -105,7 +105,7 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
 export default CategoryDetails;
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-  const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
+  const bengali = await axios.get(`https://ajker-barta.vercel.app/api/bnnews`);
   return {
     props: {
       englishNews: res.data,
