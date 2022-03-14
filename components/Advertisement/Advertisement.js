@@ -37,7 +37,7 @@ const Advertisement = () => {
                         </div>
                         {/* download pdf section */}
                         <div>                           
-                            <Link href={`https://www.prothomalo.com/widgets/docs/rate_card_prothom_alo_2022.pdf`} target="_blank" underline='none' ><Button variant="outlined" startIcon={<DownloadIcon />}>Download PDF</Button></Link>    
+                            <Link href={`https://www.prothomalo.com/widgets/docs/rate_card_prothom_alo_2022.pdf`} target="_blank" underline='none' rel='noreferrer noopener' ><Button variant="outlined" startIcon={<DownloadIcon />}>Download PDF</Button></Link>    
                         </div>
                     </div>
                 </div>
