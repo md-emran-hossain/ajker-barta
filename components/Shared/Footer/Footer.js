@@ -66,7 +66,7 @@ const Footer = ({ newses }) => {
               <li className='my-1'><a>Side Map</a></li>
               <li className='my-1'><Link href="/about"><a>About Us</a></Link></li>
               <li className='my-1'><a>career</a></li>
-              <li className='my-1'><a>About Ads</a></li>
+              <li className='my-1'><Link href='/advertisement'><a>About Ads</a></Link></li>
               <li className='my-1'><a>Give a Gift</a></li>
               <li className='my-1'><a>Security Info</a></li>
             </ul>
