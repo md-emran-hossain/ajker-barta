@@ -88,7 +88,7 @@ const Footer = ({ newses }) => {
       <div className={styles.copyRight}>
         <div className="container">
           <div className='sm:flex items-center justify-between'>
-            <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | &copy; Copyright with Love By DevHeros</p>
+            <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | Copyright &copy; {new Date().getFullYear()} All Rights Reserved</p>
             <div>
               <span><Link href='/policy'><a className='cursor-pointer'>Policy</a></Link> </span>
               <span><a className='cursor-pointer ml-4'>Claim A Report</a></span>
