@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+import DownloadIcon from '@mui/icons-material/Download';
+import { Link } from '@mui/material';
 
 
 const Advertisement = () => {
@@ -17,21 +20,28 @@ const Advertisement = () => {
 
                     <div>
                     <div className='flex'>
-                        <div>
-                            <h2 className='text-2xl text-gray-900 font-extrabold mx-10'>Print Edition</h2>
-                            <h2 className='text-xl font-bold text-gray-900 mx-10'>Contact:</h2>
+                        <div className='mx-10'>
+                            <h2 className='text-2xl text-gray-900 font-extrabold'>Print Edition</h2>
+                            <h2 className='text-xl font-bold text-gray-900 py-2'>Contact:</h2>
+                            <ul>
+                                <li className='flex'> <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>:ABC Road, Dhaka, Bangladesh</li>
+                                <li className='flex'><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>: +880-1234-24562</li>
+                                <li className='flex'><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                                </svg>:ads@ajkerbarta.com</li>
+                            </ul>
                         </div>
-                        <div>
-                            <h2>hello</h2>
+                        {/* download pdf section */}
+                        <div>                           
+                            <Link href={`https://www.prothomalo.com/widgets/docs/rate_card_prothom_alo_2022.pdf`} target="_blank" underline='none' ><Button variant="outlined" startIcon={<DownloadIcon />}>Download PDF</Button></Link>    
                         </div>
                     </div>
                 </div>
                 </div>
-
-                
-
-                
-
             </div>
         </>
     );
