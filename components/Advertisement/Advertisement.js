@@ -12,13 +12,25 @@ const Advertisement = () => {
                     <p className='text-justify mx-10'>As per the latest National Media Survey (NMS 2018 of Kantar MRB), 6.6 million people read the print edition of Ajker Barta every day, and it is the highest readership number among all Bangladeshi newspapers. Ajker Barta does not only have the widest reader base as a whole, but it also reaches to the most erudite readers of Bangladesh belonging to the upper SEC (Socio Economic Class). Ajker Barta is way ahead of any other newspaper in reaching key target groups of readers.</p>
                     <br />
                     <p className='text-justify mx-10'>Ajker Barta is the “Number 1” Bangladeshi as well as Bengali Language website in the world based on traffic and pageviews. Around 12 million users access this portal every month from over 200 different countries and territories. They generate around 280 million pageviews per month. Through all digital platforms, Bengali and English portals and mobile apps, Ajker Barta Online reaches over 1 million people every day at home and abroad.</p>
+                    <br /> <br />
+                    {/* print addition */}
+
+                    <div>
+                    <div className='flex'>
+                        <div>
+                            <h2 className='text-2xl text-gray-900 font-extrabold mx-10'>Print Edition</h2>
+                            <h2 className='text-xl font-bold text-gray-900 mx-10'>Contact:</h2>
+                        </div>
+                        <div>
+                            <h2>hello</h2>
+                        </div>
+                    </div>
+                </div>
                 </div>
 
-                {/* print addition */}
+                
 
-                <div>
-
-                </div>
+                
 
             </div>
         </>
