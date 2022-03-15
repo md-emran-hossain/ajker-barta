@@ -11,7 +11,7 @@ const Entertainment = ({ entertainment }) => {
     //     console.log(text)
     // };
     return (
-        <div className="container overflow-hidden ">
+        <div data-testid='entertainmentId' className="container overflow-hidden ">
             <h2 className='text-xl text-blue-900 font-semibold mb-3'><span className='text-gray-700'>Entertainment </span><ChevronRightIcon className='text-red-500' /></h2>
             <div className={styles.galleryRow}>
                 {

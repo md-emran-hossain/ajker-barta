@@ -2,13 +2,14 @@ import { formatDistanceToNow } from 'date-fns';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import styles from '../styles/exclusive.module.css'
-const Exclusive = ({ newses }) => {
-  const latest = newses.reverse()
+const Exclusive = ({ newses, bengaliNews }) => {
+  let optionNews = newses || bengaliNews;
+  const latest = optionNews?.reverse()
   const router = useRouter()
   const [isLetest, setIsLetest] = useState(true)
   let count = 1
   return (
-    <div className='pb-5'>
+    <div data-testid='exclusiveId' className='pb-5'>
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-3">
           <div>

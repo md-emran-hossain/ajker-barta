@@ -13,9 +13,7 @@ import { ChartBar as ChartBarIcon } from '../../../icons/chart-bar';
 import { Cog as CogIcon } from '../../../icons/cog';
 import { Lock as LockIcon } from '../../../icons/lock';
 import { Selector as SelectorIcon } from '../../../icons/selector';
-import { ShoppingBag as ShoppingBagIcon } from '../../../icons/shopping-bag';
 import { User as UserIcon } from '../../../icons/user';
-import { UserAdd as UserAddIcon } from '../../../icons/user-add';
 import { Users as UsersIcon } from '../../../icons/users';
 import { Divider } from '@mui/material';
 import { NavItem } from '../NavItem/NavItem';
@@ -27,6 +25,7 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 
 
 // drawer style //////////////////////////
@@ -110,26 +109,14 @@ const DashboardHome = ({ children }) => {
     const content = (
         <>
             <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', color: 'white', }} >
-                <div>
-                    <Box sx={{ p: 3 }}>
-                        <NextLink href="/" passHref>
-                            <a> <Logo sx={{ height: 42, width: 42 }} /> </a>
-                        </NextLink>
-                    </Box>
-                    <Box sx={{ px: 2 }}>
-                        <Box sx={{ alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.04)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', px: 3, py: '11px', borderRadius: 1 }}>
-                            <div>
-                                <Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography>
-                                <Typography color="neutral.400" variant="body2" >  Update {' '} : Newses</Typography>
-                            </div>
-                            <SelectorIcon sx={{ color: 'neutral.500', width: 14, height: 14 }} />
-                        </Box>
-                    </Box>
-                </div>
+                <Box sx={{ alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.04)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', m: 3, px: 3, py: 2, borderRadius: 1 }}>
+                    <Logo sx={{ height: 42, width: 42 }} />
+                    <NextLink href='/'><Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography></NextLink>
+                </Box>
                 <Divider
                     sx={{
                         borderColor: '#2D3748',
-                        my: 3
+                        mb: 3
                     }}
                 />
                 <Box sx={{ flexGrow: 1 }}>
@@ -146,24 +133,32 @@ const DashboardHome = ({ children }) => {
                         href={'/dashboard/account'}
                         title='Account'
                     />
-                    {admin && <NavItem
-                        key='Employee'
-                        icon={(<UsersIcon fontSize="small" />)}
-                        href={'/dashboard/users'}
-                        title='Employee'
-                    />}
-                    {admin && <NavItem
-                        key='Add News'
-                        icon={(<AddIcon fontSize="small" />)}
-                        href={'/dashboard/addNews'}
-                        title='Add News'
-                    />}
-                    {admin && <NavItem
-                        key='Make Admin'
-                        icon={(<LockIcon fontSize="small" />)}
-                        href={'/dashboard/makeAdmin'}
-                        title='Make Admin'
-                    />}
+                    {admin && <>
+                        <NavItem
+                            key='Employee'
+                            icon={(<UsersIcon fontSize="small" />)}
+                            href={'/dashboard/users'}
+                            title='Employee'
+                        />
+                        <NavItem
+                            key='Add News'
+                            icon={(<AddIcon fontSize="small" />)}
+                            href={'/dashboard/addNews'}
+                            title='Add News'
+                        />
+                        <NavItem
+                            key='Make Pole'
+                            icon={(<TuneOutlinedIcon fontSize="small" />)}
+                            href={'/dashboard/makePoll'}
+                            title='Make Pole'
+                        />
+                        <NavItem
+                            key='Make Admin'
+                            icon={(<LockIcon fontSize="small" />)}
+                            href={'/dashboard/makeAdmin'}
+                            title='Make Admin'
+                        />
+                    </>}
                     {<NavItem
                         key='My Notes'
                         icon={(<EventNoteIcon fontSize="small" />)}
@@ -181,12 +176,6 @@ const DashboardHome = ({ children }) => {
                         icon={(<CogIcon fontSize="small" />)}
                         href={'/dashboard/wishlist'}
                         title='Wish List'
-                    />
-                    <NavItem
-                        key='Back To Home'
-                        icon={(<HomeIcon fontSize="small" />)}
-                        href='/'
-                        title='Back To Home'
                     />
                     <NavItem
                         key='Log Out'

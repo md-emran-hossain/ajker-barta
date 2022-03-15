@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-// import img from 'https://i.postimg.cc/2jbfZ5hW/coronavirus.png'
 import styles from '../../styles/Covid.module.css'
 
 const CovidHeader = () => {

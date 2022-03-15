@@ -1,0 +1,357 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="pb-5"
+  data-testid="exclusiveId"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="grid lg:grid-cols-2 gap-3"
+    >
+      <div>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 border-blue-400 mr-2 bg-blue-500 text-white"
+          onClick={[Function]}
+        >
+          Letest
+        </button>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2"
+          onClick={[Function]}
+        >
+          Trending
+        </button>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+      <div>
+        <h1
+          className="exclusive"
+        >
+          Satireday
+        </h1>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`maching snapshot 2`] = `
+<div
+  data-testid="opinionId"
+>
+  <div
+    className="pt-5"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="flex items-center mb-4"
+      >
+        <h1
+          className="ml-2 text-xl cursor-pointer font-medium text-blue-900"
+          onClick={[Function]}
+        >
+          Opinion 
+        </h1>
+        <svg
+          className="text-red-600 mt-1"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"
+          />
+        </svg>
+      </div>
+      <div
+        className="grid grid-cols-12 gap-6"
+      >
+        <div
+          className="lg:col-span-5 col-span-12 border-2 border-gray-200 relative flex items-center ml-8 p-12 cursor-pointer text-lg"
+          onClick={[Function]}
+          style={
+            Object {
+              "height": "450px",
+            }
+          }
+        >
+          <h1
+            className="absolute text-xl top-8 bg-blue-900 px-4 -left-6
+ py-2 text-white"
+          />
+          <p
+            className="text-gray-600 mt-4"
+          />
+          <h2
+            className="absolute bottom-5 left-4 text-xl text-white"
+          />
+        </div>
+        <div
+          className="lg:col-span-7 col-span-12"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="container mx-auto lg:pb-5 py-10 border-b"
+  >
+    <div
+      className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2"
+    >
+      <div>
+        <h2
+          className="text-xl mb-3 text-red-500 font-serif font-medium cursor-pointer"
+          onClick={[Function]}
+        >
+          <span
+            className="text-black"
+          >
+            Editorial 
+          </span>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ChevronRightIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </h2>
+        <div
+          className="border-r pr-2"
+        >
+          <div
+            className="pb-3 cursor-pointer"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="rounded-t-md h-52 object-cover w-full"
+            />
+            <h1
+              className="text-xl font-serif my-1 hover:text-blue-500 transition-colors duration-300"
+            />
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2
+          className="text-xl mb-3 text-red-500 font-serif font-medium cursor-pointer"
+          onClick={[Function]}
+        >
+          <span
+            className="text-black"
+          >
+            Interview 
+          </span>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ChevronRightIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </h2>
+        <div
+          className="border-r pr-2"
+        >
+          <div
+            className="pb-3 cursor-pointer"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="rounded-t-md h-52 object-cover w-full"
+            />
+            <h1
+              className="text-xl font-serif my-1 hover:text-blue-500 transition-colors duration-300"
+            />
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2
+          className="text-xl mb-3 text-red-500 font-serif font-medium cursor-pointer"
+          onClick={[Function]}
+        >
+          <span
+            className="text-black"
+          >
+            Analysis 
+          </span>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ChevronRightIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </h2>
+        <div
+          className="border-r pr-2"
+        >
+          <div
+            className="pb-3 cursor-pointer"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="rounded-t-md h-52 object-cover w-full"
+            />
+            <h1
+              className="text-xl font-serif my-1 hover:text-blue-500 transition-colors duration-300"
+            />
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h2
+          className="text-xl mb-3 text-red-500 font-serif font-medium cursor-pointer"
+          onClick={[Function]}
+        >
+          <span
+            className="text-black"
+          >
+            World Media 
+          </span>
+          <svg
+            aria-hidden={true}
+            className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+            data-testid="ChevronRightIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+            />
+          </svg>
+        </h2>
+        <div>
+          <div
+            className="pb-3 cursor-pointer"
+            onClick={[Function]}
+          >
+            <img
+              alt=""
+              className="rounded-t-md h-52 object-cover w-full"
+            />
+            <h1
+              className="text-xl font-serif my-1 hover:text-blue-500 transition-colors duration-300"
+            />
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+          <div
+            className="border-t py-2 cursor-pointer"
+            onClick={[Function]}
+          >
+            <h1
+              className="text-xl font-serif hover:text-blue-500 transition-colors duration-300"
+            >
+              <div />
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

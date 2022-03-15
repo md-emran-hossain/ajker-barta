@@ -6,9 +6,9 @@ import { IoIosArrowForward } from 'react-icons/io'
 const Business = ({ business }) => {
 
   const router = useRouter()
-  const newses = business.reverse()
+  const newses = business?.reverse()
   return (
-    <div className='mb-5'>
+    <div data-testid='businessId' className='mb-5'>
       <div className="container">
         <div className='flex items-center'>
           <h1 onClick={() => router.push('/business')} className='ml-2 text-xl cursor-pointer font-medium text-blue-900'>Business </h1><IoIosArrowForward className='text-red-600 mt-1' />

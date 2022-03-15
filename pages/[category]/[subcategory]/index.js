@@ -6,16 +6,34 @@ import Footer from '../../../components/Shared/Footer/Footer';
 import Header from '../../../components/Shared/Header/Header';
 import NavigationBar from '../../../components/Shared/NavigationBar/NavigationBar';
 import styles from '../../../styles/CategoryDetails.module.css';
-import Image from 'next/image';
+import useAuth from '../../../hooks/useAuth';
 
-const SubCategoryDetails = ({ newses }) => {
+const SubCategoryDetails = ({ englishNews, bengaliNews }) => {
+  const { toggleLanguage } = useAuth();
   const [visible, setVisible] = useState(10)
   const router = useRouter()
   const subCategory = router.query.subcategory;
   const category = router.query.category;
-  const subCategories = newses.filter(news => news.category === category).map(news => news.category && news.subCategory)
+
+  let newses = null;
+  if (toggleLanguage) {
+    newses = bengaliNews;
+  }
+  else {
+    newses = englishNews;
+  }
+  const subCategories = newses?.filter(news => news.category === category).map(news => news.category && news.subCategory)
+
   const unique = [...new Set(subCategories)];
-  const displayNews = newses.filter(news => news.subCategory === subCategory).reverse()
+  let displayNews = null
+  if (toggleLanguage) {
+    const banglaNews = bengaliNews?.filter(news => news.subCategory === subCategory).reverse()
+    displayNews = banglaNews;
+  }
+  else {
+    const englishNews = newses?.filter(news => news.subCategory === subCategory).reverse()
+    displayNews = englishNews;
+  }
 
   const loadmore = () => {
     setVisible(prev => prev + 5)
@@ -81,9 +99,11 @@ const SubCategoryDetails = ({ newses }) => {
 export default SubCategoryDetails;
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
   return {
     props: {
-      newses: res.data,
+      englishNews: res.data,
+      bengaliNews: bengali.data
     },
     revalidate: 10
   };

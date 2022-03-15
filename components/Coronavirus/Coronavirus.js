@@ -7,7 +7,7 @@ const Coronavirus = ({ coronanews }) => {
 
   const latestNews = coronanews?.reverse().slice(0, 4);
   return (
-    <div className="container">
+    <div data-testid='coronaVirusId' className="container">
       <div
         onClick={() => router.push("/coronavirus")}
         className="my-4 font-semibold text-xl cursor-pointer flex items-center gap-2"

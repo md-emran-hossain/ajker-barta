@@ -19,11 +19,6 @@ const Login = () => {
     const [human, setHuman] = React.useState(false);
     const isDesktop = useMediaQuery('(min-width: 900px)');
     const location = useRouter()
-    // let locationURL = ''
-    // if (typeof location.components === 'object') {
-    //     locationURL = Object.keys(location.components)[2]
-    //     console.log(locationURL)
-    // }
 
     function onChange(value) {
         fetch('/api/users/auth', {
