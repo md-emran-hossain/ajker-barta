@@ -2,100 +2,64 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { CircularProgress } from "@mui/material";
+import { Box, Button, Card, CardContent, CardHeader, CircularProgress, Divider, TextField } from "@mui/material";
 
 const MakePoll = () => {
     const [uploading, setUploading] = useState(false)
+    const [imgName, setImgName] = React.useState(false);
+    const [pollImg, setPollImg] = React.useState("");
+    const [pollQuestion, setPollQuestion] = React.useState("")
 
-    let images = []
     const { register, handleSubmit, formState: { errors }, reset, } = useForm();
     const handleImgUpload = async (e) => {
         const imageData = new FormData();
-        imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
-        await imageData.append("image", e.target.files[0]);
+        setImgName(e.target.files[0]?.name);
+        imageData.set('key', '0c35775465096fb810e5b6d78f1cd823');
+        await imageData.append('image', e.target.files[0])
         setUploading(true)
-        axios
-            .post("https://api.imgbb.com/1/upload", imageData)
-            .then((response) => {
-                images.push(response.data.data.display_url);
-                console.log(response.data.data.display_url)
+        axios.post('https://api.imgbb.com/1/upload',
+            imageData)
+            .then(response => {
+                setPollImg(response.data.data.display_url);
+                console.log(response.data.data.display_url);
                 setUploading(false)
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error}`,
+                })
             });
-        setUploading(false)
-        if (e.target.files.length == 2) {
-            const imageData = new FormData();
-
-            imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
-            await imageData.append("image", e.target.files[1]);
-            setUploading(true)
-            axios
-                .post("https://api.imgbb.com/1/upload", imageData)
-                .then((response) => {
-
-                    images.push(response.data.data.display_url);
-                    console.log(response.data.data.display_url)
-
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        }
-        if (e.target.files.length == 3) {
-            const imageData = new FormData();
-
-            imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
-            await imageData.append("image", e.target.files[2]);
-            setUploading(true)
-            axios
-                .post("https://api.imgbb.com/1/upload", imageData)
-                .then((response) => {
-
-                    images.push(response.data.data.display_url);
-                    console.log(response.data.data.display_url)
-                    setUploading(false)
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-            setUploading(false)
-        }
     };
-    const onSubmit = async (data) => {
-        const obj = {};
-        let count = 1;
-        for (const img of images) {
-            let property = "img" + count;
-            obj[property] = img;
-            count++;
-        }
-        data.images = obj;
-        data.publishedDate = new Date().toLocaleString();
-        data.vote = { yes: 0, no: 0, noComment: 0 };
 
-        if (pollImg) {
-            const res = await fetch("/api/poll", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-            const result = await res.json();
-            if (result.insertedId) {
+    const onSubmit = (data) => {
+        const poll = {
+            img: pollImg,
+            question: pollQuestion || data.question,
+            publishedDate: new Date().toLocaleString(),
+            vote: { yes: 0, no: 0, noComment: 0 }
+        }
+
+        fetch("/api/poll", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify(poll),
+        })
+            .then(res => {
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
                     text: `Vote success for this news`,
                 });
-                images = []
                 reset();
-            }
-        }
-
+            })
     };
+    const uploadFile = () => {
+        document.getElementById('pollClick').click();
+    }
 
     return (
         <div className="container">
@@ -103,35 +67,32 @@ const MakePoll = () => {
                 Make a Poll
             </h2>
             <form
-                className="flex flex-col space-y-4 md:w-3/4 mx-auto"
                 onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col space-y-4 md:w-3/4 mx-auto"
             >
-                {uploading && <h1 className="text-center text-3xl"> <CircularProgress /> </h1>}
-
-                <input
-                    onChange={handleImgUpload}
-                    name="img"
-                    accept="image/*"
-                    type="file"
-                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
-                    multiple
-                />
-                <textarea
-                    className="px-2 py-3 outline-0 border rounded-md border-red-100"
-                    {...register("question", { required: true })}
-                    placeholder="Question"
-                />
-                {errors.question && (
-                    <span className="bg-red-50 text-red-500 rounded-md">
-                        This field is required
-                    </span>
-                )}
-
-                <input
-                    className="w-36 bg-red-500 py-2.5 text-white font-medium uppercase text-lg rounded-md hover:bg-red-600 transition-colors duration-300 cursor-pointer"
-                    type="submit"
-                    value="Make Poll"
-                />
+                <Card>
+                    <CardHeader title="Create a new poll" />
+                    <Divider />
+                    <CardContent>
+                        {uploading ? <h1 className='text-center'><CircularProgress fontSize="large" /></h1> :
+                            <div className="flex items-center justify-around flex-wrap my-2">
+                                <Button sx={{ paddingY: '3px', marginLeft: 2 }} variant="outlined"
+                                    color='secondary' onClick={uploadFile} className="">Upload image</Button>
+                                <input id='pollClick' type="file" accept="image/*" onChange={handleImgUpload} style={{ display: 'none' }} />
+                                <p className='text-gray-500 text-lg'>{imgName ? imgName : 'Select a image'}</p>
+                            </div>}
+                        <TextField onChange={(e) => setPollQuestion(e.target.value)} {...register("question", { required: true })} fullWidth label="Make Question" margin="normal" type="text" variant="outlined" />
+                        {errors.question && (
+                            <span className="bg-red-50 text-red-700 rounded-md">
+                                This field is required
+                            </span>
+                        )}
+                    </CardContent>
+                    <Divider />
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }}>
+                        <Button color="secondary" variant="contained" type="submit" > Make Poll</Button>
+                    </Box>
+                </Card>
             </form>
         </div>
     );

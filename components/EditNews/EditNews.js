@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Button, CircularProgress, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
     position: 'absolute',
@@ -22,7 +23,7 @@ const style = {
 };
 
 
-const EditNews = ({ news, modalOpen, handleEditModalClose }) => {
+const EditNews = ({ news, open, handleClose }) => {
     const { toggleLanguage } = useAuth();
     const { register, handleSubmit, reset } = useForm();
     const [imgName, setImgName] = React.useState(false);
@@ -101,11 +102,11 @@ const EditNews = ({ news, modalOpen, handleEditModalClose }) => {
 
         let postUrl = null;
         if (toggleLanguage) {
-            const url = `/api/bnnews?id=${news?._id}`
+            const url = `https://ajker-barta.vercel.app/api/bnnews?id=${news?._id}`
             postUrl = url;
         }
         else {
-            const url = `/api/news?id=${news?._id}`
+            const url = `https://ajker-barta.vercel.app/api/news?id=${news?._id}`
             postUrl = url;
         }
         axios.patch(postUrl, data)
@@ -150,8 +151,8 @@ const EditNews = ({ news, modalOpen, handleEditModalClose }) => {
                 className='bg-gray-200'
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                open={modalOpen}
-                onClose={handleEditModalClose}
+                open={open}
+                onClose={handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -159,8 +160,8 @@ const EditNews = ({ news, modalOpen, handleEditModalClose }) => {
                 }}
             >
                 <Fade in={open}>
-                    <Box sx={style}>
-                        <p className='text-end' onClick={handleEditModalClose}>X</p>
+                    <Box sx={style} >
+                        <h3 className='float-right cursor-pointer' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
                         <h2 className='text-primary font-semibold text-center text-3xl py-4'>Edit This News </h2>
                         <Paper>
                             <form onSubmit={handleSubmit(handleNewsEdit)}>

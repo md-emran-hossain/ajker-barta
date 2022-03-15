@@ -10,6 +10,7 @@ export const Sales = (props) => {
         fetch('/api/news')
             .then(response => response.json())
             .then(json => setNews(json))
+            .catch(error => console.log(error))
     }, [])
     const all = news.map(item => item?.category)
     const occurrences = all.reduce(function (acc, curr) {
@@ -87,37 +88,18 @@ export const Sales = (props) => {
         <Card {...props}>
             <CardHeader
                 action={(
-                    <Button
-                        endIcon={<ArrowDropDownIcon fontSize="small" />}
-                        size="small"
-                    >
-                        Last 7 days
-                    </Button>
+                    <Button endIcon={<ArrowDropDownIcon fontSize="small" />} size="small"> Last 7 days </Button>
                 )}
                 title="Number of News By Category"
             />
             <Divider />
             <CardContent>
-                <Box
-                    sx={{
-                        height: 400,
-                        position: 'relative'
-                    }}
-                >
-                    <Bar
-                        data={data}
-                        options={options}
-                    />
+                <Box sx={{ height: 400, position: 'relative' }}>
+                    <Bar data={data} options={options} />
                 </Box>
             </CardContent>
             <Divider />
-            <Box
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    p: 2
-                }}
-            >
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 2 }} >
             </Box>
         </Card>
     );

@@ -12,7 +12,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import { ChartBar as ChartBarIcon } from '../../../icons/chart-bar';
 import { Cog as CogIcon } from '../../../icons/cog';
 import { Lock as LockIcon } from '../../../icons/lock';
-import { Selector as SelectorIcon } from '../../../icons/selector';
 import { User as UserIcon } from '../../../icons/user';
 import { Users as UsersIcon } from '../../../icons/users';
 import { Divider } from '@mui/material';
@@ -125,7 +124,6 @@ const DashboardHome = ({ children }) => {
                         icon={(<ChartBarIcon fontSize="small" />)}
                         href={'/dashboard'}
                         title='Dashboard'
-                    // setDPanel={setDPanel}
                     />
                     <NavItem
                         key='Account'
@@ -166,23 +164,10 @@ const DashboardHome = ({ children }) => {
                         title='My Notes'
                     />}
                     <NavItem
-                        key='Settings'
-                        icon={(<CogIcon fontSize="small" />)}
-                        href={'/dashboard/settings'}
-                        title='Settings'
-                    />
-                    <NavItem
                         key='Wish List'
                         icon={(<CogIcon fontSize="small" />)}
                         href={'/dashboard/wishlist'}
                         title='Wish List'
-                    />
-                    <NavItem
-                        key='Log Out'
-                        icon={(<LogoutIcon fontSize="small" />)}
-                        href=''
-                        title='LogOut'
-                        onClick={logOut}
                     />
                 </Box>
                 <Divider sx={{ borderColor: '#2D3748' }} />
@@ -193,7 +178,6 @@ const DashboardHome = ({ children }) => {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-
             {/* Dashboard navbar */}
             <AppBar open={open} className="bg-white">
                 <Toolbar>

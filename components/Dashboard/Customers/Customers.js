@@ -19,7 +19,7 @@ const Customers = () => {
             .then(res => res.json())
             .then(data => setEmployees(data))
             .catch(err => console.log(err.message))
-    }, [employees])
+    }, [])
     const handleDesignation = (e, id) => {
         const designationObj = { designation: e.target.value }
         fetch(`/api/users/updaterole?id=${id}`, {
