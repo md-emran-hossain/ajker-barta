@@ -11,22 +11,22 @@ const Footer = ({ newses }) => {
   return (
     <div className={styles.footer}>
       <div className="container">
-      <ScrollToTop top='50' color='#EF4444' style={{padding: '5px'}} smooth />
+        <ScrollToTop top='50' color='#EF4444' style={{ padding: '5px' }} smooth />
         <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2">
           <div className={styles.infoBox}>
             <Link href='/'>
               <a className='text-white text-3xl font-medium'>Ajker <span className='text-red-500'>Barta</span></a>
             </Link>
             <div className={styles.infoBox}>
-              <p className='my-2 text-sm'>ABC Road, Rangpur, Bangladesh</p>
-              <p className='my-2 text-sm'>Phone: 0154-4455533</p>
-              <p className='my-2 text-sm'>Email: ajkerbarta007@gmail.com</p>
+              <p className='my-2 text-sm'> <a className='contact-text hover:text-white ' href="tel:+880154-4455533" target="_blank" rel='noreferrer'>Phone: 0154-4455533</a></p>
+              <p className='my-2 text-sm'><a href="https://mail.google.com/mail/?view=cm&fs=1&to=ajkerbarta007@gmail.com" className="hover:text-white " target="_blank" rel='noreferrer'>Email: ajkerbarta007@gmail.com</a> </p>
+              <p className='my-2 text-sm'><a href="https://www.google.com/maps/place/Dhaka/@23.6220844,89.4661743,8z/data=!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.810332!4d90.4125181" target="_blank" className="hover:text-white " rel='noreferrer' >ABC Road, Dhaka, Bangladesh</a></p>
             </div>
             <div className='flex items-center gap-2 mt-5'>
-              <a className='w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer'><CgFacebook /></a>
-              <a className='w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer'><CgYoutube /></a>
-              <a className='w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer'><CgGoogle /></a>
-              <a className='w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer'><CgInstagram /></a>
+              <a className='w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer' href="https://www.facebook.com/" target="_blank" rel='noreferrer' ><CgFacebook /></a>
+              <a className='w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer' href="https://www.youtube.com/" target="_blank" rel='noreferrer' ><CgYoutube /></a>
+              <a className='w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer' href="https://www.google.com/" target="_blank" rel='noreferrer' ><CgGoogle /></a>
+              <a className='w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-xl hover:text-white cursor-pointer' href="https://www.instagram.com/" target="_blank" rel='noreferrer' ><CgInstagram /></a>
             </div>
           </div>
           <div className={styles.infoBox}>
@@ -41,19 +41,15 @@ const Footer = ({ newses }) => {
               <li className='my-1'><Link href='/lifestyle'><a>LifeStyle</a></Link></li>
             </ul>
           </div>
-         
+
           <Newsletter />
 
           <div className={styles.infoBox}>
             <h1 className='text-white text-xl font-medium border-red-500'>Important Links</h1>
             <ul>
-              <li className='my-1'><a>Digital Edition</a></li>
-              <li className='my-1'><a>Side Map</a></li>
-              <li className='my-1'><Link href="/about"><a>About Us</a></Link></li>
-              <li className='my-1'><a>career</a></li>
-              <li className='my-1'><a>About Ads</a></li>
-              <li className='my-1'><a>Give a Gift</a></li>
-              <li className='my-1'><a>Security Info</a></li>
+              <li className='my-1'><Link href="/about"><a>About us</a></Link></li>
+              <li className='my-1'><Link href="/career"><a>Career</a></Link></li>
+              <li className='my-1'><Link href="/advertisement"><a>Advertisement</a></Link></li>
             </ul>
           </div>
           <div className={styles.infoBox}>
@@ -73,10 +69,10 @@ const Footer = ({ newses }) => {
       <div className={styles.copyRight}>
         <div className="container">
           <div className='sm:flex items-center justify-between'>
-            <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | &copy; Copyright with Love By DevHeros</p>
+            <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | &copy; Copyright 2022 All Right Is Reserved !!!</p>
             <div>
-              <span><Link href='/policy'><a className='cursor-pointer'>Policy</a></Link> </span>
-              <span><a className='cursor-pointer ml-4'>Claim A Report</a></span>
+              <span><Link href='/policy'><a className='cursor-pointer'>Privacy & Policy</a></Link>
+              </span>
             </div>
           </div>
         </div>

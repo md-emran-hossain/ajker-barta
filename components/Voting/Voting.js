@@ -1,12 +1,9 @@
-
 import { Button, FormControlLabel, Radio, RadioGroup, Paper, CardContent } from '@mui/material';
 import React, { useState } from 'react'
-import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2';
 
 
 export default function Voting({ polls }) {
-	// console.log(polls)
 	const voting = polls?.slice(0, 3);
 	const [voteValue, setVoteValue] = useState("");
 
@@ -14,8 +11,6 @@ export default function Voting({ polls }) {
 	const handleVoteSubmit = (e, data) => {
 		console.log(voteValue);
 		e.preventDefault();
-
-
 		let vote = Object.assign({}, data.vote)
 		console.log(vote);
 
@@ -29,7 +24,6 @@ export default function Voting({ polls }) {
 			vote.noComment = parseInt(vote.noComment) + 1
 		}
 		console.log(vote);
-
 
 		fetch(`/api/poll?id=${data?._id}`, {
 			method: "PUT",
@@ -48,7 +42,13 @@ export default function Voting({ polls }) {
 					})
 				}
 			})
-
+			.catch(error => {
+				Swal.fire({
+					icon: 'error',
+					title: 'Error',
+					text: `${error}`,
+				})
+			})
 	};
 
 	return (
@@ -57,7 +57,7 @@ export default function Voting({ polls }) {
 				{
 					voting?.map(vote => <div className='flex items-stretch' key={vote?._id}>
 						<Paper sx={{ padding: 2, }}>
-							<img src={vote?.images?.img1} style={{ width: '100%', maxHeight: '220px' }} alt="Vote Img" />
+							<img src={vote?.img} style={{ width: '100%', maxHeight: '220px' }} alt="Vote Img" />
 							<CardContent><h1 className='my-3 text-xl'>{vote?.question}</h1></CardContent>
 							<form onSubmit={(e) => handleVoteSubmit(e, vote)} className="flex flex-col">
 								<div className='flex justify-between mb-3 border-b'>
