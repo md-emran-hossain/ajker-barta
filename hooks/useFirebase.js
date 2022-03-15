@@ -216,6 +216,11 @@ export default function useFirebase() {
             .then(data => {
                 setAdmin(data.admin)
             })
+            .catch(error => Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `${error} `,
+            }))
     }
     // user info save to the database 
     const saveUser = (email, name, method) => {

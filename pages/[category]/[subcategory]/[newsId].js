@@ -21,7 +21,7 @@ import MuiAlert from "@mui/material/Alert";
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Menu } from '@mui/material';
+import { Menu, Paper, TextField } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNews from "../../../components/EditNews/EditNews";
@@ -54,17 +54,16 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   const [isShowNoteBar, setIsShowNoteBar] = useState(false);
 
   // news modal control 
-  const [open, setOpen] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleEditModalOpen = () => setOpen(true);
 
 
   // news modal control 
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleEditModalOpen = () => setModalOpen(true);
-  const handleEditModalClose = () => setModalOpen(false);
-
+  // const [modalOpen, setModalOpen] = useState(false);
+  // const handleEditModalClose = () => setModalOpen(false);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -73,7 +72,6 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnack(false);
   };
 
@@ -154,7 +152,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
 
 
   // add commnent functionality
-  const [commnetText, setCommentText] = useState('')
+  const [commentText, setCommentText] = useState('')
   const [comments, setComments] = useState([])
   useEffect(() => {
     if (news?.comments) {
@@ -166,13 +164,12 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   const handleComment = (e) => {
     e.preventDefault()
     const commentObj = {
-      comment: commnetText,
+      comment: commentText,
       name: user.displayName,
       img: user.photoURL,
       date: new Date().toLocaleString(),
       email: user.email,
     }
-    setComments([commentObj, ...comments])
     if (!user.email) {
       Swal.fire({
         title: "You are not signed in",
@@ -191,26 +188,36 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
         }
       });
     } else {
-      fetch(`/api/news/${newsId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(commentObj),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.modifiedCount > 0) {
-            e.target.reset()
-          }
+      if (commentText) {
+        setComments([commentObj, ...comments])
+        fetch(`/api/news/${newsId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(commentObj),
         })
-        .catch(err => {
-          Swal.fire({
-            title: 'Error',
-            text: `${err.message}`,
-            icon: 'error',
-            showCancelButton: true
+          .then((res) => res.json())
+          .then((data) => {
+            setCommentText("");
+            e.target.reset();
+            if (data.modifiedCount > 0) {
+              setCommentText("");
+              e.target.reset();
+            }
           })
-        })
+          .catch(err => {
+            Swal.fire({
+              title: 'Error',
+              text: `${err.message}`,
+              icon: 'error',
+              showCancelButton: true
+            })
+          })
+      }
+      else {
+        return;
+      }
     }
+
   };
   //like functionality
   const handleLike = (id) => {
@@ -252,7 +259,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
         console.log(err)
       })
   }
-
+  // wish list add
   const addToWishList = () => {
     fetch(`/api/users/wishlist?email=${user.email}`, {
       method: "PUT",
@@ -272,6 +279,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
         }
       })
   }
+  // handle audio news
 
   const playNow = (text) => {
     if (speechSynthesis.paused && speechSynthesis.speaking) {
@@ -301,6 +309,8 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
       console.error("Failed to copy: ", err);
     }
   };
+
+  // qr code  
   const generateCode = () => {
     handleOpenqr()
   }
@@ -391,19 +401,27 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        const url = `/api/news/${id}`;
-        fetch(url, {
+        let deleteURL = null;
+        if (toggleLanguage) {
+          const url = `https://ajker-barta.vercel.app/api/bnnews/${id}`;
+          deleteURL = url;
+        } else {
+          const url = `https://ajker-barta.vercel.app/api/news/${id}`;
+          deleteURL = url;
+        }
+
+        fetch(deleteURL, {
           method: 'DELETE'
         })
           .then(res => res.json())
           .then(data => {
-            if (data.deletedCount > 0) {
-              router.push('/')
+            if (data.deletedCount) {
               swalWithBootstrapButtons.fire(
                 'Deleted!',
                 'This News has been deleted.',
                 'success'
               )
+              router.push('/')
             }
           })
 
@@ -429,9 +447,9 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
           <div className=" flex items-center justify-between">
             <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
-            {admin && <div className="hover:bg-gray-200 rounded-full p-1">
+            <div className="hover:bg-gray-200 rounded-full p-1">
               <MoreVertIcon onClick={handleOpenUserMenu} fontSize="large" sx={{ borderRadius: '50%', cursor: 'pointer' }} />
-            </div>}
+            </div>
 
             <Menu sx={{ mt: '45px', width: '500px' }} id="menu-appbar" anchorEl={anchorElUser}
               anchorOrigin={{ vertical: 'top', horizontal: 'center', }} keepMounted
@@ -442,8 +460,8 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
                 <h5 onClick={handleEditModalOpen} className='mx-2 mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon />  Edit</h5>
                 <EditNews
                   news={news}
-                  modalOpen={modalOpen}
-                  handleEditModalClose={handleEditModalClose} />
+                  open={open}
+                  handleClose={handleClose} />
 
                 <h5 onClick={() => handleDeleteNews(news?._id)} className='mx-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' ><DeleteForeverIcon />  Delete</h5>
               </div>
@@ -490,75 +508,72 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
           {
             news?.images?.img6 && <img className="w-8/12 mx-auto" src={news?.images?.img6} alt='img6' />
           }
-          {user.email && <div className="flex items-center gap-3">
-            {
-              likes.includes(user.email) ? <div title='Unlike the news'>
-                <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer', color: "#1976d2" }} />
-              </div> : <div title='Give thumbs up'>
-                <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ my: 2, fontSize: 45, cursor: 'pointer' }} />
-              </div>
-            }
-            <span className="mt-3 font-semibold">{likes.length || 0} likes</span>
-          </div>}
-          {/* Selection Item */}
 
-          {/* Show after selection */}
-          <div className="border-y border-gray-300 flex items-center justify-between">
-            <h2 className="text-xl font-semibold py-3">Comments</h2>
-            <Actions />
-          </div>
-          <div className="flex justify-between items-center border-y border-gray-300">
-            <h2 className="text-xl py-3">No Comments yet</h2>
+          <Paper sx={{ padding: 1 }}>
+            {user.email && <div className="flex items-center gap-3">
+              {
+                likes.includes(user.email) ? <div title='Unlike the news'>
+                  <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ fontSize: 35, cursor: 'pointer', color: "#1976d2", marginLeft: 1 }} />
+                </div> : <div title='Give thumbs up'>
+                  <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ fontSize: 35, cursor: 'pointer', marginLeft: 1 }} />
+                </div>
+              }
+              <span className="mt-3 mb-1 font-semibold">{likes.length || 0} likes</span>
+            </div>}
+            {/* Selection Item */}
 
-            <div>
-              <span>Sort by: </span>
-              <select name="Sort by" id="Sort by">
-                <option value="">Newest</option>
-                <option value="">Oldest</option>
-              </select>
+            {/* Show after selection */}
+            <div className="border-y border-gray-300 flex items-center justify-between">
+              <h2 className="text-xl font-semibold py-3 ml-2">Comments</h2>
+              <Actions />
             </div>
-          </div>
-          <div>
-            {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
+            <div className="flex justify-between items-center border-y border-gray-300">
+              <h2 className="text-xl py-3 ml-2">{comments ? "Al Comments" : "No Comments yet"}</h2>
 
-            {comments?.map((item) => (
-              <div
-                key={item.date}
-                className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer"
-              >
-                <div className="mr-4">
-                  <div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl">
-                    <img
-                      className="inline object-cover w-12 h-12 mr-2 rounded-full"
-                      src={item.img}
-                      alt="Pro"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div className="font-semibold text-sm">{item.name}</div>
-                  <div className="text-base text-gray-500">{item.comment}</div>
-                  <div className="text-xs text-gray-500">
-                    <span className="mr-2">{item.date}</span>
-                  </div>
-                </div>
+              <div>
+                <span>Sort by: </span>
+                <select name="Sort by" id="Sort by">
+                  <option value="">Newest</option>
+                  <option value="">Oldest</option>
+                </select>
               </div>
-            ))}
-            <form onSubmit={handleComment}>
-              <input
-                placeholder="Write your comment here"
-                type="text"
-                className="border-2 rounded block w-full my-2 p-2"
-                onChange={(e) => setCommentText(e.target.value)}
-              />
-              <input
-                className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded"
-                type="submit"
-                value="Comment"
-              />
-            </form>
-          </div>
+            </div>
+            <div>
+              {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
+              <div style={{ maxHeight: '400px', overflow: 'scroll' }}>
+                {comments?.map((item) => (
+                  <div
+                    key={item.date}
+                    className="w-full flex p-3 pl-4 items-center  rounded-lg cursor-pointer border-b-2"
+                  >
+                    <div className="mr-4">
+                      <div className="h-9 w-19 rounded-sm flex items-center justify-center text-3xl">
+                        <img
+                          className="inline object-cover w-12 h-12 mr-2 rounded-full"
+                          src={item.img}
+                          alt="Pro"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-semibold text-sm">{item.name}  <span className="ml-3 text-xs text-gray-500">{item.date}</span></div>
+                      <div className="text-base text-gray-500">{item.comment}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <form onSubmit={handleComment}>
+                <TextField fullWidth label="Comment here"
+                  onChange={(e) => setCommentText(e.target.value)}
+                  type="text" variant="outlined"
+                />
+                <Button type="submit" variant="contained" color="secondary" sx={{ marginTop: 1, paddingX: 5 }}> Comment</Button>
+              </form>
+            </div>
+          </Paper>
+
         </div>
+
         <div className="col-span-1 sticky">
           <p className="mx-10 my-5 py-3 mb-3 underline text-xl">
             You may also read
@@ -639,7 +654,7 @@ export default Newsdetails;
 
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-  const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
+  const bengali = await axios.get(`https://ajker-barta.vercel.app/api/bnnews`);
   return {
     props: {
       englishNews: res.data,

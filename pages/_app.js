@@ -13,17 +13,13 @@ const clientSideEmotionCache = createEmotionCache();
 
 
 function MyApp({ Component, pageProps }) {
-  // const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const emotionCache = clientSideEmotionCache
 
   return (
-
     <div >
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>
-            AJKER BARTA
-          </title>
+          <title> AJKER BARTA</title>
           <meta
             name="viewport"
             content="initial-scale=1, width=device-width"
@@ -38,9 +34,7 @@ function MyApp({ Component, pageProps }) {
             </AuthProvider>
           </ThemeProvider>
         </LocalizationProvider>
-
       </CacheProvider>
-
     </div >
   )
 };

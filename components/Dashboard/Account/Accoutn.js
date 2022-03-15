@@ -1,6 +1,5 @@
 import Head from 'next/head';
-import { Box, Container, Grid, Typography } from '@mui/material';
-import { AccountProfile } from './AccountProfile';
+import { Box, Container, Typography } from '@mui/material';
 import { AccountProfileDetails } from './AccountProfileDetails';
 
 const Account = () => (

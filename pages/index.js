@@ -15,7 +15,7 @@ import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
-// import Voting from "../components/Voting/Voting";
+import Voting from "../components/Voting/Voting";
 import useAuth from "../hooks/useAuth";
 
 
@@ -47,7 +47,7 @@ export default function Home({ englishNews, polls, bengaliNews }) {
       <Header newses={newses} />
       <NavigationBar />
       <Hero newses={newses} />
-      {/* <Voting polls={polls} /> */}
+      <Voting polls={polls} />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
@@ -67,12 +67,12 @@ export default function Home({ englishNews, polls, bengaliNews }) {
 
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-  // const pollRes = await axios.get(`https://ajker-barta.vercel.app/api/poll`);
+  const pollRes = await axios.get(`https://ajker-barta.vercel.app/api/poll`);
   const bengali = await axios.get(`https://ajker-barta.vercel.app/api/bnnews`);
   return {
     props: {
       englishNews: res.data,
-      // polls: pollRes.data,
+      polls: pollRes.data,
       bengaliNews: bengali.data,
     },
     revalidate: 10
