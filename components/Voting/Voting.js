@@ -1,119 +1,81 @@
-import { useState } from "react";
 
-function Voting() {
-	 const initialState = {
-	 	yes: 7,
-	 	no: 4,
-	 	comment: 4,
-	 };
-
-    
-	// const [python, setPython] = useState(initialState.yes);
-	// const [javascript, setJavascript] = useState(initialState.no);
-	// const [comment, setComment] = useState(initialState.comment);
-	const [formData, updateFormData] = useState(initialState);
-    // console.log(python);
-	const handleVote = (e) => {
-		const { name, value } = e.target;
-		 if (name === "yes") {
-			updateFormData(initialState.yes + 1);
-		 	updateFormData(initialState.no);
-		 }
-		 if (name === "no") {
-			updateFormData(initialState.no + 1);
-		 	updateFormData(initialState.yes);
-		 }
-		 if (name === "comment") {
-			updateFormData(initialState.comment + 1);
-			updateFormData(initialState.yes);
-             updateFormData(initialState.no);
-		 }
-		
-
-		// updateFormData({
-		// 	//  ...formData,
-	  
-		// 	// Trimming any whitespace
-		// 	[name]: formData
-		//   });
+import { Button, FormControlLabel, Radio, RadioGroup, Paper, CardContent } from '@mui/material';
+import React, { useState } from 'react'
+import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2';
 
 
+export default function Voting({ polls }) {
+	// console.log(polls)
+	const voting = polls?.slice(0, 3);
+	const [voteValue, setVoteValue] = useState("");
 
 
+	const handleVoteSubmit = (e, data) => {
+		console.log(voteValue);
+		e.preventDefault();
 
 
+		let vote = Object.assign({}, data.vote)
+		console.log(vote);
 
+		if (voteValue === "yes") {
+			vote.yes = parseInt(vote.yes) + 1
+		}
+		else if (voteValue === "no") {
+			vote.no = parseInt(vote.no) + 1
+		}
+		else if (voteValue === "noComment") {
+			vote.noComment = parseInt(vote.noComment) + 1
+		}
+		console.log(vote);
+
+
+		fetch(`/api/poll?id=${data?._id}`, {
+			method: "PUT",
+			headers: {
+				"content-type": "application/json"
+			},
+			body: JSON.stringify(vote)
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data.modifiedCount > 0) {
+					Swal.fire({
+						icon: 'success',
+						title: 'Success',
+						text: `Vote success for this news`,
+					})
+				}
+			})
 
 	};
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		console.log(formData);
-		// ... submit to API or something
-	  };
+
 	return (
-		<div>
-
-
-
-
-<div className="max-w-2xl mx-4 sm:max-w-sm md:max-w-sm lg:max-w-sm xl:max-w-sm sm:mx-auto md:mx-auto lg:mx-auto xl:mx-auto mt-16 bg-white shadow-xl rounded-lg text-gray-900 h-100">
-  <div className="rounded-t-lg h-32 overflow-hidden">
-    <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain'/>
-  </div>
- 
-  <div className="text-center mt-2">
-    
-    <p className="text-gray-500">World number one Novak Djokovic has claimed he is not anti-vaccination but would rather skip Grand Slams than be</p>
-  </div>
-  <ul className="py-4 mt-2 text-gray-700 flex items-center justify-around">
-  <form>
-	
-			
-      
-   
- 
-	<div className="flex justify-center">
-  <div className="form-check form-check-inline">
-    <input className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="yes" id="yes"  value={formData.yes} onChange={handleVote}/>
-    <label className="form-check-label inline-block text-gray-800" >{formData.yes}</label>
-  </div>
-  <div className="form-check form-check-inline">
-    <input className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="no" id="no" value={formData.no} onChange={handleVote}/>
-    <label className="form-check-label inline-block text-gray-800" >{formData.no}</label>
-  </div>
-  <div className="form-check form-check-inline">
-    <input className="form-check-input form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="comment" id="comment" value={formData.comment} onChange={handleVote}/>
-    <label className="form-check-label inline-block text-gray-800" >{formData.comment}</label>
-  </div>
-  
-</div>
-
-
-
-
-	<div className="p-4 border-t mx-8 mt-2">
-    <button className="w-1/2 block mx-auto rounded-full bg-gray-900 hover:shadow-lg font-semibold text-white px-6 py-2" onClick={handleSubmit}>VOTe</button>
-  </div>
-  </form>
-  </ul>
-  
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-			
+		<div className='container '>
+			<div className='flex gap-6 my-16'>
+				{
+					voting?.map(vote => <div className='flex items-stretch' key={vote?._id}>
+						<Paper sx={{ padding: 2, }}>
+							<img src={vote?.images?.img1} style={{ width: '100%', maxHeight: '220px' }} alt="Vote Img" />
+							<CardContent><h1 className='my-3 text-xl'>{vote?.question}</h1></CardContent>
+							<form onSubmit={(e) => handleVoteSubmit(e, vote)} className="flex flex-col">
+								<div className='flex justify-between mb-3 border-b'>
+									<p className='font-semibold'>Vote</p>
+									<p className='mr-3 font-semibold'>Count</p>
+								</div>
+								<RadioGroup onChange={(e) => setVoteValue(e.target.value)} name="radio-buttons-group">
+									<div className='flex justify-between'><FormControlLabel value="yes" control={<Radio />} label="Yes" /> <p className='mr-3'>{vote?.vote?.yes}</p></div>
+									<div className='flex justify-between'><FormControlLabel value="no" control={<Radio />} label="No" /><p className='mr-3'>{vote?.vote?.no}</p></div>
+									<div className='flex justify-between'><FormControlLabel value="noComment" control={<Radio />} label="No Comment" /><p className='mr-3'>{vote?.vote?.noComment}</p></div>
+								</RadioGroup>
+								<Button color='success' variant='contained' type='submit'>Vote</Button>
+							</form>
+						</Paper>
+					</div>
+					)}
+			</div>
 		</div>
-	);
-}
+	)
+};
 
-export default Voting;

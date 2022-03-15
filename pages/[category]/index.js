@@ -7,16 +7,25 @@ import Header from "../../components/Shared/Header/Header";
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 import styles from "../../styles/CategoryDetails.module.css";
 import Image from 'next/image';
+import useAuth from "../../hooks/useAuth";
 
-const CategoryDetails = ({ newses }) => {
+const CategoryDetails = ({ englishNews, bengaliNews }) => {
+  const { toggleLanguage } = useAuth();
   const [visible, setVisible] = useState(10);
 
   const router = useRouter();
   const category = router.query.category;
-  const displayNews = newses
-    .filter((news) => news.category === category)
-    .reverse();
-  const subCategories = displayNews.map(
+
+  let newses = null;
+  if (toggleLanguage) {
+    newses = bengaliNews;
+  }
+  else {
+    newses = englishNews;
+  }
+  const displayNews = newses?.filter((news) => news.category === category).reverse();
+
+  const subCategories = displayNews?.map(
     (news) => news.category && news.subCategory
   );
   const unique = [...new Set(subCategories)];
@@ -36,18 +45,13 @@ const CategoryDetails = ({ newses }) => {
             <span
               key={i}
               onClick={() => router.push(`/${category}/${subCategory}`)}
-              className="cursor-pointer"
-            >
-              {subCategory}
-            </span>
-          ))}
+              className='cursor-pointer'>{subCategory}
+            </span>))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() =>
-                router.push(`/${category}/${news?.subCategory}/${news?._id}`)
-              }
+              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
@@ -65,9 +69,7 @@ const CategoryDetails = ({ newses }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() =>
-                router.push(`/${category}/${news.subCategories}/${news?._id}`)
-              }
+              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
               className={`${styles.singleNews} cursor-pointer`}
               key={news._id}
             >
@@ -103,16 +105,18 @@ const CategoryDetails = ({ newses }) => {
 export default CategoryDetails;
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  const bengali = await axios.get(`http://localhost:3000/api/bnnews`);
   return {
     props: {
-      newses: res.data,
+      englishNews: res.data,
+      bengaliNews: bengali.data,
     },
-    revalidate: 10,
+    revalidate: 10
   };
 };
 export async function getStaticPaths() {
   return {
     paths: [], //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
-  };
+    fallback: 'blocking' //indicates the type of fallback
+  }
 }

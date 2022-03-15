@@ -5,12 +5,11 @@ export default async function handler(req, res) {
     const users = database.collection('users');
     if (req.method === 'PUT') {
         const data = req.body;
-        const allNotes = data.allNotes
-        const email = data.email
+        const email = req.query.email
         const filter = { email: email };
         const updateDoc = {
-            $set: {
-                notes: allNotes
+            $push: {
+                notes: data
             }
         };
         const result = await users.updateOne(filter, updateDoc);

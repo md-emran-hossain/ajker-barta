@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="container"
+>
+  <h2
+    className="text-4xl uppercase w-fit border-b-2 border-red-500 mx-auto mb-6"
+  >
+    Add a news
+  </h2>
+  <form
+    className="flex flex-col space-y-4 md:w-3/4 mx-auto"
+    onSubmit={[Function]}
+  >
+    <input
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      name="heading"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Give a attractive heading"
+      type="text"
+    />
+    <textarea
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      name="description"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Description"
+    />
+    <input
+      accept="image/*"
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      multiple={true}
+      name="img"
+      onChange={[Function]}
+      type="file"
+    />
+    <input
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      name="reporter"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Reporter"
+      type="text"
+    />
+    <select
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      onChange={[Function]}
+    >
+      <option
+        value="not defined"
+      >
+        Please select a category
+      </option>
+      <option
+        value="coronavirus"
+      >
+        CORONAVIRUS
+      </option>
+      <option
+        value="opinion"
+      >
+        Opinion
+      </option>
+      <option
+        value="bangladesh"
+      >
+        Bangladesh
+      </option>
+      <option
+        value="international"
+      >
+        International
+      </option>
+      <option
+        value="entertainment"
+      >
+        Entertainment
+      </option>
+      <option
+        value="sciencetechnology"
+      >
+        Science & Technology
+      </option>
+      <option
+        value="business"
+      >
+        Business
+      </option>
+      <option
+        value="sports"
+      >
+        Sports
+      </option>
+    </select>
+    <select
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      name="subCategory"
+      onBlur={[Function]}
+      onChange={[Function]}
+    >
+      <option
+        value="not defined"
+      >
+        Please select a sub category
+      </option>
+    </select>
+    <input
+      className="w-36 bg-red-500 py-2.5 text-white font-medium uppercase text-lg rounded-md hover:bg-red-600 transition-colors duration-300 cursor-pointer"
+      type="submit"
+      value="Add News"
+    />
+  </form>
+</div>
+`;

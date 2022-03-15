@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="rounded imageEffect overflow-hidden shadow-md cursor-pointer"
+  onClick={[Function]}
+>
+  <div
+    className="w-full overflow-hidden"
+  >
+    <img
+      alt="Mountain"
+      className="w-full"
+    />
+  </div>
+  <div
+    className="px-3 py-3"
+  >
+    <div
+      className="font-bold text-lg mb-1 leading-6 hover:text-red-600 transition-colors duration-300"
+    />
+    <p
+      className="text-gray-700 text-sm"
+    />
+    <div
+      className="mt-4"
+    />
+  </div>
+</div>
+`;

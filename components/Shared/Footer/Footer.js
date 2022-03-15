@@ -3,25 +3,15 @@ import styles from '../../../styles/Footer.module.css'
 import { CgFacebook, CgYoutube, CgGoogle, CgInstagram } from 'react-icons/cg'
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-
+import Newsletter from './Newsletter'
+import ScrollToTop from "react-scroll-to-top";
 const Footer = ({ newses }) => {
   const router = useRouter()
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const saveUser = () => {
-    const user = { name, email };
-    fetch('/api/users', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-      .then(res => res.json())
-  };
+
   return (
     <div className={styles.footer}>
       <div className="container">
+      <ScrollToTop top='50' color='#EF4444' style={{padding: '5px'}} smooth />
         <div className="grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2">
           <div className={styles.infoBox}>
             <Link href='/'>
@@ -51,20 +41,15 @@ const Footer = ({ newses }) => {
               <li className='my-1'><Link href='/lifestyle'><a>LifeStyle</a></Link></li>
             </ul>
           </div>
-          <div className={styles.infoBox}>
-            <h1 className='text-white text-xl font-medium border-red-500'>Newsletter</h1>
-            <form onSubmit={saveUser}>
-              <input onBlur={(e) => setName(e.target.value)} type="text" placeholder='Name' />
-              <input onBlur={(e) => setEmail(e.target.value)} type="email" placeholder='Email' />
-              <button className='py-2.5 px-6 text-lg bg-red-500 text-white rounded-md w-full mt-2' type='submit'>Subscribe</button>
-            </form>
-          </div>
+         
+          <Newsletter />
+
           <div className={styles.infoBox}>
             <h1 className='text-white text-xl font-medium border-red-500'>Important Links</h1>
             <ul>
               <li className='my-1'><a>Digital Edition</a></li>
               <li className='my-1'><a>Side Map</a></li>
-              <li className='my-1'><a>About Us</a></li>
+              <li className='my-1'><Link href="/about"><a>About Us</a></Link></li>
               <li className='my-1'><a>career</a></li>
               <li className='my-1'><a>About Ads</a></li>
               <li className='my-1'><a>Give a Gift</a></li>
@@ -90,7 +75,7 @@ const Footer = ({ newses }) => {
           <div className='sm:flex items-center justify-between'>
             <p className='text-white text-md'>Ajker <span className='text-red-500'>Barta</span> | &copy; Copyright with Love By DevHeros</p>
             <div>
-              <span><a className='cursor-pointer'>Privacy & Policy</a></span>
+              <span><Link href='/policy'><a className='cursor-pointer'>Policy</a></Link> </span>
               <span><a className='cursor-pointer ml-4'>Claim A Report</a></span>
             </div>
           </div>

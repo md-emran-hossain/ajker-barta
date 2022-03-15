@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     }
     else if (req.method === 'DELETE') {
         const id = req.query.id
-        const filter = { '_id': ObjectId(id) }
+        const filter = { _id: ObjectId(id) }
         const result = await users.deleteOne(filter)
         res.status(201).json(result);
     }

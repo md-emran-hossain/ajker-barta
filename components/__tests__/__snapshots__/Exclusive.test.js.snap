@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="pb-5"
+  data-testid="exclusiveId"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="grid lg:grid-cols-2 gap-3"
+    >
+      <div>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 border-blue-400 mr-2 bg-blue-500 text-white"
+          onClick={[Function]}
+        >
+          Letest
+        </button>
+        <button
+          className="py-1 slim-border rounded-sm mb-3 px-4 bg-white border-blue-400 mr-2"
+          onClick={[Function]}
+        >
+          Trending
+        </button>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+      <div>
+        <h1
+          className="exclusive"
+        >
+          Satireday
+        </h1>
+        <div
+          className="grid sm:grid-cols-2 gap-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,8 +1,9 @@
 import { Box, Button, Card, CardActionArea, CardContent, CardMedia, Container, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
+import { useRouter } from 'next/router';
 
 
 const MakeAdmin = () => {

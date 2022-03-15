@@ -16,7 +16,6 @@ function MyApp({ Component, pageProps }) {
   // const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const emotionCache = clientSideEmotionCache
 
-
   return (
 
     <div >

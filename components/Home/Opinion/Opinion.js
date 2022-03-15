@@ -7,7 +7,7 @@ import WorldMedia from './WorldMedia/WorldMedia';
 
 const Opinion = ({ opinion }) => {
     return (
-        <>
+        <div data-testid='opinionId'>
             <OpEd opinion={opinion} />
             <div className='container mx-auto lg:pb-5 py-10 border-b'>
                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
@@ -17,7 +17,7 @@ const Opinion = ({ opinion }) => {
                     <WorldMedia opinion={opinion} />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

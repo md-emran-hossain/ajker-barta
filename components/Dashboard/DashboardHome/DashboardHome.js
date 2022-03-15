@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Avatar, Box, Menu, Tooltip } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,65 +13,27 @@ import { ChartBar as ChartBarIcon } from '../../../icons/chart-bar';
 import { Cog as CogIcon } from '../../../icons/cog';
 import { Lock as LockIcon } from '../../../icons/lock';
 import { Selector as SelectorIcon } from '../../../icons/selector';
-import { ShoppingBag as ShoppingBagIcon } from '../../../icons/shopping-bag';
 import { User as UserIcon } from '../../../icons/user';
-import { UserAdd as UserAddIcon } from '../../../icons/user-add';
 import { Users as UsersIcon } from '../../../icons/users';
 import { Divider } from '@mui/material';
 import { NavItem } from '../NavItem/NavItem';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { Logo } from '../Logo/Logo';
+import useAuth from '../../../hooks/useAuth';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import AddIcon from '@mui/icons-material/Add';
+import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
+import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 
-const items = [
-    {
-        href: '/dashboard',
-        icon: (<ChartBarIcon fontSize="small" />),
-        title: 'Dashboard'
-    },
-    {
-        href: '/dashboard/account',
-        icon: (<UserIcon fontSize="small" />),
-        title: 'Account'
-    },
-    {
-        href: '/dashboard/users',
-        icon: (<UsersIcon fontSize="small" />),
-        title: 'Employee'
-    },
-    {
-        href: '/dashboard/addNews',
-        icon: (<UsersIcon fontSize="small" />),
-        title: 'Add News'
-    },
-    {
-        href: '/dashboard/manageNews',
-        icon: (<ShoppingBagIcon fontSize="small" />),
-        title: 'Manage News'
-    },
-    {
-        href: '/dashboard/settings',
-        icon: (<CogIcon fontSize="small" />),
-        title: 'Settings'
-    },
-    {
-        href: '/dashboard/makeAdmin',
-        icon: (<LockIcon fontSize="small" />),
-        title: 'Make Admin'
-    },
-    {
-        href: '/login',
-        icon: (<UserAddIcon fontSize="small" />),
-        title: 'Login'
-    }
-];
 
 // drawer style //////////////////////////
 const drawerWidth = 260;
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -108,8 +70,11 @@ const AppBar = styled(MuiAppBar, {
 /////////////////
 
 const DashboardHome = ({ children }) => {
+    const { admin, user, logOut } = useAuth();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const router = useRouter();
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -118,8 +83,15 @@ const DashboardHome = ({ children }) => {
         setOpen(false);
     };
 
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
     ///// Side bar content///// 
-    const router = useRouter();
 
     React.useEffect(
         () => {
@@ -137,38 +109,81 @@ const DashboardHome = ({ children }) => {
     const content = (
         <>
             <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', color: 'white', }} >
-                <div>
-                    <Box sx={{ p: 3 }}>
-                        <NextLink href="/" passHref>
-                            <a> <Logo sx={{ height: 42, width: 42 }} /> </a>
-                        </NextLink>
-                    </Box>
-                    <Box sx={{ px: 2 }}>
-                        <Box sx={{ alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.04)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', px: 3, py: '11px', borderRadius: 1 }}>
-                            <div>
-                                <Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography>
-                                <Typography color="neutral.400" variant="body2" >  Update {' '} : Newses</Typography>
-                            </div>
-                            <SelectorIcon sx={{ color: 'neutral.500', width: 14, height: 14 }} />
-                        </Box>
-                    </Box>
-                </div>
+                <Box sx={{ alignItems: 'center', backgroundColor: 'rgba(255, 255, 255, 0.04)', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', m: 3, px: 3, py: 2, borderRadius: 1 }}>
+                    <Logo sx={{ height: 42, width: 42 }} />
+                    <NextLink href='/'><Typography color="inherit" variant="subtitle1"  > Ajker Barta</Typography></NextLink>
+                </Box>
                 <Divider
                     sx={{
                         borderColor: '#2D3748',
-                        my: 3
+                        mb: 3
                     }}
                 />
                 <Box sx={{ flexGrow: 1 }}>
-                    {items.map((item) => (
+                    <NavItem
+                        key='Dashboard'
+                        icon={(<ChartBarIcon fontSize="small" />)}
+                        href={'/dashboard'}
+                        title='Dashboard'
+                    // setDPanel={setDPanel}
+                    />
+                    <NavItem
+                        key='Account'
+                        icon={(<UserIcon fontSize="small" />)}
+                        href={'/dashboard/account'}
+                        title='Account'
+                    />
+                    {admin && <>
                         <NavItem
-                            key={item.title}
-                            icon={item.icon}
-                            href={item.href}
-                            title={item.title}
-                        // setDPanel={setDPanel}
+                            key='Employee'
+                            icon={(<UsersIcon fontSize="small" />)}
+                            href={'/dashboard/users'}
+                            title='Employee'
                         />
-                    ))}
+                        <NavItem
+                            key='Add News'
+                            icon={(<AddIcon fontSize="small" />)}
+                            href={'/dashboard/addNews'}
+                            title='Add News'
+                        />
+                        <NavItem
+                            key='Make Pole'
+                            icon={(<TuneOutlinedIcon fontSize="small" />)}
+                            href={'/dashboard/makePoll'}
+                            title='Make Pole'
+                        />
+                        <NavItem
+                            key='Make Admin'
+                            icon={(<LockIcon fontSize="small" />)}
+                            href={'/dashboard/makeAdmin'}
+                            title='Make Admin'
+                        />
+                    </>}
+                    {<NavItem
+                        key='My Notes'
+                        icon={(<EventNoteIcon fontSize="small" />)}
+                        href={'/dashboard/mynotes'}
+                        title='My Notes'
+                    />}
+                    <NavItem
+                        key='Settings'
+                        icon={(<CogIcon fontSize="small" />)}
+                        href={'/dashboard/settings'}
+                        title='Settings'
+                    />
+                    <NavItem
+                        key='Wish List'
+                        icon={(<CogIcon fontSize="small" />)}
+                        href={'/dashboard/wishlist'}
+                        title='Wish List'
+                    />
+                    <NavItem
+                        key='Log Out'
+                        icon={(<LogoutIcon fontSize="small" />)}
+                        href=''
+                        title='LogOut'
+                        onClick={logOut}
+                    />
                 </Box>
                 <Divider sx={{ borderColor: '#2D3748' }} />
                 <Box sx={{ px: 2, py: 3 }} > </Box>
@@ -194,10 +209,37 @@ const DashboardHome = ({ children }) => {
                         <MenuIcon fontSize='large' sx={{ color: 'black' }} />
                     </IconButton>
                     <br />
-                    <div className='container'>
+                    <div className='container flex items-center justify-between'>
                         <Typography className='text-black font-bold' variant="h5" noWrap component="div">
                             Ajker Barta
                         </Typography>
+
+                        <Box sx={{ flexGrow: 0 }}>
+                            <Tooltip title="Open settings">
+                                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                    <Avatar alt="Remy Sharp" src={user?.photoURL || "https://i.ibb.co/ScbTKWS/admin.png"} />
+                                </IconButton>
+                            </Tooltip>
+                            <Menu
+                                sx={{ mt: '45px', width: '500px' }}
+                                id="menu-appbar"
+                                anchorEl={anchorElUser}
+                                anchorOrigin={{
+                                    vertical: 'top', horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top', horizontal: 'right',
+                                }}
+                                open={Boolean(anchorElUser)}
+                                onClose={handleCloseUserMenu} >
+                                <div onClick={handleCloseUserMenu} className="flex flex-col px-3 py-2 w-48">
+                                    <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={() => router.push('/')} >< HomeIcon />  Home</h5>
+
+                                    <h5 className='ml-2 cursor-pointer font-bold text-gray-600' onClick={logOut}><LogoutIcon /> Logout</h5>
+                                </div>
+                            </Menu>
+                        </Box>
                     </div>
                 </Toolbar>
             </AppBar>

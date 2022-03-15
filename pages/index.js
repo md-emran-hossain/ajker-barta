@@ -15,20 +15,39 @@ import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
 import ImageGallery from "../components/Home/imageGallery/imageGallery";
-export default function Home({ newses }) {
-  const coronanews = newses.filter((news) => news.category === "coronavirus");
-  const bdnews = newses.filter((news) => news.category === "bangladesh");
-  const international = newses.filter((news) => news.category === "international");
-  const entertainment = newses.filter((news) => news.category === "entertainment");
-  const science = newses.filter((news) => news.category === "sciencetechnology");
-  const business = newses.filter((news) => news.category === "business");
-  const sports = newses.filter((news) => news.category === "sports");
-  const opinion = newses.filter(news => news.category === 'opinion')
+// import Voting from "../components/Voting/Voting";
+import useAuth from "../hooks/useAuth";
+
+
+export default function Home({ englishNews, polls, bengaliNews }) {
+  const { toggleLanguage } = useAuth();
+
+  let newses = null;
+  if (toggleLanguage) {
+    const bangla = bengaliNews
+    newses = bangla;
+  }
+  else {
+    const english = englishNews
+    newses = english;
+
+  }
+
+  const coronanews = newses?.filter((news) => news.category === "coronavirus");
+  const bdnews = newses?.filter((news) => news.category === "bangladesh");
+  const international = newses?.filter((news) => news.category === "international");
+  const entertainment = newses?.filter((news) => news.category === "entertainment");
+  const science = newses?.filter((news) => news.category === "sciencetechnology");
+  const business = newses?.filter((news) => news.category === "business");
+  const sports = newses?.filter((news) => news.category === "sports");
+  const opinion = newses?.filter(news => news.category === 'opinion')
+
   return (
     <div>
-      <Header />
+      <Header newses={newses} />
       <NavigationBar />
       <Hero newses={newses} />
+      {/* <Voting polls={polls} /> */}
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
@@ -48,10 +67,15 @@ export default function Home({ newses }) {
 
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
+  // const pollRes = await axios.get(`https://ajker-barta.vercel.app/api/poll`);
+  const bengali = await axios.get(`https://ajker-barta.vercel.app/api/bnnews`);
   return {
     props: {
-      newses: res.data,
+      englishNews: res.data,
+      // polls: pollRes.data,
+      bengaliNews: bengali.data,
     },
     revalidate: 10
   };
 };
+

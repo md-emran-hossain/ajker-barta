@@ -13,6 +13,8 @@ export default function useFirebase() {
     const [loading, setLoading] = useState(true);
     const [admin, setAdmin] = useState(false);
     const [jwtToken, setJwtToken] = useState('')
+    // toggle language 
+    const [toggleLanguage, setToggleLanguage] = useState(false)
 
     const router = useRouter();
     const auth = getAuth();
@@ -24,7 +26,7 @@ export default function useFirebase() {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const user = result.user;
-                router.replace(location || '/');
+                router.push(location.query.from || '/');
                 // save to database or update
                 saveUser(user.email, user.displayName, 'PUT')
                 setAuthError('')
@@ -93,7 +95,7 @@ export default function useFirebase() {
         signInWithEmailAndPassword(auth, email, password)
             .then((user) => {
                 setUser(user)
-                router.push(location || '/');
+                router.push(location?.query?.from || '/');
                 setAuthError('');
                 handleResponse(user.user, location)
                 Swal.fire({
@@ -203,7 +205,7 @@ export default function useFirebase() {
     }, [auth]);
 
 
-    // admin set to database 
+    // check admin
     const getAdmin = (email) => {
         fetch(`/api/users?email=${email}`, {
             headers: {
@@ -237,7 +239,7 @@ export default function useFirebase() {
 
 
     return {
-        user, jwtToken, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError
+        user, jwtToken, admin, authError, loading, signInWithGoogle, registerUser, loginUser, logOut, setLoading, setAuthError, setToggleLanguage, toggleLanguage
     }
 };
 
