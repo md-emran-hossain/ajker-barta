@@ -22,12 +22,12 @@ const Careeritem = () => {
               <p className="text-gray-600 mb-8">Your future is waiting for you. What will you choose to become? How do you want to live your life? What career is right for you? This free career test is for students and adults to help you discover your career interests because there are thousands of careers to choose from and each is just as unique as you! Give us just</p>
             </div>
             <div className="w-full md:w-1/2">
-              <img className="rounded-lg" src="https://pbs.twimg.com/media/CR45LOXVEAADG5E.jpg" alt="Vortex" />
+              <img className="rounded-lg" src="https://www.leatherworkinggroup.com/images/content/33_570x330.jpg?11:22:16&_e=.jpg" alt="Vortex" />
             </div>
           </div>
           <div className="flex items-center flex-wrap mb-20">
             <div className="w-full md:w-1/2">
-              <img className="rounded-lg" src="https://www.thesun.co.uk/wp-content/uploads/2019/06/SWJFO-EAPlay-08-1.jpg" alt="use the force" />
+              <img className="rounded-lg" src="https://besbd.org/wp-content/uploads/2021/04/Teamwork-Diverstiy-Mission-and-Culture.jpg" />
             </div>
             <div className="w-full md:w-1/2 pl-10">
               <h4 className="text-3xl text-gray-800 font-bold mb-3">Our Mission!</h4>
@@ -40,7 +40,7 @@ const Careeritem = () => {
               <p className="text-gray-600 mb-8">The culture in its simplest form refers to the ideas, customs, and social behaviour of particular people or society. Moreover, it denotes the arts, events, actions and objects that clearly show or represent something abstract or theoretical of human intellectual achievement regarded collectively. We also relate culture to the attitudes and behaviour characteristic of a specific social</p>
             </div>
             <div className="w-full md:w-1/2">
-              <img className="rounded-lg" src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Ferikkain%2Ffiles%2F2018%2F01%2FRey-Luke.jpg" alt="Syncing" />
+              <img className="rounded-lg" src="https://www.skylineuniversity.ac.ae/blog/images/2021/01/08/globalization.jpg" alt="Syncing" />
             </div>
           </div>
         </section>
