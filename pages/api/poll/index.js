@@ -18,7 +18,6 @@ export default async function handler(req, res) {
     if (req.method === 'PUT') {
         const data = req.body;
         const id = req.query.id;
-        console.log(data, "ID: ", id)
         const query = { _id: ObjectId(id) };
         const options = { upsert: true };
         const updateDoc = {

@@ -31,7 +31,6 @@ import Modal from '@mui/material/Modal';
 
 const Newsdetails = ({ englishNews, bengaliNews }) => {
   const { user, toggleLanguage, admin } = useAuth();
-  const [success, setSuccess] = useState([]);
   const [speed, setSpeed] = useState(1);
 
   // manage news option
@@ -55,15 +54,8 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
 
   // news modal control 
   const [openSnack, setOpenSnack] = useState(false);
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleEditModalOpen = () => setOpen(true);
 
-
-  // news modal control 
-  // const [modalOpen, setModalOpen] = useState(false);
-  // const handleEditModalClose = () => setModalOpen(false);
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -382,61 +374,6 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     );
   };
 
-  // handle delete 
-  const handleDeleteNews = (id) => {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'ml-2 bg-green-500 text-white rounded-full px-8 py-1',
-        cancelButton: 'bg-red-500 text-white rounded-full px-8 py-1'
-      },
-      buttonsStyling: false
-    })
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to delete this item!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        let deleteURL = null;
-        if (toggleLanguage) {
-          const url = `https://ajker-barta.vercel.app/api/bnnews/${id}`;
-          deleteURL = url;
-        } else {
-          const url = `https://ajker-barta.vercel.app/api/news/${id}`;
-          deleteURL = url;
-        }
-
-        fetch(deleteURL, {
-          method: 'DELETE'
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (data.deletedCount) {
-              swalWithBootstrapButtons.fire(
-                'Deleted!',
-                'This News has been deleted.',
-                'success'
-              )
-              router.push('/')
-            }
-          })
-
-      } else if (
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'this file is safe :)',
-          'error'
-        )
-      }
-    })
-  };
-
   return (
     <div>
       <Header />
@@ -444,29 +381,8 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
       <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
         <div className="col-span-2 mt-6">
           <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3" >{news?.category}</h3>
-          <div className=" flex items-center justify-between">
-            <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
-            <div className="hover:bg-gray-200 rounded-full p-1">
-              <MoreVertIcon onClick={handleOpenUserMenu} fontSize="large" sx={{ borderRadius: '50%', cursor: 'pointer' }} />
-            </div>
-
-            <Menu sx={{ mt: '45px', width: '500px' }} id="menu-appbar" anchorEl={anchorElUser}
-              anchorOrigin={{ vertical: 'top', horizontal: 'center', }} keepMounted
-              transformOrigin={{ vertical: 'top', horizontal: 'center', }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu} >
-              <div onClick={handleCloseUserMenu} className="flex flex-col w-48">
-                <h5 onClick={handleEditModalOpen} className='mx-2 mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon />  Edit</h5>
-                <EditNews
-                  news={news}
-                  open={open}
-                  handleClose={handleClose} />
-
-                <h5 onClick={() => handleDeleteNews(news?._id)} className='mx-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' ><DeleteForeverIcon />  Delete</h5>
-              </div>
-            </Menu>
-          </div>
+          <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
           {/* Listening feature  start*/}
           <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">

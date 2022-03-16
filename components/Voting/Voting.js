@@ -53,9 +53,10 @@ export default function Voting({ polls }) {
 
 	return (
 		<div className='container '>
-			<div className='flex gap-6 my-16'>
+			<h1 className='text-center font-semibold text-2xl lg:text-4xl my-5'>Please Vote Here</h1>
+			<div className='grid grid-cols-12 gap-5 my-16'>
 				{
-					voting?.map(vote => <div className='flex items-stretch' key={vote?._id}>
+					voting?.map(vote => <div className='col-span-12 md:col-span-6 lg:col-span-4' key={vote?._id}>
 						<Paper sx={{ padding: 2, }}>
 							<img src={vote?.img} style={{ width: '100%', maxHeight: '220px' }} alt="Vote Img" />
 							<CardContent><h1 className='my-3 text-xl'>{vote?.question}</h1></CardContent>

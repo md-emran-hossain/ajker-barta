@@ -89,6 +89,7 @@ const EditNews = ({ news, open, handleClose }) => {
     };
 
     const handleNewsEdit = (data) => {
+        console.log(toggleLanguage)
         const obj = {};
         let count = 1;
         for (const img of images) {
@@ -102,17 +103,17 @@ const EditNews = ({ news, open, handleClose }) => {
 
         let postUrl = null;
         if (toggleLanguage) {
-            const url = `https://ajker-barta.vercel.app/api/bnnews?id=${news?._id}`
+            const url = `/api/bnnews?id=${news?._id}`
             postUrl = url;
         }
         else {
-            const url = `https://ajker-barta.vercel.app/api/news?id=${news?._id}`
+            const url = `/api/news?id=${news?._id}`
             postUrl = url;
         }
         axios.patch(postUrl, data)
             .then(res => {
                 console.log(res.data);
-                if (res.data.modifiedCount) {
+                if (data.modifiedCount) {
                     Swal.fire({
                         position: 'top',
                         icon: 'success',

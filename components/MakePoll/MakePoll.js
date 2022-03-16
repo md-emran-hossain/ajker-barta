@@ -53,7 +53,8 @@ const MakePoll = () => {
                     icon: 'success',
                     title: 'Success',
                     text: `Vote success for this news`,
-                });
+                })
+                    .catch(err => console.log(err))
                 reset();
             })
     };

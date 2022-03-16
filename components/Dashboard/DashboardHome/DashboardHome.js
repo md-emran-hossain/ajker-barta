@@ -25,6 +25,7 @@ import AddIcon from '@mui/icons-material/Add';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 
 
 // drawer style //////////////////////////
@@ -143,6 +144,12 @@ const DashboardHome = ({ children }) => {
                             icon={(<AddIcon fontSize="small" />)}
                             href={'/dashboard/addNews'}
                             title='Add News'
+                        />
+                        <NavItem
+                            key='Manage News'
+                            icon={(<SettingsApplicationsIcon fontSize="small" />)}
+                            href={'/dashboard/manageNews'}
+                            title='Manage News'
                         />
                         <NavItem
                             key='Make Pole'
