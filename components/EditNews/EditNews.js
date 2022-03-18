@@ -26,7 +26,7 @@ const style = {
 const EditNews = ({ news, open, handleClose }) => {
     const { toggleLanguage } = useAuth();
     const { register, handleSubmit, reset } = useForm();
-    const [imgName, setImgName] = React.useState(false);
+    const [imgName, setImgName] = React.useState("No Image Selected");
     const [uploading, setUploading] = React.useState(false)
 
     let images = []
@@ -175,7 +175,7 @@ const EditNews = ({ news, open, handleClose }) => {
                                     <Button sx={{ paddingY: '3px', marginLeft: 2 }} type="submit" variant="outlined"
                                         color='secondary' onClick={uploadFile} className="">Upload image</Button>
                                     <input id='editClick' type="file" accept="image/*" onChange={handleImgUpload} style={{ display: 'none' }} />
-                                    <p className='text-gray-500 text-lg'>{imgName ? imgName : 'Select a image'}</p>
+                                    <p className='text-gray-500 text-lg'>{imgName}</p>
                                 </div>}
 
 

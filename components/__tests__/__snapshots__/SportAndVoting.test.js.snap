@@ -64,13 +64,10 @@ exports[`maching snapshot 1`] = `
       className="..."
     >
       <div
-        className="container"
+        className="container "
       >
-        <h2>
-          this is Voting
-        </h2>
         <div
-          className="flex gap-6"
+          className="flex gap-6 my-16"
         />
       </div>
     </div>

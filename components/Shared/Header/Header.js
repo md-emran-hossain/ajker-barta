@@ -12,7 +12,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LanguageVersion from '../../LanguageVersion/LanguageVersion';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-
+import Weather from '../../../components/Weather/Weather';
+import useMediaQuery from '../useMediaQuery/useMediaQuery';
 
 const Header = ({ newses }) => {
     const { user, logOut, toggleLanguage } = useAuth();
@@ -21,6 +22,8 @@ const Header = ({ newses }) => {
     const recent = newses?.reverse().slice(0, 3)
     const [notification, setNotification] = React.useState(recent)
     const [isShowNotification, setIsShowNotification] = React.useState(false)
+    const isDesktop = useMediaQuery('(min-width: 768px)');
+
     const router = useRouter()
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -45,9 +48,13 @@ const Header = ({ newses }) => {
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg'>
                                     <Link href='/'><a className='text-2xl font-serif font-semibold'>{toggleLanguage ? "আজকের" : "AJKER"} <span className='text-red-500'>{toggleLanguage ? "বার্তা" : "BARTA"}</span></a></Link>
                                 </li>
-                                <li>
+                                <li className='my-3'>
                                     <p className='bg-white rounded-full drop-shadow-md p-2'><SearchIcon onClick={() => router.push('/search')} sx={{ fontSize: '35px', cursor: 'pointer' }} /></p>
                                 </li>
+                                <li className='mb-5'>
+                                    <LanguageVersion />
+                                </li>
+
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/bangladesh">{toggleLanguage ? "বাংলাদেশ" : "Bangladesh"}</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/international" data-title="About" aria-label="About">{toggleLanguage ? "বিশ্ব" : "International"}</Link></li>
                                 <li onClick={() => setIsOpen(!isOpen)} className='text-lg font-medium font-serif text-gray-500 hover:text-gray-700 py-1'><Link href="/sports" data-title="My Expertise" aria-label="My Expertise">{toggleLanguage ? "খেলা" : "Sports"}</Link></li>
@@ -59,6 +66,9 @@ const Header = ({ newses }) => {
                                 <li className='text-lg mt-5'>
                                     <p className='ml-5'><strong> &copy; {toggleLanguage ? "আজকের বার্তা" : "AJKER BARTA"}</strong></p>
                                 </li>
+                                <li>
+                                    <Weather />
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -69,6 +79,7 @@ const Header = ({ newses }) => {
                                 <VscThreeBars style={{ fontSize: "25px", cursor: 'pointer' }} onClick={() => setIsOpen(!isOpen)} />
                             </div>
                             <p className='bg-white rounded-full drop-shadow-md p-2'><SearchIcon onClick={() => router.push('/search')} sx={{ fontSize: '35px', cursor: 'pointer' }} /></p>
+                            {isDesktop && <Weather />}
                         </div>
                     </div>
 
@@ -122,9 +133,7 @@ const Header = ({ newses }) => {
                                         <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                                 }
                             </div>
-                            <LanguageVersion />
                         </div>
-                        {/* <Weather /> */}
                     </div>
 
                 </div>

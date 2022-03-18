@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`maching snapshot 1`] = `
+<div
+  className="container"
+>
+  <h2
+    className="text-4xl uppercase w-fit border-b-2 border-red-500 mx-auto mb-6"
+  >
+    Make a Poll
+  </h2>
+  <form
+    className="flex flex-col space-y-4 md:w-3/4 mx-auto"
+    onSubmit={[Function]}
+  >
+    <input
+      accept="image/*"
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      multiple={true}
+      name="img"
+      onChange={[Function]}
+      type="file"
+    />
+    <textarea
+      className="px-2 py-3 outline-0 border rounded-md border-red-100"
+      name="question"
+      onBlur={[Function]}
+      onChange={[Function]}
+      placeholder="Question"
+    />
+    <input
+      className="w-36 bg-red-500 py-2.5 text-white font-medium uppercase text-lg rounded-md hover:bg-red-600 transition-colors duration-300 cursor-pointer"
+      type="submit"
+      value="Make Poll"
+    />
+  </form>
+</div>
+`;

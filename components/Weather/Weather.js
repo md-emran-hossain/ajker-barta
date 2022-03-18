@@ -38,8 +38,8 @@ export default function Weather() {
 
     return (
 
-        <div className='flex items-center'>
-            <img width='80px' height='80px' src={`http://openweathermap.org/img/w/${icon}.png`}
+        <div className='flex '>
+            <img width='50px' height='50px' src={`http://openweathermap.org/img/w/${icon}.png`}
                 alt="wthr img" />
             <div className=''>
                 <h3 className="font-semibold">{weather}</h3>
