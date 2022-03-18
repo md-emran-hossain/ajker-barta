@@ -9,8 +9,7 @@ import styles from '../styles/Hero.module.css';
 import { EffectFade, Navigation, Pagination, Autoplay } from "swiper";
 import { useRouter } from 'next/router';
 
-const Hero = ({ newses, bengaliNews }) => {
-  // let optionNews = newses || bengaliNews;
+const Hero = ({ newses }) => {
   const latest = newses.reverse()
   const router = useRouter()
   return (

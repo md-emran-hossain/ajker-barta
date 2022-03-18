@@ -33,14 +33,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   const { user, toggleLanguage, admin } = useAuth();
   const [speed, setSpeed] = useState(1);
 
-  // manage news option
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
   const [openqr, setOpenqr] = React.useState(false);
   const handleOpenqr = () => setOpenqr(true);
   const handleCloseqr = () => setOpenqr(false);
@@ -456,6 +449,14 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
             </div>
             <div>
               {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
+              <form onSubmit={handleComment}>
+                <TextField fullWidth label="Comment here"
+                  onChange={(e) => setCommentText(e.target.value)}
+                  type="text" variant="outlined"
+                />
+                <Button type="submit" variant="contained" color="secondary" sx={{ marginTop: 1, paddingX: 5 }}> Comment</Button>
+              </form>
+
               <div style={{ maxHeight: '400px', overflow: 'scroll' }}>
                 {comments?.map((item) => (
                   <div
@@ -478,13 +479,6 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
                   </div>
                 ))}
               </div>
-              <form onSubmit={handleComment}>
-                <TextField fullWidth label="Comment here"
-                  onChange={(e) => setCommentText(e.target.value)}
-                  type="text" variant="outlined"
-                />
-                <Button type="submit" variant="contained" color="secondary" sx={{ marginTop: 1, paddingX: 5 }}> Comment</Button>
-              </form>
             </div>
           </Paper>
 

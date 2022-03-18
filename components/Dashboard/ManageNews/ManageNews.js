@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import useAuth from '../../../hooks/useAuth';
-import { Paper, TableCell, TableHead, TableContainer, TableRow, Table, TableBody } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNews from '../../EditNews/EditNews';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
 const tableStyle = {
     borderRight: '1px solid gray'
@@ -21,7 +21,7 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
         manageAllNews = e;
     }
     // modal 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
@@ -82,8 +82,9 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
 
     return (
         <div>
-            <h1 className="font-semibold text-4xl text-center text-gray-600 my-4">MANAGE NEWS</h1>
+
             <div className="container">
+                <Typography sx={{ mx: 1, my: 3, fontSize: 'bold' }} variant="h4" > {toggleLanguage ? "সংবাদ পরিচালনা করুন" : "Manage Newses"} </Typography>
                 <Paper elevation={5} sx={{ width: '100%', borderRadius: '20px' }}>
                     <TableContainer className='' sx={{ borderRadius: '10px' }}>
                         <Table stickyHeader aria-label="sticky table">
@@ -99,8 +100,7 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
                             <TableBody>
                                 {manageAllNews?.map((news) => (
                                     <TableRow
-                                        key={news._id}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                        key={news._id}>
                                         <TableCell style={tableStyle} align="left"><img src={news?.images?.img1} alt="news img" style={{ height: '50px' }} /></TableCell>
                                         <TableCell style={tableStyle} align="left">{news?.heading} <br /></TableCell>
                                         <TableCell style={tableStyle} align="left">{news?.category}</TableCell>

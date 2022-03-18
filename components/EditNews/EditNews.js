@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { Button, CircularProgress, Paper } from '@mui/material';
+import { CircularProgress, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import CloseIcon from '@mui/icons-material/Close';
@@ -14,12 +14,12 @@ const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
-    minWidth: '800px',
     transform: 'translate(-50%, -50%)',
+    width: 400,
     bgcolor: 'background.paper',
-    boxShadow: 15,
-    borderRadius: '10px',
-    p: 2,
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
 };
 
 
@@ -148,54 +148,47 @@ const EditNews = ({ news, open, handleClose }) => {
     return (
         <div>
             <Modal
-                sx={{ overflow: 'scroll', paddingY: 5 }}
-                className='bg-gray-200'
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
+                keepMounted
                 open={open}
                 onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
+                aria-labelledby="keep-mounted-modal-title"
+                aria-describedby="keep-mounted-modal-description"
             >
-                <Fade in={open}>
-                    <Box sx={style} >
-                        <h3 className='float-right cursor-pointer' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
-                        <h2 className='text-primary font-semibold text-center text-3xl py-4'>Edit This News </h2>
-                        <Paper>
-                            <form onSubmit={handleSubmit(handleNewsEdit)}>
-                                <div className="mb-3">
-                                    <p className='text-gray-500 m-2'>Heading</p>
-                                    <input type="text" placeholder="Your Name" name='heading' defaultValue={news?.heading || ""} {...register("heading")} className=" w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" />
-                                </div>
+                <Box sx={style} >
+                    <h3 className='float-right cursor-pointer' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
+                    <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+                        Text in a modal
+                    </Typography>
+                    <Paper>
+                        <form onSubmit={handleSubmit(handleNewsEdit)}>
+                            <div className="mb-3">
+                                <p className='text-gray-500 m-2'>Heading</p>
+                                <input type="text" placeholder="Your Name" name='heading' defaultValue={news?.heading || ""} {...register("heading")} className=" w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
 
-                                <div className="mb-3">
-                                    <p className='text-gray-500 m-2'>Reporter</p>
-                                    <input type="text" placeholder="Your Name" name='reporter' defaultValue={news?.reporter || ""} {...register("reporter")} className=" w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" />
-                                </div>
-
+                            <div className="mb-3">
+                                <p className='text-gray-500 m-2'>Reporter</p>
+                                <input type="text" placeholder="Your Name" name='reporter' defaultValue={news?.reporter || ""} {...register("reporter")} className=" w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" />
+                            </div>
+                            {uploading ? <h1 className='text-center'><CircularProgress fontSize="large" /></h1> :
                                 <div className="flex items-center justify-around flex-wrap my-2">
-                                    {uploading && <h1 className='text-center'><CircularProgress fontSize="large" /></h1>}
                                     <Button sx={{ paddingY: '3px', marginLeft: 2 }} type="submit" variant="outlined"
                                         color='secondary' onClick={uploadFile} className="">Upload image</Button>
                                     <input id='editClick' type="file" accept="image/*" onChange={handleImgUpload} style={{ display: 'none' }} />
                                     <p className='text-gray-500 text-lg'>{imgName ? imgName : 'Select a image'}</p>
-                                </div>
+                                </div>}
 
 
-                                <div className="mb-5">
-                                    <p className='text-gray-500 m-2'>Description</p>
-                                    <textarea rows="7" placeholder="Your Message" name="description" defaultValue={news?.description || ""} {...register("description")} className="w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] resize-none outline-none focus-visible:shadow-none focus:border-primary"></textarea>
-                                </div>
-                                <div>
-                                    <Button sx={{ width: '100%' }} type="submit" color='secondary' variant="contained">Save News</Button>
-                                </div>
-                            </form>
-                        </Paper>
-                    </Box>
-                </Fade>
+                            <div className="mb-5">
+                                <p className='text-gray-500 m-2'>Description</p>
+                                <textarea rows="7" placeholder="Your Message" name="description" defaultValue={news?.description || ""} {...register("description")} className="w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] resize-none outline-none focus-visible:shadow-none focus:border-primary"></textarea>
+                            </div>
+                            <div>
+                                <Button sx={{ width: '100%' }} type="submit" color='secondary' variant="contained">Save News</Button>
+                            </div>
+                        </form>
+                    </Paper>
+                </Box>
             </Modal>
         </div>
     );

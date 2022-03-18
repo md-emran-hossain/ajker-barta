@@ -4,13 +4,10 @@ import { createEmotionCache } from '../utils/create-emotion-cache';
 import { theme } from '../theme';
 import Head from 'next/head';
 import { CacheProvider } from '@emotion/react';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
 const clientSideEmotionCache = createEmotionCache();
-
 
 function MyApp({ Component, pageProps }) {
   const emotionCache = clientSideEmotionCache
@@ -26,14 +23,12 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <AuthProvider>
-              <Component {...pageProps} />
-            </AuthProvider>
-          </ThemeProvider>
-        </LocalizationProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
+        </ThemeProvider>
       </CacheProvider>
     </div >
   )

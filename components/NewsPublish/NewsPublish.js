@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Push from "push.js";
+import { Typography } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
 
 const NewsPublish = () => {
-
+  const { toggleLanguage } = useAuth();
   const [category, setCategory] = useState([]);
   let images = []
   const {
@@ -97,9 +99,7 @@ const NewsPublish = () => {
 
   return (
     <div className="container">
-      <h2 className="text-4xl uppercase w-fit border-b-2 border-red-500 mx-auto mb-6">
-        Add a news
-      </h2>
+      <Typography sx={{ mx: 1, my: 3, fontSize: 'bold' }} variant="h4" > {toggleLanguage ? "একটি খবর যোগ করুন" : "Add A NEWS"} </Typography>
       <form
         className="flex flex-col space-y-4 md:w-3/4 mx-auto"
         onSubmit={handleSubmit(onSubmit)}

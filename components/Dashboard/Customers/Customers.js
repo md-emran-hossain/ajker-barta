@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Box, Container } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { CustomerListToolbar } from './CustomerListToolbar';
 import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
@@ -60,7 +60,7 @@ const Customers = () => {
             </Head>
             <Box component="main" sx={{ flexGrow: 1, }}>
                 <Container maxWidth={"lg"}>
-                    <CustomerListToolbar employees={employees} />
+                    <Typography sx={{ m: 1 }} variant="h4" >  Users </Typography>
                     <Box sx={{ mt: 3 }}>
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">

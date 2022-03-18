@@ -6,7 +6,6 @@ import Footer from "../../components/Shared/Footer/Footer";
 import Header from "../../components/Shared/Header/Header";
 import NavigationBar from "../../components/Shared/NavigationBar/NavigationBar";
 import styles from "../../styles/CategoryDetails.module.css";
-import Image from 'next/image';
 import useAuth from "../../hooks/useAuth";
 
 const CategoryDetails = ({ englishNews, bengaliNews }) => {
@@ -61,7 +60,7 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
               <h1>{news?.heading}</h1>
               <p>{news?.description?.[0].slice(0, 100)}</p>
               <p>{`${formatDistanceToNow(
-                new Date(news.publishedDate)
+                new Date(news.publishedDate.toString())
               )} ago`}</p>
             </div>
           ))}
@@ -82,7 +81,7 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
                 </h1>
                 <p className="text-sm my-2">{news.description?.[0]}</p>
                 <p className="text-blue-600 text-md">{`${formatDistanceToNow(
-                  new Date(news.publishedDate)
+                  new Date(news.publishedDate.toString())
                 )} ago`}</p>
               </div>
             </div>
