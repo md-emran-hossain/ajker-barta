@@ -122,7 +122,7 @@ const Header = ({ newses }) => {
                                         <button onClick={() => router.push('/login')} className='sm:py-1.5 py-1 px-4 sm:px-6 bg-red-500 hover:bg-red-400 transition-bg duration-300 rounded-md text-white text-lg font-medium'>Login</button>
                                 }
                             </div>
-                            <LanguageVersion />
+                            {/* <LanguageVersion /> */}
                         </div>
                         {/* <Weather /> */}
                     </div>
