@@ -1,4 +1,5 @@
 import run from '../../../utils/database';
+const ObjectId = require('mongodb').ObjectId;
 
 export default async function handler(req, res) {
     const { database } = await run();
@@ -14,8 +15,15 @@ export default async function handler(req, res) {
         const result = await news.insertOne(singleNews);
         res.status(201).json(result);
     }
-    // update news 
+    // delete news
+    if (req.method === 'DELETE') {
+        const id = req.query.id;
+        const query = { '_id': ObjectId(id) };
+        const result = await news.deleteOne(query);
+        res.status(200).json(result)
+    }
 
+    // update news 
     else if (req.method === 'PATCH') {
         const id = req.query.id;
         const { heading, images, description, reporter } = req.body;

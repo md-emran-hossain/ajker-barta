@@ -19,6 +19,7 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: 4,
     p: 4,
 };
 
@@ -154,14 +155,12 @@ const EditNews = ({ news, open, handleClose }) => {
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
             >
-                <Box sx={style} >
-                    <h3 className='float-right cursor-pointer' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
-                    <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
-                        Text in a modal
-                    </Typography>
-                    <Paper>
+                <Box sx={style} style={{ width: '800px', position: 'relative' }}>
+                    <h3 className='cursor-pointer absolute right-2 top-2' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
+                    <h3 className='font-semibold text-3xl'>Edit News</h3>
+                    <Paper >
                         <form onSubmit={handleSubmit(handleNewsEdit)}>
-                            <div className="mb-3">
+                            <div className="my-3">
                                 <p className='text-gray-500 m-2'>Heading</p>
                                 <input type="text" placeholder="Your Name" name='heading' defaultValue={news?.heading || ""} {...register("heading")} className=" w-full rounded py-2 px-[14px] text-body-color text-base border border-[f0f0f0] outline-none focus-visible:shadow-none focus:border-primary" />
                             </div>

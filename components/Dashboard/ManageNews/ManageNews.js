@@ -46,10 +46,10 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
             if (result.isConfirmed) {
                 let deleteURL = {};
                 if (toggleLanguage) {
-                    const url = `api/bnnews/${id}`;
+                    const url = `api/bnnews?id=${id}`;
                     deleteURL = url;
                 } else {
-                    const url = `/api/news/${id}`;
+                    const url = `/api/news?id=${id}`;
                     deleteURL = url;
                 }
 
@@ -73,7 +73,7 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
             ) {
                 swalWithBootstrapButtons.fire(
                     'Cancelled',
-                    'this news not deleted',
+                    'News Delete Cancel',
                     'error'
                 )
             }
