@@ -44,7 +44,7 @@ export const AccountProfileDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`https://ajker-barta.vercel.app/api/users/note?email=${user.email}`)
+        fetch(`/api/users/note?email=${user.email}`)
             .then(res => res.json())
             .then(data => setUserData(data))
             .catch(error => {
@@ -58,7 +58,7 @@ export const AccountProfileDetails = () => {
 
     const updateUser = (e) => {
         e.preventDefault()
-        fetch('https://ajker-barta.vercel.app/api/users', {
+        fetch('/api/users', {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -87,7 +87,7 @@ export const AccountProfileDetails = () => {
     useEffect(() => {
         const ac = new AbortController();
         Promise.all([
-            fetch(`https://ajker-barta.vercel.app/api/users/note?email=${user.email}`, { signal: ac.signal })
+            fetch(`/api/users/note?email=${user.email}`, { signal: ac.signal })
         ]).then(data => setUserData(data))
             .catch(error => {
                 Swal.fire({
