@@ -7,10 +7,10 @@ const about = () => {
 
     return (
         <div>
-         <Header />
-         <NavigationBar />
-         <AboutUs></AboutUs>
-        <Footer />
+            <Header />
+            <NavigationBar />
+            <AboutUs />
+            <Footer />
         </div>
     );
 };

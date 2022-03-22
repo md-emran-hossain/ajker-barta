@@ -85,18 +85,15 @@ export const AccountProfileDetails = () => {
     };
 
     useEffect(() => {
-        const ac = new AbortController();
-        Promise.all([
-            fetch(`/api/users/note?email=${user.email}`, { signal: ac.signal })
-        ]).then(data => setUserData(data))
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'error',
-                    text: `${error}`,
+        if (user) {
+            fetch(`/api/users/note?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setUserData(data)
+                    console.log(data)
                 })
-            })
-        return () => ac.abort();
+                .catch(err => console.log(err))
+        }
     }, [user]);
 
 

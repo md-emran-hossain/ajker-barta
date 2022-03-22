@@ -105,11 +105,11 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
                                         <TableCell style={tableStyle} align="left">{news?.heading} <br /></TableCell>
                                         <TableCell style={tableStyle} align="left">{news?.category}</TableCell>
                                         <TableCell style={tableStyle} align="center">{news?.subCategory}</TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="center" sx={{ minWidth: '120px' }}>
                                             <div className="flex items-center justify-around flex-wrap">
-                                                <h5 onClick={handleOpen} className='xs:mb-2 cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' > <EditIcon /></h5>
+                                                <h5 onClick={handleOpen} className='xs:mb-2 cursor-pointer font-bold px-2' > <EditIcon sx={{ color: 'green' }} /></h5>
 
-                                                <h5 onClick={() => handleDeleteNews(news?._id)} className=' cursor-pointer font-bold text-gray-800 hover:bg-gray-200 rounded-lg px-2' ><DeleteForeverIcon /></h5>
+                                                <h5 onClick={() => handleDeleteNews(news?._id)} className=' cursor-pointer font-bold px-2' ><DeleteForeverIcon sx={{ color: 'red' }} /></h5>
                                             </div>
                                         </TableCell>
                                         <EditNews
