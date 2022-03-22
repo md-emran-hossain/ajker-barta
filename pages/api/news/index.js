@@ -26,13 +26,13 @@ export default async function handler(req, res) {
     // update news 
     else if (req.method === 'PATCH') {
         const id = req.query.id;
-        const { heading, images, description, reporter } = req.body;
-        console.log("Edit English News: Hitted ", id);
-        // const query = { _id: ObjectId(id) };
-        // const updateDoc = {
-        //     $set: reporter, description, images, heading,
-        // }
-        // const result = await news.updateOne(query, updateDoc);
-        res.status(201).json("Hited the update english news: ", id);
+        const data = req.body;
+        console.log("Edit English News: Hitted ", id, "----", req.body);
+        const query = { '_id': ObjectId(id) };
+        const updateDoc = {
+            $set: data,
+        }
+        const result = await news.updateOne(query, updateDoc);
+        res.status(201).json(result);
     }
 }

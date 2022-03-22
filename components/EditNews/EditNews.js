@@ -2,7 +2,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { CircularProgress, Paper } from '@mui/material';
@@ -30,10 +29,8 @@ const EditNews = ({ news, open, handleClose }) => {
     const [imgName, setImgName] = React.useState("No Image Selected");
     const [uploading, setUploading] = React.useState(false)
 
-    let images = []
     const handleImgUpload = async (e) => {
         const imageData = new FormData();
-        console.log(e.target.files);
         imageData.set("key", "0c35775465096fb810e5b6d78f1cd823");
         await imageData.append("image", e.target.files[0]);
         setImgName(e.target.files[0].name);
@@ -41,7 +38,6 @@ const EditNews = ({ news, open, handleClose }) => {
         axios
             .post("https://api.imgbb.com/1/upload", imageData)
             .then((response) => {
-                images.push(response.data.data.display_url);
                 console.log(response.data.data.display_url)
                 setUploading(false)
             })
@@ -60,9 +56,7 @@ const EditNews = ({ news, open, handleClose }) => {
                 .post("https://api.imgbb.com/1/upload", imageData)
                 .then((response) => {
 
-                    images.push(response.data.data.display_url);
                     console.log(response.data.data.display_url)
-
                 })
                 .catch((error) => {
                     console.log(error);
@@ -78,29 +72,18 @@ const EditNews = ({ news, open, handleClose }) => {
             axios
                 .post("https://api.imgbb.com/1/upload", imageData)
                 .then((response) => {
-                    images.push(response.data.data.display_url);
+
                     console.log(response.data.data.display_url)
-                    setUploading(false)
                 })
                 .catch((error) => {
                     console.log(error);
                 });
-            setUploading(false)
         }
     };
 
-    const handleNewsEdit = (data) => {
-        console.log(toggleLanguage)
-        const obj = {};
-        let count = 1;
-        for (const img of images) {
-            let property = "img" + count;
-            obj[property] = img;
-            count++;
-        }
 
-        data.images = obj;
-        console.log(data)
+
+    const handleNewsEdit = (data) => {
 
         let postUrl = null;
         if (toggleLanguage) {
@@ -111,6 +94,8 @@ const EditNews = ({ news, open, handleClose }) => {
             const url = `/api/news?id=${news?._id}`
             postUrl = url;
         }
+
+        console.log(data.images)
         axios.patch(postUrl, data)
             .then(res => {
                 console.log(res.data);
@@ -171,9 +156,9 @@ const EditNews = ({ news, open, handleClose }) => {
                             </div>
                             {uploading ? <h1 className='text-center'><CircularProgress fontSize="large" /></h1> :
                                 <div className="flex items-center justify-around flex-wrap my-2">
-                                    <Button sx={{ paddingY: '3px', marginLeft: 2 }} type="submit" variant="outlined"
-                                        color='secondary' onClick={uploadFile} className="">Upload image</Button>
-                                    <input id='editClick' type="file" accept="image/*" onChange={handleImgUpload} style={{ display: 'none' }} />
+                                    <Button sx={{ paddingY: '3px', marginLeft: 2 }} variant="outlined"
+                                        color='secondary' onClick={uploadFile} >Upload image</Button>
+                                    <input id='editClick' type="file" accept="image/*" multiple onChange={handleImgUpload} style={{ display: 'none' }} />
                                     <p className='text-gray-500 text-lg'>{imgName}</p>
                                 </div>}
 
