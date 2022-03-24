@@ -6,15 +6,17 @@ const MyNotes = () => {
   const { user } = useAuth()
   const [notes, setNotes] = useState([])
   useEffect(() => {
-    fetch(`/api/users/note?email=${user.email}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.notes) {
-          setNotes(data.notes)
-        } else {
-          setNotes([])
-        }
-      })
+    if (user.email) {
+      fetch(`/api/users/note?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.notes) {
+            setNotes(data.notes)
+          } else {
+            setNotes([])
+          }
+        })
+    }
   }, [user.email])
   const handleDeleteNote = (title, selectedText) => {
     fetch(`/api/users/notedelete?email=${user.email}`, {

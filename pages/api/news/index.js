@@ -23,14 +23,14 @@ export default async function handler(req, res) {
         res.status(200).json(result)
     }
 
-    // update news 
-    else if (req.method === 'PATCH') {
+    else if (req.method === 'PUT') {
         const id = req.query.id;
-        const data = req.body;
-        console.log("Edit English News: Hitted ", id, "----", req.body);
+        const { heading, images, description, reporter } = req.body;
         const query = { '_id': ObjectId(id) };
         const updateDoc = {
-            $set: data,
+            $set: {
+                reporter, description, images, heading
+            },
         }
         const result = await news.updateOne(query, updateDoc);
         res.status(201).json(result);

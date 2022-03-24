@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { Box, Container, Typography } from '@mui/material';
-import { CustomerListToolbar } from './CustomerListToolbar';
 import { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,8 +10,11 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ClearIcon from '@mui/icons-material/Clear';
 import Swal from 'sweetalert2'
+import useAuth from '../../../hooks/useAuth';
 
 const Customers = () => {
+    const { toggleLanguage } = useAuth();
+
     const [employees, setEmployees] = useState([])
     useEffect(() => {
         fetch('/api/users')
@@ -60,7 +62,7 @@ const Customers = () => {
             </Head>
             <Box component="main" sx={{ flexGrow: 1, }}>
                 <Container maxWidth={"lg"}>
-                    <Typography sx={{ m: 1 }} variant="h4" >  Users </Typography>
+                    <Typography sx={{ m: 1 }} variant="h4" >{toggleLanguage ? "কর্মকর্তা" : "Employ"} </Typography>
                     <Box sx={{ mt: 3 }}>
                         <TableContainer component={Paper}>
                             <Table sx={{ minWidth: 650 }} aria-label="simple table">

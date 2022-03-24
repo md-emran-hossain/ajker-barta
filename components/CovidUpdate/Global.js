@@ -19,11 +19,12 @@ import { AiOutlineUser } from 'react-icons/ai'
 const Global = () => {
   const [globalData, setGlobalData] = useState({})
   useEffect(() => {
-    fetch('https://corona.lmao.ninja/v2/all?yesterday')
+    fetch('https://api.covid19api.com/summary')
       .then(res => res.json())
-      .then(data => setGlobalData(data))
+      .then(data => setGlobalData(data.Global))
+      .catch(err => console.log(err.message))
   }, [])
-  const { cases, recovered, active, deaths, todayCases, todayRecovered } = globalData
+  const { TotalConfirmed: cases, TotalRecovered: recovered, NewDeaths: active, TotalDeaths: deaths, NewConfirmed: todayCases, NewRecovered: todayRecovered } = globalData
   const covidData = [
     {
       name: "TC",
@@ -74,7 +75,7 @@ const Global = () => {
             <div className={styles.infoBox}>
               <div>
                 <FcBusinessman style={{ fontSize: "25px", margin: "0 auto" }} />
-                <p>Active Cases</p>
+                <p>Todays Deaths</p>
                 <h1>{active}</h1>
               </div>
             </div>
@@ -121,7 +122,7 @@ const Global = () => {
             <div className={styles.indicateColor}>
               <div><div style={{ color: "#18dcff", fontWeight: "500" }}>TC</div>Total Cases</div>
               <div><div style={{ color: "#feca57", fontWeight: "500" }}>TR</div>Total Recovered</div>
-              <div><div style={{ color: "#ff4d4d", fontWeight: "500" }}>AC</div>Active Casess</div>
+              <div><div style={{ color: "#ff4d4d", fontWeight: "500" }}>AC</div>Todays Deaths</div>
               <div><div style={{ color: "#0be881", fontWeight: "500" }}>TD</div>Total Deaths</div>
               <div><div style={{ color: "#f368e0", fontWeight: "500" }}>TC</div>Todays Case</div>
               <div><div style={{ color: "#3c40c6", fontWeight: "500" }}>TR</div>Todays Recovered</div>
