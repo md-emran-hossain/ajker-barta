@@ -211,7 +211,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     })
       .then(res => res.json())
       .then(result => {
-        if (result.modifiedCount === 1) {
+        if (result.modifiedCount > 0) {
           const newLikes = [...likes, user.email]
           setLikes(newLikes)
         }
@@ -231,7 +231,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     })
       .then(res => res.json())
       .then(result => {
-        if (result.modifiedCount === 1) {
+        if (result.modifiedCount > 0) {
           const newLikes = news?.likes.filter(ele => ele !== user.email)
           setLikes(newLikes)
         }
