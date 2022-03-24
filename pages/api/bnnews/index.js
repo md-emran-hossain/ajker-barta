@@ -17,13 +17,14 @@ export default async function handler(req, res) {
     else if (req.method === 'PUT') {
         const id = req.query.id;
         const { heading, images, description, reporter } = req.body;
+        console.log("Hitted Edit Bengali News: ", id);
         const query = { '_id': ObjectId(id) };
         const updateDoc = {
             $set: {
-                reporter, description, images, heading
-            },
+                reporter, description, images, heading,
+            }
         }
-        const result = await news.updateOne(query, updateDoc);
+        const result = await bnnews.updateOne(query, updateDoc);
         res.status(201).json(result);
     }
 }
