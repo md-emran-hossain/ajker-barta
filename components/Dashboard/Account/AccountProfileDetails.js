@@ -40,20 +40,14 @@ export const AccountProfileDetails = () => {
         newObj[property] = value
         delete newObj._id
         setUserData(newObj)
-
     };
 
     useEffect(() => {
-        fetch(`/api/users/note?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setUserData(data))
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'error',
-                    text: `${error}`,
-                })
-            })
+        if (user.email) {
+            fetch(`/api/users/note?email=${user.email}`)
+                .then(res => res.json())
+                .then(data => setUserData(data))
+        }
     }, [user.email])
 
     const updateUser = (e) => {
@@ -83,23 +77,6 @@ export const AccountProfileDetails = () => {
                 })
             })
     };
-
-    useEffect(() => {
-        const ac = new AbortController();
-        Promise.all([
-            fetch(`/api/users/note?email=${user.email}`, { signal: ac.signal })
-        ]).then(data => setUserData(data))
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'error',
-                    text: `${error}`,
-                })
-            })
-        return () => ac.abort();
-    }, [user]);
-
-
 
     const uploadFile = () => {
         document.getElementById('profileImg').click();

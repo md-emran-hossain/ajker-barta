@@ -1,18 +1,21 @@
 import { Button, FormControlLabel, Radio, RadioGroup, Paper, CardContent } from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 
 
-export default function Voting({ polls }) {
-	const voting = polls?.slice(0, 3);
+export default function Voting() {
 	const [voteValue, setVoteValue] = useState("");
+	const [polls, setPolls] = useState([])
 
+	useEffect(() => {
+		fetch('/api/poll')
+			.then(res => res.json())
+			.then(data => setPolls(data?.slice(0, 3)))
+	}, [])
 
 	const handleVoteSubmit = (e, data) => {
-		console.log(voteValue);
 		e.preventDefault();
 		let vote = Object.assign({}, data.vote)
-		console.log(vote);
 
 		if (voteValue === "yes") {
 			vote.yes = parseInt(vote.yes) + 1
@@ -23,8 +26,6 @@ export default function Voting({ polls }) {
 		else if (voteValue === "noComment") {
 			vote.noComment = parseInt(vote.noComment) + 1
 		}
-		console.log(vote);
-
 		fetch(`/api/poll?id=${data?._id}`, {
 			method: "PUT",
 			headers: {
@@ -56,7 +57,7 @@ export default function Voting({ polls }) {
 			<h1 className='text-center font-semibold text-2xl lg:text-4xl my-5'>Please Vote Here</h1>
 			<div className='grid grid-cols-12 gap-5 my-16'>
 				{
-					voting?.map(vote => <div className='col-span-12 md:col-span-6 lg:col-span-4' key={vote?._id}>
+					polls?.map(vote => <div className='col-span-12 md:col-span-6 lg:col-span-4' key={vote?._id}>
 						<Paper sx={{ padding: 2, }}>
 							<img src={vote?.img} style={{ width: '100%', maxHeight: '220px' }} alt="Vote Img" />
 							<CardContent><h1 className='my-3 text-xl'>{vote?.question}</h1></CardContent>

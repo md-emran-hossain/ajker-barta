@@ -19,7 +19,7 @@ import Voting from "../components/Voting/Voting";
 import useAuth from "../hooks/useAuth";
 
 
-export default function Home({ englishNews, polls, bengaliNews }) {
+export default function Home({ englishNews, bengaliNews }) {
   const { toggleLanguage } = useAuth();
 
   let newses = null;
@@ -46,7 +46,7 @@ export default function Home({ englishNews, polls, bengaliNews }) {
       <Header newses={newses} />
       <NavigationBar />
       <Hero newses={newses} />
-      <Voting polls={polls} />
+      <Voting />
       <Coronavirus coronanews={coronanews} />
       <Global />
       <CovidBtn />
@@ -66,12 +66,10 @@ export default function Home({ englishNews, polls, bengaliNews }) {
 
 export const getStaticProps = async () => {
   const res = await axios.get(`https://ajker-barta.vercel.app/api/news/`);
-  const pollRes = await axios.get(`https://ajker-barta.vercel.app/api/poll`);
   const bengali = await axios.get(`https://ajker-barta.vercel.app/api/bnnews`);
   return {
     props: {
       englishNews: res.data,
-      polls: pollRes.data,
       bengaliNews: bengali.data,
     },
     revalidate: 10
