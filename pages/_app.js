@@ -48,7 +48,7 @@ function MyApp({ Component, pageProps }) {
             name="viewport"
             content="initial-scale=1, width=device-width"
           />
-          <link rel="shortcut icon" href="https://i.ibb.co/WH9t9Yf/ajkerbarta-favicon.png" type="image/x-icon" />
+          <link rel="shortcut icon" href="https://i.ibb.co/MRKjbf4/Pigeon.png" type="image/x-icon" />
         </Head>
 
         <LocalizationProvider dateAdapter={AdapterDateFns}>

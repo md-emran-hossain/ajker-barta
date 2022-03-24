@@ -22,6 +22,7 @@ const Global = () => {
     fetch('https://corona.lmao.ninja/v2/all?yesterday')
       .then(res => res.json())
       .then(data => setGlobalData(data))
+      .catch(err => console.log(err.message))
   }, [])
   const { cases, recovered, active, deaths, todayCases, todayRecovered } = globalData
   const covidData = [

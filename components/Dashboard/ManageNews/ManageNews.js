@@ -29,8 +29,13 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
     //edit
     const handleOpen = (id) => {
         setOpen(true)
-        console.log(open)
-        fetch(`/api/news/single?id=${id}`)
+        let url = ''
+        if (toggleLanguage) {
+            url = `/api/bnnews/single?id=${id}`
+        } else {
+            url = `/api/news/single?id=${id}`
+        }
+        fetch(url)
             .then(res => res.json())
             .then(data => setSingleNews(data))
     }
@@ -48,7 +53,13 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
             count++;
         }
         data.images = images
-        fetch(`/api/news?id=${singleNews._id}`, {
+        let url = '';
+        if (toggleLanguage) {
+            url = `/api/bnnews?id=${singleNews._id}`;
+        } else {
+            url = `/api/news?id=${singleNews._id}`;
+        }
+        fetch(url, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
