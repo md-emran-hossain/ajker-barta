@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import DashboardHome from '../../components/Dashboard/DashboardHome/DashboardHome'
 import ManageNews from '../../components/Dashboard/ManageNews/ManageNews'
-import axios from 'axios';
 import useAuth from '../../hooks/useAuth'
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-export default function ManageNewsRoute({ englishNews,
-    bengaliNews }) {
+export default function ManageNewsRoute({ englishNews, bengaliNews }) {
     const { admin, user, loading } = useAuth()
     const router = useRouter()
 
@@ -24,7 +23,7 @@ export default function ManageNewsRoute({ englishNews,
     return (
         <div>
             <DashboardHome>
-                <ManageNews bengaliNews={bengaliNews} englishNews={englishNews} />
+                <ManageNews englishNews={englishNews} bengaliNews={bengaliNews} />
             </DashboardHome>
         </div>
     )
@@ -41,3 +40,4 @@ export const getStaticProps = async () => {
         revalidate: 10
     };
 };
+

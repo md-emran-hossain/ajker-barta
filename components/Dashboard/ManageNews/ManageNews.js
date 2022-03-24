@@ -1,16 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2'
 import useAuth from '../../../hooks/useAuth';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditNews from '../../EditNews/EditNews';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 const tableStyle = {
     borderRight: '1px solid gray'
 }
-const ManageNews = ({ bengaliNews, englishNews }) => {
+const ManageNews = ({ englishNews, bengaliNews }) => {
     const { toggleLanguage } = useAuth();
+    const router = useRouter()
+
+    // const [bangla, setBangla] = useState([]);
+    // const [english, setEnglish] = useState([]);
+    // useEffect(() => {
+    //     if (toggleLanguage) {
+    //         fetch(`/api/bnnews`)
+    //             .then(res => res.json())
+    //             .then(data => setBangla(data))
+    //             .catch(err => console.log(err))
+    //     }
+    //     else {
+    //         fetch(`/api/news`)
+    //             .then(res => res.json())
+    //             .then(data => setEnglish(data))
+    //             .catch(err => console.log(err))
+    //     }
+    // }, [toggleLanguage])
+
+
+
     let manageAllNews = null;
     if (toggleLanguage) {
         const b = bengaliNews;
@@ -80,6 +102,8 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
         })
     };
 
+
+
     return (
         <div>
 
@@ -108,14 +132,14 @@ const ManageNews = ({ bengaliNews, englishNews }) => {
                                         <TableCell align="center" sx={{ minWidth: '120px' }}>
                                             <div className="flex items-center justify-around flex-wrap">
                                                 <h5 onClick={handleOpen} className='xs:mb-2 cursor-pointer font-bold px-2' > <EditIcon sx={{ color: 'green' }} /></h5>
+                                                <EditNews
+                                                    news={news}
+                                                    open={open}
+                                                    handleClose={handleClose} />
 
                                                 <h5 onClick={() => handleDeleteNews(news?._id)} className=' cursor-pointer font-bold px-2' ><DeleteForeverIcon sx={{ color: 'red' }} /></h5>
                                             </div>
                                         </TableCell>
-                                        <EditNews
-                                            news={news}
-                                            open={open}
-                                            handleClose={handleClose} />
                                     </TableRow>
                                 ))}
                             </TableBody>

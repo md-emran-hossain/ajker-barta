@@ -9,19 +9,6 @@ import { useForm } from 'react-hook-form';
 import useAuth from '../../hooks/useAuth';
 import CloseIcon from '@mui/icons-material/Close';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    borderRadius: 4,
-    p: 4,
-};
-
 
 const EditNews = ({ news, open, handleClose }) => {
     const { toggleLanguage } = useAuth();
@@ -133,14 +120,18 @@ const EditNews = ({ news, open, handleClose }) => {
 
     return (
         <div>
-            <Modal
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="keep-mounted-modal-title"
-                aria-describedby="keep-mounted-modal-description"
-            >
-                <Box sx={style} style={{ width: '800px', position: 'relative' }}>
+            <Modal keepMounted open={open} onClose={handleClose} >
+                <Box sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: 400,
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    borderRadius: 4,
+                    p: 4,
+                }}>
                     <h3 className='cursor-pointer absolute right-2 top-2' onClick={handleClose}><CloseIcon fontSize='large' /></h3>
                     <h3 className='font-semibold text-3xl'>Edit News</h3>
                     <Paper >
