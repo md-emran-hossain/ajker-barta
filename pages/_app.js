@@ -45,6 +45,7 @@ function MyApp({ Component, pageProps }) {
             name="viewport"
             content="initial-scale=1, width=device-width"
           />
+          <link rel="shortcut icon" href="https://i.ibb.co/WH9t9Yf/ajkerbarta-favicon.png" type="image/x-icon" />
         </Head>
 
         <ThemeProvider theme={theme}>

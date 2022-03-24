@@ -10,15 +10,17 @@ const WishList = () => {
   const [matchedData, setMatchedData] = useState([])
   const router = useRouter()
   useEffect(() => {
-    fetch(`/api/users/note?email=${user.email}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.wishlist) {
-          setWishList(data.wishlist)
-        } else {
-          setWishList([])
-        }
-      })
+    if (user.email) {
+      fetch(`/api/users/note?email=${user.email}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.wishlist) {
+            setWishList(data.wishlist)
+          } else {
+            setWishList([])
+          }
+        })
+    }
   }, [user.email])
   useEffect(() => {
     fetch('/api/news')
@@ -70,7 +72,7 @@ const WishList = () => {
             <h1 onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className='text-lg leading-6 my-1 font-semibold hover:text-red-600 transition-colors duration-300 cursor-pointer' >{news?.heading}</h1>
             <p className='text-sm'>{news?.description[0].slice(0, 100)}...</p>
             <div className='flex items-center justify-between'>
-              <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500">{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
+              {news?.publishedDate && <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500">{`${formatDistanceToNow(new Date(news?.publishedDate))} ago`}</p>}
               <button onClick={() => handleDeleteWish(news._id)} className='py-1 px-2 text-sm bg-gray-300 rounded-md'>Remove</button>
             </div>
           </div>)
