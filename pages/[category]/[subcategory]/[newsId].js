@@ -374,12 +374,14 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
           {/* Listening feature  start*/}
-          <div className="cursor-pointer justify-start  flex items-center gap-2  px-4 py-2 rounded-3xl ">
-            <h5>Listen Now</h5>
-            <FaPlay onClick={() => playNow(news?.description?.join())} />{" "}
-            <FaPause onClick={pause} /> <FaStop onClick={stop} />{" "}
-            <span>Speed {speed}</span>
-            <input type="range" name="speed" id="speed" min=".5" max="3" step=".5" onChange={(e) => setSpeed(e.target.value)} defaultValue={speed} />
+          <div className="cursor-pointer border-2 border-gray-200 px-6 py-4 rounded-2xl my-5 max-w-sm">
+            <h5 className="text-xl text-gray-800 font-semibold">Listen Now</h5>
+            <div className="flex gap-3 mt-2">
+              <FaPlay onClick={() => playNow(news?.description?.join())} />{" "}
+              <FaPause onClick={pause} /> <FaStop onClick={stop} />{" "}
+              <span>Speed {speed}</span>
+              <input type="range" name="speed" id="speed" min=".5" max="3" step=".5" onChange={(e) => setSpeed(e.target.value)} defaultValue={speed} />
+            </div>
           </div>
 
           {/* Listening feature  end*/}
