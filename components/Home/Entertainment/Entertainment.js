@@ -6,13 +6,10 @@ import { useRouter } from "next/router";
 
 const Entertainment = ({ entertainment }) => {
     const router = useRouter()
-    // const handle = () => {
-    //     const text = window.getSelection().toString().trim();
-    //     console.log(text)
-    // };
+
     return (
         <div data-testid='entertainmentId' className="container overflow-hidden ">
-            <h2 className='text-xl text-blue-900 font-semibold mb-3'><span className='text-gray-700'>Entertainment </span><ChevronRightIcon className='text-red-500' /></h2>
+            <h2 className='text-xl text-blue-900 font-semibold mb-3 mt-14'><span className='text-gray-700'>Entertainment </span><ChevronRightIcon className='text-red-500' /></h2>
             <div className={styles.galleryRow}>
                 {
                     entertainment?.slice(0, 4).map(news => <div onClick={() => router.push(`/${news.category}/${news.subCategory}/${news?._id}`)} className={styles.gallery} key={news._id}>
