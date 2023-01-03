@@ -54,8 +54,8 @@ export default function Home({ englishNews, bengaliNews }) {
       <International international={international} />
       <ScienceTechnology science={science} />
       <Exclusive newses={newses} />
-      <Business business={business} />
       <Entertainment entertainment={entertainment} />
+      <Business business={business} />
       <ImageGallery />
       <Opinion opinion={opinion} />
       <Sports sports={sports} />
