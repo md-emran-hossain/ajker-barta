@@ -32,7 +32,7 @@ const ScienceTechnology = ({ science }) => {
                 {news?.heading}
               </h1>
               <p className="text-sm">{news.description[0].slice(0, 100)}...</p>
-              <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit text-blue-500">{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
+              <p className="px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100 w-fit">{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
             </div>
           ))}
         </div>
