@@ -45,7 +45,7 @@ const Hero = ({ newses }) => {
           </Swiper>
           <Swiper
             direction={"vertical"}
-            slidesPerView={5}
+            slidesPerView={4}
             spaceBetween={30}
             freeMode={true}
             loop={true}
@@ -65,7 +65,7 @@ const Hero = ({ newses }) => {
                   </div>
                   <div className='w-3/5'>
                     <h3 className='md:text-lg text-md leading-5 md:leading-4 xl:leading-6 cursor-pointer hover:text-red-600 font-medium transition-colors duration-300'><span className='text-red-500'>{news?.category}</span> /{news?.heading}</h3>
-                    <p className='text-sm md:text-md py-4'>{news?.description[0].slice(0, 50)}...</p>
+                    <p className='text-sm md:text-md py-2'>{news?.description[0].slice(0, 50)}...</p>
                     <span className='px-2 mt-2 py-1 font-medium text-sm rounded-full bg-gray-100'>{`${formatDistanceToNow(new Date(news?.publishedDate))} ago`}</span>
                   </div>
                 </div>
