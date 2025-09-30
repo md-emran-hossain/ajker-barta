@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -7,24 +7,31 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from "recharts";
-import styles from '../../styles/Covid.module.css'
-import { HiUsers } from 'react-icons/hi'
-import { FcBusinessman, FcDataRecovery } from 'react-icons/fc'
-import { BsEmojiSmile } from 'react-icons/bs'
-import { RiHotelBedLine } from 'react-icons/ri'
-import { AiOutlineUser } from 'react-icons/ai'
+import styles from "../../styles/Covid.module.css";
+import { HiUsers } from "react-icons/hi";
+import { FcBusinessman, FcDataRecovery } from "react-icons/fc";
+import { BsEmojiSmile } from "react-icons/bs";
+import { RiHotelBedLine } from "react-icons/ri";
+import { AiOutlineUser } from "react-icons/ai";
 
 const Global = () => {
-  const [globalData, setGlobalData] = useState({})
+  const [globalData, setGlobalData] = useState({});
   useEffect(() => {
-    fetch('https://api.covid19api.com/summary')
-      .then(res => res.json())
-      .then(data => setGlobalData(data.Global))
-      .catch(err => console.log(err.message))
-  }, [])
-  const { TotalConfirmed: cases, TotalRecovered: recovered, NewDeaths: active, TotalDeaths: deaths, NewConfirmed: todayCases, NewRecovered: todayRecovered } = globalData
+    fetch("https://api.covid19api.com/summary")
+      .then((res) => res.json())
+      .then((data) => setGlobalData(data.Global))
+      .catch((err) => console.log(err.message));
+  }, []);
+  const {
+    TotalConfirmed: cases,
+    TotalRecovered: recovered,
+    NewDeaths: active,
+    TotalDeaths: deaths,
+    NewConfirmed: todayCases,
+    NewRecovered: todayRecovered,
+  } = globalData;
   const covidData = [
     {
       name: "TC",
@@ -36,7 +43,7 @@ const Global = () => {
     },
     {
       name: "AC",
-      Globaly: active
+      Globaly: active,
     },
     {
       name: "TD",
@@ -44,12 +51,12 @@ const Global = () => {
     },
     {
       name: "TC",
-      Globaly: todayCases
+      Globaly: todayCases,
     },
     {
       name: "TR",
       Globaly: todayRecovered,
-    }
+    },
   ];
 
   return (
@@ -60,14 +67,26 @@ const Global = () => {
           <div className={styles.lasUpdate}>
             <div className={styles.infoBox}>
               <div>
-                <HiUsers style={{ color: "#18dcff", fontSize: "25px", margin: "0 auto" }} />
+                <HiUsers
+                  style={{
+                    color: "#18dcff",
+                    fontSize: "25px",
+                    margin: "0 auto",
+                  }}
+                />
                 <p>Total Cases</p>
                 <h1>{cases}</h1>
               </div>
             </div>
             <div className={styles.infoBox}>
               <div>
-                <BsEmojiSmile style={{ color: "#feca57", fontSize: "25px", margin: "0 auto" }} />
+                <BsEmojiSmile
+                  style={{
+                    color: "#feca57",
+                    fontSize: "25px",
+                    margin: "0 auto",
+                  }}
+                />
                 <p>Total Recovered</p>
                 <h1>{recovered}</h1>
               </div>
@@ -81,21 +100,35 @@ const Global = () => {
             </div>
             <div className={styles.infoBox}>
               <div>
-                <RiHotelBedLine style={{ color: "#0be881", fontSize: "25px", margin: "0 auto" }} />
+                <RiHotelBedLine
+                  style={{
+                    color: "#0be881",
+                    fontSize: "25px",
+                    margin: "0 auto",
+                  }}
+                />
                 <p>Total Deaths</p>
                 <h1>{deaths}</h1>
               </div>
             </div>
             <div className={styles.infoBox}>
               <div>
-                <AiOutlineUser style={{ color: "#f368e0", fontSize: "25px", margin: "0 auto" }} />
+                <AiOutlineUser
+                  style={{
+                    color: "#f368e0",
+                    fontSize: "25px",
+                    margin: "0 auto",
+                  }}
+                />
                 <p>Todays Case</p>
                 <h1>{todayCases}</h1>
               </div>
             </div>
             <div className={styles.infoBox}>
               <div>
-                <FcDataRecovery style={{ fontSize: "25px", margin: "0 auto" }} />
+                <FcDataRecovery
+                  style={{ fontSize: "25px", margin: "0 auto" }}
+                />
                 <p>Todays Recovered</p>
                 <h1>{todayRecovered}</h1>
               </div>
@@ -120,12 +153,30 @@ const Global = () => {
               </ResponsiveContainer>
             </div>
             <div className={styles.indicateColor}>
-              <div><div style={{ color: "#18dcff", fontWeight: "500" }}>TC</div>Total Cases</div>
-              <div><div style={{ color: "#feca57", fontWeight: "500" }}>TR</div>Total Recovered</div>
-              <div><div style={{ color: "#ff4d4d", fontWeight: "500" }}>AC</div>Todays Deaths</div>
-              <div><div style={{ color: "#0be881", fontWeight: "500" }}>TD</div>Total Deaths</div>
-              <div><div style={{ color: "#f368e0", fontWeight: "500" }}>TC</div>Todays Case</div>
-              <div><div style={{ color: "#3c40c6", fontWeight: "500" }}>TR</div>Todays Recovered</div>
+              <div>
+                <div style={{ color: "#18dcff", fontWeight: "500" }}>TC</div>
+                Total Cases
+              </div>
+              <div>
+                <div style={{ color: "#feca57", fontWeight: "500" }}>TR</div>
+                Total Recovered
+              </div>
+              <div>
+                <div style={{ color: "#ff4d4d", fontWeight: "500" }}>AC</div>
+                Todays Deaths
+              </div>
+              <div>
+                <div style={{ color: "#0be881", fontWeight: "500" }}>TD</div>
+                Total Deaths
+              </div>
+              <div>
+                <div style={{ color: "#f368e0", fontWeight: "500" }}>TC</div>
+                Todays Case
+              </div>
+              <div>
+                <div style={{ color: "#3c40c6", fontWeight: "500" }}>TR</div>
+                Todays Recovered
+              </div>
             </div>
           </div>
         </div>

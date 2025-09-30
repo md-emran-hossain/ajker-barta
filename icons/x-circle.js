@@ -1,4 +1,4 @@
-import { createSvgIcon } from '@mui/material/utils';
+import { createSvgIcon } from "@mui/material/utils";
 
 export const XCircle = createSvgIcon(
   <svg
@@ -12,5 +12,5 @@ export const XCircle = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'XCircle'
+  "XCircle",
 );

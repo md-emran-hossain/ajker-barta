@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { render } from '@testing-library/react'
-import ScienceTechnology from '../ScienceTechnology'
-import renderer from 'react-test-renderer'
+import React from "react";
+import ReactDOM from "react-dom";
+import { render } from "@testing-library/react";
+import ScienceTechnology from "../ScienceTechnology";
+import renderer from "react-test-renderer";
 const testArr = [
   {
     _id: "620a0d73b2c17eb44612513b",
@@ -13,7 +13,7 @@ const testArr = [
       "Russian President Vladimir Putin has surrounded Ukraine from nearly all sides with more than 100,000 soldiers in a high-stakes standoff with the West over NATO’s post-Soviet expansion into countries once under the Kremlin’s domain.",
     ],
     images: {
-      img1: "https://images.prothomalo.com/prothomalo-english%2F2022-02%2F4bef49f6-66a4-41a4-b051-6f01977311ed%2F724673_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.3"
+      img1: "https://images.prothomalo.com/prothomalo-english%2F2022-02%2F4bef49f6-66a4-41a4-b051-6f01977311ed%2F724673_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.3",
     },
     reporter: "Kyiv",
     subCategory: "europe",
@@ -30,27 +30,26 @@ const testArr = [
       "Russian President Vladimir Putin has surrounded Ukraine from nearly all sides with more than 100,000 soldiers in a high-stakes standoff with the West over NATO’s post-Soviet expansion into countries once under the Kremlin’s domain.",
     ],
     images: {
-      img1: "https://images.prothomalo.com/prothomalo-english%2F2022-02%2F4bef49f6-66a4-41a4-b051-6f01977311ed%2F724673_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.3"
+      img1: "https://images.prothomalo.com/prothomalo-english%2F2022-02%2F4bef49f6-66a4-41a4-b051-6f01977311ed%2F724673_01_02.jpg?auto=format%2Ccompress&fmt=webp&format=webp&w=940&dpr=1.3",
     },
     reporter: "Kyiv",
     subCategory: "europe",
     category: "international",
     publishedDate: "2/14/2022, 2:06:11 PM",
     likes: [],
-  }
-]
-it('render ScienceTechnology component without crashing', () => {
-  const div = document.createElement('div')
-  ReactDOM.render(<ScienceTechnology />, div)
-})
+  },
+];
+it("render ScienceTechnology component without crashing", () => {
+  const div = document.createElement("div");
+  ReactDOM.render(<ScienceTechnology />, div);
+});
 
-it('testing ScienceTechnology with props', () => {
-  const { getByTestId } = render(<ScienceTechnology testArr={testArr} />)
-  expect(getByTestId('scienceTechnologyId')).toBeTruthy()
-})
+it("testing ScienceTechnology with props", () => {
+  const { getByTestId } = render(<ScienceTechnology testArr={testArr} />);
+  expect(getByTestId("scienceTechnologyId")).toBeTruthy();
+});
 
-it('maching snapshot', () => {
-  const tree = renderer.create(<ScienceTechnology />)
-  expect(tree).toMatchSnapshot()
-})
-
+it("maching snapshot", () => {
+  const tree = renderer.create(<ScienceTechnology />);
+  expect(tree).toMatchSnapshot();
+});

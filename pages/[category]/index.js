@@ -18,14 +18,15 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
   let newses = null;
   if (toggleLanguage) {
     newses = bengaliNews;
-  }
-  else {
+  } else {
     newses = englishNews;
   }
-  const displayNews = newses?.filter((news) => news.category === category).reverse();
+  const displayNews = newses
+    ?.filter((news) => news.category === category)
+    .reverse();
 
   const subCategories = displayNews?.map(
-    (news) => news.category && news.subCategory
+    (news) => news.category && news.subCategory,
   );
   const unique = [...new Set(subCategories)];
 
@@ -44,23 +45,26 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
             <span
               key={i}
               onClick={() => router.push(`/${category}/${subCategory}`)}
-              className='cursor-pointer'>{subCategory}
-            </span>))}
+              className="cursor-pointer"
+            >
+              {subCategory}
+            </span>
+          ))}
         </div>
         <div className={styles.categoryGrid}>
           {displayNews?.slice(0, 5).map((news) => (
             <div
-              onClick={() => router.push(`/${category}/${news?.subCategory}/${news?._id}`)}
+              onClick={() =>
+                router.push(`/${category}/${news?.subCategory}/${news?._id}`)
+              }
               className={`${styles.itemBox} cursor-pointer`}
               key={news._id}
             >
-              <img src={news?.images?.img1}
-                priority
-                alt="hi" />
+              <img src={news?.images?.img1} priority alt="hi" />
               <h1>{news?.heading}</h1>
               <p>{news?.description?.[0].slice(0, 100)}</p>
               <p>{`${formatDistanceToNow(
-                new Date(news.publishedDate.toString())
+                new Date(news.publishedDate.toString()),
               )} ago`}</p>
             </div>
           ))}
@@ -68,20 +72,20 @@ const CategoryDetails = ({ englishNews, bengaliNews }) => {
         <div>
           {displayNews?.slice(5, visible).map((news) => (
             <div
-              onClick={() => router.push(`/${category}/${news.subCategories}/${news?._id}`)}
+              onClick={() =>
+                router.push(`/${category}/${news.subCategories}/${news?._id}`)
+              }
               className={`${styles.singleNews} cursor-pointer`}
               key={news._id}
             >
-              <img
-                alt=""
-                src={news?.images?.img1} />
+              <img alt="" src={news?.images?.img1} />
               <div>
                 <h1 className="text-xl font-medium hover:text-red-600 transition-colors duration-300 cursor-pointer">
                   {news?.heading}
                 </h1>
                 <p className="text-sm my-2">{news.description?.[0]}</p>
                 <p className="text-blue-600 text-md">{`${formatDistanceToNow(
-                  new Date(news.publishedDate.toString())
+                  new Date(news.publishedDate.toString()),
                 )} ago`}</p>
               </div>
             </div>
@@ -110,12 +114,12 @@ export const getStaticProps = async () => {
       englishNews: res.data,
       bengaliNews: bengali.data,
     },
-    revalidate: 10
+    revalidate: 10,
   };
 };
 export async function getStaticPaths() {
   return {
     paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking' //indicates the type of fallback
-  }
+    fallback: "blocking", //indicates the type of fallback
+  };
 }

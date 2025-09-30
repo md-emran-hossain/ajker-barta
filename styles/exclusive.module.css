@@ -1,4 +1,4 @@
-.exclusive{
+.exclusive {
   font-size: 25px;
   margin-bottom: 10px;
   font-weight: 500;
@@ -6,8 +6,8 @@
   position: relative;
   margin-left: 30px;
 }
-.exclusive::before{
-  content: '';
+.exclusive::before {
+  content: "";
   position: absolute;
   top: 50%;
   left: -30px;

@@ -10,7 +10,7 @@ import NavigationBar from "../components/Shared/NavigationBar/NavigationBar";
 import Footer from "../components/Shared/Footer/Footer";
 import Global from "../components/CovidUpdate/Global";
 import CovidBtn from "../components/CovidUpdate/CovidBtn";
-import axios from 'axios'
+import axios from "axios";
 import Sports from "../components/Home/Sports/Sports";
 import Entertainment from "../components/Home/Entertainment/Entertainment";
 import Opinion from "../components/Home/Opinion/Opinion";
@@ -18,28 +18,32 @@ import ImageGallery from "../components/Home/imageGallery/imageGallery";
 import Voting from "../components/Voting/Voting";
 import useAuth from "../hooks/useAuth";
 
-
 export default function Home({ englishNews, bengaliNews }) {
   const { toggleLanguage } = useAuth();
 
   let newses = null;
   if (toggleLanguage) {
-    const bangla = bengaliNews
+    const bangla = bengaliNews;
     newses = bangla;
-  }
-  else {
-    const english = englishNews
+  } else {
+    const english = englishNews;
     newses = english;
   }
 
   const coronanews = newses?.filter((news) => news.category === "coronavirus");
   const bdnews = newses?.filter((news) => news.category === "bangladesh");
-  const international = newses?.filter((news) => news.category === "international");
-  const entertainment = newses?.filter((news) => news.category === "entertainment");
-  const science = newses?.filter((news) => news.category === "sciencetechnology");
+  const international = newses?.filter(
+    (news) => news.category === "international",
+  );
+  const entertainment = newses?.filter(
+    (news) => news.category === "entertainment",
+  );
+  const science = newses?.filter(
+    (news) => news.category === "sciencetechnology",
+  );
   const business = newses?.filter((news) => news.category === "business");
   const sports = newses?.filter((news) => news.category === "sports");
-  const opinion = newses?.filter(news => news.category === 'opinion')
+  const opinion = newses?.filter((news) => news.category === "opinion");
 
   return (
     <div>
@@ -72,6 +76,6 @@ export const getStaticProps = async () => {
       englishNews: res.data,
       bengaliNews: bengali.data,
     },
-    revalidate: 10
+    revalidate: 10,
   };
 };
