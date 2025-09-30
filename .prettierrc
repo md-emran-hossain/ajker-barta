@@ -1,0 +1,29 @@
+{
+	"useTabs": true,
+	"tabWidth": 2,
+	"semi": true,
+	"singleQuote": false,
+	"jsxSingleQuote": false,
+	"trailingComma": "none",
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"arrowParens": "avoid",
+	"importOrder": [
+		"^react$",
+		"<THIRD_PARTY_MODULES>",
+		"^routes/(.*)$",
+		"^assets/(.*)$",
+		"^constants/(.*)$",
+		"^context/(.*)$",
+		"^actionTypes/(.*)$",
+		"^reducers/(.*)$",
+		"^hooks/(.*)$",
+		"^containers/(.*)$",
+		"^components/(.*)$",
+		"^storage/(.*)$",
+		"^utils/(.*)$",
+		"^[./]"
+	],
+	"importOrderSortSpecifiers": true,
+	"importOrderGroupNamespaceSpecifiers": true
+}
