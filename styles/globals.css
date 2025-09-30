@@ -1,35 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap");
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
   scroll-behavior: smooth;
 }
 
 /* voting poll button style*/
-.votingPollSubmitBtn{
+.votingPollSubmitBtn {
   display: none;
 }
 
-
-
-.container{
+.container {
   width: 95%;
   max-width: 1280px;
   margin: 0 auto;
 }
-.imageEffect:hover > div img{
+.imageEffect:hover > div img {
   transform: scale(1.1);
 }
-.imageEffect > div img{
+.imageEffect > div img {
   transition: 0.2s ease-in transform;
 }
-.afterSelectBtn{
+.afterSelectBtn {
   position: absolute;
   top: 0;
   left: 0;
@@ -38,50 +46,51 @@ body {
   border-radius: 10px;
   z-index: 10;
 }
-.afterSelectBtn::after{
-  content: '';
+.afterSelectBtn::after {
+  content: "";
   position: absolute;
   bottom: -15px;
   left: 48%;
   width: 20px;
   height: 20px;
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
   transform: rotate(-45deg) translateY(-50%);
 }
-.afterSelectBtn button:first-child{
+.afterSelectBtn button:first-child {
   font-size: 35px;
   background-color: rgb(0, 139, 46);
   padding: 5px;
 }
-.afterSelectBtn button:nth-child(2){
+.afterSelectBtn button:nth-child(2) {
   font-size: 35px;
-  background-color: #1DA1F2;
+  background-color: #1da1f2;
   padding: 5px;
 }
-.afterSelectBtn button:nth-child(3){
+.afterSelectBtn button:nth-child(3) {
   font-size: 35px;
   background-color: #3b5998;
   padding: 5px;
 }
-.showNotification{
+.showNotification {
   display: block;
 }
-.showOption{
+.showOption {
   display: block;
   animation-duration: 0.2s;
   animation-fill-mode: both;
   animation-name: btnAnimation;
 }
-@keyframes btnAnimation{
-  0%{
+@keyframes btnAnimation {
+  0% {
     opacity: 0;
     transform: scale3d(0.3, 0.3, 0.3);
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+  /* Code for Firefox */
   color: white;
   background: aqua;
 }
@@ -105,7 +114,7 @@ body {
 * {
   box-sizing: border-box;
 }
-#hero .swiper-button-prev{
+#hero .swiper-button-prev {
   left: 0 !important;
   background-color: #fff;
   font-size: 10px;
@@ -114,7 +123,7 @@ body {
   opacity: 0;
   transition: 0.3s ease opacity;
 }
-#hero .swiper-button-next{
+#hero .swiper-button-next {
   right: 0 !important;
   background-color: #fff;
   border-top-left-radius: 5px;
@@ -123,20 +132,19 @@ body {
   transition: 0.3s ease opacity;
 }
 #hero .swiper:hover .swiper-button-next,
-#hero .swiper:hover .swiper-button-prev{
+#hero .swiper:hover .swiper-button-prev {
   opacity: 1;
 }
 #hero .swiper-button-prev::after,
-#hero .swiper-button-next::after{
+#hero .swiper-button-next::after {
   font-size: 20px !important;
 }
-.slim-border{
+.slim-border {
   border-width: 1px;
 }
- /* Login page Style  */
+/* Login page Style  */
 
-.first-form{
-  
+.first-form {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
@@ -302,9 +310,9 @@ body {
 .first-form input {
   display: block;
   width: 100%;
-   margin-top: 5px; 
-  padding-bottom: 5px; 
-  font-size: 16px; 
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
@@ -329,37 +337,38 @@ body {
   transform: translate3d(0, 0, 0);
 }
 
-  /* second login form  */
+/* second login form  */
 
-  .second-form-body{
+.second-form-body {
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: 'Jost', sans-serif;
-  }
+  font-family: "Jost", sans-serif;
+}
 
-  .second-form-main{
+.second-form-main {
   margin: 100px 0;
   width: 350px;
   height: 500px;
   background: red;
   overflow: hidden;
-  background: url("https://i.ibb.co/mXcdRbQ/Minimal-globe-technology-business-vector-background.jpg") no-repeat center/ cover;
+  background: url("https://i.ibb.co/mXcdRbQ/Minimal-globe-technology-business-vector-background.jpg")
+    no-repeat center/ cover;
   border-radius: 10px;
   box-shadow: 5px 20px 50px #000;
 }
-#chk{
+#chk {
   display: none;
 }
-.signup{
+.signup {
   position: relative;
-  width:100%;
+  width: 100%;
   height: 100%;
 }
-.second-form label{
+.second-form label {
   color: #fff;
   font-size: 2.3em;
   justify-content: center;
@@ -367,9 +376,9 @@ body {
   margin: 60px;
   font-weight: bold;
   cursor: pointer;
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
-.second-form input{
+.second-form input {
   width: 60%;
   height: 25px;
   background: #f7f7f7;
@@ -381,7 +390,7 @@ body {
   outline: none;
   border-radius: 5px;
 }
-.second-form button{
+.second-form button {
   width: 60%;
   height: 40px;
   margin: 10px auto;
@@ -395,33 +404,33 @@ body {
   outline: none;
   border: none;
   border-radius: 5px;
-  transition: .2s ease-in;
+  transition: 0.2s ease-in;
   cursor: pointer;
 }
-.second-form button:hover{
+.second-form button:hover {
   background: #6d44b8;
 }
-.login{
+.login {
   height: 460px;
   background: #eee;
   border-radius: 60% / 10%;
   transform: translateY(-180px);
-  transition: .8s ease-in-out;
+  transition: 0.8s ease-in-out;
 }
-.login label{
+.login label {
   color: #573b8a;
-  transform: scale(.6);
+  transform: scale(0.6);
 }
 
-#chk:checked ~ .login{
+#chk:checked ~ .login {
   transform: translateY(-500px);
 }
-#chk:checked ~ .login label{
-  transform: scale(1);	
+#chk:checked ~ .login label {
+  transform: scale(1);
 }
-#chk:checked ~ .signup label{
-  transform: scale(.6);
-}          
+#chk:checked ~ .signup label {
+  transform: scale(0.6);
+}
 
 @media screen and (min-width: 480px) {
   .second-form-body {

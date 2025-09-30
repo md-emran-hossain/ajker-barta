@@ -1,7 +1,7 @@
-import create from 'zustand'
+import create from "zustand";
 const useProgressStore = create((set) => ({
   isAnimating: false,
-  setIsAnimating: (isAnimating) => set(() => ({ isAnimating }))
-}))
+  setIsAnimating: (isAnimating) => set(() => ({ isAnimating })),
+}));
 
-export default useProgressStore
+export default useProgressStore;

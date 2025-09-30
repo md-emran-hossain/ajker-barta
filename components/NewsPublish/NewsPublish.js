@@ -2,16 +2,22 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Push from "push.js";
-import { Card, CardContent, Typography, CircularProgress, Button } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CircularProgress,
+  Button,
+} from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 
 const NewsPublish = () => {
   const { toggleLanguage } = useAuth();
   const [category, setCategory] = useState([]);
-  const [uploading, setUploading] = useState(false)
+  const [uploading, setUploading] = useState(false);
   const [imgName, setImgName] = useState("No Select Image");
 
-  let images = []
+  let images = [];
   const {
     register,
     handleSubmit,
@@ -29,7 +35,7 @@ const NewsPublish = () => {
       .post("https://api.imgbb.com/1/upload", imageData)
       .then((response) => {
         images.push(response.data.data.display_url);
-        console.log(images)
+        console.log(images);
         setUploading(false);
       })
       .catch((error) => {
@@ -46,9 +52,8 @@ const NewsPublish = () => {
       axios
         .post("https://api.imgbb.com/1/upload", imageData)
         .then((response) => {
-
           images.push(response.data.data.display_url);
-          console.log(images)
+          console.log(images);
           setUploading(false);
         })
         .catch((error) => {
@@ -66,9 +71,8 @@ const NewsPublish = () => {
       axios
         .post("https://api.imgbb.com/1/upload", imageData)
         .then((response) => {
-
           images.push(response.data.data.display_url);
-          console.log(images)
+          console.log(images);
           setUploading(false);
         })
         .catch((error) => {
@@ -102,19 +106,22 @@ const NewsPublish = () => {
     if (result.insertedId) {
       Push.create("Hello World!");
       alert("News added");
-      images = []
+      images = [];
       reset();
     }
-    socket.emit('sendNotification', data)
+    socket.emit("sendNotification", data);
   };
 
   const uploadFile = () => {
-    document.getElementById('addNewsClick').click();
-  }
+    document.getElementById("addNewsClick").click();
+  };
 
   return (
     <div className="container">
-      <Typography sx={{ mx: 1, my: 3, fontSize: 'bold' }} variant="h4" > {toggleLanguage ? "একটি খবর যোগ করুন" : "Add A NEWS"} </Typography>
+      <Typography sx={{ mx: 1, my: 3, fontSize: "bold" }} variant="h4">
+        {" "}
+        {toggleLanguage ? "একটি খবর যোগ করুন" : "Add A NEWS"}{" "}
+      </Typography>
       <Card>
         <CardContent>
           <form
@@ -145,13 +152,32 @@ const NewsPublish = () => {
               </span>
             )}
 
-            {uploading ? <h1 className='text-center'><CircularProgress fontSize="large" /></h1> :
+            {uploading ? (
+              <h1 className="text-center">
+                <CircularProgress fontSize="large" />
+              </h1>
+            ) : (
               <div className="flex items-center justify-around flex-wrap my-2">
-                <Button sx={{ paddingY: '3px', marginLeft: 2 }} type="submit" variant="outlined"
-                  color='secondary' onClick={uploadFile} className="">Upload image</Button>
-                <input id='addNewsClick' type="file" accept="image/*" onChange={handleImgUpload} style={{ display: 'none' }} />
-                <p className='text-gray-500 text-lg'>{imgName}</p>
-              </div>}
+                <Button
+                  sx={{ paddingY: "3px", marginLeft: 2 }}
+                  type="submit"
+                  variant="outlined"
+                  color="secondary"
+                  onClick={uploadFile}
+                  className=""
+                >
+                  Upload image
+                </Button>
+                <input
+                  id="addNewsClick"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImgUpload}
+                  style={{ display: "none" }}
+                />
+                <p className="text-gray-500 text-lg">{imgName}</p>
+              </div>
+            )}
 
             <input
               className="px-2 py-3 outline-0 border rounded-md border-red-100"
@@ -185,7 +211,9 @@ const NewsPublish = () => {
                 className="px-2 py-3 outline-0 border rounded-md border-red-100"
                 {...register("subCategory", { required: true })}
               >
-                <option value="not defined">Please select a sub category</option>
+                <option value="not defined">
+                  Please select a sub category
+                </option>
                 {category === "international" && (
                   <>
                     <option value="asia">Asia</option>

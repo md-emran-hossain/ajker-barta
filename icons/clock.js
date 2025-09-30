@@ -1,4 +1,4 @@
-import { createSvgIcon } from '@mui/material/utils';
+import { createSvgIcon } from "@mui/material/utils";
 
 export const Clock = createSvgIcon(
   <svg
@@ -12,5 +12,5 @@ export const Clock = createSvgIcon(
       clipRule="evenodd"
     />
   </svg>,
-  'Clock'
+  "Clock",
 );

@@ -1,7 +1,21 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, LinkedinShareButton, LinkedinIcon, } from "react-share";
-import { FaRegBookmark, FaPrint, FaPlay, FaPause, FaStop, FaCopy } from "react-icons/fa";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "react-share";
+import {
+  FaRegBookmark,
+  FaPrint,
+  FaPlay,
+  FaPause,
+  FaStop,
+  FaCopy,
+} from "react-icons/fa";
 import { MdFacebook, MdOutlineEditNote } from "react-icons/md";
 import Footer from "../../../components/Shared/Footer/Footer";
 import Header from "../../../components/Shared/Header/Header";
@@ -18,17 +32,16 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import MuiAlert from "@mui/material/Alert";
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
-import { Paper, TextField } from '@mui/material';
-import Box from '@mui/material/Box';
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
+import { Paper, TextField } from "@mui/material";
+import Box from "@mui/material/Box";
 import QRCode from "qrcode.react";
-import Modal from '@mui/material/Modal';
+import Modal from "@mui/material/Modal";
 
 const Newsdetails = ({ englishNews, bengaliNews }) => {
   const { user, toggleLanguage, admin } = useAuth();
   const [speed, setSpeed] = useState(1);
-
 
   const [openqr, setOpenqr] = React.useState(false);
   const handleOpenqr = () => setOpenqr(true);
@@ -41,10 +54,9 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   const [yValue, setyVlue] = useState(0);
   const [isShowNoteBar, setIsShowNoteBar] = useState(false);
 
-  // news modal control 
+  // news modal control
   const [openSnack, setOpenSnack] = useState(false);
   const handleClose = () => setOpen(false);
-
 
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -59,7 +71,12 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   const action = (
     <>
       <Button color="secondary" size="small" onClick={handleClose}></Button>
-      <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose} >
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
         <CloseIcon fontSize="small" />
       </IconButton>
     </>
@@ -94,7 +111,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     const hashtags = "HotNews, Recent, Letest";
     const via = "Ajker Barta";
     window.open(
-      `${twitterShareUrl}?text="${text}"&url=${currentUrl}&hashtags=${hashtags}&via=${via}`
+      `${twitterShareUrl}?text="${text}"&url=${currentUrl}&hashtags=${hashtags}&via=${via}`,
     );
   };
 
@@ -109,48 +126,45 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
   let newses = null;
   if (toggleLanguage) {
     newses = bengaliNews;
-  }
-  else {
+  } else {
     newses = englishNews;
   }
   const news = newses?.find((news) => news._id === newsId);
 
-
-  const [likes, setLikes] = useState([])
+  const [likes, setLikes] = useState([]);
   useEffect(() => {
     if (news?.likes) {
-      setLikes(news?.likes)
+      setLikes(news?.likes);
     } else {
-      setLikes([])
+      setLikes([]);
     }
-  }, [news?.likes])
+  }, [news?.likes]);
   const category = news?.category;
   const remaining = newses.filter(
-    (item) => item.category === category && item._id !== news._id
+    (item) => item.category === category && item._id !== news._id,
   );
   // const url = window?.location?.href
   const iconClass = "p-3 flex-initial bg-gray-200 rounded-full cursor-pointer";
 
-
   // add commnent functionality
-  const [commentText, setCommentText] = useState('')
-  const [comments, setComments] = useState([])
+  const [commentText, setCommentText] = useState("");
+  const [comments, setComments] = useState([]);
   useEffect(() => {
     if (news?.comments) {
-      setComments(news?.comments)
+      setComments(news?.comments);
     } else {
-      setComments([])
+      setComments([]);
     }
-  }, [news])
+  }, [news]);
   const handleComment = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const commentObj = {
       comment: commentText,
       name: user.displayName,
       img: user.photoURL,
       date: new Date().toLocaleString(),
       email: user.email,
-    }
+    };
     if (!user.email) {
       Swal.fire({
         title: "You are not signed in",
@@ -163,14 +177,16 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
       }).then((result) => {
         if (result.isConfirmed) {
           router.push({
-            pathname: '/login',
-            query: { from: `/${news?.category}/${news?.subCategory}/${news?._id}` }
-          })
+            pathname: "/login",
+            query: {
+              from: `/${news?.category}/${news?.subCategory}/${news?._id}`,
+            },
+          });
         }
       });
     } else {
       if (commentText) {
-        setComments([commentObj, ...comments])
+        setComments([commentObj, ...comments]);
         fetch(`/api/news/${newsId}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -185,81 +201,79 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
               e.target.reset();
             }
           })
-          .catch(err => {
+          .catch((err) => {
             Swal.fire({
-              title: 'Error',
+              title: "Error",
               text: `${err.message}`,
-              icon: 'error',
-              showCancelButton: true
-            })
-          })
-      }
-      else {
+              icon: "error",
+              showCancelButton: true,
+            });
+          });
+      } else {
         return;
       }
     }
-
   };
   //like functionality
   const handleLike = (id) => {
     fetch(`/api/news/like?id=${id}`, {
       method: "PUT",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-      body: JSON.stringify({ email: user.email })
+      body: JSON.stringify({ email: user.email }),
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         if (result.modifiedCount > 0) {
-          const newLikes = [...likes, user.email]
-          setLikes(newLikes)
+          const newLikes = [...likes, user.email];
+          setLikes(newLikes);
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   //unlike functionality
   const handleUnLike = (id) => {
     fetch(`/api/news/unlike?id=${id}`, {
       method: "PUT",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-      body: JSON.stringify({ email: user.email })
+      body: JSON.stringify({ email: user.email }),
     })
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         if (result.modifiedCount > 0) {
-          const newLikes = news?.likes.filter(ele => ele !== user.email)
-          setLikes(newLikes)
+          const newLikes = news?.likes.filter((ele) => ele !== user.email);
+          setLikes(newLikes);
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   // wish list add
   const addToWishList = () => {
     fetch(`/api/users/wishlist?email=${user.email}`, {
       method: "PUT",
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json",
       },
-      body: JSON.stringify({ id: news._id })
+      body: JSON.stringify({ id: news._id }),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.modifiedCount === 1) {
           Swal.fire({
-            icon: 'success',
-            title: 'Success',
+            icon: "success",
+            title: "Success",
             text: `This news Added to your wish list`,
-          })
+          });
         }
-      })
-  }
+      });
+  };
   // handle audio news
 
   const playNow = (text) => {
@@ -291,10 +305,10 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     }
   };
 
-  // qr code  
+  // qr code
   const generateCode = () => {
-    handleOpenqr()
-  }
+    handleOpenqr();
+  };
   const downloadQRCode = () => {
     // Generate download with use canvas and stream
     const canvas = document.getElementById("qr-gen");
@@ -309,13 +323,13 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     document.body.removeChild(downloadLink);
   };
   const qrstyle = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
+    bgcolor: "background.paper",
+    border: "2px solid #000",
     boxShadow: 24,
     p: 4,
   };
@@ -337,7 +351,10 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
             <LinkedinIcon round={true} size={40} />
           </LinkedinShareButton>
         </span>
-        <span onClick={addToWishList} className={`${iconClass} bg-orange-500 text-white`}>
+        <span
+          onClick={addToWishList}
+          className={`${iconClass} bg-orange-500 text-white`}
+        >
           <FaRegBookmark />
         </span>
         <span
@@ -347,9 +364,7 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
         >
           <FaCopy />
         </span>
-        <span title="Show QR Code"
-          onClick={generateCode}
-          className={iconClass}>
+        <span title="Show QR Code" onClick={generateCode} className={iconClass}>
           <AiOutlineQrcode />
         </span>
         <span
@@ -367,9 +382,17 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
     <div>
       <Header />
       <NavigationBar />
-      <div onMouseUp={handleSelection} className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1">
+      <div
+        onMouseUp={handleSelection}
+        className="grid md:mx-14 sm:mx-4 md:grid-cols-3 sm:grid-cols-1"
+      >
         <div className="col-span-2 mt-6">
-          <h3 onClick={() => router.push(`/${category}`)} className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3" >{news?.category}</h3>
+          <h3
+            onClick={() => router.push(`/${category}`)}
+            className="underline-offset-8 capitalize cursor-pointer underline mb-2 text-2xl text-blue-500 py-3"
+          >
+            {news?.category}
+          </h3>
 
           <h1 className="text-4xl mb-3 font-semibold">{news?.heading}</h1>
 
@@ -380,7 +403,16 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
               <FaPlay onClick={() => playNow(news?.description?.join())} />{" "}
               <FaPause onClick={pause} /> <FaStop onClick={stop} />{" "}
               <span>Speed {speed}</span>
-              <input type="range" name="speed" id="speed" min=".5" max="3" step=".5" onChange={(e) => setSpeed(e.target.value)} defaultValue={speed} />
+              <input
+                type="range"
+                name="speed"
+                id="speed"
+                min=".5"
+                max="3"
+                step=".5"
+                onChange={(e) => setSpeed(e.target.value)}
+                defaultValue={speed}
+              />
             </div>
           </div>
 
@@ -393,40 +425,100 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
             <Actions />
           </div>
           <hr />
-          <img src={news?.images?.img1} className=" py-3 w-full" alt={news?.title} />
+          <img
+            src={news?.images?.img1}
+            className=" py-3 w-full"
+            alt={news?.title}
+          />
 
-          {news?.description?.slice(0, 5).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
-          {
-            news?.images?.img2 && <img className="w-8/12 mx-auto" src={news?.images?.img2} alt='img2' />
-          }
-          {news?.description?.slice(6, 10).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
-          {
-            news?.images?.img3 && <img src={news?.images?.img3} alt='img3' />
-          }
-          {news?.description?.slice(11, 15).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
-          {
-            news?.images?.img4 && <img className="w-8/12 mx-auto" src={news?.images?.img4} alt='img4' />
-          }
-          {news?.description?.slice(16, 20).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
-          {
-            news?.images?.img5 && <img className="w-8/12 mx-auto" src={news?.images?.img5} alt='img5' />
-          }
-          {news?.description?.slice(21, 25).map((newsP, i) => <p key={i} className="pb-5  w-11/12 mx-auto"> {newsP}</p>)}
-          {
-            news?.images?.img6 && <img className="w-8/12 mx-auto" src={news?.images?.img6} alt='img6' />
-          }
+          {news?.description?.slice(0, 5).map((newsP, i) => (
+            <p key={i} className="pb-5  w-11/12 mx-auto">
+              {" "}
+              {newsP}
+            </p>
+          ))}
+          {news?.images?.img2 && (
+            <img
+              className="w-8/12 mx-auto"
+              src={news?.images?.img2}
+              alt="img2"
+            />
+          )}
+          {news?.description?.slice(6, 10).map((newsP, i) => (
+            <p key={i} className="pb-5  w-11/12 mx-auto">
+              {" "}
+              {newsP}
+            </p>
+          ))}
+          {news?.images?.img3 && <img src={news?.images?.img3} alt="img3" />}
+          {news?.description?.slice(11, 15).map((newsP, i) => (
+            <p key={i} className="pb-5  w-11/12 mx-auto">
+              {" "}
+              {newsP}
+            </p>
+          ))}
+          {news?.images?.img4 && (
+            <img
+              className="w-8/12 mx-auto"
+              src={news?.images?.img4}
+              alt="img4"
+            />
+          )}
+          {news?.description?.slice(16, 20).map((newsP, i) => (
+            <p key={i} className="pb-5  w-11/12 mx-auto">
+              {" "}
+              {newsP}
+            </p>
+          ))}
+          {news?.images?.img5 && (
+            <img
+              className="w-8/12 mx-auto"
+              src={news?.images?.img5}
+              alt="img5"
+            />
+          )}
+          {news?.description?.slice(21, 25).map((newsP, i) => (
+            <p key={i} className="pb-5  w-11/12 mx-auto">
+              {" "}
+              {newsP}
+            </p>
+          ))}
+          {news?.images?.img6 && (
+            <img
+              className="w-8/12 mx-auto"
+              src={news?.images?.img6}
+              alt="img6"
+            />
+          )}
 
           <Paper sx={{ padding: 1 }}>
-            {user.email && <div className="flex items-center gap-3">
-              {
-                likes.includes(user.email) ? <div title='Unlike the news'>
-                  <ThumbUpIcon onClick={() => handleUnLike(news._id)} sx={{ fontSize: 35, cursor: 'pointer', color: "#1976d2", marginLeft: 1 }} />
-                </div> : <div title='Give thumbs up'>
-                  <ThumbUpOutlinedIcon onClick={() => handleLike(news._id)} sx={{ fontSize: 35, cursor: 'pointer', marginLeft: 1 }} />
-                </div>
-              }
-              <span className="mt-3 mb-1 font-semibold">{likes.length || 0} likes</span>
-            </div>}
+            {user.email && (
+              <div className="flex items-center gap-3">
+                {likes.includes(user.email) ? (
+                  <div title="Unlike the news">
+                    <ThumbUpIcon
+                      onClick={() => handleUnLike(news._id)}
+                      sx={{
+                        fontSize: 35,
+                        cursor: "pointer",
+                        color: "#1976d2",
+                        marginLeft: 1,
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <div title="Give thumbs up">
+                    <ThumbUpOutlinedIcon
+                      onClick={() => handleLike(news._id)}
+                      sx={{ fontSize: 35, cursor: "pointer", marginLeft: 1 }}
+                    />
+                  </div>
+                )}
+                <span className="mt-3 mb-1 font-semibold">
+                  {likes.length || 0} likes
+                </span>
+              </div>
+            )}
             {/* Selection Item */}
 
             {/* Show after selection */}
@@ -435,7 +527,9 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
               <Actions />
             </div>
             <div className="flex justify-between items-center border-y border-gray-300">
-              <h2 className="text-xl py-3 ml-2">{comments ? "Al Comments" : "No Comments yet"}</h2>
+              <h2 className="text-xl py-3 ml-2">
+                {comments ? "Al Comments" : "No Comments yet"}
+              </h2>
 
               <div>
                 <span>Sort by: </span>
@@ -448,14 +542,25 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
             <div>
               {/* <h1>{success?.map(item=><h1 key={item.comment}>{item.comment}</h1>)}</h1> */}
               <form onSubmit={handleComment}>
-                <TextField fullWidth label="Comment here"
+                <TextField
+                  fullWidth
+                  label="Comment here"
                   onChange={(e) => setCommentText(e.target.value)}
-                  type="text" variant="outlined"
+                  type="text"
+                  variant="outlined"
                 />
-                <Button type="submit" variant="contained" color="secondary" sx={{ marginTop: 1, paddingX: 5 }}> Comment</Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
+                  sx={{ marginTop: 1, paddingX: 5 }}
+                >
+                  {" "}
+                  Comment
+                </Button>
               </form>
 
-              <div style={{ maxHeight: '400px', overflow: 'scroll' }}>
+              <div style={{ maxHeight: "400px", overflow: "scroll" }}>
                 {comments?.map((item) => (
                   <div
                     key={item.date}
@@ -471,15 +576,21 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-semibold text-sm">{item.name}  <span className="ml-3 text-xs text-gray-500">{item.date}</span></div>
-                      <div className="text-base text-gray-500">{item.comment}</div>
+                      <div className="font-semibold text-sm">
+                        {item.name}{" "}
+                        <span className="ml-3 text-xs text-gray-500">
+                          {item.date}
+                        </span>
+                      </div>
+                      <div className="text-base text-gray-500">
+                        {item.comment}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
           </Paper>
-
         </div>
 
         <div className="col-span-1 sticky">
@@ -488,7 +599,15 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
           </p>
           {remaining?.slice(0, 6).map((item) => {
             return (
-              <div onClick={() => router.push(`/${item?.category}/${item?.subCategory}/${item?._id}`)} className="cursor-pointer" key={item._id}>
+              <div
+                onClick={() =>
+                  router.push(
+                    `/${item?.category}/${item?.subCategory}/${item?._id}`,
+                  )
+                }
+                className="cursor-pointer"
+                key={item._id}
+              >
                 <div className="mx-10 my-5 pb-4 border-b border-gray-300">
                   <h2 className="text-xl font-semibold">{item?.heading}</h2>
                   <div className="flex">
@@ -501,7 +620,8 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
                   </div>
                   <p>{`${formatDistanceToNow(new Date(news.publishedDate))} ago`}</p>
                 </div>
-              </div>)
+              </div>
+            );
           })}
         </div>
       </div>
@@ -520,7 +640,12 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
             level={"H"}
             includeMargin={true}
           />
-          <button className="border bg-red-500 rounded block py-3 px-5 text-white" onClick={downloadQRCode}>Download QR Code</button>
+          <button
+            className="border bg-red-500 rounded block py-3 px-5 text-white"
+            onClick={downloadQRCode}
+          >
+            Download QR Code
+          </button>
         </Box>
       </Modal>
       <div
@@ -550,7 +675,11 @@ const Newsdetails = ({ englishNews, bengaliNews }) => {
         onClose={handleCloseSnack}
         action={action}
       >
-        <Alert onClose={handleCloseSnack} severity="success" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleCloseSnack}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           News Link Copied!
         </Alert>
       </Snackbar>
